@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cac7c7"
+    android:orientation="vertical"
+    tools:context="streaming.test.org.togethertrip.ui.TouristSpotReview">
+
+    <RelativeLayout
+        android:id="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#cac7c7">
+
+        <TextView
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="후기보기"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/reviewbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="후기작성icon" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lineRl1"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/firstRl"
+        android:background="#5a5a5a"></RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="#cac7c7"
+        android:orientation="horizontal"
+        android:padding="10px">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/latesttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10px"
+                android:text="최신순" />
+
+            <TextView
+                android:id="@+id/ratingtxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10px"
+                android:text="별점순" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="포토후기 모아보기" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.3">
+
+        <ListView
+            android:id="@+id/touristSpot_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d6d6d6">
+
+        </ListView>
+    </LinearLayout>
+</LinearLayout>

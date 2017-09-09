@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="streaming.test.org.togethertrip.ui.TouristSpotDetail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/touristSpot_detail_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars = "true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/touristSpot_detail_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sally"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ddddddddddddddddddddddddddddddddddddd"
+                    android:textSize="80dp"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/touristSpot_detail_heartbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/touristSpot_detail_hearttxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"/>
+        <ImageButton
+            android:id="@+id/touristSpot_detail_commentsbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/touristSpot_detail_commentstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"/>
+    </LinearLayout>
+</LinearLayout>

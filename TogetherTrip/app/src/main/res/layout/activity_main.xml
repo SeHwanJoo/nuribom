@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="streaming.test.org.togethertrip.ui.MainActivity"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#e4e4e4"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="지도icon"
+            android:onClick="mapClick"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="돋보기icon"/>
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/real_searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:text = "실제검색"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/lineRl1"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/firstRl"
+        android:background="#cecece"></View>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#80000000" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            >
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="homeTab">
+
+                <Button
+                    android:id="@+id/button_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#e4e4e4"
+                    android:text="홈"
+                    android:textColor="#000"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="spotTab">
+
+                <Button
+                    android:id="@+id/button_spot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#e4e4e4"
+                    android:text="관광지"
+                    android:textColor="#000"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="courseTab">
+
+                <Button
+                    android:id="@+id/button_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#e4e4e4"
+                    android:text="코스"
+                    android:textColor="#000" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="alarmTab">
+
+                <Button
+                    android:id="@+id/button_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#e4e4e4"
+                    android:text="알람"
+                    android:textColor="#000"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="mypageTab">
+
+                <Button
+                    android:id="@+id/button_mypage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#e4e4e4"
+                    android:text="마이페이지"
+                    android:textColor="#000"/>
+            </FrameLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

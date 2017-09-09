@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\taehyung\.android\build-cache\70f0cf4ceda070c0458d82bbbaa607ab318b0ccd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
+        <dex dex="C:\Users\taehyung\AndroidStudioProjects\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dbbbbd8af0b70331f942834c149a55134af72a9e\classes.dex" />
+    </item>
+
+</items>
