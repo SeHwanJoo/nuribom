@@ -9,6 +9,7 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:background="#e4e4e4">
 
         <LinearLayout
@@ -117,10 +118,10 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="#dedede" />
+                android:background="#cecece" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,17 +225,9 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="#dedede" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="20dp"
@@ -312,47 +305,40 @@
                     android:padding="0dp" />
             </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#fff">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#cecece" />
-            </LinearLayout>
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#cecece" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
                 android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="20dp"
-                android:paddingTop="16dp">
-
+                android:paddingTop="16dp"
+                android:background="#fff">
                 <ImageView
                     android:id="@+id/notice_img"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginRight="5dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_launcher"/>
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="16dp"
                     android:layout_toRightOf="@id/notice_img"
                     android:text="공지사항 및 이용약관"
                     android:textColor="#000000"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="16dp" />
+
 
 
                 <TextView
@@ -372,7 +358,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_below="@+id/textView12"
                     android:text=">"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/textView14"
@@ -393,45 +379,104 @@
                     android:layout_marginTop="10dp"
                     android:padding="0dp"
                     android:text=">"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
                 android:paddingBottom="15dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="20dp"
                 android:paddingTop="16dp">
 
-                <ImageView
-                    android:id="@+id/faq_img"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/ic_launcher" />
-
                 <TextView
-                    android:id="@+id/faq_tv"
+                    android:id="@+id/textView9_"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/faq_img"
                     android:text="FAQ"
+
                     android:textColor="#000000"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textView9_"
+                    android:text="이메일주소"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/settings_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/textView9_"/>
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView10"
+                    android:layout_marginTop="10dp"
+                    android:text="휴대폰번호"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/settings_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/settings_email"
+                    android:layout_marginTop="10dp"
+                    android:padding="0dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView11"
+                    android:layout_marginTop="10dp"
+                    android:text="비밀번호"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/settings_pw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/settings_phone"
+                    android:layout_marginTop="10dp"/>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="#cecece" />
+                android:background="#80000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#80000000" />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#80000000" />
 
         </LinearLayout>
     </ScrollView>

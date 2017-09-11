@@ -27,16 +27,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NAME"
-            android:textSize="25sp"
+            android:textSize="25dp"
             android:layout_centerInParent="true"/>
 
         <Button
             android:id="@+id/btn_search"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
             android:text="돋보기icon"/>
         <EditText
             android:id="@+id/edit_search"
@@ -95,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#e4e4e4"
+                    android:background="#fff"
                     android:text="홈"
                     android:textColor="#000"/>
             </FrameLayout>
@@ -111,9 +110,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#e4e4e4"
+                    android:background="#fff"
                     android:text="관광지"
-                    android:textColor="#000"/>
+                    android:textColor="#808080"/>
             </FrameLayout>
 
             <FrameLayout
@@ -127,9 +126,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#e4e4e4"
+                    android:background="#fff"
                     android:text="코스"
-                    android:textColor="#000" />
+                    android:textColor="#808080" />
             </FrameLayout>
 
             <FrameLayout
@@ -143,9 +142,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#e4e4e4"
+                    android:background="#fff"
                     android:text="알람"
-                    android:textColor="#000"/>
+                    android:textColor="#808080"/>
             </FrameLayout>
             <FrameLayout
                 android:layout_width="0dp"
@@ -158,9 +157,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#e4e4e4"
+                    android:background="#fff"
                     android:text="마이페이지"
-                    android:textColor="#000"/>
+                    android:textColor="#808080"/>
             </FrameLayout>
         </LinearLayout>
     </RelativeLayout>

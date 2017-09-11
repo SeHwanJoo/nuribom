@@ -1,5 +1,6 @@
 package streaming.test.org.togethertrip.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class TouristSpotReview extends AppCompatActivity {
     }
     @OnClick(R.id.reviewbtn)
     public void reviewbtnClick(){
+        Intent intent = new Intent(getApplicationContext(), TouristSpotReviewWrite.class);
+        startActivity(intent);
 
     }
 }

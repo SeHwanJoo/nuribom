@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
     public void spotTab(View view) {
         mViewPager.setCurrentItem(1);
         tabSelect(1);
-//        mViewPager.removeView(course.getView());
 
         btn_map.setVisibility(View.VISIBLE);
         tv_main.setText("관광지");

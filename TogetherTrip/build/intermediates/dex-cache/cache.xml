@@ -3,12 +3,30 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\70f0cf4ceda070c0458d82bbbaa607ab318b0ccd\output\jars\classes.jar"
-        jumboMode="false"
+        jar="C:\CookAndroid\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\CookAndroid\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_ef99f3fe9e4919326e973413e768085419d4e283\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dayoung\.android\build-cache\2f4907e76641654163f6ffd70cf09187f4cd4824\output\jars\classes.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="031e8b3ab2df4ab43b1017f84417d7e10dfbb8d2">
-        <dex dex="C:\Users\taehyung\AndroidStudioProjects\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dbbbbd8af0b70331f942834c149a55134af72a9e\classes.dex" />
+        <dex dex="C:\CookAndroid\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_49e940ce01166f071046b0fdb224e16a719d8572\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\CookAndroid\TogetherTrip\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="552a3faba20565885a8fac9b11b4fb87b2a6f7de">
+        <dex dex="C:\CookAndroid\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_47ead6f733474b79aa5528cc7b097229c120639e\classes.dex" />
     </item>
 
 </items>
