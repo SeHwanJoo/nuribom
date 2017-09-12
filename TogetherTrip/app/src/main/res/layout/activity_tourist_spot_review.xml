@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cac7c7"
+    android:background="#e4e4e4"
     android:orientation="vertical"
     tools:context="streaming.test.org.togethertrip.ui.TouristSpotReview">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#cac7c7">
+        android:background="#e4e4e4">
 
         <TextView
             android:id="@+id/tv_main"

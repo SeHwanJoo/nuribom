@@ -20,7 +20,8 @@ public class HomeFragment extends Fragment {
     Context context;
 
     public HomeFragment(){
-
+        activity = getActivity();
+        context = getContext();
     }
 
     @Override
@@ -31,7 +32,11 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_home, container, false);
+        View view = inflater.inflate(R.layout.main_container, container, false);
+
+
+
+        return view;
     }
 
     @Override
