@@ -36,20 +36,30 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="돋보기icon"/>
+            android:text="edit_search"
+            android:visibility="gone"/>
         <EditText
             android:id="@+id/edit_search"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:background="#fff"/>
         <Button
             android:id="@+id/real_searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:text = "실제검색"/>
+            android:text = "real_search"/>
+
+        <Button
+            android:id="@+id/home_searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="home_search"/>
     </RelativeLayout>
 
     <View
