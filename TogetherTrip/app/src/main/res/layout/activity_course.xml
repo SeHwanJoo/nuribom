@@ -1,9 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="streaming.test.org.togethertrip.ui.CourseActivity">
+    tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity"
+    android:background="#e4e4e4">
 
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/filerRl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#fff">
+
+            <TextView
+                android:id="@+id/tv_filter"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="FILTER" />
+
+            <TextView
+                android:id="@+id/tv_line1"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/tv_filter"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"/>
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_line1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp">
+                <Button
+                    android:id="@+id/filter_all"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="전체"
+                    android:textSize="13dp"/>
+                <Button
+                    android:id="@+id/filter_touristSpot"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="관광지"
+                    android:textSize="13dp"/>
+                <Button
+                    android:id="@+id/filter_culture"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="문화시설"
+                    android:textSize="13dp"/>
+                <Button
+                    android:id="@+id/filter_stay"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="숙박"
+                    android:textSize="13dp"/>
+                <Button
+                    android:id="@+id/filter_shopping"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="쇼핑"
+                    android:textSize="13dp"/>
+                <Button
+                    android:id="@+id/filter_food"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/tv_line1"
+                    android:layout_weight="1"
+                    android:background="#fafafa"
+                    android:text="음식점"
+                    android:textSize="13dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lineRl2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/filerRl"
+            android:background="#cecece"
+            ></RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/lineRl4"
+            android:layout_width="match_parent"
+            android:layout_height="0.9dp"
+            android:layout_below="@id/filerRl"
+            android:background="#5f5f5f"
+            ></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/lineRl3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/filerRl"
+            android:background="#cecece"
+            ></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginTop="5dp"
+            android:background="#e4e4e4">
+            <TextView
+                android:id="@+id/ingi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인기순"
+                android:textSize="10sp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/ingi"
+                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
+                android:text="최신순"
+                android:textSize="10sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6.5"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#fff">
+
+            <ListView
+                android:id="@+id/touristSpot_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+            </ListView>
+        </RelativeLayout>
+
+    </LinearLayout>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="17dp"
+        android:src="@drawable/add"
+        fab:fab_colorNormal="@color/fabPressed"
+        fab:fab_colorPressed="@color/fabPressed"
+        fab:fab_colorRipple="@color/fabRipple" />
+</FrameLayout>

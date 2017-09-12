@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         alarm = new AlarmFragment();
-        course = new CourseFragment();
+        course = new CourseFragment(this);
         home = new HomeFragment();
         mypage = new MypageFragment();
         spot = new SpotFragment();

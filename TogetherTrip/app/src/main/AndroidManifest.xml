@@ -30,7 +30,8 @@
         <activity android:name=".ui.TouristSpotDetail" />
         <activity android:name=".ui.TouristSpotReview" />
         <activity android:name=".ui.TouristSpotReviewListViewItem" />
-        <activity android:name=".ui.TouristSpotReviewWrite"></activity>
+        <activity android:name=".ui.TouristSpotReviewWrite" />
+        <activity android:name=".ui.CourseWrite"></activity>
     </application>
 
 </manifest>
