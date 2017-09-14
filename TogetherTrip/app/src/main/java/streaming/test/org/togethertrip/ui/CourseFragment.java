@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import butterknife.ButterKnife;
 import streaming.test.org.togethertrip.R;
 
 /**
@@ -42,16 +43,20 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_course, container, false);
 
+
+
+
+
         //fab 버튼누르면 작성창
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, CourseWrite.class));
             }
         });
+
+
         return view;
     }
 

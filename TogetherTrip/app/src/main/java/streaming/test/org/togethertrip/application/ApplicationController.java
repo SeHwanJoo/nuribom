@@ -14,7 +14,7 @@ public class ApplicationController extends Application {
 
     private static ApplicationController instance;    // 먼저 어플리케이션 인스턴스 객체를 하나 선언
 
-    private static String baseUrl = "http://52.78.32.197:3000/";  // 베이스 url 초기화
+    private static String baseUrl = "http://52.78.40.158:3000/";  // 베이스 url 초기화
 
 
     private NetworkService networkService;                        // 네트워크 서비스 객체 선언
