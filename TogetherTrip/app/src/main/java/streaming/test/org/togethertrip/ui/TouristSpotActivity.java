@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,12 +22,13 @@ import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
+import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
 import static android.view.View.GONE;
 
 public class TouristSpotActivity extends AppCompatActivity {
-    final static String TAG = "searchTourist";
+    final static String TAG = "TouristActivityLog";
     final private Context context = this;
     final private Activity activity = this;
 
@@ -48,9 +48,10 @@ public class TouristSpotActivity extends AppCompatActivity {
 
     NetworkService networkService;
 
-    ListView listView;
-    ListViewAdapter listViewAdapter;
-    ArrayList<TouristSpotSearchList> spotListDatas;
+    ListView spotList;
+    ArrayList<TouristSpotSearchList> spotResultListDatas;
+    TouristSpot_ListViewAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,39 +71,7 @@ public class TouristSpotActivity extends AppCompatActivity {
 
     @OnClick(R.id.real_searchBtn)
     public void realSearchClick(){
-        keyword = edit_search.getText().toString();
-
-        networkService = ApplicationController.getInstance().getNetworkService();
-        Log.d(TAG, "onClick: networkService :" + networkService );
-
-        Call<TouristSpotSearchList> requestDriverApplyOwner = networkService.searchTouristSpot(keyword);
-        requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchList>() {
-            @Override
-            public void onResponse(Call<TouristSpotSearchList> call, Response<TouristSpotSearchList> response) {
-                Log.d(TAG, "DriverApplyOwnerResult response.isSuccessful(): " + response.isSuccessful());
-                if (response.isSuccessful()) {
-                    Toast.makeText(TouristSpotActivity.this, "response.isSuccessful() = true", Toast.LENGTH_SHORT).show();
-
-                    /*
-                    TODO result로 통째로 묶어줄 것
-                     */
-//                    spotListDatas = response.body().result;
-//
-//                    listViewAdapter = new ListViewAdapter(context, spotListDatas);
-//                    listView = (ListView) findViewById(R.id.touristSpot_listView);
-//                    listView.setAdapter(listViewAdapter);
-
-                } else {
-                    //response.isSuccessful() = false
-                    Toast.makeText(TouristSpotActivity.this, "통신 실패", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<TouristSpotSearchList> call, Throwable t) {
-                //검색시 통신 실패
-                Toast.makeText(TouristSpotActivity.this, "통신 실패", Toast.LENGTH_SHORT).show();
-            }
-        });
+        search();
     }
 
     @OnClick({R.id.filter_all, R.id.filter_touristSpot, R.id.filter_culture, R.id.filter_stay, R.id.filter_shopping, R.id.filter_food})
@@ -127,6 +96,39 @@ public class TouristSpotActivity extends AppCompatActivity {
 
                 break;
         }
+    }
+
+    public void search(){
+        keyword = edit_search.getText().toString();
+
+        if(keyword == null) keyword = "a";
+
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Log.d(TAG, "onClick: networkService :" + networkService );
+
+        Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(keyword);
+        requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
+            @Override
+            public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
+                if (response.isSuccessful()) {
+                    /*
+                    TODO 잘 실행 되는지?
+                     */
+                    Log.d(TAG, "onResponse: search: " + keyword);
+                    spotResultListDatas = response.body().result;
+
+                    adapter = new TouristSpot_ListViewAdapter(context, null);
+                    spotList.setAdapter(adapter);
+
+                } else {
+                    //response.isSuccessful() = false
+                }
+            }
+            @Override
+            public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
+                //검색시 통신 실패
+            }
+        });
     }
 
 }
