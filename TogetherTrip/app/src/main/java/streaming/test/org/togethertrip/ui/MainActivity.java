@@ -2,7 +2,6 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,32 +9,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
-import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
-import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.network.NetworkService;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivityLog";
@@ -48,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     @BindViews({R.id.button_home, R.id.button_spot, R.id.button_course, R.id.button_alarm, R.id.button_mypage})
     List<Button> tabButtonList;
-    @BindView(R.id.tv_main) TextView tv_main;
-    @BindView(R.id.btn_map) Button btn_map;
-    @BindView(R.id.btn_search) Button btn_search;
-    @BindView(R.id.real_searchBtn) Button real_searchBtn;
-    @BindView(R.id.home_searchBtn) Button home_searchBtn;
-    @BindView(R.id.edit_search) EditText edit_search;
+//    @BindView(R.id.tv_main) TextView tv_main;
+//    @BindView(R.id.btn_map) Button btn_map;
+//    @BindView(R.id.btn_search) Button btn_search;
+//    @BindView(R.id.real_searchBtn) Button real_searchBtn;
+//    @BindView(R.id.home_searchBtn) Button home_searchBtn;
+//    @BindView(R.id.edit_search) EditText edit_search;
 
     AlarmFragment alarm;
     CourseFragment course;
@@ -107,50 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 tabSelect(position);
                 switch(position){
                     case 0:
-                        btn_map.setVisibility(GONE);
-                        tv_main.setText("NAME");
-                        tv_main.setVisibility(VISIBLE);
-                        edit_search.setVisibility(GONE);
-                        btn_search.setVisibility(GONE);
-                        real_searchBtn.setVisibility(GONE);
-                        home_searchBtn.setVisibility(VISIBLE);
-
                         break;
                     case 1:
-                        btn_map.setVisibility(VISIBLE);
-                        tv_main.setText("관광지");
-                        tv_main.setVisibility(VISIBLE);
-                        edit_search.setVisibility(GONE);
-                        btn_search.setVisibility(VISIBLE);
-                        real_searchBtn.setVisibility(GONE);
-                        home_searchBtn.setVisibility(GONE);
                         break;
                     case 2:
-                        btn_map.setVisibility(GONE);
-                        tv_main.setText("코스");
-                        tv_main.setVisibility(VISIBLE);
-                        btn_search.setVisibility(VISIBLE);
-                        real_searchBtn.setVisibility(GONE);
-                        home_searchBtn.setVisibility(GONE);
-                        edit_search.setVisibility(GONE);
                         break;
                     case 3:
-                        btn_map.setVisibility(GONE);
-                        tv_main.setText("알람");
-                        tv_main.setVisibility(VISIBLE);
-                        edit_search.setVisibility(GONE);
-                        btn_search.setVisibility(GONE);
-                        real_searchBtn.setVisibility(GONE);
-                        home_searchBtn.setVisibility(GONE);
                         break;
                     case 4:
-                        btn_map.setVisibility(GONE);
-                        tv_main.setText("마이페이지");
-                        tv_main.setVisibility(VISIBLE);
-                        btn_search.setVisibility(GONE);
-                        real_searchBtn.setVisibility(GONE);
-                        home_searchBtn.setVisibility(GONE);
-                        edit_search.setVisibility(GONE);
                         break;
                 }
             }
@@ -191,12 +142,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(0);
         tabSelect(0);
 
-        btn_map.setVisibility(GONE);
-        tv_main.setText("NAME");
-        edit_search.setVisibility(GONE);
-        btn_search.setVisibility(GONE);
-        real_searchBtn.setVisibility(GONE);
-        home_searchBtn.setVisibility(VISIBLE);
 
     }
 
@@ -206,12 +151,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(1);
         tabSelect(1);
 
-        btn_map.setVisibility(VISIBLE);
-        tv_main.setText("관광지");
-        edit_search.setVisibility(GONE);
-        btn_search.setVisibility(VISIBLE);
-        real_searchBtn.setVisibility(GONE);
-        home_searchBtn.setVisibility(GONE);
     }
 
     //아래 탭에서 코스 선택시
@@ -220,12 +159,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(2);
         tabSelect(2);
 
-        btn_map.setVisibility(GONE);
-        tv_main.setText("코스");
-        btn_search.setVisibility(VISIBLE);
-        real_searchBtn.setVisibility(GONE);
-        home_searchBtn.setVisibility(GONE);
-        edit_search.setVisibility(GONE);
     }
 
     //아래 탭에서 알람 선택시
@@ -234,12 +167,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(3);
         tabSelect(3);
 
-        btn_map.setVisibility(GONE);
-        tv_main.setText("알람");
-        edit_search.setVisibility(GONE);
-        btn_search.setVisibility(GONE);
-        real_searchBtn.setVisibility(GONE);
-        home_searchBtn.setVisibility(GONE);
     }
 
     //아래 탭에서 마이페이지 선택시
@@ -248,12 +175,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(4);
         tabSelect(4);
 
-        btn_map.setVisibility(GONE);
-        tv_main.setText("마이페이지");
-        btn_search.setVisibility(GONE);
-        real_searchBtn.setVisibility(GONE);
-        home_searchBtn.setVisibility(GONE);
-        edit_search.setVisibility(GONE);
     }
 
     /**
@@ -272,67 +193,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //지도 아이콘 클릭시 작동하는 메소드
-    @OnClick(R.id.btn_map)
-    public void mapClick(){
-        startActivity(new Intent(this, TouristSpotDetail.class));
-    }
 
-    //검색 버튼 클릭시 작동하는 메소드
-    @OnClick({R.id.btn_search,R.id.real_searchBtn,R.id.home_searchBtn})
-    public void searchClick(View view){
-        switch(view.getId()){
-            //
-            case R.id.btn_search:
-                edit_search.setVisibility(VISIBLE);
-                tv_main.setVisibility(GONE);
-
-                search_keyword = "";
-                break;
-            case R.id.home_searchBtn:
-                startActivity(new Intent(this, Home_SearchActivity.class));
-                break;
-            case R.id.real_searchBtn:
-                /*
-                TODO 검색버튼 클릭시 네트워킹
-                 */
-                search();
-
-                break;
-        }
-    }
-
-    //검색 네트워킹하는 메소드
-    public void search(){
-        search_keyword = edit_search.getText().toString();
-
-        if(search_keyword == null) search_keyword = "a";
-
-        networkService = ApplicationController.getInstance().getNetworkService();
-        Log.d(TAG, "onClick: networkService :" + networkService );
-
-        Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(search_keyword);
-        requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
-            @Override
-            public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
-                if (response.isSuccessful()) {
-                    /*
-                    TODO 잘 실행 되는지?
-                     */
-                    Log.d(TAG, "onResponse: search: " + search_keyword);
-                    spotResultListDatas = response.body().result;
-
-                    adapter = new TouristSpot_ListViewAdapter(context, null);
-                    spotList.setAdapter(adapter);
-
-                } else {
-                    //response.isSuccessful() = false
-                }
-            }
-            @Override
-            public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
-                //검색시 통신 실패
-            }
-        });
-    }
 }

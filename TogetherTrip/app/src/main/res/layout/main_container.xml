@@ -4,251 +4,303 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#cecece">
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"
-        android:background="#713300">
+        android:background="#e4e4e4"
+        android:layout_weight="1">
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#dedede" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:background="#fff">
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="주변 시설 검색"
-            android:textSize="15sp"/>
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_all"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_all"
-                        android:layout_centerHorizontal="true"
-                        android:text="전체"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
+            android:text="NAME"
+            android:textSize="25dp"
+            android:layout_centerInParent="true"/>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_charger"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_charger"
-                        android:layout_centerHorizontal="true"
-                        android:text="휠체어 충전기"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="edit_search"
+            android:visibility="gone"/>
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:background="#fff"/>
+        <Button
+            android:id="@+id/real_searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:text = "real_search"/>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_parkinglot"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_parkinglot"
-                        android:layout_centerHorizontal="true"
-                        android:text="장애인 주차장"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_ooo"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_ooo"
-                        android:layout_centerHorizontal="true"
-                        android:text="ooo1"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_ooo2"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_ooo2"
-                        android:layout_centerHorizontal="true"
-                        android:text="ooo2"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/facility_ooo3"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/sally"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/facility_ooo3"
-                        android:layout_centerHorizontal="true"
-                        android:text="ooo3"
-                        android:textSize="10sp"/>
-                </RelativeLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#dedede" />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <View
-                android:id="@+id/select_touristSpot"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#263fe1" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <View
-                android:id="@+id/select_course"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#dedede" />
-        </LinearLayout>
-    </LinearLayout>
-
+        <Button
+            android:id="@+id/home_searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="home_search"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="#fff"
+        android:layout_weight="8"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="추천 관광지"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="추천 코스"
-                android:gravity="center"/>
+            android:layout_marginTop="20dp"
+            android:background="#713300">
+
         </LinearLayout>
-        <HorizontalScrollView
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#dedede" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5">
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="#fff">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="주변 시설 검색"
+                android:textSize="15sp"/>
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_all"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_all"
+                            android:layout_centerHorizontal="true"
+                            android:text="전체"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_charger"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_charger"
+                            android:layout_centerHorizontal="true"
+                            android:text="휠체어 충전기"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_parkinglot"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_parkinglot"
+                            android:layout_centerHorizontal="true"
+                            android:text="장애인 주차장"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_ooo"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_ooo"
+                            android:layout_centerHorizontal="true"
+                            android:text="ooo1"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_ooo2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_ooo2"
+                            android:layout_centerHorizontal="true"
+                            android:text="ooo2"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/facility_ooo3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/sally"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/facility_ooo3"
+                            android:layout_centerHorizontal="true"
+                            android:text="ooo3"
+                            android:textSize="10sp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#dedede" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/select_touristSpot"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#263fe1" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/select_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#dedede" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="#fff"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="추천 관광지"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="추천 코스"
+                    android:gravity="center"/>
             </LinearLayout>
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/border_round"/>
 
-        </HorizontalScrollView>
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/border_round"/>
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/border_round"/>
+                </LinearLayout>
 
-    </LinearLayout>
+            </HorizontalScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

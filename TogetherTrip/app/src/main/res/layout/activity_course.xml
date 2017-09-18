@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity"
+    android:orientation="vertical"
     android:background="#e4e4e4">
 
+    <RelativeLayout
+        android:id="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#e4e4e4"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="지도icon"
+            android:onClick="mapClick"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마이페이지"
+            android:textSize="25dp"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="edit_search"
+            android:visibility="gone"/>
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:background="#fff"/>
+        <Button
+            android:id="@+id/real_searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:text = "real_search"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="8">
         <RelativeLayout
             android:id="@+id/filerRl"
             android:layout_width="match_parent"
@@ -187,4 +236,4 @@
         fab:fab_colorNormal="@color/fabPressed"
         fab:fab_colorPressed="@color/fabPressed"
         fab:fab_colorRipple="@color/fabRipple" />
-</FrameLayout>
+</LinearLayout>

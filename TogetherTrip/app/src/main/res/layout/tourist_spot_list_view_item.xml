@@ -56,7 +56,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text="광화문"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout

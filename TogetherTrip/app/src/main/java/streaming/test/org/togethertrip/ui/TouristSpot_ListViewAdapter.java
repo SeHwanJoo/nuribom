@@ -12,7 +12,6 @@ import java.util.List;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
-import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 
 /**
  * Created by taehyung on 2017-09-05.
@@ -21,16 +20,17 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 //ListView사용을 위한 어댑터
 public class TouristSpot_ListViewAdapter extends BaseAdapter {
     List<TouristSpotSearchList> dataList;
-    List<TouristSpotSearchResult> touristSpotSearchResultList;
+//    List<TouristSpotSearchResult> touristSpotSearchResultList;
     Context context;
 
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
     }
 
-    public TouristSpot_ListViewAdapter(Context context, List<TouristSpotSearchResult> touristSpotSearchResultList){
+    public TouristSpot_ListViewAdapter(Context context ,List<TouristSpotSearchList> dataList){
         this.context = context;
-        this.touristSpotSearchResultList = touristSpotSearchResultList;
+//        this.touristSpotSearchResultList = touristSpotSearchResultList;
+        this.dataList = dataList;
     }
 
     @Override
@@ -83,10 +83,15 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
 //        iv_bigImg.setImageDrawable(touristSpotListView.tripInfo.firstimage);
 //        ib_bigImgHeart.setImageDrawable(touristSpotListView.tripInfo.); // 하트버튼 스와이프 구현해야함
 //        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
+//        tv_spotAddr.setText(touristSpotListView.result.get(position).tripInfo.addr1);
+//        tv_spotName.setText(touristSpotListView.result.get(position).tripInfo.title);
+//        tv_heartCount.setText(touristSpotListView.result.get(position).tripInfo.likecount);
+//        tv_commentCount.setText(touristSpotListView.result.get(position).tripInfo.commentcount);
         tv_spotAddr.setText(touristSpotListView.tripInfo.addr1);
         tv_spotName.setText(touristSpotListView.tripInfo.title);
         tv_heartCount.setText(touristSpotListView.tripInfo.likecount);
         tv_commentCount.setText(touristSpotListView.tripInfo.commentcount);
+
 
         return convertView;
     }

@@ -8,7 +8,7 @@
     android:background="#e4e4e4"
     android:orientation="vertical">
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:visibility="gone"
             android:text = "실제검색"/>
-    </RelativeLayout>-->
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/filerRl"
         android:layout_width="match_parent"
