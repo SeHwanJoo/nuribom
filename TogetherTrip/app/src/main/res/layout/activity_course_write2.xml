@@ -8,43 +8,12 @@
     tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
     android:weightSum="10">
 
-    <RelativeLayout
-        android:id="@+id/firstRl"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#cac7c7">
 
-        <TextView
-            android:id="@+id/tv_courst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="코스작성"
-            android:textSize="25dp" />
-
-        <Button
-            android:id="@+id/okbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="작성완료icon" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/lineRl1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/firstRl"
-        android:background="#aaaaaa"></RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="9">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +52,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="20dp"
-                        android:src="@drawable/sally" />
+                        android:src="@drawable/sally"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -157,13 +126,6 @@
             </LinearLayout>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/nextbtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"/>
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/lineRl2"

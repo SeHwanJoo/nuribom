@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
+    android:weightSum="10">
+
+    <RelativeLayout
+        android:id="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#cac7c7">
+
+        <TextView
+            android:id="@+id/tv_courst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="코스작성"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/okbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="작성완료icon" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/lineRl1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/firstRl"
+        android:background="#aaaaaa"></RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.view.ViewPager>
+
+    <Button
+        android:id="@+id/nextbtn"
+        android:layout_weight="1"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"/>
+
+
+</LinearLayout>
+
+
