@@ -178,12 +178,14 @@ public class SpotFragment extends Fragment {
                      */
                     Log.d(TAG, "onResponse: search: " + search_keyword);
                     spotResultListDatas = response.body().result;
+                //    Log.v("YG", spotResultListDatas.get(0).Tirpinfo.toString());
                     Log.d(TAG, "onResponse: spotResultListDatas: " + spotResultListDatas);
 
                     adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);
                     Log.d(TAG, "onResponse: adapter: " + adapter);
                     Log.d(TAG, "onResponse: spotList: " + spotList);
                     spotList.setAdapter(adapter);
+                    Log.d(TAG, "onResponse: " + spotResultListDatas.get(0));
 
                 } else {
                     //response.isSuccessful() = false

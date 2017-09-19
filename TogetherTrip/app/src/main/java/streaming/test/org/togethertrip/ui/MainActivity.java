@@ -189,7 +189,44 @@ public class MainActivity extends AppCompatActivity {
 
         }
         tabButtonList.get(page).setSelected(true);
-        tabButtonList.get(page).setTextColor(Color.BLACK);
+        switch(page){
+            case 0: //home
+                tabButtonList.get(0).setBackgroundResource(R.drawable.navi_home_on);
+                tabButtonList.get(1).setBackgroundResource(R.drawable.navi_trip_off);
+                tabButtonList.get(2).setBackgroundResource(R.drawable.navi_course_off);
+                tabButtonList.get(3).setBackgroundResource(R.drawable.navi_alrarm_off);
+                tabButtonList.get(4).setBackgroundResource(R.drawable.navi_mypage_off);
+                break;
+            case 1: //spot
+                tabButtonList.get(0).setBackgroundResource(R.drawable.navi_home_off);
+                tabButtonList.get(1).setBackgroundResource(R.drawable.navi_trip_on);
+                tabButtonList.get(2).setBackgroundResource(R.drawable.navi_course_off);
+                tabButtonList.get(3).setBackgroundResource(R.drawable.navi_alrarm_off);
+                tabButtonList.get(4).setBackgroundResource(R.drawable.navi_mypage_off);
+                break;
+            case 2: //course
+                tabButtonList.get(0).setBackgroundResource(R.drawable.navi_home_off);
+                tabButtonList.get(1).setBackgroundResource(R.drawable.navi_trip_off);
+                tabButtonList.get(2).setBackgroundResource(R.drawable.navi_course_on);
+                tabButtonList.get(3).setBackgroundResource(R.drawable.navi_alrarm_off);
+                tabButtonList.get(4).setBackgroundResource(R.drawable.navi_mypage_off);
+                break;
+            case 3: //alarm
+                tabButtonList.get(0).setBackgroundResource(R.drawable.navi_home_off);
+                tabButtonList.get(1).setBackgroundResource(R.drawable.navi_trip_off);
+                tabButtonList.get(2).setBackgroundResource(R.drawable.navi_course_off);
+                tabButtonList.get(3).setBackgroundResource(R.drawable.navi_alrarm_on);
+                tabButtonList.get(4).setBackgroundResource(R.drawable.navi_mypage_off);
+                break;
+            case 4: //mypage
+                tabButtonList.get(0).setBackgroundResource(R.drawable.navi_home_off);
+                tabButtonList.get(1).setBackgroundResource(R.drawable.navi_trip_off);
+                tabButtonList.get(2).setBackgroundResource(R.drawable.navi_course_off);
+                tabButtonList.get(3).setBackgroundResource(R.drawable.navi_alrarm_off);
+                tabButtonList.get(4).setBackgroundResource(R.drawable.navi_mypage_on);
+                break;
+
+        }
 
     }
 
