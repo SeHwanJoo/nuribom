@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,32 +20,31 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
 
 //ListView사용을 위한 어댑터
 public class TouristSpot_ListViewAdapter extends BaseAdapter {
-    List<TouristSpotSearchList> dataList;
-//    List<TouristSpotSearchResult> touristSpotSearchResultList;
+    final static String TAG = "ListViewAdapterLog";
+    List<TouristSpotSearchList> touristSpotSearchResultList;
     Context context;
 
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
     }
 
-    public TouristSpot_ListViewAdapter(Context context ,List<TouristSpotSearchList> dataList){
+    public TouristSpot_ListViewAdapter(Context context ,List<TouristSpotSearchList> touristSpotSearchResultList){
         this.context = context;
-//        this.touristSpotSearchResultList = touristSpotSearchResultList;
-        this.dataList = dataList;
+        this.touristSpotSearchResultList = touristSpotSearchResultList;
     }
 
     @Override
     public int getCount() {
-        if(dataList == null){
+        if(touristSpotSearchResultList == null){
             return 0;
         }else {
-            return dataList.size();
+            return touristSpotSearchResultList.size();
         }
     }
 
     @Override
     public TouristSpotSearchList getItem(int position) {
-        return dataList.get(position);
+        return touristSpotSearchResultList.get(position);
     }
 
     @Override
@@ -59,6 +59,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.tourist_spot_list_view_item,null);
         }
+        Log.d(TAG, "getView: "+convertView);
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iv_bigImg = (ImageView) convertView.findViewById(R.id.iv_bigImg);
@@ -70,7 +71,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         TextView tv_commentCount = (TextView)convertView.findViewById(R.id.tv_commentCount);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        TouristSpotSearchList touristSpotListView = getItem(position);
+//        TouristSpotSearchList touristSpotListView = getItem(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         /*
@@ -80,20 +81,29 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
              iv_profileImg = 프로필 사진 받아와 비트맵으로 그려야함
              glide 라이브러리 참고해볼것
          */
-//        iv_bigImg.setImageDrawable(touristSpotListView.tripInfo.firstimage);
-//        ib_bigImgHeart.setImageDrawable(touristSpotListView.tripInfo.); // 하트버튼 스와이프 구현해야함
+//        iv_bigImg.setImageDrawable(touristSpotListView.Tirpinfo.firstimage);
+//        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tirpinfo.); // 하트버튼 스와이프 구현해야함
 //        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
-//        tv_spotAddr.setText(touristSpotListView.result.get(position).tripInfo.addr1);
-//        tv_spotName.setText(touristSpotListView.result.get(position).tripInfo.title);
-//        tv_heartCount.setText(touristSpotListView.result.get(position).tripInfo.likecount);
-//        tv_commentCount.setText(touristSpotListView.result.get(position).tripInfo.commentcount);
-        tv_spotAddr.setText(touristSpotListView.tripInfo.addr1);
-        tv_spotName.setText(touristSpotListView.tripInfo.title);
-        tv_heartCount.setText(touristSpotListView.tripInfo.likecount);
-        tv_commentCount.setText(touristSpotListView.tripInfo.commentcount);
+        tv_spotAddr.setText(touristSpotSearchResultList.get(position).tripinfo.addr1);
+        tv_spotName.setText(touristSpotSearchResultList.get(position).tripinfo.title);
+//        tv_heartCount.setText(touristSpotSearchResultList.get(position).tripinfo.likecount);
+//        tv_commentCount.setText(touristSpotSearchResultList.get(position).tripinfo.commentcount);
+
+        Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
+
+
+//        tv_spotAddr.setText(touristSpotListView.Tirpinfo.addr1);
+//        tv_spotName.setText(touristSpotListView.Tirpinfo.title);
+//        tv_heartCount.setText(touristSpotListView.Tirpinfo.likecount);
+//        tv_commentCount.setText(touristSpotListView.Tirpinfo.commentcount);
 
 
         return convertView;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 
     /**
