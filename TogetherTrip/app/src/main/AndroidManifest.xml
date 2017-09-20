@@ -43,16 +43,14 @@
         <activity android:name=".ui.TouristSpotReview" />
         <activity android:name=".ui.TouristSpotReviewListViewItem" />
         <activity android:name=".ui.TouristSpotReviewWrite" />
-
-        <activity android:name=".ui.CourseWrite"></activity>
-
+        <activity android:name=".ui.CourseWrite" />
 
         <fragment
             android:name=".ui.CourseFragment"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".ui.Home_SearchActivity"></activity>
-
+        <activity android:name=".ui.Home_SearchActivity" />
+        <activity android:name=".ui.SigninActivity"/>
     </application>
 
 </manifest>
