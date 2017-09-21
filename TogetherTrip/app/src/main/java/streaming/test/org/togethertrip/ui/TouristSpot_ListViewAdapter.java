@@ -81,8 +81,8 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
              iv_profileImg = 프로필 사진 받아와 비트맵으로 그려야함
              glide 라이브러리 참고해볼것
          */
-//        iv_bigImg.setImageDrawable(touristSpotListView.Tirpinfo.firstimage);
-//        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tirpinfo.); // 하트버튼 스와이프 구현해야함
+//        iv_bigImg.setImageDrawable(touristSpotListView.Tripinfo.firstimage);
+//        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tripinfo.); // 하트버튼 스와이프 구현해야함
 //        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
         tv_spotAddr.setText(touristSpotSearchResultList.get(position).tripinfo.addr1);
         tv_spotName.setText(touristSpotSearchResultList.get(position).tripinfo.title);
@@ -92,10 +92,10 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
 
 
-//        tv_spotAddr.setText(touristSpotListView.Tirpinfo.addr1);
-//        tv_spotName.setText(touristSpotListView.Tirpinfo.title);
-//        tv_heartCount.setText(touristSpotListView.Tirpinfo.likecount);
-//        tv_commentCount.setText(touristSpotListView.Tirpinfo.commentcount);
+//        tv_spotAddr.setText(touristSpotListView.Tripinfo.addr1);
+//        tv_spotName.setText(touristSpotListView.Tripinfo.title);
+//        tv_heartCount.setText(touristSpotListView.Tripinfo.likecount);
+//        tv_commentCount.setText(touristSpotListView.Tripinfo.commentcount);
 
 
         return convertView;

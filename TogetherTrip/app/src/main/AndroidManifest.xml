@@ -50,7 +50,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity android:name=".ui.Home_SearchActivity" />
-        <activity android:name=".ui.SigninActivity"/>
+        <activity android:name=".ui.SignupActivity"/>
     </application>
 
 </manifest>

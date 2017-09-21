@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public class TouristSpotSearchResult {
     public ArrayList<TouristSpotSearchList> result;
 
-//    public Tirpinfo Tirpinfo;
+//    public Tripinfo Tripinfo;
 //    public DetailWithTour detailWithTour;
 }

@@ -50,9 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#fff"
-                    android:text="홈"
-                    android:textColor="#000"/>
+                    android:background="@drawable/navi_home_on"/>
             </FrameLayout>
 
             <FrameLayout
@@ -66,9 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#fff"
-                    android:text="관광지"
-                    android:textColor="#808080"/>
+                    android:background="@drawable/navi_trip_off"/>
             </FrameLayout>
 
             <FrameLayout
@@ -82,9 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#fff"
-                    android:text="코스"
-                    android:textColor="#808080" />
+                    android:background="@drawable/navi_course_off" />
             </FrameLayout>
 
             <FrameLayout
@@ -98,9 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#fff"
-                    android:text="알람"
-                    android:textColor="#808080"/>
+                    android:background="@drawable/navi_alrarm_off"/>
             </FrameLayout>
             <FrameLayout
                 android:layout_width="0dp"
@@ -113,9 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="#fff"
-                    android:text="마이페이지"
-                    android:textColor="#808080"/>
+                    android:background="@drawable/navi_mypage_off"/>
             </FrameLayout>
         </LinearLayout>
     </RelativeLayout>

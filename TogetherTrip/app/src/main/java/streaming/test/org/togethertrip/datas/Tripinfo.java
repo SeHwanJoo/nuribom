@@ -5,7 +5,7 @@ package streaming.test.org.togethertrip.datas;
  */
 
 //TripInfo의 정보를 담을 객체
-public class Tirpinfo {
+public class Tripinfo {
     public String contentId;
     public String contentTypeId;
     public String addr1;

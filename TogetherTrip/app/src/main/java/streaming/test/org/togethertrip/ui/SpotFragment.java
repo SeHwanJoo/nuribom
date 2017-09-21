@@ -178,7 +178,7 @@ public class SpotFragment extends Fragment {
                      */
                     Log.d(TAG, "onResponse: search: " + search_keyword);
                     spotResultListDatas = response.body().result;
-                //    Log.v("YG", spotResultListDatas.get(0).Tirpinfo.toString());
+                //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
                     Log.d(TAG, "onResponse: spotResultListDatas: " + spotResultListDatas);
 
                     adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);

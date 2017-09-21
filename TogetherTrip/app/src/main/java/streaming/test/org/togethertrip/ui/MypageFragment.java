@@ -43,7 +43,7 @@ public class MypageFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity, SigninActivity.class));
+                startActivity(new Intent(activity, SignupActivity.class));
             }
         });
 

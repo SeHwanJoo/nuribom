@@ -6,6 +6,6 @@ package streaming.test.org.togethertrip.datas;
 
 //검색시 리스트뷰로 보여주기위한 결과 List
 public class TouristSpotSearchList {
-    public Tirpinfo tripinfo;
+    public Tripinfo tripinfo;
     public DetailWithTour detailWithTour;
 }
