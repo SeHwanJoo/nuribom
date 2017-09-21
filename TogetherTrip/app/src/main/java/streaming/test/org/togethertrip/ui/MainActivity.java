@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         alarm = new AlarmFragment();
         course = new CourseFragment(this);
         home = new HomeFragment(this);
-        mypage = new MypageFragment();
+        mypage = new MypageFragment(this);
         spot = new SpotFragment(this);
 
         //Fragment 추가

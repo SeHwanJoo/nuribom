@@ -275,19 +275,22 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/border_round"/>
 
                     <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/border_round"/>
                     <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="20dp"
                         android:background="@drawable/border_round"/>
                 </LinearLayout>
