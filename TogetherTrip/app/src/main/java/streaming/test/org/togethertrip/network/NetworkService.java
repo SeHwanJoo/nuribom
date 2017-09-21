@@ -1,8 +1,11 @@
 package streaming.test.org.togethertrip.network;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
+import streaming.test.org.togethertrip.datas.MessageResult;
+import streaming.test.org.togethertrip.datas.RegisterDatas;
+import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 
 /**
@@ -11,7 +14,11 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 
 public interface NetworkService {
     //관광지 검색
-    @GET("trips/list/{keyword}")
-    Call<TouristSpotSearchResult> searchTouristSpot(@Path("keyword") String keyword);
+    @POST("trips/list")
+    Call<TouristSpotSearchResult> searchTouristSpot(@Body SearchData searchData);
+
+    //회원가입
+    @POST("users")
+    Call<MessageResult> requestSignup(@Body RegisterDatas registerDatas);
 
 }

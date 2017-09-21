@@ -16,13 +16,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.network.NetworkService;
@@ -44,13 +43,6 @@ public class SpotFragment extends Fragment {
 
     NetworkService networkService;
 
-    @BindView(R.id.filter_all) Button filter_all;
-    @BindView(R.id.filter_touristSpot) Button filter_touristSpot;
-    @BindView(R.id.filter_culture) Button filter_culture;
-    @BindView(R.id.filter_stay) Button filter_stay;
-    @BindView(R.id.filter_shopping) Button filter_shopping;
-    @BindView(R.id.filter_food) Button filter_food;
-
     Button btn_search;
     Button btn_map;
     Button real_searchBtn;
@@ -58,6 +50,7 @@ public class SpotFragment extends Fragment {
     EditText edit_search;
 
     String search_keyword;
+    SearchData searchData;
 
     public SpotFragment(){
 
@@ -75,10 +68,7 @@ public class SpotFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         try{
-            search();
 
-            spotList = (ListView) activity.findViewById(R.id.touristSpot_listView);
-            spotList.setAdapter(adapter);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -87,7 +77,6 @@ public class SpotFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tourist_spot, container, false);
-        ButterKnife.bind(activity);
 
         btn_search = (Button) view.findViewById(R.id.btn_search);
         btn_map = (Button) view.findViewById(R.id.btn_map);
@@ -109,8 +98,6 @@ public class SpotFragment extends Fragment {
         real_searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search_keyword = edit_search.getText().toString();
-
                 search();
             }
         });
@@ -123,52 +110,24 @@ public class SpotFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-//    @OnClick(R.id.btn_search)
-//    public void searchClick(){
-//        tv_main.setVisibility(GONE);
-//        btn_search.setVisibility(GONE);
-//        edit_search.setVisibility(View.VISIBLE);
-//        real_searchBtn.setVisibility(View.VISIBLE);
-//    }
-//
-//    @OnClick(R.id.real_searchBtn)
-//    public void realSearchClick(){
-//        search();
-//    }
-//
-//    @OnClick({R.id.filter_all, R.id.filter_touristSpot, R.id.filter_culture, R.id.filter_stay, R.id.filter_shopping, R.id.filter_food})
-//    public void filterClick(View view){
-//        switch(view.getId()){
-//            case R.id.filter_all:
-//
-//                break;
-//            case R.id.filter_touristSpot:
-//
-//                break;
-//            case R.id.filter_culture:
-//
-//                break;
-//            case R.id.filter_stay:
-//
-//                break;
-//            case R.id.filter_shopping:
-//
-//                break;
-//            case R.id.filter_food:
-//
-//                break;
-//        }
-//    }
-
     //관광지 검색 메소드
     public void search(){
-        search_keyword = edit_search.getText().toString();
-
+        Log.d(TAG, "search: in!");
         if(search_keyword == null) search_keyword = "광화문";
 
-        networkService = ApplicationController.getInstance().getNetworkService();
+        search_keyword = edit_search.getText().toString();
+        searchData = new SearchData();
+        /*
+         * TODO 나중에 userid는 받아와야됨~
+         */
+        searchData.userid = "Joo";
+        searchData.keyword = search_keyword;
+        Log.d(TAG, "search: searchData.keyword: " + searchData.keyword);
 
-        Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(search_keyword);
+        networkService = ApplicationController.getInstance().getNetworkService();
+        Log.d(TAG, "search: networkService: " + networkService);
+
+        Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
         requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
             @Override
             public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
@@ -188,12 +147,13 @@ public class SpotFragment extends Fragment {
                     Log.d(TAG, "onResponse: " + spotResultListDatas.get(0));
 
                 } else {
-                    //response.isSuccessful() = false
+                    Log.d(TAG, "onResponse: response is not success");
                 }
             }
             @Override
             public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
                 //검색시 통신 실패
+                Log.d(TAG, "onFailure: !!!");
             }
         });
     }

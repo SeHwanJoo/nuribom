@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 //검색 결과를 담을 객체
 public class TouristSpotSearchResult {
+    public String message;
     public ArrayList<TouristSpotSearchList> result;
 
 //    public Tripinfo Tripinfo;

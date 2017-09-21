@@ -19,6 +19,7 @@
             android:id="@+id/ib_bigImgHeart"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:background="@drawable/trips_heart_off"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
@@ -94,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:background="#6eb554" />
+                    android:background="@drawable/trips_heart_off" />
 
                 <TextView
                     android:id="@+id/tv_heartCount"
@@ -116,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:background="#4f8eb5" />
+                    android:background="@drawable/trips_comment" />
 
                 <TextView
                     android:id="@+id/tv_commentCount"
