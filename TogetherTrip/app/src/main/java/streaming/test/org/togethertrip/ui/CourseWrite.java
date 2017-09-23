@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,9 @@ public class CourseWrite extends AppCompatActivity {
     CourseWriteFragment2 courseWriteFragment2;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    ImageView imgelbum;
+    //int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24*2,getResources().getDisplayMetrics());
+
 
     static int position = 0;
 
@@ -29,6 +33,7 @@ public class CourseWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_write_viewpager);
         button = (Button) findViewById(R.id.nextbtn);
+//        imgelbum = (ImageView) findViewById(R.id.elbum);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         courseWriteFragment = new CourseWriteFragment();
@@ -46,16 +51,29 @@ public class CourseWrite extends AppCompatActivity {
                 position++;
                 mSectionsPagerAdapter.notifyDataSetChanged();
 
-                mViewPager.setCurrentItem(position);
+                mViewPager.setClipToPadding(false);
+                mViewPager.setPadding(0,0,0,0);
+                mViewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -9);
+                mViewPager.setPageMargin(getResources().getDisplayMetrics().heightPixels/ -8);
+                mViewPager.setCurrentItem(position,true);
+
+//                if (position==position-1){
+//
+//                }
             }
         });
     }
 
+
     //페이지 선택 확인을 위한 어댑터
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm)
+        {
             super(fm);
+
+          //  mViewPager.setPageMargin(-margin);
         }
+
 
         @Override
         public Fragment getItem(int position) {
@@ -67,6 +85,14 @@ public class CourseWrite extends AppCompatActivity {
         }
 
         @Override
+        public float getPageWidth(int position) {
+            if(position == 0) return 1f;
+            else return 0.99999999f;
+            //        return super.getPageWidth(position);
+
+        }
+
+        @Override
         public int getCount() {
             return fragmentList.size();
         }
@@ -75,5 +101,12 @@ public class CourseWrite extends AppCompatActivity {
         public void notifyDataSetChanged() {
             super.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        position = 0;
+        finish();
     }
 }

@@ -22,6 +22,7 @@
 
         <!-- 이미지 추가 버튼으로 대체해야함-->
         <ImageView
+            android:id="@+id/elbum"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"

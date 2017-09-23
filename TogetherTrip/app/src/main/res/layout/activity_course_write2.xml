@@ -8,8 +8,6 @@
     tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
     android:weightSum="10">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,6 +27,7 @@
 
             <!-- 이미지 추가 버튼으로 대체해야함-->
             <ImageView
+                android:id="@+id/elbum"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5.5"
