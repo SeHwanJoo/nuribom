@@ -51,6 +51,7 @@
                     android:background="#c5c5c5" />
 
                 <EditText
+                    android:id="@+id/edit_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -86,6 +87,7 @@
                     android:background="#c5c5c5" />
 
                 <EditText
+                    android:id="@+id/edit_email"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -121,6 +123,7 @@
                     android:background="#c5c5c5" />
 
                 <EditText
+                    android:id="@+id/edit_password"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -156,6 +159,7 @@
                     android:background="#c5c5c5" />
 
                 <EditText
+                    android:id="@+id/edit_checkPassword"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -171,6 +175,7 @@
             android:layout_marginRight="45dp"
             android:background="@drawable/border_round">
             <TextView
+                android:id="@+id/tv_join"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"

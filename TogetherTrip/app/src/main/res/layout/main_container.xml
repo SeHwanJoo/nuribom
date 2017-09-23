@@ -42,13 +42,13 @@
             android:visibility="gone"
             android:text = "real_search"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/home_searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="home_search"/>
+            android:background="@drawable/trips_searsh"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

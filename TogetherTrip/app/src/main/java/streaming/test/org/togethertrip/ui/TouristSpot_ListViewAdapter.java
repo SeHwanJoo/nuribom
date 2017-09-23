@@ -59,7 +59,6 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.tourist_spot_list_view_item,null);
         }
-        Log.d(TAG, "getView: "+convertView);
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iv_bigImg = (ImageView) convertView.findViewById(R.id.iv_bigImg);
@@ -90,13 +89,6 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
 //        tv_commentCount.setText(touristSpotSearchResultList.get(position).tripinfo.commentcount);
 
         Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
-
-
-//        tv_spotAddr.setText(touristSpotListView.Tripinfo.addr1);
-//        tv_spotName.setText(touristSpotListView.Tripinfo.title);
-//        tv_heartCount.setText(touristSpotListView.Tripinfo.likecount);
-//        tv_commentCount.setText(touristSpotListView.Tripinfo.commentcount);
-
 
         return convertView;
     }
