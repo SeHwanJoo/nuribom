@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,9 +43,9 @@ public class SpotFragment extends Fragment {
 
     NetworkService networkService;
 
-    Button btn_search;
-    Button btn_map;
-    Button real_searchBtn;
+    ImageButton btn_search;
+    ImageButton btn_map;
+    ImageButton real_searchBtn;
     TextView tv_main;
     EditText edit_search;
 
@@ -78,9 +78,9 @@ public class SpotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tourist_spot, container, false);
 
-        btn_search = (Button) view.findViewById(R.id.btn_search);
-        btn_map = (Button) view.findViewById(R.id.btn_map);
-        real_searchBtn = (Button) view.findViewById(R.id.real_searchBtn);
+        btn_search = (ImageButton) view.findViewById(R.id.btn_search);
+        btn_map = (ImageButton) view.findViewById(R.id.btn_map);
+        real_searchBtn = (ImageButton) view.findViewById(R.id.real_searchBtn);
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spotList = (ListView) view.findViewById(R.id.touristSpot_listView);

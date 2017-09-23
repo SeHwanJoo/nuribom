@@ -15,32 +15,23 @@
         android:layout_height="0dp"
         android:background="#e4e4e4"
         android:layout_weight="1">
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="지도icon"
-            android:onClick="mapClick"
-            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="마이페이지"
+            android:text="코스"
             android:textSize="25dp"
             android:layout_centerInParent="true"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="edit_search"
-            android:visibility="gone"/>
+            android:background="@drawable/trips_searsh"
+            android:visibility="visible"/>
         <EditText
             android:id="@+id/edit_search"
             android:layout_width="150dp"
@@ -48,13 +39,13 @@
             android:layout_centerInParent="true"
             android:visibility="gone"
             android:background="#fff"/>
-        <Button
+        <ImageButton
             android:id="@+id/real_searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:text = "real_search"/>
+            android:background="@drawable/trips_searsh"/>
     </RelativeLayout>
 
     <LinearLayout

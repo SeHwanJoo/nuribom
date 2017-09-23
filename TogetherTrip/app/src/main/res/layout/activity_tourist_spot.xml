@@ -14,42 +14,44 @@
         android:layout_height="0dp"
         android:background="#e4e4e4"
         android:layout_weight="1">
-        <Button
+        <ImageButton
             android:id="@+id/btn_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="지도icon"/>
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/trips_tab_map"/>
 
         <TextView
             android:id="@+id/tv_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="관광지"
+            android:text="여행지"
             android:textSize="25dp"
             android:layout_centerInParent="true"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="돋보기icon"/>
+            android:background="@drawable/trips_searsh"
+            />
         <EditText
             android:id="@+id/edit_search"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="gone"/>
-        <Button
+        <ImageButton
             android:id="@+id/real_searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:text = "실제검색"/>
+            android:background="@drawable/trips_searsh"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/filerRl"
