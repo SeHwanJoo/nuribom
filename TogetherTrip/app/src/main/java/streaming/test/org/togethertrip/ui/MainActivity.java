@@ -48,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
     MypageFragment mypage;
     SpotFragment spot;
 
-    String search_keyword;
-
-    ListView spotList;
-    ArrayList<TouristSpotSearchList> spotResultListDatas;
-    TouristSpot_ListViewAdapter adapter;
-
-    NetworkService networkService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

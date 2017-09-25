@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import static android.view.View.GONE;
  * Created by taehyung on 2017-09-06.
  */
 
-public class SpotFragment extends Fragment {
+public class SpotFragment extends Fragment implements View.OnClickListener{
     static final String TAG = "SpotFragmentLog";
     Context context;
     Activity activity;
@@ -48,6 +50,12 @@ public class SpotFragment extends Fragment {
     ImageButton real_searchBtn;
     TextView tv_main;
     EditText edit_search;
+
+    ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
+
+    ArrayAdapter<CharSequence> adspin1, adspin2;
+    String choice_sido = "";
+    Spinner spinner_location;
 
     String search_keyword;
     SearchData searchData;
@@ -85,6 +93,21 @@ public class SpotFragment extends Fragment {
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spotList = (ListView) view.findViewById(R.id.touristSpot_listView);
 
+        filter_all = (ImageButton) view.findViewById(R.id.filter_all);
+        filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
+        filter_bathroom = (ImageButton) view.findViewById(R.id.filter_bathroom);
+        filter_parkinglot = (ImageButton) view.findViewById(R.id.filter_parkinglot);
+        filter_elevator = (ImageButton) view.findViewById(R.id.filter_elevator);
+
+        spinner_location = (Spinner) view.findViewById(R.id.spinner_location);
+
+        filter_all.setOnClickListener(this);
+        filter_wheelchairs.setOnClickListener(this);
+        filter_bathroom.setOnClickListener(this);
+        filter_parkinglot.setOnClickListener(this);
+        filter_elevator.setOnClickListener(this);
+
+
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +124,11 @@ public class SpotFragment extends Fragment {
                 search();
             }
         });
+
+        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
+        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_location.setAdapter(adspin1);
+
 
         return view;
     }
@@ -156,5 +184,26 @@ public class SpotFragment extends Fragment {
                 Log.d(TAG, "onFailure: !!!");
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.filter_all:
+                filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_on);
+                break;
+            case R.id.filter_wheelchairs:
+                filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
+                break;
+            case R.id.filter_bathroom:
+                filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
+                break;
+            case R.id.filter_parkinglot:
+                filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
+                break;
+            case R.id.filter_elevator:
+                filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
+                break;
+        }
     }
 }
