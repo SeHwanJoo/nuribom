@@ -1,5 +1,6 @@
 package streaming.test.org.togethertrip.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class CourseWrite extends AppCompatActivity {
     CourseWriteFragment2 courseWriteFragment2;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    ImageView imgelbum;
+
     //int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24*2,getResources().getDisplayMetrics());
 
 
@@ -33,7 +33,6 @@ public class CourseWrite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_write_viewpager);
         button = (Button) findViewById(R.id.nextbtn);
-//        imgelbum = (ImageView) findViewById(R.id.elbum);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         courseWriteFragment = new CourseWriteFragment();
@@ -62,6 +61,7 @@ public class CourseWrite extends AppCompatActivity {
 //                }
             }
         });
+
     }
 
 
@@ -102,6 +102,10 @@ public class CourseWrite extends AppCompatActivity {
             super.notifyDataSetChanged();
         }
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onBackPressed() {
@@ -109,4 +113,5 @@ public class CourseWrite extends AppCompatActivity {
         position = 0;
         finish();
     }
+
 }
