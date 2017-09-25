@@ -5,178 +5,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity"
-    android:background="#e4e4e4"
+    android:background="#1D1D1D1D"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#e4e4e4"
-        android:layout_weight="1">
-        <Button
+        android:layout_weight="1"
+        android:background="#fff">
+        <ImageButton
             android:id="@+id/btn_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="지도icon"/>
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/trips_tab_map"/>
 
         <TextView
             android:id="@+id/tv_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="관광지"
+            android:text="여행지"
             android:textSize="25dp"
             android:layout_centerInParent="true"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="돋보기icon"/>
+            android:background="@drawable/trips_searsh"
+            />
         <EditText
             android:id="@+id/edit_search"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="gone"/>
-        <Button
+        <ImageButton
             android:id="@+id/real_searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:visibility="gone"
-            android:text = "실제검색"/>
+            android:background="@drawable/trips_searsh"/>
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/filerRl"
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#cecece"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:background="#fff">
-
-        <TextView
-            android:id="@+id/tv_filter"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:text="FILTER" />
-
-        <TextView
-            android:id="@+id/tv_line1"
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/trips_filter_location"/>
+        <Spinner
+            android:id="@+id/spinner_location"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:textAlignment="center"
+            />
+        <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/tv_filter"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"/>
+            android:background="#cecece"/>
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:text="시설 필터"
+        android:textSize="14sp"/>
+
+    <RelativeLayout
+        android:id="@+id/filerRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_toRightOf="@id/tv_line1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp">
-            <Button
+            <ImageButton
                 android:id="@+id/filter_all"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="전체"
-                android:textSize="13dp"/>
-            <Button
-                android:id="@+id/filter_touristSpot"
+                android:background="@drawable/trips_facilityfilter_all_off"/>
+            <ImageButton
+                android:id="@+id/filter_wheelchairs"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="관광지"
-                android:textSize="13dp"/>
-            <Button
-                android:id="@+id/filter_culture"
+                android:background="@drawable/trips_facilityfilter_wheelchairs_off"/>
+
+            <ImageButton
+                android:id="@+id/filter_bathroom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="문화시설"
-                android:textSize="13dp"/>
-            <Button
-                android:id="@+id/filter_stay"
+                android:background="@drawable/trips_facilityfilter_bathroom_off"/>
+
+            <ImageButton
+                android:id="@+id/filter_parkinglot"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="숙박"
-                android:textSize="13dp"/>
-            <Button
-                android:id="@+id/filter_shopping"
+                android:background="@drawable/trips_facilityfilter_parkinglot_off"
+                />
+            <ImageButton
+                android:id="@+id/filter_elevator"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="쇼핑"
-                android:textSize="13dp"/>
-            <Button
-                android:id="@+id/filter_food"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/tv_line1"
-                android:layout_weight="1"
-                android:background="#fafafa"
-                android:text="음식점"
-                android:textSize="13dp"/>
+                android:background="@drawable/trips_facilityfilter_elevator_off"/>
+
         </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/lineRl2"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/filerRl"
-        android:background="#cecece"
-        ></RelativeLayout>
-
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
         android:layout_marginTop="5dp"
-        android:background="#e4e4e4">
-        <TextView
-            android:id="@+id/ingi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인기순"
-            android:textSize="10sp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentBottom="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/ingi"
-            android:layout_centerVertical="true"
-            android:layout_alignParentBottom="true"
-            android:text="최신순"
-            android:textSize="10sp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="8"
-        android:padding="8dp"
         android:background="#fff"
-        android:layout_marginTop="5dp">
+        android:padding="8dp">
 
         <ListView
             android:id="@+id/touristSpot_listView"
