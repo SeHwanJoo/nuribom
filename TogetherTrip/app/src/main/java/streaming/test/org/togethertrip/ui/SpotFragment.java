@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -53,9 +54,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
 
-    ArrayAdapter<CharSequence> adspin1, adspin2;
     String choice_sido = "";
     Spinner spinner_location;
+    SpinnerAdapter adspin1;
+    final static String[] arrayLocation = {"서울", "인천", "경기도", "강원도", "충청북도",
+            "충청남도", "전라북도", "전라남도", "경상북도", "경상남도"};
 
     String search_keyword;
     SearchData searchData;
@@ -115,6 +118,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
                 real_searchBtn.setVisibility(View.VISIBLE);
                 tv_main.setVisibility(GONE);
                 edit_search.setVisibility(View.VISIBLE);
+                edit_search.requestFocus();
             }
         });
 
@@ -125,7 +129,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
+        adspin1 = new SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
+//        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_location.setAdapter(adspin1);
 
@@ -148,7 +153,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         /*
          * TODO 나중에 userid는 받아와야됨~
          */
-        searchData.userid = "Joo";
+        searchData.userid = "joo";
         searchData.keyword = search_keyword;
         Log.d(TAG, "search: searchData.keyword: " + searchData.keyword);
 
@@ -206,4 +211,57 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
+    public class SpinnerAdapter extends ArrayAdapter<String> {
+        Context context;
+        String[] items = new String[] {};
+
+        public SpinnerAdapter(final Context context,
+                               final String[] objects, final int textViewResourceId) {
+            super(context, textViewResourceId, objects);
+            this.items = objects;
+            this.context = context;
+        }
+
+        /**
+         * 스피너 클릭시 보여지는 View의 정의
+         */
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_dropdown_item, parent, false);
+            }
+
+            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            tv.setText(items[position]);
+            tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTextSize(12);
+            tv.setHeight(50);
+            return convertView;
+        }
+
+        /**
+         * 기본 스피너 View 정의
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_item, parent, false);
+            }
+
+            TextView tv = (TextView) convertView
+                    .findViewById(android.R.id.text1);
+            tv.setText(items[position]);
+            tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTextSize(12);
+            return convertView;
+        }
+    }
+
 }
