@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:clipToPadding="false">
 
 
     <LinearLayout
@@ -18,7 +19,8 @@
         android:layout_marginTop="15dp"
         android:weightSum="10"
         android:orientation="vertical"
-        android:background="#cecece">
+        android:background="#000"
+        android:elevation="5dp">
 
         <!-- 이미지 추가 버튼으로 대체해야함-->
         <ImageView
@@ -34,7 +36,8 @@
             android:layout_height="0dp"
             android:layout_weight="6"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="20dp"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/calenderview"
