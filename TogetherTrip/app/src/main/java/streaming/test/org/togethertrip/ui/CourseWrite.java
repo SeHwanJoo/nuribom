@@ -23,6 +23,8 @@ public class CourseWrite extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
+
+
     //int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24*2,getResources().getDisplayMetrics());
 
 
@@ -105,7 +107,43 @@ public class CourseWrite extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+//        Toast.makeText(getBaseContext(), "resultCode: "+requestCode, Toast.LENGTH_SHORT).show();
+//
+//        if(requestCode == PICK_IMAGE_REQUEST_CODE)
+//        {
+//            if(resultCode== Activity.RESULT_OK)
+//            {
+//                try {
+//                    //Uri에서 이미지 이름을 얻어온다.
+//                    //String name_Str = getImageNameToUri(data.getData());
+//
+//                    //이미지 데이터를 비트맵으로 받아온다.
+//                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+//                    ImageView image = (ImageView)findViewById(R.id.elbum);
+//
+//                    //배치해놓은 ImageView에 set
+//                    image.setImageBitmap(image_bitmap);
+//
+//
+//                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
+//
+//
+//                } catch (FileNotFoundException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
     }
+
+
 
     @Override
     public void onBackPressed() {
