@@ -9,6 +9,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import streaming.test.org.togethertrip.R;
@@ -23,6 +26,17 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
     final static String TAG = "ListViewAdapterLog";
     List<TouristSpotSearchList> touristSpotSearchResultList;
     Context context;
+
+    String contentId;
+    String contentTypeId;
+
+    String parking;
+    String route;
+    String wheelchair;
+    String elevator;
+    String restroom;
+    String handicapEtc;
+    String braileblock;
 
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
@@ -80,13 +94,25 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
              iv_profileImg = 프로필 사진 받아와 비트맵으로 그려야함
              glide 라이브러리 참고해볼것
          */
-//        iv_bigImg.setImageDrawable(touristSpotListView.Tripinfo.firstimage);
 //        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tripinfo.); // 하트버튼 스와이프 구현해야함
 //        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
+        Glide.with(context).load(touristSpotSearchResultList.get(position).tripinfo.firstimage)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(iv_bigImg);
         tv_spotAddr.setText(touristSpotSearchResultList.get(position).tripinfo.addr1);
         tv_spotName.setText(touristSpotSearchResultList.get(position).tripinfo.title);
-//        tv_heartCount.setText(touristSpotSearchResultList.get(position).tripinfo.likecount);
-//        tv_commentCount.setText(touristSpotSearchResultList.get(position).tripinfo.commentcount);
+        contentId = touristSpotSearchResultList.get(position).tripinfo.contentId;
+        contentTypeId = touristSpotSearchResultList.get(position).tripinfo.contentTypeId;
+        parking = touristSpotSearchResultList.get(position).detailWithTour.parking;
+        route = touristSpotSearchResultList.get(position).detailWithTour.route;
+        wheelchair = touristSpotSearchResultList.get(position).detailWithTour.wheelchair;
+        elevator = touristSpotSearchResultList.get(position).detailWithTour.elevator;
+        restroom = touristSpotSearchResultList.get(position).detailWithTour.restroom;
+        handicapEtc = touristSpotSearchResultList.get(position).detailWithTour.handicapetc;
+        braileblock = touristSpotSearchResultList.get(position).detailWithTour.brileblock;
+        tv_heartCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.likecount));
+        tv_commentCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.commentcount));
 
         Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
 
@@ -103,5 +129,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
      * @param heartCount
      * @param commentCount
      */
+
+
 
 }
