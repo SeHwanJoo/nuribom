@@ -29,6 +29,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
+import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
@@ -168,12 +170,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         });
 
 //        spotList.setOnItemClickListener(itemClickListener);
-        spotList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(context, TouristSpotDetail.class));
-            }
-        });
+        spotList.setOnItemClickListener(itemClickListener);
 
         touristSpot_fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,13 +341,44 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            int tempIndex = (int)parent.getItemAtPosition(position);
-            Log.d(TAG, "onItemClick: itemClick: " + tempIndex);
-            Toast.makeText(context, tempIndex+"번 리스트 클릭", Toast.LENGTH_SHORT).show();
+            clickItem(view, position);
 
             startActivity(new Intent(context, TouristSpotDetail.class));
         }
     };
+
+    //리스트뷰 선택! detail 네트워킹
+    /*
+    * TODO Detail ui 데이터들 셋팅
+     */
+    public void clickItem(View view, int position){
+        DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
+        detailSpotListDatas.contentid = spotResultListDatas.get(position).tripinfo.contentId;
+        detailSpotListDatas.contenttypeid = spotResultListDatas.get(position).tripinfo.contentTypeId;
+        /*
+        * TODO 나중에 userid는 받아와야함!
+         */
+        detailSpotListDatas.userid = "joo";
+
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+        Call<DetailSpotListClickResult> requestDetailSpotList = networkService.clickDetailSpotList(detailSpotListDatas);
+        requestDetailSpotList.enqueue(new Callback<DetailSpotListClickResult>() {
+            @Override
+            public void onResponse(Call<DetailSpotListClickResult> call, Response<DetailSpotListClickResult> response) {
+                if (response.isSuccessful()) {
+
+                } else {
+                    Log.d(TAG, "onResponse: response is not success");
+                }
+            }
+            @Override
+            public void onFailure(Call<DetailSpotListClickResult> call, Throwable t) {
+                //검색시 통신 실패
+                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 
