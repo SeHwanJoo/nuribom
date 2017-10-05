@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -53,6 +58,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     EditText edit_search;
 
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
+    FloatingActionButton touristSpot_fab_btn;
 
     String choice_sido = "";
     Spinner spinner_location;
@@ -78,11 +84,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try{
 
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -95,6 +97,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spotList = (ListView) view.findViewById(R.id.touristSpot_listView);
+        touristSpot_fab_btn = (FloatingActionButton) view.findViewById(R.id.touristSpot_fab_btn);
 
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);
         filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
@@ -109,7 +112,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         filter_bathroom.setOnClickListener(this);
         filter_parkinglot.setOnClickListener(this);
         filter_elevator.setOnClickListener(this);
-
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +135,54 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 //        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_location.setAdapter(adspin1);
+        spinner_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(adspin1.getItem(position).equals("서울")){
+                    choice_sido = "서울";
+                }else if(adspin1.getItem(position).equals("인천")){
+                    choice_sido = "인천";
+                }else if(adspin1.getItem(position).equals("경기도")){
+                    choice_sido = "경기도";
+                }else if(adspin1.getItem(position).equals("강원도")){
+                    choice_sido = "강원도";
+                }else if(adspin1.getItem(position).equals("충청북도")){
+                    choice_sido = "충청북도";
+                }else if(adspin1.getItem(position).equals("충청남도")){
+                    choice_sido = "충청남도";
+                }else if(adspin1.getItem(position).equals("전라북도")){
+                    choice_sido = "전라북도";
+                }else if(adspin1.getItem(position).equals("전라남도")){
+                    choice_sido = "전라남도";
+                }else if(adspin1.getItem(position).equals("경상북도")){
+                    choice_sido = "경상북도";
+                }else if(adspin1.getItem(position).equals("경상남도")){
+                    choice_sido = "경상남도";
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+//        spotList.setOnItemClickListener(itemClickListener);
+        spotList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(context, TouristSpotDetail.class));
+            }
+        });
+
+        touristSpot_fab_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                * TODO 작성버튼 클릭시
+                 */
+            }
+        });
 
         return view;
     }
@@ -141,43 +190,40 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        search();
+
     }
 
     //관광지 검색 메소드
     public void search(){
-        Log.d(TAG, "search: in!");
-        if(search_keyword == null) search_keyword = "광화문";
-
+        Log.d(TAG, "search: " + search_keyword);
         search_keyword = edit_search.getText().toString();
+
+        if(search_keyword == null) search_keyword = "광화문";
+        else if(search_keyword.equals("")) search_keyword = "광화문";
+
         searchData = new SearchData();
         /*
          * TODO 나중에 userid는 받아와야됨~
          */
         searchData.userid = "joo";
         searchData.keyword = search_keyword;
-        Log.d(TAG, "search: searchData.keyword: " + searchData.keyword);
 
         networkService = ApplicationController.getInstance().getNetworkService();
-        Log.d(TAG, "search: networkService: " + networkService);
 
         Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
         requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
             @Override
             public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
                 if (response.isSuccessful()) {
-                    /*
-                    TODO 잘 실행 되는지?
-                     */
-                    Log.d(TAG, "onResponse: search: " + search_keyword);
+
                     spotResultListDatas = response.body().result;
-                //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
-                    Log.d(TAG, "onResponse: spotResultListDatas: " + spotResultListDatas);
+                    //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
 
                     adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);
-                    Log.d(TAG, "onResponse: adapter: " + adapter);
-                    Log.d(TAG, "onResponse: spotList: " + spotList);
                     spotList.setAdapter(adapter);
-                    Log.d(TAG, "onResponse: " + spotResultListDatas.get(0));
+
 
                 } else {
                     Log.d(TAG, "onResponse: response is not success");
@@ -186,7 +232,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
                 //검색시 통신 실패
-                Log.d(TAG, "onFailure: !!!");
+                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -195,29 +241,59 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.filter_all:
-                filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_on);
+                if(filter_all.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_all_off).getConstantState())) {
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_on);
+                    filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
+                    filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_off);
+                    filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_off);
+                    filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_off);
+                }else{
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
+                }
                 break;
             case R.id.filter_wheelchairs:
-                filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
+                if(filter_wheelchairs.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_wheelchairs_off).getConstantState())) {
+                    filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
+                }else{
+                    filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
+                }
                 break;
             case R.id.filter_bathroom:
-                filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
+                if(filter_bathroom.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_bathroom_off).getConstantState())) {
+                    filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
+                }else{
+                    filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_off);
+                }
                 break;
             case R.id.filter_parkinglot:
-                filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
+                if(filter_parkinglot.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_parkinglot_off).getConstantState())) {
+                    filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
+                }else{
+                    filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_off);
+                }
                 break;
             case R.id.filter_elevator:
-                filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
+                if(filter_elevator.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_elevator_off).getConstantState())) {
+                    filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
+                    filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
+                }else {
+                    filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_off);
+                }
                 break;
         }
     }
+
+
 
     public class SpinnerAdapter extends ArrayAdapter<String> {
         Context context;
         String[] items = new String[] {};
 
         public SpinnerAdapter(final Context context,
-                               final String[] objects, final int textViewResourceId) {
+                              final String[] objects, final int textViewResourceId) {
             super(context, textViewResourceId, objects);
             this.items = objects;
             this.context = context;
@@ -263,5 +339,20 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             return convertView;
         }
     }
+
+    //리스트 클릭시
+    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int tempIndex = (int)parent.getItemAtPosition(position);
+            Log.d(TAG, "onItemClick: itemClick: " + tempIndex);
+            Toast.makeText(context, tempIndex+"번 리스트 클릭", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(context, TouristSpotDetail.class));
+        }
+    };
+
+
+
 
 }

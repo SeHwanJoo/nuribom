@@ -3,19 +3,18 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import com.bumptech.glide.Glide;
 
 import streaming.test.org.togethertrip.R;
 
@@ -75,27 +74,27 @@ public class CourseWriteFragment extends Fragment {
 
         if (requestCode == PICK_IMAGE_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                try {
+//                try {
                     //Uri에서 이미지 이름을 얻어온다.
                     //String name_Str = getImageNameToUri(data.getData());
-
                     //이미지 데이터를 비트맵으로 받아온다.
-                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
-
-
+//                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
+                    Uri uri = data.getData();
+                    Log.d("zzzdf", "onActivityResult: " + uri) ;
+                    Glide.with(context).load(uri).into(imageView);
                     //배치해놓은 ImageView에 set
-                    imageView.setImageBitmap(image_bitmap);
+//                    imageView.setImageBitmap(image_bitmap);
 
                     //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                } catch (FileNotFoundException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
         }
 

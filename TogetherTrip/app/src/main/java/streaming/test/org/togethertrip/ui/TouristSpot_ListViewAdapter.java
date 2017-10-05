@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
@@ -22,9 +24,9 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
  */
 
 //ListView사용을 위한 어댑터
-public class TouristSpot_ListViewAdapter extends BaseAdapter {
+public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterable {
     final static String TAG = "ListViewAdapterLog";
-    List<TouristSpotSearchList> touristSpotSearchResultList;
+    ArrayList<TouristSpotSearchList> touristSpotSearchResultList;
     Context context;
 
     String contentId;
@@ -38,11 +40,14 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
     String handicapEtc;
     String braileblock;
 
+    Filter listFilter;
+    ArrayList<TouristSpotSearchList> filteredItemList;
+
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
     }
 
-    public TouristSpot_ListViewAdapter(Context context ,List<TouristSpotSearchList> touristSpotSearchResultList){
+    public TouristSpot_ListViewAdapter(Context context ,ArrayList<TouristSpotSearchList> touristSpotSearchResultList){
         this.context = context;
         this.touristSpotSearchResultList = touristSpotSearchResultList;
     }
@@ -124,12 +129,55 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         super.notifyDataSetChanged();
     }
 
-    /**
-     * Count 데이터 타입 확인
-     * @param heartCount
-     * @param commentCount
-     */
+    @Override
+    public Filter getFilter() {
+        if (listFilter == null) {
+            listFilter = new ListFilter() ;
+        } return listFilter ;
 
+    }
+
+
+    private class ListFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+            if(constraint == null || constraint.length() == 0){
+                results.values = touristSpotSearchResultList;
+                results.count = touristSpotSearchResultList.size();
+            }else{
+                ArrayList<TouristSpotSearchList> itemList = new ArrayList<TouristSpotSearchList>();
+                for(TouristSpotSearchList item : touristSpotSearchResultList){
+                    /*
+                    TODO 버튼이 눌림을 확인하고 item 추가
+                    http://recipes4dev.tistory.com/96
+
+                     */
+
+
+
+                }
+
+                results.values = itemList;
+                results.count = itemList.size();
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredItemList = (ArrayList<TouristSpotSearchList>) results.values;
+
+            if(results.count>0){
+                notifyDataSetChanged();
+            }else{
+                notifyDataSetInvalidated();
+            }
+        }
+    }
 
 
 }
