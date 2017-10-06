@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}">
+
+    <include layout="@layout/util_img_select_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/photoPagerFragment"
+            android:name="com.yongbeam.y_photopicker.util.photopicker.fragment.ImagePagerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <!-- 뒤로가기,공유버튼 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="16dp"
+        android:background="#00000000">
+
+        <ImageView
+            android:id="@+id/iv_back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:id="@+id/iv_share_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_detail_share" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1/10"
+            android:id="@+id/tv_count"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="12dp"
+            android:textSize="12dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_back_btn"
+            android:layout_toEndOf="@+id/iv_back_btn" />
+    </RelativeLayout>
+</RelativeLayout>

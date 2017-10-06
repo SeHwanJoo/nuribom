@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="pager_bg">#ffffff</color>
+  <color name="style_color_primary">#5BADE1</color>
+  <color name="style_color_primary_dark">#5BADC7</color>
+  <color name="style_color_accent">#01bcd5</color>
+  <color name="image_loading_color">#4f696969</color>
+  <color name="image_loading_error_color">#4f696969</color>
+
+  <color name="color_f2f2f2">#f2f2f2</color>
+  <color name="color_cccccc">#cccccc</color>
+  <color name="color_696969">#696969</color>
+  <color name="color_00000000">#00000000</color>
+  <color name="color_4f696969">#4f696969</color>
+  <color name="color_000000">#000000</color>
+  <color name="color_9c9c9c">#9c9c9c</color>
+  <color name="color_ffffff">#ffffff</color>
+  <color name="img_loding_placeholder">#ffffff</color>
+  <color name="img_loding_placeholder2">#1590b2</color>
+  <color name="color_ffd31a">#ffd31a</color>
+  <color name="color_ededee">#ededee</color>
+
+  <color name="color_282828">#282828</color>
+  <color name="color_505050">#505050</color>
+  <color name="color_787878">#787878</color>
+</resources>
