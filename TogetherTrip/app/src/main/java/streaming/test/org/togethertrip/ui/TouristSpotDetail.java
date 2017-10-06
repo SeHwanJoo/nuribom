@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.skp.Tmap.TMapView;
 
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailErr";
@@ -23,12 +24,15 @@ public class TouristSpotDetail extends AppCompatActivity {
     ImageView imgView;
     ImageButton heartbtn, commentsbtn;
     TextView hearttxt, commentstxt;
+    TextView detail_overView;
     RelativeLayout detail_mapRl;
 
     BitmapDrawable bitmap;
 
     Intent intent;
     String contentId;
+
+    DetailSpotListClickResponse.DetailCommon detailCommon;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -37,7 +41,8 @@ public class TouristSpotDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_detail);
         intent = this.getIntent();
-        contentId = intent.getStringExtra("contentId");
+
+//        detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
 
         Log.d(TAG, "onCreate: " + contentId);
 
@@ -47,7 +52,10 @@ public class TouristSpotDetail extends AppCompatActivity {
         commentsbtn = (ImageButton)findViewById(R.id.touristSpot_detail_commentsbtn);
         hearttxt = (TextView)findViewById(R.id.touristSpot_detail_hearttxt);
         commentstxt = (TextView)findViewById(R.id.touristSpot_detail_commentstxt);
+        detail_overView = (TextView) findViewById(R.id.detail_overView);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
+
+//        detail_overView.setText(detailCommon.overview);
 
         TMapView tmapView = new TMapView(this);
         tmapView.setSKPMapApiKey("d9c128a3-3d91-3162-a305-e4b65bea1b55");
@@ -66,6 +74,13 @@ public class TouristSpotDetail extends AppCompatActivity {
 
         commentsbtn.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TouristSpotReview.class);
+                startActivity(intent);
+            }
+        });
+        commentstxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TouristSpotReview.class);

@@ -65,11 +65,6 @@ public class TouristSpotActivity extends AppCompatActivity {
         real_searchBtn.setVisibility(View.VISIBLE);
     }
 
-    @OnClick(R.id.real_searchBtn)
-    public void realSearchClick(){
-        search();
-    }
-
     @OnClick({R.id.filter_all, R.id.filter_touristSpot, R.id.filter_culture, R.id.filter_stay, R.id.filter_shopping, R.id.filter_food})
     public void filterClick(View view){
         switch(view.getId()){
@@ -92,50 +87,6 @@ public class TouristSpotActivity extends AppCompatActivity {
 
                 break;
         }
-    }
-
-    public void search(){
-//        Toast.makeText(context, "in Activity", Toast.LENGTH_SHORT).show();
-//        search_keyword = edit_search.getText().toString();
-//        searchData = new SearchData();
-//        /*
-//         * TODO 나중에 userid는 받아와야됨~
-//         */
-//        searchData.userid = "Joo";
-//        searchData.keyword = search_keyword;
-//
-//        if(search_keyword == null) search_keyword = "광화문";
-//
-//        networkService = ApplicationController.getInstance().getNetworkService();
-//
-//        Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
-//        requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
-//            @Override
-//            public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
-//                if (response.isSuccessful()) {
-//                    /*
-//                    TODO 잘 실행 되는지?
-//                     */
-//                    Log.d(TAG, "onResponse: search: " + search_keyword);
-//                    spotResultListDatas = response.body().result;
-//                    //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
-//                    Log.d(TAG, "onResponse: spotResultListDatas: " + spotResultListDatas);
-//
-//                    adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);
-//                    Log.d(TAG, "onResponse: adapter: " + adapter);
-//                    Log.d(TAG, "onResponse: spotList: " + spotList);
-//                    spotList.setAdapter(adapter);
-//                    Log.d(TAG, "onResponse: " + spotResultListDatas.get(0));
-//
-//                } else {
-//                    //response.isSuccessful() = false
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
-//                //검색시 통신 실패
-//            }
-//        });
     }
 
 }

@@ -88,27 +88,22 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         TextView tv_heartCount = (TextView) convertView.findViewById(R.id.tv_heartCount);
         TextView tv_commentCount = (TextView)convertView.findViewById(R.id.tv_commentCount);
 
+        Log.d(TAG, "getView: ImageView: " + iv_bigImg);
+
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
 //        TouristSpotSearchList touristSpotListView = getItem(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        /*
-        TODO 이미지 처리!!
-             iv_bigImg = 큰 이미지 비트맵으로 그려야함
-             ib_bigImgHeart = 하트버튼 클릭 시 색깔 채우고 1값 올리기
-             iv_profileImg = 프로필 사진 받아와 비트맵으로 그려야함
-             glide 라이브러리 참고해볼것
-         */
 //        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tripinfo.); // 하트버튼 스와이프 구현해야함
-//        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
-        Glide.with(context).load(touristSpotSearchResultList.get(position).tripinfo.firstimage)
+       Glide.with(context).load(touristSpotSearchResultList.get(position).tripinfo.firstimage)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(iv_bigImg);
         tv_spotAddr.setText(touristSpotSearchResultList.get(position).tripinfo.addr1);
         tv_spotName.setText(touristSpotSearchResultList.get(position).tripinfo.title);
-        contentId = touristSpotSearchResultList.get(position).tripinfo.contentId;
-        contentTypeId = touristSpotSearchResultList.get(position).tripinfo.contentTypeId;
+        contentId = touristSpotSearchResultList.get(position).tripinfo.contentid;
+        contentTypeId = touristSpotSearchResultList.get(position).tripinfo.contenttypeid;
+
         parking = touristSpotSearchResultList.get(position).detailWithTour.parking;
         route = touristSpotSearchResultList.get(position).detailWithTour.route;
         wheelchair = touristSpotSearchResultList.get(position).detailWithTour.wheelchair;
@@ -118,8 +113,6 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         braileblock = touristSpotSearchResultList.get(position).detailWithTour.brileblock;
         tv_heartCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.likecount));
         tv_commentCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.commentcount));
-
-        Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
 
         return convertView;
     }

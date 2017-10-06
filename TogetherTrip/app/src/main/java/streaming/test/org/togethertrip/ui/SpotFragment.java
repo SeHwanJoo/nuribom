@@ -29,6 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.SearchData;
@@ -50,6 +51,10 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     ListView spotList;
     ArrayList<TouristSpotSearchList> spotResultListDatas;
     TouristSpot_ListViewAdapter adapter;
+
+    DetailSpotListClickResponse detailSpotListClickResponse;
+    DetailSpotListClickResult detailSpotListClickResult;
+    Intent detailIntent;
 
     NetworkService networkService;
 
@@ -223,7 +228,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
 
                 } else {
-                    Log.d(TAG, "onResponse: response is not success");
+                    Log.d(TAG, "onResponse: search response is not success");
                 }
             }
             @Override
@@ -300,8 +305,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
          * 스피너 클릭시 보여지는 View의 정의
          */
         @Override
-        public View getDropDownView(int position, View convertView,
-                                    ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(context);
@@ -343,7 +347,12 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             clickItem(view, position);
 
-            startActivity(new Intent(context, TouristSpotDetail.class));
+            Log.d(TAG, "onItemClick: detailIntent: " + detailIntent);
+            try {
+                startActivity(detailIntent);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     };
 
@@ -352,24 +361,47 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     * TODO Detail ui 데이터들 셋팅
      */
     public void clickItem(View view, int position){
-        DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
-        detailSpotListDatas.contentid = spotResultListDatas.get(position).tripinfo.contentId;
-        detailSpotListDatas.contenttypeid = spotResultListDatas.get(position).tripinfo.contentTypeId;
+        Log.d(TAG, "clickItem: 진입");
+       DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
+        detailSpotListDatas.contentid = spotResultListDatas.get(position).tripinfo.contentid;
+        detailSpotListDatas.contenttypeid = spotResultListDatas.get(position).tripinfo.contenttypeid;
         /*
         * TODO 나중에 userid는 받아와야함!
          */
         detailSpotListDatas.userid = "joo";
 
-        networkService = ApplicationController.getInstance().getNetworkService();
-
-        Call<DetailSpotListClickResult> requestDetailSpotList = networkService.clickDetailSpotList(detailSpotListDatas);
+        NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
+        Log.d(TAG, "clickItem: networkService: " + list_networkService);
+        Call<DetailSpotListClickResult> requestDetailSpotList = list_networkService.clickDetailSpotList(detailSpotListDatas);
         requestDetailSpotList.enqueue(new Callback<DetailSpotListClickResult>() {
             @Override
             public void onResponse(Call<DetailSpotListClickResult> call, Response<DetailSpotListClickResult> response) {
                 if (response.isSuccessful()) {
+                    Log.d(TAG, "onResponse: detail 통신");
+                    /*
+                    * TODO 왜 null인지 모르겠다. 화가 난다.
+                    * response.body().result -> null
+                    * response.body() -> not null
+                    *  detailSpotListClickResult.result.detailCommon -> null
+                    *
+                    *  result 객체로 감싸져 있는게 맞는지 확인 필요!
+                    *
+                     */
+
+//                    detailSpotListClickResult = response.body();
+//                    detailSpotListClickResponse = response.body().result;
+//
+//                    Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
+                    detailIntent = new Intent(context, TouristSpotDetail.class);
+//                    detailIntent.putExtra("detailCommon", detailSpotListClickResult.result.detailCommon);
 
                 } else {
-                    Log.d(TAG, "onResponse: response is not success");
+                    /*
+                    * TODO list중 contentid, contenttypeid 자체가 검색이 안되는 것 있음!
+                    * 이유 찾아야됨
+                    */
+                    Log.d(TAG, "onResponse: clickList response is not success");
+                    Log.d(TAG, "onResponse: tq: " + response.isSuccessful());
                 }
             }
             @Override

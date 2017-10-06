@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e4e4e4"
-    android:orientation="vertical"
-    tools:context="streaming.test.org.togethertrip.ui.TouristSpotReview">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/firstRl"
@@ -79,17 +78,20 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="8.3">
+        android:layout_weight="9"
+        android:id="@+id/RefreshLayout">
 
-        <ListView
-            android:id="@+id/touristSpot_listView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/touristSpot_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#d6d6d6">
+        </android.support.v7.widget.RecyclerView>
 
-        </ListView>
-    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>
+

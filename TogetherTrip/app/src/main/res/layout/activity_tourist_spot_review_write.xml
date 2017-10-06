@@ -5,129 +5,253 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#e4e4e4"
-    android:weightSum="10"
-    tools:context="streaming.test.org.togethertrip.ui.TouristSpotReviewWrite">
+    android:background="#FFFFFF"
+    android:weightSum="10">
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_weight="1"
+        android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:background="#FFFFFF">
 
-        <RelativeLayout
-            android:id="@+id/firstRl"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#e4e4e4">
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/tv_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="후기 작성하기"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"/>
 
-            <TextView
-                android:id="@+id/tv_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Review"
-                android:textSize="25sp"
-                android:layout_centerInParent="true"/>
+        <Button
+            android:text="작성"
+            android:id="@+id/completeBtn"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"/>
 
-            <Button
-                android:id="@+id/btn_search"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="작성완료icon"
-                android:layout_marginRight="15dp"/>
-
-        </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#cecece" />
-    <LinearLayout
+
+
+    <View
         android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#cecece" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:background="#e4e4e4"
-        android:orientation="vertical">
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.5" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:src="@drawable/reviewwrite_add" />
 
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="30dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:isIndicator="false"
-                    android:numStars="5"
-                    android:soundEffectsEnabled="true"
-                    android:stepSize="0.5"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="-10dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.5" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/sally"
-                    android:scaleType="matrix" />
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/sally"/>
-                <Button
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"/>
-            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="7"
+                android:fontFamily="HYGothic"
+                android:text="장소를 입력해주세요."
+                android:textSize="25dp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#cecece" />
+
+
         <LinearLayout
+            android:id="@+id/datepicker"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="이곳에 후기를 남겨주세요."
-                android:background="#fff"
-                android:gravity="top"
-                android:padding="15dp"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.5" />
+
+            <ImageView
+                android:id="@+id/imageview_tsrw_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/reviewwrite_date" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.5" />
+
+            <TextView
+                android:id="@+id/textview_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="7"
+                android:fontFamily="HYGothic"
+                android:text="방문일 날짜를 선택해주세요."
+                android:textSize="15dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:weightSum="10">
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="2dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="#dedede"
-                android:layout_marginTop="-5dp"
-                />
+                android:background="#cecece" />
+
+            <EditText
+                android:id="@+id/edittext_review_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:gravity="top"
+                android:hint="이곳에 후기를 남겨주세요."
+                android:padding="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="3">
+
+                    <RatingBar
+                        android:id="@+id/ratingbar_review_stars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:isIndicator="false"
+                        android:numStars="5"
+                        android:soundEffectsEnabled="true"
+                        android:stepSize="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="5.0"
+                    android:textSize="30dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#cecece" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/imageview_review_1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/imageview_review_2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:scaleType="fitCenter"
+                android:background="#FFFFFF"/>
+            <Button
+                android:id= "@+id/button_review_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/addImageName"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        android:textSize="12sp" />
 </LinearLayout>
