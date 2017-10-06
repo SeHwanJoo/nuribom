@@ -5,6 +5,6 @@ package streaming.test.org.togethertrip.datas;
  */
 
 public class DetailSpotListClickResult {
-    public DetailSpotListClickResponse result;
+    public DetailSpotListClickResponse tripinfo;
 
 }

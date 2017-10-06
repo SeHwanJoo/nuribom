@@ -53,7 +53,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     TouristSpot_ListViewAdapter adapter;
 
     DetailSpotListClickResponse detailSpotListClickResponse;
-    DetailSpotListClickResult detailSpotListClickResult;
     Intent detailIntent;
 
     NetworkService networkService;
@@ -75,6 +74,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
     String search_keyword;
     SearchData searchData;
+
+    String addr;
 
     public SpotFragment(){
 
@@ -174,7 +175,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-//        spotList.setOnItemClickListener(itemClickListener);
         spotList.setOnItemClickListener(itemClickListener);
 
         touristSpot_fab_btn.setOnClickListener(new View.OnClickListener() {
@@ -362,13 +362,17 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
      */
     public void clickItem(View view, int position){
         Log.d(TAG, "clickItem: 진입");
-       DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
+        DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
         detailSpotListDatas.contentid = spotResultListDatas.get(position).tripinfo.contentid;
         detailSpotListDatas.contenttypeid = spotResultListDatas.get(position).tripinfo.contenttypeid;
+
         /*
         * TODO 나중에 userid는 받아와야함!
          */
         detailSpotListDatas.userid = "joo";
+
+        addr = spotResultListDatas.get(position).tripinfo.addr1;
+        Log.d(TAG, "onResponse: addr: " + addr);
 
         NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
         Log.d(TAG, "clickItem: networkService: " + list_networkService);
@@ -378,22 +382,16 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             public void onResponse(Call<DetailSpotListClickResult> call, Response<DetailSpotListClickResult> response) {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "onResponse: detail 통신");
-                    /*
-                    * TODO 왜 null인지 모르겠다. 화가 난다.
-                    * response.body().result -> null
-                    * response.body() -> not null
-                    *  detailSpotListClickResult.result.detailCommon -> null
-                    *
-                    *  result 객체로 감싸져 있는게 맞는지 확인 필요!
-                    *
-                     */
 
-//                    detailSpotListClickResult = response.body();
-//                    detailSpotListClickResponse = response.body().result;
-//
-//                    Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
+                    detailSpotListClickResponse = response.body().tripinfo;
+
+                    Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
                     detailIntent = new Intent(context, TouristSpotDetail.class);
-//                    detailIntent.putExtra("detailCommon", detailSpotListClickResult.result.detailCommon);
+                    detailIntent.putExtra("stringAddr", addr);
+                    detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
+                    detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
+//                    detailIntent.putExtra("detailInfo", detailSpotListClickResponse.detailInfo);
+                    detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
 
                 } else {
                     /*
