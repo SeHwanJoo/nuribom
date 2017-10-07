@@ -120,7 +120,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/tv_line1"
                 android:layout_weight="1"
                 android:background="@drawable/trips_facilityfilter_all_on"/>
             <ImageButton
@@ -128,7 +127,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/tv_line1"
+                android:layout_toRightOf="@id/filter_all"
                 android:layout_weight="1"
                 android:background="@drawable/trips_facilityfilter_wheelchairs_off"/>
 
@@ -137,7 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/tv_line1"
+                android:layout_toRightOf="@id/filter_wheelchairs"
                 android:layout_weight="1"
                 android:background="@drawable/trips_facilityfilter_bathroom_off"/>
 
@@ -146,7 +145,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/tv_line1"
+                android:layout_toRightOf="@id/filter_bathroom"
                 android:layout_weight="1"
                 android:background="@drawable/trips_facilityfilter_parkinglot_off"
                 />
@@ -156,7 +155,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_toRightOf="@id/tv_line1"
+                android:layout_toRightOf="@id/filter_parkinglot"
                 android:layout_weight="1"
                 android:background="@drawable/trips_facilityfilter_elevator_off"/>
 

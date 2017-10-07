@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:divider="#dddddd"
+    android:descendantFocusability="blocksDescendants">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <ImageView
+            android:id="@+id/iv_course_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="#adadad"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+        <ImageButton
+            android:id="@+id/ib_bigImgHeart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/trips_heart_off"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.3"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="12.5dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="2">
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/tv_course_item_courseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="종로뿌시기"
+                    android:textColor="#1D1D1D"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="12.5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/tv_course_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2017.08.21~2017.08.24(3일)"
+                    android:textColor="#686868"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="12.5dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/tv_course_item_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="힐링"
+                    android:textColor="#1D1D1D"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="right"
+                android:layout_marginLeft="12.5dp"
+                android:weightSum="100"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:id="@+id/iv_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/trips_heart_off" />
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"></View>
+                <TextView
+                    android:id="@+id/tv_course_heartCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="00" />
+
+                <ImageView
+                    android:id="@+id/iv_item_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/trips_comment" />
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"></View>
+                <TextView
+                    android:id="@+id/tv_course_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="00" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

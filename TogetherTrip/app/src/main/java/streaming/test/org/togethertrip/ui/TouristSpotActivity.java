@@ -33,11 +33,11 @@ public class TouristSpotActivity extends AppCompatActivity {
     @BindView(R.id.tv_main) TextView tv_main;
     @BindView(R.id.edit_search) EditText edit_search;
     @BindView(R.id.filter_all) Button filter_all;
-    @BindView(R.id.filter_touristSpot) Button filter_touristSpot;
-    @BindView(R.id.filter_culture) Button filter_culture;
-    @BindView(R.id.filter_stay) Button filter_stay;
-    @BindView(R.id.filter_shopping) Button filter_shopping;
-    @BindView(R.id.filter_food) Button filter_food;
+//    @BindView(R.id.filter_touristSpot) Button filter_touristSpot;
+//    @BindView(R.id.filter_culture) Button filter_culture;
+//    @BindView(R.id.filter_stay) Button filter_stay;
+//    @BindView(R.id.filter_shopping) Button filter_shopping;
+//    @BindView(R.id.filter_food) Button filter_food;
 
     String search_keyword;
     SearchData searchData;
@@ -65,28 +65,28 @@ public class TouristSpotActivity extends AppCompatActivity {
         real_searchBtn.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.filter_all, R.id.filter_touristSpot, R.id.filter_culture, R.id.filter_stay, R.id.filter_shopping, R.id.filter_food})
-    public void filterClick(View view){
-        switch(view.getId()){
-            case R.id.filter_all:
-
-                break;
-            case R.id.filter_touristSpot:
-
-                break;
-            case R.id.filter_culture:
-
-                break;
-            case R.id.filter_stay:
-
-                break;
-            case R.id.filter_shopping:
-
-                break;
-            case R.id.filter_food:
-
-                break;
-        }
-    }
+//    @OnClick({R.id.filter_all, R.id.filter_touristSpot, R.id.filter_culture, R.id.filter_stay, R.id.filter_shopping, R.id.filter_food})
+//    public void filterClick(View view){
+//        switch(view.getId()){
+//            case R.id.filter_all:
+//
+//                break;
+//            case R.id.filter_touristSpot:
+//
+//                break;
+//            case R.id.filter_culture:
+//
+//                break;
+//            case R.id.filter_stay:
+//
+//                break;
+//            case R.id.filter_shopping:
+//
+//                break;
+//            case R.id.filter_food:
+//
+//                break;
+//        }
+//    }
 
 }

@@ -56,6 +56,11 @@
 
         <activity android:name=".ui.Home_SearchActivity" />
         <activity android:name=".ui.SignupActivity"/>
+        <activity android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>
