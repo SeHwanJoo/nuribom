@@ -22,7 +22,7 @@ public class DetailSpotListClickResponse {
         public String tel;
         public String overview;
     }
-    public class DetailIntro{
+    public class DetailIntro implements Serializable{
         public String accomcountlodging;
         public String checkintime;
         public String chkcooking;
@@ -35,14 +35,14 @@ public class DetailSpotListClickResponse {
         public String roomtype;
         public String scalelodging;
     }
-    public class DetailInfo{
+    public class DetailInfo implements Serializable{
         public String infoname;
         public String infotext;
     }
     public class DetailImage{
         public String originimgurl;
     }
-    public class OtherInfo{
+    public class OtherInfo implements Serializable{
         public int likecount;
         public int commentcount;
         public int message;

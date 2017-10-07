@@ -60,6 +60,7 @@
                                 android:textColor="#1D1D1D"
                                 android:textSize="24sp"/>
                             <TextView
+                                android:id="@+id/detail_spotAddr"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -180,12 +181,18 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="주차: "
+                                android:layout_weight="1.7"
+                                android:text="주차"
                                 android:textColor="#8C8C8C"
                                 android:textSize="12sp" />
+                            <TextView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text=":"/>
 
                             <TextView
+                                android:id="@+id/tv_parkinglot"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"
@@ -204,12 +211,17 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="접근로: "
+                                android:layout_weight="1.7"
+                                android:text="접근로"
                                 android:textColor="#8C8C8C"
                                 android:textSize="12sp" />
-
                             <TextView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text=":"/>
+                            <TextView
+                                android:id="@+id/tv_route"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"
@@ -226,11 +238,17 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="휠체어: "
+                                android:layout_weight="1.7"
+                                android:text="휠체어"
                                 android:textSize="12sp"
                                 android:textColor="#8C8C8C"/>
                             <TextView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text=":"/>
+                            <TextView
+                                android:id="@+id/tv_wheelchairs"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"
@@ -247,15 +265,21 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="출입통로: "
+                                android:layout_weight="1.7"
+                                android:text="엘레베이터"
                                 android:textSize="12sp"
                                 android:textColor="#8C8C8C"/>
                             <TextView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text=":"/>
+                            <TextView
+                                android:id="@+id/tv_elevator"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"
-                                android:text="출입통로 내용"
+                                android:text="엘레베이터 내용"
                                 android:textSize="12sp"
                                 android:textColor="#8C8C8C"/>
                         </LinearLayout>
@@ -268,11 +292,17 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:text="화장실: "
+                                android:layout_weight="1.7"
+                                android:text="화장실"
                                 android:textSize="12sp"
                                 android:textColor="#8C8C8C"/>
                             <TextView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:text=":"/>
+                            <TextView
+                                android:id="@+id/tv_bathroom"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="8"

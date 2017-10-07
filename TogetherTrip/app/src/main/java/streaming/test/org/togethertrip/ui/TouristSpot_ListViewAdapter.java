@@ -40,6 +40,8 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
     String handicapEtc;
     String braileblock;
 
+    String addr;
+
     Filter listFilter;
     ArrayList<TouristSpotSearchList> filteredItemList;
 
@@ -114,6 +116,8 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         tv_heartCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.likecount));
         tv_commentCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.commentcount));
 
+        addr = touristSpotSearchResultList.get(position).tripinfo.addr1;
+
         return convertView;
     }
 
@@ -122,6 +126,9 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         super.notifyDataSetChanged();
     }
 
+    /*
+    * TODO 필터링...
+     */
     @Override
     public Filter getFilter() {
         if (listFilter == null) {
@@ -129,7 +136,6 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         } return listFilter ;
 
     }
-
 
     private class ListFilter extends Filter{
 

@@ -1,10 +1,9 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +15,7 @@ import com.skp.Tmap.TMapView;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
+import streaming.test.org.togethertrip.datas.DetailWithTour;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailErr";
@@ -24,15 +24,18 @@ public class TouristSpotDetail extends AppCompatActivity {
     ImageView imgView;
     ImageButton heartbtn, commentsbtn;
     TextView hearttxt, commentstxt;
-    TextView detail_overView;
+    TextView detail_overView, detail_spotName, detail_spotAddr;
+    ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
+    TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route;
     RelativeLayout detail_mapRl;
 
-    BitmapDrawable bitmap;
-
     Intent intent;
-    String contentId;
+    String addr;
 
     DetailSpotListClickResponse.DetailCommon detailCommon;
+    DetailSpotListClickResponse.DetailIntro detailIntro;
+    DetailSpotListClickResponse.DetailInfo detailInfo;
+    DetailWithTour detailWithTour;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -42,9 +45,10 @@ public class TouristSpotDetail extends AppCompatActivity {
         setContentView(R.layout.activity_tourist_spot_detail);
         intent = this.getIntent();
 
-//        detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
-
-        Log.d(TAG, "onCreate: " + contentId);
+        addr = intent.getStringExtra("stringAddr");
+        detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
+        detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
+        detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
 
         scrollView = (ScrollView)findViewById(R.id.touristSpot_detail_scroll);
         imgView = (ImageView)findViewById(R.id.touristSpot_detail_img);
@@ -52,10 +56,33 @@ public class TouristSpotDetail extends AppCompatActivity {
         commentsbtn = (ImageButton)findViewById(R.id.touristSpot_detail_commentsbtn);
         hearttxt = (TextView)findViewById(R.id.touristSpot_detail_hearttxt);
         commentstxt = (TextView)findViewById(R.id.touristSpot_detail_commentstxt);
-        detail_overView = (TextView) findViewById(R.id.detail_overView);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
 
-//        detail_overView.setText(detailCommon.overview);
+        //받아온 데이터들 상세보기에 대입!
+        detail_spotName = (TextView) findViewById(R.id.detail_spotName);
+        detail_spotAddr = (TextView) findViewById(R.id.detail_spotAddr);
+        detail_overView = (TextView) findViewById(R.id.detail_overView);
+        filter_bathroom = (ImageButton) findViewById(R.id.filter_bathroom);
+        filter_elevator = (ImageButton) findViewById(R.id.filter_elevator);
+        filter_parkinglot = (ImageButton) findViewById(R.id.filter_parkinglot);
+        filter_wheelchairs = (ImageButton) findViewById(R.id.filter_wheelchairs);
+        tv_bathroom = (TextView) findViewById(R.id.tv_bathroom);
+        tv_elevator = (TextView) findViewById(R.id.tv_elevator);
+        tv_parkinglot = (TextView) findViewById(R.id.tv_parkinglot);
+        tv_wheelchairs = (TextView) findViewById(R.id.tv_wheelchairs);
+        tv_route = (TextView) findViewById(R.id.tv_route);
+
+        try {
+            detail_spotName.setText(detailCommon.title);
+            detail_overView.setText(Html.fromHtml(detailCommon.overview).toString());
+            detail_spotAddr.setText(addr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //시설정보들 유무 검사, 이미지로 표시 메소드
+        checkFacilities();
+
 
         TMapView tmapView = new TMapView(this);
         tmapView.setSKPMapApiKey("d9c128a3-3d91-3162-a305-e4b65bea1b55");
@@ -89,9 +116,50 @@ public class TouristSpotDetail extends AppCompatActivity {
         });
     }
 
-//    @OnClick(R.id.touristSpot_detail_commentsbtn)
-//    public void commentClick(){
-//
-//    }
+    public void checkFacilities(){
+        try {
+            if (!detailWithTour.elevator.equals(null)) {
+                filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
+                tv_elevator.setText(detailWithTour.elevator);
+            }
+        }catch (NullPointerException ne){
+            filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_off);
+            tv_elevator.setText("");
+        }
+        try{
+            if(!detailWithTour.parking.equals(null)) {
+                filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
+                tv_parkinglot.setText(detailWithTour.parking);
+            }
+        }catch (NullPointerException ne){
+            filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_off);
+            tv_parkinglot.setText("");
+        }
+        try {
+            if (!detailWithTour.restroom.equals(null)) {
+                filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
+                tv_bathroom.setText(detailWithTour.restroom);
+            }
+        }catch (NullPointerException ne){
+            filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_off);
+            tv_bathroom.setText("");
+        }
+        try{
+            if(!detailWithTour.wheelchair.equals(null)) {
+                filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
+                tv_wheelchairs.setText(detailWithTour.wheelchair);
+            }
+        }catch (NullPointerException ne){
+            filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
+            tv_wheelchairs.setText("");
+        }
+        try{
+            if(!detailWithTour.route.equals("null")) {
+                tv_route.setText(detailWithTour.route);
+            }
+        }catch(NullPointerException ne){
+            tv_route.setText("");
+        }
+    }
 
 }
