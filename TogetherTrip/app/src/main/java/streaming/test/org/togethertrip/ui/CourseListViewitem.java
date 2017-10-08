@@ -1,7 +1,5 @@
 package streaming.test.org.togethertrip.ui;
 
-import java.util.Date;
-
 /**
  * Created by minseung on 2017-10-07.
  */

@@ -9,6 +9,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.MessageResult;
@@ -48,4 +49,9 @@ public interface NetworkService {
     //후기 리스트뷰 띄우기
     @GET("/trips/reviews/{contentid}")
     Call<TouristSpotReviewResult> getMainResult(@Path("contentid") String contentid);
+
+    //관광코스 그리드뷰 띄우기
+    @GET("/course/list/{keyword}/{userid}")
+    Call<CourseResult> getCourseResult(@Path("keyword") String keyword,
+                                       @Path("userid") String userid);
 }
