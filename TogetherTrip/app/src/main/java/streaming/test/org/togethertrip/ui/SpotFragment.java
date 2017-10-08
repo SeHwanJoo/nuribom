@@ -77,6 +77,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
     String addr;
 
+
     public SpotFragment(){
 
     }
@@ -225,7 +226,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
                     adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);
                     spotList.setAdapter(adapter);
-
 
                 } else {
                     Log.d(TAG, "onResponse: search response is not success");
@@ -394,10 +394,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
 
                 } else {
-                    /*
-                    * TODO list중 contentid, contenttypeid 자체가 검색이 안되는 것 있음!
-                    * 이유 찾아야됨
-                    */
                     Log.d(TAG, "onResponse: clickList response is not success");
                     Log.d(TAG, "onResponse: tq: " + response.isSuccessful());
                 }
@@ -409,8 +405,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
             }
         });
     }
-
-
 
 
 }

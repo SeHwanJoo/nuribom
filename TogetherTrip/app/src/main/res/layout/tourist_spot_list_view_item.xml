@@ -63,6 +63,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:text="광화문"
+                    android:gravity="center"
                     android:textColor="#1D1D1D"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -145,8 +146,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:orientation="horizontal">
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
         <TextView
             android:id="@+id/filter_all"
             android:layout_width="0dp"
@@ -168,6 +170,7 @@
             android:id="@+id/filter_wheelchairs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tv_line1"
             android:layout_weight="1"
@@ -177,6 +180,7 @@
             android:id="@+id/filter_bathroom"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tv_line1"
             android:layout_weight="1"
@@ -186,6 +190,7 @@
             android:id="@+id/filter_parkinglot"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/tv_line1"
             android:layout_weight="1"
@@ -195,12 +200,16 @@
             android:id="@+id/filter_elevator"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/tv_line1"
             android:layout_weight="1"
             android:background="@drawable/trips_facilityfilter_elevator_off"/>
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
     </LinearLayout>
 
 

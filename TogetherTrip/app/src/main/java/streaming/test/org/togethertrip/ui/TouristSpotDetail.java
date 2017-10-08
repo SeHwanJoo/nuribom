@@ -1,6 +1,8 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -11,11 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.skp.Tmap.TMapData;
+import com.skp.Tmap.TMapMarkerItem;
+import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
+import streaming.test.org.togethertrip.datas.MapPoint;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailErr";
@@ -27,7 +33,11 @@ public class TouristSpotDetail extends AppCompatActivity {
     TextView detail_overView, detail_spotName, detail_spotAddr;
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route;
+
     RelativeLayout detail_mapRl;
+    TMapData tmapData = null;
+    MapPoint mapPoint;
+    TMapView tmapView;
 
     Intent intent;
     String addr;
@@ -50,12 +60,12 @@ public class TouristSpotDetail extends AppCompatActivity {
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
 
-        scrollView = (ScrollView)findViewById(R.id.touristSpot_detail_scroll);
-        imgView = (ImageView)findViewById(R.id.touristSpot_detail_img);
-        heartbtn = (ImageButton)findViewById(R.id.touristSpot_detail_heartbtn);
-        commentsbtn = (ImageButton)findViewById(R.id.touristSpot_detail_commentsbtn);
-        hearttxt = (TextView)findViewById(R.id.touristSpot_detail_hearttxt);
-        commentstxt = (TextView)findViewById(R.id.touristSpot_detail_commentstxt);
+        scrollView = (ScrollView) findViewById(R.id.touristSpot_detail_scroll);
+        imgView = (ImageView) findViewById(R.id.touristSpot_detail_img);
+        heartbtn = (ImageButton) findViewById(R.id.touristSpot_detail_heartbtn);
+        commentsbtn = (ImageButton) findViewById(R.id.touristSpot_detail_commentsbtn);
+        hearttxt = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
+        commentstxt = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
 
         //받아온 데이터들 상세보기에 대입!
@@ -76,15 +86,18 @@ public class TouristSpotDetail extends AppCompatActivity {
             detail_spotName.setText(detailCommon.title);
             detail_overView.setText(Html.fromHtml(detailCommon.overview).toString());
             detail_spotAddr.setText(addr);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         //시설정보들 유무 검사, 이미지로 표시 메소드
         checkFacilities();
 
+        //주소를 통해 좌표값 얻기
+        convertToAddr();
+        showMarkerPoint();
 
-        TMapView tmapView = new TMapView(this);
+        tmapView = new TMapView(this);
         tmapView.setSKPMapApiKey("d9c128a3-3d91-3162-a305-e4b65bea1b55");
         tmapView.setCompassMode(true);
         tmapView.setIconVisibility(true);
@@ -99,7 +112,7 @@ public class TouristSpotDetail extends AppCompatActivity {
         //스크롤바 사용기능 설정
         scrollView.setVerticalScrollBarEnabled(true);
 
-        commentsbtn.setOnClickListener(new View.OnClickListener(){
+        commentsbtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -116,50 +129,84 @@ public class TouristSpotDetail extends AppCompatActivity {
         });
     }
 
-    public void checkFacilities(){
+    //해당 시설 검증 및 표시
+    public void checkFacilities() {
         try {
             if (!detailWithTour.elevator.equals(null)) {
                 filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
                 tv_elevator.setText(detailWithTour.elevator);
             }
-        }catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_off);
-            tv_elevator.setText("");
+            tv_elevator.setText("해당 시설 없음");
         }
-        try{
-            if(!detailWithTour.parking.equals(null)) {
+        try {
+            if (!detailWithTour.parking.equals(null)) {
                 filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
                 tv_parkinglot.setText(detailWithTour.parking);
             }
-        }catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_off);
-            tv_parkinglot.setText("");
+            tv_parkinglot.setText("해당 시설 없음");
         }
         try {
             if (!detailWithTour.restroom.equals(null)) {
                 filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
                 tv_bathroom.setText(detailWithTour.restroom);
             }
-        }catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_off);
-            tv_bathroom.setText("");
+            tv_bathroom.setText("해당 시설 없음");
         }
-        try{
-            if(!detailWithTour.wheelchair.equals(null)) {
+        try {
+            if (!detailWithTour.wheelchair.equals(null)) {
                 filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
                 tv_wheelchairs.setText(detailWithTour.wheelchair);
             }
-        }catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
-            tv_wheelchairs.setText("");
+            tv_wheelchairs.setText("해당 시설 없음");
         }
-        try{
-            if(!detailWithTour.route.equals("null")) {
+        try {
+            if (!detailWithTour.route.equals("null")) {
                 tv_route.setText(detailWithTour.route);
             }
-        }catch(NullPointerException ne){
-            tv_route.setText("");
+        } catch (NullPointerException ne) {
+            tv_route.setText("해당 시설 없음");
         }
+    }
+
+    //마커 찍는 메소드
+    public void showMarkerPoint() {
+        mapPoint = new MapPoint("강남", 37.510350, 127.066847);
+
+        TMapPoint point = new TMapPoint(mapPoint.getLatitude(),
+                mapPoint.getLongitude());
+        TMapMarkerItem item1 = new TMapMarkerItem();
+        Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.ic_launcher);
+
+        item1.setTMapPoint(point);
+        item1.setName(mapPoint.getName());
+        item1.setVisible(item1.VISIBLE);
+        item1.setIcon(bitmap);
+
+        tmapView.addMarkerItem("locationPoint", item1);
+    }
+
+
+    //명칭 검색을 통해 마커찍기
+    public void convertToAddr() {
+//        TMapData tmapData = new TMapData();
+//        tmapData.findAllPOI(addr, new TMapData.FindAllPOIListenerCallback() {
+//            @Override
+//            public void onFindAllPOI(ArrayList<TMapPOIItem> arrayList) {
+//                for(int i=0; i<arrayList.size();i++){
+//                    TMapPOIItem item= arrayList.get(i);
+//
+//                    Log.d(TAG, "onFindAllPOI: 주소로찾기: " + item.getPOIPoint().toString());
+//                }
+//            }
+//        });
     }
 
 }
