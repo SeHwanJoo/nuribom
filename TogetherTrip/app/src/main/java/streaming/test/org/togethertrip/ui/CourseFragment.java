@@ -9,8 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
 
@@ -22,6 +26,9 @@ public class CourseFragment extends Fragment {
     Activity activity;
     Context context;
     FloatingActionButton fab;
+    GridView listView;
+    CourseListAdapter courseListAdapter;
+    ArrayList<CourseListViewitem> courseListViewitemArrayList;
 
     public CourseFragment(){
 
@@ -41,7 +48,18 @@ public class CourseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_course, container, false);
+        listView = (GridView)view.findViewById(R.id.course_gridView);
+        courseListViewitemArrayList = new ArrayList<CourseListViewitem>();
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
+        courseListViewitemArrayList.add(new CourseListViewitem(R.drawable.sally,"종로뿌시기","2017.10.07~2017.10.9(2일간)","힐링",3,5));
 
+
+        courseListAdapter = new CourseListAdapter(getContext(),courseListViewitemArrayList);
+        listView.setAdapter(courseListAdapter);
 
 
 
