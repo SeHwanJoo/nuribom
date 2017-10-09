@@ -1,0 +1,107 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'maven-publish'
+//apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.yongbeam'
+
+//group = getProperty('projectGroupName').toString()
+//version = getProperty('projectVersionName').toString()
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 25
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        abortOnError true
+        disable 'MissingTranslation'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.android.support:design:25.3.1'
+}
+
+
+//task generateSourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier 'sources'
+//    group = 'build'
+//}
+//
+//task generateJavadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += configurations.compile
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    failOnError false
+//    group = 'build'
+//}
+//
+//task generateJavadocJar(type: Jar) {
+//    from generateJavadoc
+//    classifier 'javadoc'
+//    group = 'build'
+//}
+//
+//publishing {
+//    publications {
+//        Yphotopicker(MavenPublication) {
+//            artifact "$buildDir/outputs/aar/y-photopicker-release.aar"
+//            artifact generateJavadocJar
+//            artifact generateSourcesJar
+//
+//            groupId getProperty('projectGroupName').toString()
+//            artifactId "y-photopicker"
+//            version getProperty('projectVersionName').toString()
+//
+//            pom.withXml {
+//                def dependenciesNode = asNode().appendNode('dependencies')
+//                configurations.compile.allDependencies.each {
+//                    def dependencyNode = dependenciesNode.appendNode('dependency')
+//                    dependencyNode.appendNode('groupId', it.group)
+//                    dependencyNode.appendNode('artifactId', it.name)
+//                    dependencyNode.appendNode('version', it.version)
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//bintray {
+//    user = getProperty('bintrayUser').toString()
+//    key = getProperty('bintrayApiKey').toString()
+//    publications = ['Yphotopicker']
+//    pkg {
+//        repo = 'maven'
+//        name = 'y-photopicker'
+//        licenses = ['Apache 2.0']
+//        vcsUrl = 'https://github.com/yongbeam/Android-Y-PhotoPicker'
+//        publish = true
+//        publicDownloadNumbers = true
+//
+//        version {
+//            name = getProperty('projectVersionName').toString()
+//            desc = 'android image single/multiple/crop select library.'
+//            released  = new Date()
+//            vcsTag = 'release_' + getProperty('projectVersionName').toString()
+//        }
+//    }
+//}

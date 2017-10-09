@@ -1,10 +1,11 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +13,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.datas.DetailWithTour;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
 
 /**
@@ -22,9 +24,9 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
  */
 
 //ListView사용을 위한 어댑터
-public class TouristSpot_ListViewAdapter extends BaseAdapter {
+public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterable {
     final static String TAG = "ListViewAdapterLog";
-    List<TouristSpotSearchList> touristSpotSearchResultList;
+    ArrayList<TouristSpotSearchList> touristSpotSearchResultList;
     Context context;
 
     String contentId;
@@ -38,11 +40,20 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
     String handicapEtc;
     String braileblock;
 
+    String addr;
+
+    Filter listFilter;
+    ArrayList<TouristSpotSearchList> filteredItemList;
+
+    ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
+    DetailWithTour detailWithTour;
+
+
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
     }
 
-    public TouristSpot_ListViewAdapter(Context context ,List<TouristSpotSearchList> touristSpotSearchResultList){
+    public TouristSpot_ListViewAdapter(Context context ,ArrayList<TouristSpotSearchList> touristSpotSearchResultList){
         this.context = context;
         this.touristSpotSearchResultList = touristSpotSearchResultList;
     }
@@ -83,27 +94,22 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         TextView tv_heartCount = (TextView) convertView.findViewById(R.id.tv_heartCount);
         TextView tv_commentCount = (TextView)convertView.findViewById(R.id.tv_commentCount);
 
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-//        TouristSpotSearchList touristSpotListView = getItem(position);
+        filter_bathroom = (ImageButton) convertView.findViewById(R.id.filter_bathroom);
+        filter_elevator = (ImageButton) convertView.findViewById(R.id.filter_elevator);
+        filter_parkinglot = (ImageButton) convertView.findViewById(R.id.filter_parkinglot);
+        filter_wheelchairs = (ImageButton) convertView.findViewById(R.id.filter_wheelchairs);
 
         // 아이템 내 각 위젯에 데이터 반영
-        /*
-        TODO 이미지 처리!!
-             iv_bigImg = 큰 이미지 비트맵으로 그려야함
-             ib_bigImgHeart = 하트버튼 클릭 시 색깔 채우고 1값 올리기
-             iv_profileImg = 프로필 사진 받아와 비트맵으로 그려야함
-             glide 라이브러리 참고해볼것
-         */
 //        ib_bigImgHeart.setImageDrawable(touristSpotListView.Tripinfo.); // 하트버튼 스와이프 구현해야함
-//        iv_profileImg.setImageDrawable(touristSpotListView.getIv_profileImg()); // 해당 글의 프로필 이미지 안가져왐
-        Glide.with(context).load(touristSpotSearchResultList.get(position).tripinfo.firstimage)
+       Glide.with(context).load(touristSpotSearchResultList.get(position).tripinfo.firstimage)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(iv_bigImg);
         tv_spotAddr.setText(touristSpotSearchResultList.get(position).tripinfo.addr1);
         tv_spotName.setText(touristSpotSearchResultList.get(position).tripinfo.title);
-        contentId = touristSpotSearchResultList.get(position).tripinfo.contentId;
-        contentTypeId = touristSpotSearchResultList.get(position).tripinfo.contentTypeId;
+        contentId = touristSpotSearchResultList.get(position).tripinfo.contentid;
+        contentTypeId = touristSpotSearchResultList.get(position).tripinfo.contenttypeid;
+
         parking = touristSpotSearchResultList.get(position).detailWithTour.parking;
         route = touristSpotSearchResultList.get(position).detailWithTour.route;
         wheelchair = touristSpotSearchResultList.get(position).detailWithTour.wheelchair;
@@ -114,7 +120,11 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         tv_heartCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.likecount));
         tv_commentCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.commentcount));
 
-        Log.d(TAG, "getView: " + touristSpotSearchResultList.get(position).tripinfo.addr1);
+        //시설 정보 유무에 따른 이미지
+        checkFacilities();
+
+        //상세보기에서 주소 보여주기 위함
+        addr = touristSpotSearchResultList.get(position).tripinfo.addr1;
 
         return convertView;
     }
@@ -124,12 +134,88 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter {
         super.notifyDataSetChanged();
     }
 
-    /**
-     * Count 데이터 타입 확인
-     * @param heartCount
-     * @param commentCount
+    /*
+    * TODO 필터링...
      */
+    @Override
+    public Filter getFilter() {
+        if (listFilter == null) {
+            listFilter = new ListFilter() ;
+        } return listFilter ;
 
+    }
+
+    private class ListFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+
+            if(constraint == null || constraint.length() == 0){
+                results.values = touristSpotSearchResultList;
+                results.count = touristSpotSearchResultList.size();
+            }else{
+                ArrayList<TouristSpotSearchList> itemList = new ArrayList<TouristSpotSearchList>();
+                for(TouristSpotSearchList item : touristSpotSearchResultList){
+                    /*
+                    TODO 버튼이 눌림을 확인하고 item 추가
+                    http://recipes4dev.tistory.com/96
+
+                     */
+
+
+
+                }
+
+                results.values = itemList;
+                results.count = itemList.size();
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredItemList = (ArrayList<TouristSpotSearchList>) results.values;
+
+            if(results.count>0){
+                notifyDataSetChanged();
+            }else{
+                notifyDataSetInvalidated();
+            }
+        }
+    }
+
+    public void checkFacilities(){
+        try {
+            if (!elevator.equals(null)) {
+                filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_on);
+            }
+        }catch (NullPointerException ne){
+            filter_elevator.setBackgroundResource(R.drawable.trips_facilityfilter_elevator_off);
+        }
+        try{
+            if(!parking.equals(null)) {
+                filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_on);
+            }
+        }catch (NullPointerException ne){
+            filter_parkinglot.setBackgroundResource(R.drawable.trips_facilityfilter_parkinglot_off);
+        }
+        try {
+            if (!restroom.equals(null)) {
+                filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_on);
+            }
+        }catch (NullPointerException ne){
+            filter_bathroom.setBackgroundResource(R.drawable.trips_facilityfilter_bathroom_off);
+        }
+        try{
+            if(!wheelchair.equals(null)) {
+                filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_on);
+            }
+        }catch (NullPointerException ne){
+            filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
+        }
+    }
 
 
 }

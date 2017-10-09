@@ -1,0 +1,10 @@
+<resources>
+    <style name="PopupMenuStyle" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/color_ffffff</item>
+        <item name="android:textColor">@color/color_9c9c9c</item>
+    </style>
+
+    <style name="myTheme.actionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
+</resources>

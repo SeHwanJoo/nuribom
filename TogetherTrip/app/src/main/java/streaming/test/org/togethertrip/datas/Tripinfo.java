@@ -6,8 +6,8 @@ package streaming.test.org.togethertrip.datas;
 
 //TripInfo의 정보를 담을 객체
 public class Tripinfo {
-    public String contentId;
-    public String contentTypeId;
+    public String contentid;
+    public String contenttypeid;
     public String addr1;
     public String title;
     public String firstimage; // 사진url

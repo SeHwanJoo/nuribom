@@ -15,29 +15,36 @@
         android:layout_below="@id/firstRl"
         android:background="#cecece"></View>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </android.support.v4.view.ViewPager>
-
+        android:background="#000"
+        android:elevation="3dp">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="#fff">
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#80000000" />
+        android:background="#f0f0f0"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#000">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
+            android:background="#fff"
             >
             <FrameLayout
                 android:layout_width="0dp"
@@ -50,6 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_home_on"/>
             </FrameLayout>
 
@@ -64,6 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_trip_off"/>
             </FrameLayout>
 
@@ -78,6 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_course_off" />
             </FrameLayout>
 
@@ -92,6 +105,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_alrarm_off"/>
             </FrameLayout>
             <FrameLayout
@@ -105,6 +120,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_mypage_off"/>
             </FrameLayout>
         </LinearLayout>
