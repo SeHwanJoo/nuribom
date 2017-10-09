@@ -7,6 +7,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import streaming.test.org.togethertrip.datas.CourseWriteDatas;
+import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import streaming.test.org.togethertrip.datas.CourseResult;
@@ -35,6 +37,10 @@ public interface NetworkService {
     //회원가입
     @POST("users")
     Call<MessageResult> requestSignup(@Body RegisterDatas registerDatas);
+
+    //코스작성
+    @POST("edit")
+    Call<CourseWriteResult> writeCourse(@Body CourseWriteDatas courseWriteDatas);
 
     // 후기 작성
     @Multipart

@@ -7,26 +7,35 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.datas.CourseWriteDatas;
+import streaming.test.org.togethertrip.datas.CourseWriteResult;
+import streaming.test.org.togethertrip.network.NetworkService;
 
-public class CourseWrite extends AppCompatActivity {
-    Button button;
+public class CourseWrite extends AppCompatActivity{
+    Button okbtn;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     CourseWriteFragment courseWriteFragment;
     CourseWriteFragment2 courseWriteFragment2;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-
-
-
-    //int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24*2,getResources().getDisplayMetrics());
-
+    FloatingActionButton nextfab;
+    CourseWriteDatas courseWriteDatas;
+    String courseTitle;
+    NetworkService networkService;
+    String course1;
 
     static int position = 0;
 
@@ -34,46 +43,83 @@ public class CourseWrite extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_write_viewpager);
-        button = (Button) findViewById(R.id.nextbtn);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        courseWriteFragment = new CourseWriteFragment();
-        courseWriteFragment2 = new CourseWriteFragment2();
+        courseWriteFragment = new CourseWriteFragment(this);
+        courseWriteFragment2 = new CourseWriteFragment2(this);
         fragmentList.add(position, courseWriteFragment);
         position++;
+
+        okbtn = (Button)findViewById(R.id.okbtn);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        //fab 버튼누르면 작성창
+        nextfab = (FloatingActionButton) findViewById(R.id.nextfab);
+        nextfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentList.add(position, new CourseWriteFragment2());
+//                startActivity(new Intent(getBaseContext(),CourseWrite.class));
+
+                fragmentList.add(position, new CourseWriteFragment2(getBaseContext()));
                 position++;
                 mSectionsPagerAdapter.notifyDataSetChanged();
 
                 mViewPager.setClipToPadding(false);
                 mViewPager.setPadding(0,0,0,0);
-                mViewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -9);
-                mViewPager.setPageMargin(getResources().getDisplayMetrics().heightPixels/ -8);
+                mViewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
+                mViewPager.setPageMargin(getResources().getDisplayMetrics().heightPixels/ -10);
                 mViewPager.setCurrentItem(position,true);
-
-//                if (position==position-1){
-//
-//                }
             }
         });
 
+        okbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(CourseWrite.this,data.title, Toast.LENGTH_SHORT).show();
+                okNetwork();
+            }
+        });
+
+//        Bundle bundle = getArguments().getString("course1");
+//        int id = bundle.getInt("id");
+//        Item item = (Item) bundle.getSerializable("item");
+
     }
 
+    public void okNetwork(){
+
+        courseWriteDatas.main.title="abc";
+        Log.d("gggggg", "search: searchData.keyword: " + courseWriteDatas.main.title);
+
+
+        Call<CourseWriteResult> courseWriteTitle = networkService.writeCourse(courseWriteDatas);
+        courseWriteTitle.enqueue(new Callback<CourseWriteResult>() {
+            @Override
+            public void onResponse(Call<CourseWriteResult> call, Response<CourseWriteResult> response) {
+                if (response.isSuccessful()) {
+                    /*
+                    TODO 잘 실행 되는지?
+                     */
+                    Log.d("coursetitle", "onResponse: search: " + courseTitle);
+
+                } else {
+
+                }
+            }
+            @Override
+            public void onFailure(Call<CourseWriteResult> call, Throwable t) {
+                //검색시 통신 실패
+            }
+        });
+    }
 
     //페이지 선택 확인을 위한 어댑터
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public SectionsPagerAdapter(FragmentManager fm)
         {
             super(fm);
-
-          //  mViewPager.setPageMargin(-margin);
         }
 
 
@@ -90,7 +136,6 @@ public class CourseWrite extends AppCompatActivity {
         public float getPageWidth(int position) {
             if(position == 0) return 1f;
             else return 0.99999999f;
-            //        return super.getPageWidth(position);
 
         }
 
@@ -107,43 +152,7 @@ public class CourseWrite extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-//        Toast.makeText(getBaseContext(), "resultCode: "+requestCode, Toast.LENGTH_SHORT).show();
-//
-//        if(requestCode == PICK_IMAGE_REQUEST_CODE)
-//        {
-//            if(resultCode== Activity.RESULT_OK)
-//            {
-//                try {
-//                    //Uri에서 이미지 이름을 얻어온다.
-//                    //String name_Str = getImageNameToUri(data.getData());
-//
-//                    //이미지 데이터를 비트맵으로 받아온다.
-//                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-//                    ImageView image = (ImageView)findViewById(R.id.elbum);
-//
-//                    //배치해놓은 ImageView에 set
-//                    image.setImageBitmap(image_bitmap);
-//
-//
-//                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-//
-//
-//                } catch (FileNotFoundException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                } catch (Exception e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
     }
-
-
 
     @Override
     public void onBackPressed() {

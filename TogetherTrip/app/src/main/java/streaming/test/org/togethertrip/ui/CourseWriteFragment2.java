@@ -2,12 +2,17 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import streaming.test.org.togethertrip.R;
 
@@ -17,11 +22,14 @@ import streaming.test.org.togethertrip.R;
 
 
 public class CourseWriteFragment2 extends Fragment {
+    private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
+    ImageView imageView;
     Activity activity;
+    Intent intent;
 
-    public CourseWriteFragment2(){
-
+    public CourseWriteFragment2(Context context){
+        this.context = context;
     }
 
     @Override
@@ -32,11 +40,37 @@ public class CourseWriteFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_course_write2, container, false);
+       View view = inflater.inflate(R.layout.activity_course_write2, container, false);
+
+        imageView=(ImageView)view.findViewById(R.id.elbum2);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickImage();
+            }
+        });
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+    private void pickImage(){
+        intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //getActivity().startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Glide.with(context).load(data.getData()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
+            }
+        }
     }
 }

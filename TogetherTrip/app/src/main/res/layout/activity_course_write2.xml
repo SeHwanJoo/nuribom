@@ -29,111 +29,90 @@
 
             <!-- 이미지 추가 버튼으로 대체해야함-->
             <ImageView
-                android:id="@+id/elbum"
+                android:id="@+id/elbum2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5.5"
+                android:layout_weight="4.5"
                 android:src="@drawable/sally"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4.5"
+                android:layout_weight="5.5"
                 android:orientation="vertical"
-                android:padding="20dp"
                 android:background="#fff">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="3"
-                    android:orientation="horizontal">
+                    android:layout_weight="1.9"
+                    android:orientation="horizontal"
+                    android:id="@+id/place">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/sally"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:hint="장소입력" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:hint="구체적인 위치입력"
-                            android:textColor="#2a2a2a" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:id="@+id/ratebar1"
-                        style="?android:attr/ratingBarStyleSmall"
+                    <ImageView
+                        android:id="@+id/plusPlace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:isIndicator="true"
-                        android:numStars="5"
-                        android:soundEffectsEnabled="true"
-                        android:stepSize="0.5" />
-
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="7dp"/>
                     <TextView
+                        android:id="@+id/placetv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:padding="15dp"
-                        android:text="4/5" />
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="yyyy/mm/dd"
-                            android:layout_alignParentRight="true"/>
-                    </RelativeLayout>
-
+                        android:layout_marginTop="12dp"
+                        android:text="장소를 입력해주세요"
+                        android:textSize="16sp"
+                        android:textColor="#1E3790"/>
                 </LinearLayout>
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#cecece"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="5.5">
+                    android:layout_weight="1.9"
+                    android:orientation="horizontal"
+                    android:id="@+id/visitDay">
+
+                    <ImageView
+                        android:id="@+id/visitDayIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="7dp"
+                        android:text="icon"/>
+                    <TextView
+                        android:id="@+id/visitDaytv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="방문 날짜를 선택해주세요"
+                        android:textSize="14sp"
+                        android:textColor="#686868"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#cecece"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="6.2"
+                    android:padding="12dp">
 
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="간략한 내용입력" />
+                        android:hint="내용을 입력하세요"
+                        android:textSize="14sp"
+                        android:textColorHint="#686868"
+                        android:textColor="#1D1D1D"/>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/lineRl2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/firstRl"
-        android:background="#dedede"></RelativeLayout>
-
 </LinearLayout>
