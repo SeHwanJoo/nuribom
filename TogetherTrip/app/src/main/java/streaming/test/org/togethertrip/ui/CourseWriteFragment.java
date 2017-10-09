@@ -38,6 +38,7 @@ public class CourseWriteFragment extends Fragment {
     Intent intent;
     EditText courseTitle;
 
+
     String choice_sido = "";
     Spinner spinner_category;
     CourseWriteFragment.SpinnerAdapter adspin1;
@@ -179,11 +180,11 @@ TODO 메롱
                         android.R.layout.simple_spinner_dropdown_item, parent, false);
             }
 
-//            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
-//            tv.setText(items[position]);
-//            tv.setTextColor(Color.parseColor("#1E3790"));
-//            tv.setTextSize(12);
-//            tv.setHeight(50);
+            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            tv.setText(items[position]);
+            tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTextSize(12);
+            tv.setHeight(50);
             return convertView;
         }
 

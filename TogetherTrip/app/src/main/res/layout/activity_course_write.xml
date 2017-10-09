@@ -27,60 +27,65 @@
             android:id="@+id/elbum"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.5"
+            android:layout_weight="6"
             android:src="@drawable/sally"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3.5"
+            android:layout_weight="4"
             android:orientation="vertical"
-            android:padding="20dp"
             android:background="#fff">
 
             <TextView
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/calenderview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#95989A"
                 android:hint="기간은 자동으로 입력됩니다."/>
 
             <Spinner
                 android:id="@+id/categoryspinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="16dp"
                 />
             <EditText
                 android:id="@+id/courseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="16dp"
                 android:hint="제목을 입력해주세요"
-                android:textSize="25sp"
-                android:layout_marginLeft="-10dp"/>
+                android:textSize="24sp"
+                android:textColor="#1D1D1D"
+                android:background="@null"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
                     android:src="@drawable/sally"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="작성자"
+                    android:textSize="16sp"
+                    android:textColor="#686868"
+                    android:layout_marginTop="6dp"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="간략한 내용입력"
-                android:layout_marginTop="10dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

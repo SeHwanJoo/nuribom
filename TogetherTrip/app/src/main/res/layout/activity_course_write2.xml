@@ -56,7 +56,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginRight="7dp"/>
+                        android:layout_marginRight="7dp"
+                        android:src="@drawable/course_more_place"/>
                     <TextView
                         android:id="@+id/placetv"
                         android:layout_width="wrap_content"
@@ -84,7 +85,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="7dp"
-                        android:text="icon"/>
+                        android:src="@drawable/course_date"/>
                     <TextView
                         android:id="@+id/visitDaytv"
                         android:layout_width="wrap_content"

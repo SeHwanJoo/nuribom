@@ -25,13 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="코스작성"
-            android:textSize="25dp" />
+            android:text="작성하기"
+            android:textSize="18dp"
+            android:textColor="#1D1D1D"/>
 
         <Button
             android:id="@+id/okbtn"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
@@ -61,10 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="25dp"
-        android:src="@drawable/add"
-        fab:fab_colorNormal="@color/fabPressed"
-        fab:fab_colorPressed="@color/fabPressed"
-        fab:fab_colorRipple="@color/fabRipple" />
+        android:src="@drawable/course_morewrite"/>
 </FrameLayout>
 
 
