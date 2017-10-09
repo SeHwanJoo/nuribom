@@ -3,6 +3,7 @@
     package="streaming.test.org.togethertrip">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".application.ApplicationController"
@@ -45,8 +46,12 @@
         <activity android:name=".ui.TouristSpotReviewWrite" />
         <activity android:name=".ui.CourseWrite" />
 
+
         <fragment
             android:name=".ui.CourseFragment"
+            android:windowSoftInputMode="adjustPan" />
+        <fragment
+            android:name=".ui.CourseFragment2"
             android:windowSoftInputMode="adjustPan" />
 
         <activity android:name=".ui.Home_SearchActivity" />
