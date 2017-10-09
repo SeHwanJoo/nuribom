@@ -14,7 +14,6 @@ public class TouristSpotReviewListViewItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_review_list_view_item);
 
-        ratingBar = (RatingBar)findViewById(R.id.ratebar1);
     }
 
 
