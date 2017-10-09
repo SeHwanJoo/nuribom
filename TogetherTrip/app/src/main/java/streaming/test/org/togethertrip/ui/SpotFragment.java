@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ import static android.view.View.GONE;
  * Created by taehyung on 2017-09-06.
  */
 
-public class SpotFragment extends Fragment implements View.OnClickListener{
+public class SpotFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener{
     static final String TAG = "SpotFragmentLog";
     Context context;
     Activity activity;
@@ -65,6 +66,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     FloatingActionButton touristSpot_fab_btn;
+
+    SwipeRefreshLayout spot_refreshLayout;
 
     String choice_sido = "";
     Spinner spinner_location;
@@ -100,6 +103,9 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tourist_spot, container, false);
 
+        networkService = ApplicationController.getInstance().getNetworkService();
+
+
         btn_search = (ImageButton) view.findViewById(R.id.btn_search);
         btn_map = (ImageButton) view.findViewById(R.id.btn_map);
         real_searchBtn = (ImageButton) view.findViewById(R.id.real_searchBtn);
@@ -107,6 +113,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spotList = (ListView) view.findViewById(R.id.touristSpot_listView);
         touristSpot_fab_btn = (FloatingActionButton) view.findViewById(R.id.touristSpot_fab_btn);
+        spot_refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.spot_refreshLayout);
 
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);
         filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
@@ -121,6 +128,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         filter_bathroom.setOnClickListener(this);
         filter_parkinglot.setOnClickListener(this);
         filter_elevator.setOnClickListener(this);
+
+        spot_refreshLayout.setOnRefreshListener(this);
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +150,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         });
 
         adspin1 = new SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
-//        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_location.setAdapter(adspin1);
         spinner_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -200,20 +208,18 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
     //관광지 검색 메소드
     public void search(){
-        Log.d(TAG, "search: " + search_keyword);
         search_keyword = edit_search.getText().toString();
 
         if(search_keyword == null) search_keyword = "광화문";
         else if(search_keyword.equals("")) search_keyword = "광화문";
 
+        Log.d(TAG, "search: " + search_keyword);
         searchData = new SearchData();
         /*
          * TODO 나중에 userid는 받아와야됨~
          */
         searchData.userid = "joo";
         searchData.keyword = search_keyword;
-
-        networkService = ApplicationController.getInstance().getNetworkService();
 
         Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
         requestDriverApplyOwner.enqueue(new Callback<TouristSpotSearchResult>() {
@@ -223,6 +229,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
 
                     spotResultListDatas = response.body().result;
                     //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
+                    Log.d(TAG, "onResponse: search() 성공");
 
                     adapter = new TouristSpot_ListViewAdapter(context, spotResultListDatas);
                     spotList.setAdapter(adapter);
@@ -287,7 +294,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
-
 
 
     public class SpinnerAdapter extends ArrayAdapter<String> {
@@ -406,5 +412,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener{
         });
     }
 
+    //Swipe시 갱신되는 메소드
+    @Override
+    public void onRefresh() {
+        search();
+        spot_refreshLayout.setRefreshing(false);
+    }
 
 }

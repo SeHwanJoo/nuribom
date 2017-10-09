@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,8 +16,11 @@ import android.widget.TextView;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
+import com.skp.Tmap.TMapPOIItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
+
+import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
@@ -25,6 +29,7 @@ import streaming.test.org.togethertrip.datas.MapPoint;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailErr";
+    private final static String mTMapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
 
     ScrollView scrollView;
     ImageView imgView;
@@ -94,18 +99,19 @@ public class TouristSpotDetail extends AppCompatActivity {
         checkFacilities();
 
         //주소를 통해 좌표값 얻기
-        convertToAddr();
-        showMarkerPoint();
+//        convertToAddr();
 
         tmapView = new TMapView(this);
-        tmapView.setSKPMapApiKey("d9c128a3-3d91-3162-a305-e4b65bea1b55");
-        tmapView.setCompassMode(true);
-        tmapView.setIconVisibility(true);
-        tmapView.setZoomLevel(15);
-        tmapView.setMapType(TMapView.MAPTYPE_STANDARD);
-        tmapView.setLanguage(TMapView.LANGUAGE_KOREAN);
+        tmapView.setSKPMapApiKey(mTMapApiKey);
+        tmapView.setCompassMode(true); // 현재 보는 방향
+        tmapView.setIconVisibility(true); //현위치 아이콘 표시
+        tmapView.setZoomLevel(15); //줌 레벨
+        tmapView.setMapType(TMapView.MAPTYPE_STANDARD); //지도 타입
+        tmapView.setLanguage(TMapView.LANGUAGE_KOREAN); //언어 설정
+        //화면 중심을 단말의 현재위치로 이동
         tmapView.setTrackingMode(true);
         tmapView.setSightVisible(true);
+        tmapView.setLocationPoint(37.510350, 127.066847);
 
         detail_mapRl.addView(tmapView);
 
@@ -176,6 +182,11 @@ public class TouristSpotDetail extends AppCompatActivity {
         }
     }
 
+
+    public void addPoint(){
+        mapPoint = new MapPoint("강남", 37.510350, 127.066847);
+    }
+
     //마커 찍는 메소드
     public void showMarkerPoint() {
         mapPoint = new MapPoint("강남", 37.510350, 127.066847);
@@ -189,24 +200,29 @@ public class TouristSpotDetail extends AppCompatActivity {
         item1.setName(mapPoint.getName());
         item1.setVisible(item1.VISIBLE);
         item1.setIcon(bitmap);
+        item1.setCalloutTitle(mapPoint.getName());
+        item1.setCanShowCallout(true);
+        item1.setAutoCalloutVisible(true);
 
         tmapView.addMarkerItem("locationPoint", item1);
     }
 
 
-    //명칭 검색을 통해 마커찍기
+    //주소를 좌표로 변환
     public void convertToAddr() {
-//        TMapData tmapData = new TMapData();
-//        tmapData.findAllPOI(addr, new TMapData.FindAllPOIListenerCallback() {
-//            @Override
-//            public void onFindAllPOI(ArrayList<TMapPOIItem> arrayList) {
-//                for(int i=0; i<arrayList.size();i++){
-//                    TMapPOIItem item= arrayList.get(i);
-//
-//                    Log.d(TAG, "onFindAllPOI: 주소로찾기: " + item.getPOIPoint().toString());
-//                }
-//            }
-//        });
+        final String strData = addr;
+        TMapData tmapData = new TMapData();
+
+        tmapData.findAllPOI(strData, new TMapData.FindAllPOIListenerCallback() {
+            @Override
+            public void onFindAllPOI(ArrayList<TMapPOIItem> arrayList) {
+                for(int i=0;i<arrayList.size();i++) {
+                    TMapPOIItem item = arrayList.get(0);
+                    Log.d(TAG, "onFindAllPOI: Point: " + item.getPOIPoint().toString());
+                }
+
+            }
+        });
     }
 
 }
