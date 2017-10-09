@@ -107,7 +107,7 @@ public class CourseWriteFragment extends Fragment {
 /*
 TODO 메롱
  */
-        Toast.makeText(context, "박다영은 핵바보다", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "김태형은 핵바보다", Toast.LENGTH_SHORT).show();
 
 
         return view;
