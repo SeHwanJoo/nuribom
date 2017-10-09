@@ -43,9 +43,6 @@ public class CourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_course, container, false);
 
 
-
-
-
         //fab 버튼누르면 작성창
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
