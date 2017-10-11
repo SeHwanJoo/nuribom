@@ -13,7 +13,7 @@ public class DetailSpotListClickResponse {
     public ArrayList<DetailInfo> detailInfo;
     public DetailWithTour detailWithTour;
     public ArrayList<DetailImage> detailImage;
-    public OtherInfo otherInfo;
+    public OtherInfo otherinfo;
 
     //객체 통째로 intent에 putExtra 하기 위해 Serializable 인터페이스를 implement.
     public class DetailCommon implements Serializable{
@@ -21,6 +21,8 @@ public class DetailSpotListClickResponse {
         public String telname;
         public String tel;
         public String overview;
+        public String mapx;
+        public String mapy;
     }
     public class DetailIntro implements Serializable{
         public String accomcountlodging;
@@ -45,6 +47,6 @@ public class DetailSpotListClickResponse {
     public class OtherInfo implements Serializable{
         public int likecount;
         public int commentcount;
-        public int message;
+        public String message;
     }
 }

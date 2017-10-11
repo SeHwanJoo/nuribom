@@ -246,6 +246,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         });
     }
 
+    //시설 필터링 on/off 메소드
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -347,25 +348,15 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         }
     }
 
-    //리스트 클릭시
+    //리스트 클릭 리스너
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             clickItem(view, position);
-
-            Log.d(TAG, "onItemClick: detailIntent: " + detailIntent);
-            try {
-                startActivity(detailIntent);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         }
     };
 
-    //리스트뷰 선택! detail 네트워킹
-    /*
-    * TODO Detail ui 데이터들 셋팅
-     */
+    // detail 네트워킹
     public void clickItem(View view, int position){
         Log.d(TAG, "clickItem: 진입");
         DetailSpotListDatas detailSpotListDatas = new DetailSpotListDatas();
@@ -390,18 +381,28 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     Log.d(TAG, "onResponse: detail 통신");
 
                     detailSpotListClickResponse = response.body().tripinfo;
-
+                    /*
+                     * TODO Detail ui 데이터들 셋팅을 위해 객체 보내기
+                     */
                     Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
+
                     detailIntent = new Intent(context, TouristSpotDetail.class);
                     detailIntent.putExtra("stringAddr", addr);
                     detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
 //                    detailIntent.putExtra("detailInfo", detailSpotListClickResponse.detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
+                    detailIntent.putExtra("otherInfo", detailSpotListClickResponse.otherinfo);
+
+                    //왜 null값이 들어가는지 ?
+//                    Log.d(TAG, "onResponse: message: " + detailSpotListClickResponse.otherinfo.message);
+//                    Log.d(TAG, "onResponse: likecount: " + detailSpotListClickResponse.otherinfo.likecount);
+//                    Log.d(TAG, "onResponse: comment: " + detailSpotListClickResponse.otherinfo.commentcount);
+
+                    startActivity(detailIntent);
 
                 } else {
                     Log.d(TAG, "onResponse: clickList response is not success");
-                    Log.d(TAG, "onResponse: tq: " + response.isSuccessful());
                 }
             }
             @Override

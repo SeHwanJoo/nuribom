@@ -5,27 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.MypageActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F1F1F1">
     <RelativeLayout
         android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#e4e4e4"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/tv_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="마이페이지"
-            android:textSize="25dp"
-            android:layout_centerInParent="true"/>
+        android:background="#000"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp"
+        android:elevation="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+            <TextView
+                android:id="@+id/tv_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마이페이지"
+                android:textSize="25dp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </RelativeLayout>
+
+
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:background="#e4e4e4"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp">
@@ -48,10 +57,9 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="32dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/sally"/>
+                        android:src="@drawable/mypage_profile_defalt"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,15 +72,20 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="10dp"
-                        android:text="비회원"/>
+                        android:layout_marginTop="18dp"
+                        android:text="찌니"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#1D1D1D"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:layout_marginBottom="10dp"
-                        android:text="email@example.com"/>
+                        android:text="email@example.com"
+                        android:textSize="14sp"
+                        android:textColor="#686868"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -106,9 +119,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="로그인"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
+                    android:text="로그아웃"
+                    android:textColor="#1D1D1D"
+                    android:textSize="14sp" />
 
                 <View
                     android:layout_width="1dp"
@@ -129,9 +142,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="회원가입"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
+                    android:text="프로필 변경(회원가입)"
+                    android:textColor="#1D1D1D"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -145,101 +158,110 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="15dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
                 android:orientation="horizontal"
                 android:background="#fff">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="내가 쓴 글"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
+                        android:layout_marginBottom="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="내가 쓴 코스"
+                        android:textColor="#1D1D1D"
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/imageView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_below="@id/textView7"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="18dp"
+                        android:layout_marginLeft="40dp"
+                        android:src="@drawable/mypage_mycource" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_toRightOf="@id/imageView7"
-                        android:layout_below="@id/textView7"
                         android:text="0"
-                        android:textSize="20sp"/>
+                        android:textSize="24sp"
+                        android:textColor="#1E3790"
+                        android:layout_below="@+id/textView7"
+                        android:layout_toRightOf="@id/imageView7"/>
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="내가 쓴 글"
-                        android:layout_marginBottom="15dp"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
+                        android:layout_marginBottom="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="내가 쓴 후기"
+                        android:textColor="#1D1D1D"
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_below="@id/textView8"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="40dp"
+                        android:src="@drawable/mypage_myreview"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_toRightOf="@id/imageView8"
-                        android:layout_below="@id/textView8"
                         android:text="0"
-                        android:textSize="20sp"/>
+                        android:textSize="24sp"
+                        android:textColor="#1E3790"
+                        android:layout_below="@+id/textView8"
+                        android:layout_toRightOf="@id/imageView8"/>
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="내가 쓴 글"
-                        android:layout_marginBottom="15dp"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
+                        android:layout_marginBottom="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:text="보관함"
+                        android:textColor="#1D1D1D"
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_below="@id/textView9"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="40dp"
+                        android:src="@drawable/myreview_heart"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_toRightOf="@id/imageView9"
-                        android:layout_below="@id/textView9"
                         android:text="0"
-                        android:textSize="20sp"/>
+                        android:textSize="24sp"
+                        android:textColor="#1E3790"
+                        android:layout_below="@+id/textView9"
+                        android:layout_toRightOf="@id/imageView9"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -259,20 +281,12 @@
                 android:paddingRight="20dp"
                 android:paddingTop="16dp"
                 android:background="#fff">
-                <ImageView
-                    android:id="@+id/alarm_img"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/ic_launcher"/>
-
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="16dp"
-                    android:layout_toRightOf="@id/alarm_img"
                     android:text="알림 설정"
                     android:textColor="#000000"
                     android:textStyle="bold"
@@ -284,6 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textView15"
+                    android:layout_marginLeft="10dp"
                     android:text="이메일"
                     android:textColor="#000000"
                     android:textSize="15sp" />
@@ -293,7 +308,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/textView15" />
+                    android:layout_below="@+id/textView15"
+                    android:layout_toRightOf="@id/textView16"/>
 
                 <TextView
                     android:id="@+id/textView17"
@@ -301,8 +317,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView16"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="SMS"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:layout_above="@+id/settings_switch_push" />
 
                 <Switch
                     android:id="@+id/settings_switch_sms"
@@ -310,14 +328,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@+id/settings_switch_email"
-                    android:layout_marginTop="-2dp" />
+                    android:layout_toRightOf="@id/textView17"/>
 
                 <TextView
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView17"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="푸시알림"
                     android:textColor="#000000" />
 
@@ -327,7 +345,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@id/settings_switch_sms"
-                    android:layout_marginTop="-2dp"
+                    android:layout_toRightOf="@id/textView18"
                     android:padding="0dp" />
             </RelativeLayout>
 
@@ -354,66 +372,91 @@
                 android:paddingRight="20dp"
                 android:paddingTop="16dp">
 
-                <ImageView
-                    android:id="@+id/notice_img"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/ic_launcher" />
-
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/notice_img"
                     android:text="공지사항 및 이용약관"
                     android:textColor="#000000"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_notice"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textView12"
-                    android:text="공지 사항"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:layout_marginLeft="10dp"
+                    android:weightSum="10">
+                    <!--TODO marginLeft 줘야돼~-->
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="공지 사항"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"/>
+                    <TextView
+                        android:id="@+id/settings_tos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView12"
+                        android:text=">"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/settings_tos"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/textView12"
-                    android:text=">"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView13"
-                    android:layout_marginTop="10dp"
-                    android:text="이용 약관"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/settings_privacy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/settings_tos"
-                    android:layout_marginTop="10dp"
-                    android:padding="0dp"
-                    android:text=">"
-                    android:textSize="15sp" />
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/ll_notice"
+                    android:weightSum="10">
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="이용 약관"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"/>
+                    <TextView
+                        android:id="@+id/settings_privacy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:padding="0dp"
+                        android:text=">"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#fff">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#cecece" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -424,12 +467,7 @@
                 android:paddingRight="20dp"
                 android:paddingTop="16dp">
 
-                <ImageView
-                    android:id="@+id/faq_img"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/ic_launcher" />
+
 
                 <TextView
                     android:id="@+id/faq_tv"
@@ -437,7 +475,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/faq_img"
                     android:text="FAQ"
                     android:textColor="#000000"
                     android:textSize="16dp"

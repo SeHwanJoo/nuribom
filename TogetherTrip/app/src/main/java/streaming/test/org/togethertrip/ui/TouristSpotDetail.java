@@ -1,8 +1,6 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -14,18 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
-import com.skp.Tmap.TMapPOIItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
-
-import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
-import streaming.test.org.togethertrip.datas.MapPoint;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailErr";
@@ -34,23 +27,25 @@ public class TouristSpotDetail extends AppCompatActivity {
     ScrollView scrollView;
     ImageView imgView;
     ImageButton heartbtn, commentsbtn;
-    TextView hearttxt, commentstxt;
+    TextView tv_heartCount, tv_commentCount;
     TextView detail_overView, detail_spotName, detail_spotAddr;
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route;
+    TextView tv_location;
 
     RelativeLayout detail_mapRl;
-    TMapData tmapData = null;
-    MapPoint mapPoint;
+    double mapX,mapY;
     TMapView tmapView;
 
     Intent intent;
     String addr;
+    String title;
 
     DetailSpotListClickResponse.DetailCommon detailCommon;
     DetailSpotListClickResponse.DetailIntro detailIntro;
     DetailSpotListClickResponse.DetailInfo detailInfo;
     DetailWithTour detailWithTour;
+    DetailSpotListClickResponse.OtherInfo otherInfo;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -64,16 +59,23 @@ public class TouristSpotDetail extends AppCompatActivity {
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
+        otherInfo = (DetailSpotListClickResponse.OtherInfo) intent.getSerializableExtra("otherInfo");
+
+        title = detailCommon.title;
+        //해당 관광지 x,y좌표 저장
+        mapX = Double.parseDouble(detailCommon.mapx);
+        mapY = Double.parseDouble(detailCommon.mapy);
+        Log.d(TAG, "onCreate: " + mapX + " / " + mapY);
 
         scrollView = (ScrollView) findViewById(R.id.touristSpot_detail_scroll);
         imgView = (ImageView) findViewById(R.id.touristSpot_detail_img);
         heartbtn = (ImageButton) findViewById(R.id.touristSpot_detail_heartbtn);
         commentsbtn = (ImageButton) findViewById(R.id.touristSpot_detail_commentsbtn);
-        hearttxt = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
-        commentstxt = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
+        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
+        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
 
-        //받아온 데이터들 상세보기에 대입!
+        //각종 view 연결
         detail_spotName = (TextView) findViewById(R.id.detail_spotName);
         detail_spotAddr = (TextView) findViewById(R.id.detail_spotAddr);
         detail_overView = (TextView) findViewById(R.id.detail_overView);
@@ -86,11 +88,31 @@ public class TouristSpotDetail extends AppCompatActivity {
         tv_parkinglot = (TextView) findViewById(R.id.tv_parkinglot);
         tv_wheelchairs = (TextView) findViewById(R.id.tv_wheelchairs);
         tv_route = (TextView) findViewById(R.id.tv_route);
+        tv_location = (TextView) findViewById(R.id.tv_location);
+        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
+        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
 
+        //받아온 데이터들 상세보기에 대입!
         try {
+            /*
+             * 이미지 setting
+             */
             detail_spotName.setText(detailCommon.title);
             detail_overView.setText(Html.fromHtml(detailCommon.overview).toString());
             detail_spotAddr.setText(addr);
+            tv_location.setText(addr);
+            /*
+            * 이용 안내 setting
+            */
+            tv_heartCount.setText(otherInfo.likecount);
+            tv_commentCount.setText(otherInfo.commentcount);
+
+            //좋아요 여부확인 및 표시
+            if(otherInfo.message.equals("unlike")){
+                heartbtn.setBackgroundResource(R.drawable.trips_heart_off);
+            }else{
+                heartbtn.setBackgroundResource(R.drawable.trips_heart_on);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,22 +120,8 @@ public class TouristSpotDetail extends AppCompatActivity {
         //시설정보들 유무 검사, 이미지로 표시 메소드
         checkFacilities();
 
-        //주소를 통해 좌표값 얻기
-//        convertToAddr();
-
-        tmapView = new TMapView(this);
-        tmapView.setSKPMapApiKey(mTMapApiKey);
-        tmapView.setCompassMode(true); // 현재 보는 방향
-        tmapView.setIconVisibility(true); //현위치 아이콘 표시
-        tmapView.setZoomLevel(15); //줌 레벨
-        tmapView.setMapType(TMapView.MAPTYPE_STANDARD); //지도 타입
-        tmapView.setLanguage(TMapView.LANGUAGE_KOREAN); //언어 설정
-        //화면 중심을 단말의 현재위치로 이동
-        tmapView.setTrackingMode(true);
-        tmapView.setSightVisible(true);
-        tmapView.setLocationPoint(37.510350, 127.066847);
-
-        detail_mapRl.addView(tmapView);
+        //맵 생성 및 마커
+        initTmap();
 
         //스크롤바 사용기능 설정
         scrollView.setVerticalScrollBarEnabled(true);
@@ -126,7 +134,7 @@ public class TouristSpotDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        commentstxt.setOnClickListener(new View.OnClickListener() {
+        tv_commentCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TouristSpotReview.class);
@@ -182,47 +190,33 @@ public class TouristSpotDetail extends AppCompatActivity {
         }
     }
 
+    //맵 초기화 및 생성
+    public void initTmap(){
+        tmapView = new TMapView(this);
+        tmapView.setSKPMapApiKey(mTMapApiKey);
+        tmapView.setCenterPoint(mapX,mapY);
+        tmapView.setZoomLevel(15);
+        detail_mapRl.addView(tmapView);
 
-    public void addPoint(){
-        mapPoint = new MapPoint("강남", 37.510350, 127.066847);
+        addMarker();
+
+        //아이콘 및 지도 생성
+        tmapView.setIconVisibility(true);
+        tmapView.setSightVisible(true);
     }
 
-    //마커 찍는 메소드
-    public void showMarkerPoint() {
-        mapPoint = new MapPoint("강남", 37.510350, 127.066847);
+    //마커 추가 메소드
+    public void addMarker(){
+        TMapPoint point = new TMapPoint(mapY,mapX);
+        TMapMarkerItem marker = new TMapMarkerItem();
+        marker.setTMapPoint(point);
 
-        TMapPoint point = new TMapPoint(mapPoint.getLatitude(),
-                mapPoint.getLongitude());
-        TMapMarkerItem item1 = new TMapMarkerItem();
-        Bitmap bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.ic_launcher);
-
-        item1.setTMapPoint(point);
-        item1.setName(mapPoint.getName());
-        item1.setVisible(item1.VISIBLE);
-        item1.setIcon(bitmap);
-        item1.setCalloutTitle(mapPoint.getName());
-        item1.setCanShowCallout(true);
-        item1.setAutoCalloutVisible(true);
-
-        tmapView.addMarkerItem("locationPoint", item1);
+        //풍선뷰 안의 항목에 글 지정
+        marker.setCalloutTitle(title);
+        marker.setCanShowCallout(true);
+        marker.setAutoCalloutVisible(true);
+        tmapView.addMarkerItem("marker", marker);
     }
 
-
-    //주소를 좌표로 변환
-    public void convertToAddr() {
-        final String strData = addr;
-        TMapData tmapData = new TMapData();
-
-        tmapData.findAllPOI(strData, new TMapData.FindAllPOIListenerCallback() {
-            @Override
-            public void onFindAllPOI(ArrayList<TMapPOIItem> arrayList) {
-                for(int i=0;i<arrayList.size();i++) {
-                    TMapPOIItem item = arrayList.get(0);
-                    Log.d(TAG, "onFindAllPOI: Point: " + item.getPOIPoint().toString());
-                }
-
-            }
-        });
-    }
 
 }

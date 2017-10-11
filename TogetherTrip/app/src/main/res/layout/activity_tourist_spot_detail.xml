@@ -358,6 +358,7 @@
                                 android:background="@drawable/trips_location"
                                 android:layout_gravity="center"/>
                             <TextView
+                                android:id="@+id/tv_location"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="7"
@@ -407,33 +408,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#fff">
-            <ImageButton
-                android:id="@+id/touristSpot_detail_heartbtn"
+            <LinearLayout
+                android:id="@+id/heartLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/trips_heart_off"/>
-            <TextView
-                android:id="@+id/touristSpot_detail_hearttxt"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp">
+                <ImageButton
+                    android:id="@+id/touristSpot_detail_heartbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/trips_heart_on"/>
+                <TextView
+                    android:id="@+id/touristSpot_detail_hearttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:text="00"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/commentLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center"
-                android:text="00"/>
-            <ImageButton
-                android:id="@+id/touristSpot_detail_commentsbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_gravity="center"
-                android:background="@drawable/trips_comment"/>
-            <TextView
-                android:id="@+id/touristSpot_detail_commentstxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center"
-                android:text="00"/>
+                android:layout_height="match_parent">
+                <ImageButton
+                    android:id="@+id/touristSpot_detail_commentsbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/trips_comment"/>
+                <TextView
+                    android:id="@+id/touristSpot_detail_commentstxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:text="00"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
