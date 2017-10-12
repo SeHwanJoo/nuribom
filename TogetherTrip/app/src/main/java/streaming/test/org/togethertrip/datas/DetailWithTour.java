@@ -14,5 +14,5 @@ public class DetailWithTour implements Serializable {
     public String elevator;
     public String restroom;
     public String handicapetc;
-    public String brileblock; // 점자블록 유무
+    public String braileblock; // 점자블록 유무
 }

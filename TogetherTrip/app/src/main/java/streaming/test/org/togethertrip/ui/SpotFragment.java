@@ -33,6 +33,7 @@ import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
+import streaming.test.org.togethertrip.datas.OtherInfo;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
@@ -54,6 +55,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     TouristSpot_ListViewAdapter adapter;
 
     DetailSpotListClickResponse detailSpotListClickResponse;
+    OtherInfo otherInfo;
     Intent detailIntent;
 
     NetworkService networkService;
@@ -190,7 +192,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onClick(View v) {
                 /*
-                * TODO 작성버튼 클릭시
+                * TODO (후기)작성버튼 클릭시
                  */
             }
         });
@@ -363,6 +365,9 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         detailSpotListDatas.contentid = spotResultListDatas.get(position).tripinfo.contentid;
         detailSpotListDatas.contenttypeid = spotResultListDatas.get(position).tripinfo.contenttypeid;
 
+        Log.d(TAG, "clickItem: contentId / contentTypeId : " + detailSpotListDatas.contentid +
+                " / " + detailSpotListDatas.contenttypeid);
+
         /*
         * TODO 나중에 userid는 받아와야함!
          */
@@ -381,10 +386,12 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     Log.d(TAG, "onResponse: detail 통신");
 
                     detailSpotListClickResponse = response.body().tripinfo;
+                    otherInfo = response.body().otherinfo;
                     /*
                      * TODO Detail ui 데이터들 셋팅을 위해 객체 보내기
                      */
                     Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
+                    Log.d(TAG, "onResponse: 리스트: " + detailSpotListClickResponse.detailInfo);
 
                     detailIntent = new Intent(context, TouristSpotDetail.class);
                     detailIntent.putExtra("stringAddr", addr);
@@ -392,12 +399,13 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
 //                    detailIntent.putExtra("detailInfo", detailSpotListClickResponse.detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
-                    detailIntent.putExtra("otherInfo", detailSpotListClickResponse.otherinfo);
+//                    detailIntent.putExtra("detailImage", detailSpotListClickResponse.detailImage);
+                    detailIntent.putExtra("otherInfo", otherInfo);
 
                     //왜 null값이 들어가는지 ?
-//                    Log.d(TAG, "onResponse: message: " + detailSpotListClickResponse.otherinfo.message);
-//                    Log.d(TAG, "onResponse: likecount: " + detailSpotListClickResponse.otherinfo.likecount);
-//                    Log.d(TAG, "onResponse: comment: " + detailSpotListClickResponse.otherinfo.commentcount);
+                    Log.d(TAG, "onResponse: message: " + otherInfo.message);
+                    Log.d(TAG, "onResponse: likecount: " + otherInfo.likecount);
+                    Log.d(TAG, "onResponse: comment: " + otherInfo.commentcount);
 
                     startActivity(detailIntent);
 

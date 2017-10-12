@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -19,9 +20,10 @@ import com.skp.Tmap.TMapView;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
+import streaming.test.org.togethertrip.datas.OtherInfo;
 
 public class TouristSpotDetail extends AppCompatActivity {
-    final static String TAG = "TouristSpotDetailErr";
+    final static String TAG = "TouristSpotDetailLog";
     private final static String mTMapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
 
     ScrollView scrollView;
@@ -30,7 +32,7 @@ public class TouristSpotDetail extends AppCompatActivity {
     TextView tv_heartCount, tv_commentCount;
     TextView detail_overView, detail_spotName, detail_spotAddr;
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
-    TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route;
+    TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route, tv_braileblock, tv_handicapEtc;
     TextView tv_location;
 
     RelativeLayout detail_mapRl;
@@ -45,7 +47,7 @@ public class TouristSpotDetail extends AppCompatActivity {
     DetailSpotListClickResponse.DetailIntro detailIntro;
     DetailSpotListClickResponse.DetailInfo detailInfo;
     DetailWithTour detailWithTour;
-    DetailSpotListClickResponse.OtherInfo otherInfo;
+    OtherInfo otherInfo;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -59,7 +61,7 @@ public class TouristSpotDetail extends AppCompatActivity {
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
-        otherInfo = (DetailSpotListClickResponse.OtherInfo) intent.getSerializableExtra("otherInfo");
+        otherInfo = (OtherInfo) intent.getSerializableExtra("otherInfo");
 
         title = detailCommon.title;
         //해당 관광지 x,y좌표 저장
@@ -71,8 +73,8 @@ public class TouristSpotDetail extends AppCompatActivity {
         imgView = (ImageView) findViewById(R.id.touristSpot_detail_img);
         heartbtn = (ImageButton) findViewById(R.id.touristSpot_detail_heartbtn);
         commentsbtn = (ImageButton) findViewById(R.id.touristSpot_detail_commentsbtn);
-        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
-        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
+        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_heartCount);
+        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentsCount);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
 
         //각종 view 연결
@@ -89,8 +91,10 @@ public class TouristSpotDetail extends AppCompatActivity {
         tv_wheelchairs = (TextView) findViewById(R.id.tv_wheelchairs);
         tv_route = (TextView) findViewById(R.id.tv_route);
         tv_location = (TextView) findViewById(R.id.tv_location);
-        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_hearttxt);
-        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentstxt);
+        tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_heartCount);
+        tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentsCount);
+        tv_braileblock = (TextView) findViewById(R.id.tv_braileblock);
+        tv_handicapEtc = (TextView) findViewById(R.id.tv_handicapEtc);
 
         //받아온 데이터들 상세보기에 대입!
         try {
@@ -104,13 +108,17 @@ public class TouristSpotDetail extends AppCompatActivity {
             /*
             * 이용 안내 setting
             */
-            tv_heartCount.setText(otherInfo.likecount);
-            tv_commentCount.setText(otherInfo.commentcount);
 
-            //좋아요 여부확인 및 표시
+            tv_heartCount.setText(String.valueOf(otherInfo.likecount));
+            tv_commentCount.setText(String.valueOf(otherInfo.commentcount));
+
+            Log.d(TAG, "onCreate: message: " + otherInfo.message);
+            //하트 여부확인 및 표시
             if(otherInfo.message.equals("unlike")){
+                Log.d(TAG, "onCreate: in 하트여부체크 off");
                 heartbtn.setBackgroundResource(R.drawable.trips_heart_off);
             }else{
+                Log.d(TAG, "onCreate: in 하트여부체크 on");
                 heartbtn.setBackgroundResource(R.drawable.trips_heart_on);
             }
         } catch (Exception e) {
@@ -188,6 +196,20 @@ public class TouristSpotDetail extends AppCompatActivity {
         } catch (NullPointerException ne) {
             tv_route.setText("해당 시설 없음");
         }
+        try{
+            if(!detailWithTour.braileblock.equals("null")){
+                tv_braileblock.setText(detailWithTour.braileblock);
+            }
+        }catch(NullPointerException e){
+            tv_braileblock.setText("해당 시설 없음");
+        }
+        try{
+            if(!detailWithTour.handicapetc.equals("null")){
+                tv_handicapEtc.setText(detailWithTour.handicapetc);
+            }
+        }catch(NullPointerException e){
+            tv_handicapEtc.setText("해당 시설 없음");
+        }
     }
 
     //맵 초기화 및 생성
@@ -195,7 +217,7 @@ public class TouristSpotDetail extends AppCompatActivity {
         tmapView = new TMapView(this);
         tmapView.setSKPMapApiKey(mTMapApiKey);
         tmapView.setCenterPoint(mapX,mapY);
-        tmapView.setZoomLevel(15);
+        tmapView.setZoomLevel(15); //지도 ZoomLevel지정 작을 수록 넓은 범위 보여줌
         detail_mapRl.addView(tmapView);
 
         addMarker();
@@ -214,9 +236,8 @@ public class TouristSpotDetail extends AppCompatActivity {
         //풍선뷰 안의 항목에 글 지정
         marker.setCalloutTitle(title);
         marker.setCanShowCallout(true);
-        marker.setAutoCalloutVisible(true);
+        marker.setIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_place_red));
+//        marker.setAutoCalloutVisible(true); //풍선뷰 보일지 여부
         tmapView.addMarkerItem("marker", marker);
     }
-
-
 }

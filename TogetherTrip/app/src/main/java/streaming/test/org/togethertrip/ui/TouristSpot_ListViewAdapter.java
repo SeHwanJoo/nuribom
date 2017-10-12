@@ -116,7 +116,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         elevator = touristSpotSearchResultList.get(position).detailWithTour.elevator;
         restroom = touristSpotSearchResultList.get(position).detailWithTour.restroom;
         handicapEtc = touristSpotSearchResultList.get(position).detailWithTour.handicapetc;
-        braileblock = touristSpotSearchResultList.get(position).detailWithTour.brileblock;
+        braileblock = touristSpotSearchResultList.get(position).detailWithTour.braileblock;
         tv_heartCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.likecount));
         tv_commentCount.setText(String.valueOf(touristSpotSearchResultList.get(position).tripinfo.commentcount));
 

@@ -391,7 +391,6 @@
                     android:layout_below="@+id/textView12"
                     android:layout_marginLeft="10dp"
                     android:weightSum="10">
-                    <!--TODO marginLeft 줘야돼~-->
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
