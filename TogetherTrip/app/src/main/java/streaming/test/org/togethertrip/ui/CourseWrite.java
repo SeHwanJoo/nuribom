@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -24,7 +26,9 @@ import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
-public class CourseWrite extends AppCompatActivity{
+import static streaming.test.org.togethertrip.R.id.courseTitle;
+
+public class CourseWrite extends AppCompatActivity implements CourseWriteFragment.DataSetListner{
     Button okbtn;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     CourseWriteFragment courseWriteFragment;
@@ -33,7 +37,12 @@ public class CourseWrite extends AppCompatActivity{
     private ViewPager mViewPager;
     FloatingActionButton nextfab;
     CourseWriteDatas courseWriteDatas;
-    String courseTitle;
+
+    //번들로 받을 데이터
+    Uri uri;
+    String title;
+    String category;
+
     NetworkService networkService;
     Bundle course1Bundle;
 
@@ -71,14 +80,17 @@ public class CourseWrite extends AppCompatActivity{
                 mViewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
                 mViewPager.setPageMargin(getResources().getDisplayMetrics().heightPixels/ -10);
                 mViewPager.setCurrentItem(position,true);
+
+                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
             }
         });
 
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("bundleeeee", "onItemClick: detailIntent: " + course1Bundle);
+                Log.d("bundleeeee", "onItemClick: detailIntent: " + title);
 
+                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(CourseWrite.this,data.title, Toast.LENGTH_SHORT).show();
 //                okNetwork();
             }
@@ -118,6 +130,8 @@ public class CourseWrite extends AppCompatActivity{
             }
         });
     }
+
+
 
     //페이지 선택 확인을 위한 어댑터
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -164,5 +178,14 @@ public class CourseWrite extends AppCompatActivity{
         position = 0;
         finish();
     }
+
+    @Override
+    public void FirstFragmentDataSet(Uri uri, String category, String title) {
+        this. uri = uri;
+        this.category = category;
+        this.title = title;
+
+    }
+
 
 }

@@ -36,12 +36,5 @@ public class DetailSpotListClickResponse {
         public String roomtype;
         public String scalelodging;
     }
-    public class DetailInfo implements Serializable{
-        public String infoname;
-        public String infotext;
-    }
-    public class DetailImage{
-        public String originimgurl;
-    }
 
 }

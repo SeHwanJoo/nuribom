@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -21,6 +22,8 @@ import com.skp.Tmap.TMapView;
 import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.datas.DetailImage;
+import streaming.test.org.togethertrip.datas.DetailInfo;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
 import streaming.test.org.togethertrip.datas.OtherInfo;
@@ -53,9 +56,9 @@ public class TouristSpotDetail extends AppCompatActivity {
 
     DetailSpotListClickResponse.DetailCommon detailCommon;
     DetailSpotListClickResponse.DetailIntro detailIntro;
-    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
+    ArrayList<DetailInfo> detailInfo;
     DetailWithTour detailWithTour;
-    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
+    ArrayList<DetailImage> detailImage;
     OtherInfo otherInfo;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
@@ -69,9 +72,9 @@ public class TouristSpotDetail extends AppCompatActivity {
         addr = intent.getStringExtra("stringAddr");
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
-        detailInfo = (ArrayList<DetailSpotListClickResponse.DetailInfo>) intent.getSerializableExtra("detailInfo");
+        detailInfo = intent.getParcelableArrayListExtra("detailInfo");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
-        detailImage = (ArrayList<DetailSpotListClickResponse.DetailImage>) intent.getSerializableExtra("detailImage");
+        detailImage = intent.getParcelableArrayListExtra("detailImage");
         otherInfo = (OtherInfo) intent.getSerializableExtra("otherInfo");
 
         Log.d(TAG, "onCreate: Info 리스트: " + detailInfo);
@@ -133,10 +136,20 @@ public class TouristSpotDetail extends AppCompatActivity {
             for(int i=0; i<detailInfoSize; i++){
                 TextView tv_infoName = new TextView(this);
                 tv_infoName.setText(detailInfo.get(i).infoname);
+                tv_infoName.setTextColor(Color.parseColor("#1D1D1D"));
+                tv_infoName.setTextSize(14);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                lp.setMargins(8, 13, 0, 0);
                 tv_infoName.setLayoutParams(lp);
 
+                TextView tv_infoText = new TextView(this);
+                tv_infoText.setText(detailInfo.get(i).infotext);
+                tv_infoText.setTextColor(Color.parseColor("#686868"));
+                tv_infoText.setTextSize(14);
+                tv_infoText.setLayoutParams(lp);
+
                 detailInfo_container.addView(tv_infoName);
+                detailInfo_container.addView(tv_infoText);
             }
 
 

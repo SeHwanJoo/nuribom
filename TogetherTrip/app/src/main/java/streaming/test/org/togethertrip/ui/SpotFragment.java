@@ -30,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.DetailImage;
+import streaming.test.org.togethertrip.datas.DetailInfo;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
@@ -56,8 +58,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
     DetailSpotListClickResponse detailSpotListClickResponse;
     OtherInfo otherInfo;
-    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
-    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
+    ArrayList<DetailInfo> detailInfo;
+    ArrayList<DetailImage> detailImage;
     Intent detailIntent;
 
     NetworkService networkService;
@@ -487,10 +489,13 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     detailIntent.putExtra("stringAddr", addr);
                     detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
-                    detailIntent.putExtra("detailInfo", detailInfo);
+                    detailIntent.putParcelableArrayListExtra("detailInfo", detailSpotListClickResponse.detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
-                    detailIntent.putExtra("detailImage", detailImage);
+                    detailIntent.putParcelableArrayListExtra("detailImage", detailSpotListClickResponse.detailImage);
                     detailIntent.putExtra("otherInfo", otherInfo);
+
+                    Log.d(TAG, "onResponse: detailInfo: " + detailSpotListClickResponse.detailInfo);
+                    Log.d(TAG, "onResponse: detailImage: " + detailSpotListClickResponse.detailImage);
 
                     startActivity(detailIntent);
 

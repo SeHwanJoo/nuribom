@@ -8,12 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.melnykov.fab.FloatingActionButton;
 
 import streaming.test.org.togethertrip.R;
 
@@ -31,6 +35,7 @@ import streaming.test.org.togethertrip.R;
  */
 
 public class CourseWriteFragment extends Fragment {
+    private static final String TAG = "CourseWriteFragment";
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
     Activity activity;
@@ -38,8 +43,16 @@ public class CourseWriteFragment extends Fragment {
     Intent intent;
     EditText courseTitle;
 
+    //CourseWrite 액티비티의 버튼
+    Button okBtn;
+    FloatingActionButton nextfab;
 
-    String choice_sido = "";
+    String title;
+    Uri mUri;
+    DataSetListner mListner;
+
+
+    String choice_category = "";
     Spinner spinner_category;
     CourseWriteFragment.SpinnerAdapter adspin1;
     final static String[] arrayLocation1 = {"카테고리1", "카테고리2", "카테고리3", "카테고리4"};
@@ -71,7 +84,72 @@ public class CourseWriteFragment extends Fragment {
         });
 
         courseTitle = (EditText) view.findViewById(R.id.courseTitle);
-        String course1 = courseTitle.toString();
+
+        try{
+            mListner.FirstFragmentDataSet(mUri, choice_category, title);
+            courseTitle.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                        //입력하기 전에
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                        입력되는 텍스트에 변화가 있을때
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        //입력이 끝났을 때
+                        title = courseTitle.getText().toString();
+                    }
+                });
+        }catch(Exception e){
+
+        }
+
+//        okBtn = (Button) activity.findViewById(R.id.okbtn);
+//        nextfab = (FloatingActionButton) activity.findViewById(R.id.nextfab);
+//
+//        okBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try{
+//                    mListner.FirstFragmentDataSet(mUri, choice_category, title);
+//                }catch(Exception e){
+//
+//                }
+//
+//            }
+//        });
+//
+//        nextfab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //타이틀 입력 받기
+//                courseTitle.addTextChangedListener(new TextWatcher() {
+//
+//                    @Override
+//                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                        //입력하기 전에
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+////                        입력되는 텍스트에 변화가 있을때
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable s) {
+//                        //입력이 끝났을 때
+//                        title = courseTitle.getText().toString();
+//                    }
+//                });
+//
+//            }
+//        });
+
 
         spinner_category = (Spinner) view.findViewById(R.id.categoryspinner);
 
@@ -82,13 +160,13 @@ public class CourseWriteFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(adspin1.getItem(position).equals("카테고리1")){
-                    choice_sido = "카테고리1";
+                    choice_category = "카테고리1";
                 }else if(adspin1.getItem(position).equals("카테고리2")){
-                    choice_sido = "카테고리2";
+                    choice_category = "카테고리2";
                 }else if(adspin1.getItem(position).equals("카테고리3")){
-                    choice_sido = "카테고리3";
+                    choice_category = "카테고리3";
                 }else if(adspin1.getItem(position).equals("카테고리4")){
-                    choice_sido = "카테고리4";
+                    choice_category = "카테고리4";
                 }
             }
 
@@ -101,10 +179,10 @@ public class CourseWriteFragment extends Fragment {
 
 
         // 줄때
-        Fragment f = new Fragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Obj", course1);   // Object 넘기기
-        f.setArguments(bundle);
+//        Fragment f = new Fragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("Obj", course1);   // Object 넘기기
+//        f.setArguments(bundle);
 /*
 TODO 메롱
  */
@@ -118,6 +196,7 @@ TODO 메롱
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
     private void pickImage(){
         intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
@@ -133,27 +212,12 @@ TODO 메롱
             if (resultCode == Activity.RESULT_OK) {
                 Glide.with(context).load(data.getData()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
 
-//                try {
-                //Uri에서 이미지 이름을 얻어온다.
-                //String name_Str = getImageNameToUri(data.getData());
-                //이미지 데이터를 비트맵으로 받아온다.
-//                    Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
                 Uri uri = data.getData();
-                Log.d("zzzdf", "onActivityResult: " + uri) ;
+                Log.d(TAG, "onActivityResult: " + uri) ;
                 Glide.with(context).load(uri).into(imageView);
-                //배치해놓은 ImageView에 set
-//                    imageView.setImageBitmap(image_bitmap);
-
-                //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-//                } catch (FileNotFoundException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                mUri = uri;
+            }else{
+                Toast.makeText(context, "이미지를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -208,5 +272,33 @@ TODO 메롱
         }
     }
 
+
+
+    /*
+    * TODO 프래그먼트 <-> 액티비티간 통신
+    * 액티비티 내의 ok버튼을 CourseWriteFragment, CourseWriteFragment2에서 인지하고
+    * Fragment들에 있는 데이터들을 합쳐 서버에 통신해야함 어려워 못하겠어 엉엉
+    */
+
+
+    public interface DataSetListner{
+        void FirstFragmentDataSet(Uri uri, String category, String title);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof DataSetListner){
+            mListner = (DataSetListner) context;
+        }else{
+            throw new RuntimeException(context.toString() + "must be implement DataSetListner");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListner = null;
+    }
 }
 
