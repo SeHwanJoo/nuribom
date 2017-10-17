@@ -35,7 +35,7 @@ public class CourseWrite extends AppCompatActivity{
     CourseWriteDatas courseWriteDatas;
     String courseTitle;
     NetworkService networkService;
-    String course1;
+    Bundle course1Bundle;
 
     static int position = 0;
 
@@ -77,14 +77,18 @@ public class CourseWrite extends AppCompatActivity{
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("bundleeeee", "onItemClick: detailIntent: " + course1Bundle);
+
 //                Toast.makeText(CourseWrite.this,data.title, Toast.LENGTH_SHORT).show();
-                okNetwork();
+//                okNetwork();
             }
         });
 
-//        Bundle bundle = getArguments().getString("course1");
+//        Bundle bundle = getArg.getString("Obj");
 //        int id = bundle.getInt("id");
 //        Item item = (Item) bundle.getSerializable("item");
+
+
 
     }
 
