@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -17,10 +18,14 @@ import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
 
+import java.util.ArrayList;
+
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
 import streaming.test.org.togethertrip.datas.OtherInfo;
+
+import static android.support.v7.widget.ListPopupWindow.WRAP_CONTENT;
 
 public class TouristSpotDetail extends AppCompatActivity {
     final static String TAG = "TouristSpotDetailLog";
@@ -34,6 +39,7 @@ public class TouristSpotDetail extends AppCompatActivity {
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route, tv_braileblock, tv_handicapEtc;
     TextView tv_location;
+    LinearLayout detailInfo_container;
 
     RelativeLayout detail_mapRl;
     double mapX,mapY;
@@ -42,11 +48,14 @@ public class TouristSpotDetail extends AppCompatActivity {
     Intent intent;
     String addr;
     String title;
+    int detailInfoSize;
+    int detailImageSize;
 
     DetailSpotListClickResponse.DetailCommon detailCommon;
     DetailSpotListClickResponse.DetailIntro detailIntro;
-    DetailSpotListClickResponse.DetailInfo detailInfo;
+    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
     DetailWithTour detailWithTour;
+    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
     OtherInfo otherInfo;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
@@ -60,14 +69,26 @@ public class TouristSpotDetail extends AppCompatActivity {
         addr = intent.getStringExtra("stringAddr");
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
+        detailInfo = (ArrayList<DetailSpotListClickResponse.DetailInfo>) intent.getSerializableExtra("detailInfo");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
+        detailImage = (ArrayList<DetailSpotListClickResponse.DetailImage>) intent.getSerializableExtra("detailImage");
         otherInfo = (OtherInfo) intent.getSerializableExtra("otherInfo");
+
+        Log.d(TAG, "onCreate: Info 리스트: " + detailInfo);
+        Log.d(TAG, "onCreate: Image 리스트" + detailImage);
+        
+        try {
+            detailInfoSize = detailInfo.size();
+            detailImageSize = detailImage.size();
+        }catch(NullPointerException ne){
+            detailInfoSize = 0;
+            detailImageSize = 0;
+        }
 
         title = detailCommon.title;
         //해당 관광지 x,y좌표 저장
         mapX = Double.parseDouble(detailCommon.mapx);
         mapY = Double.parseDouble(detailCommon.mapy);
-        Log.d(TAG, "onCreate: " + mapX + " / " + mapY);
 
         scrollView = (ScrollView) findViewById(R.id.touristSpot_detail_scroll);
         imgView = (ImageView) findViewById(R.id.touristSpot_detail_img);
@@ -76,6 +97,7 @@ public class TouristSpotDetail extends AppCompatActivity {
         tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_heartCount);
         tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentsCount);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
+        detailInfo_container = (LinearLayout) findViewById(R.id.detailInfo_container);
 
         //각종 view 연결
         detail_spotName = (TextView) findViewById(R.id.detail_spotName);
@@ -108,6 +130,15 @@ public class TouristSpotDetail extends AppCompatActivity {
             /*
             * 이용 안내 setting
             */
+            for(int i=0; i<detailInfoSize; i++){
+                TextView tv_infoName = new TextView(this);
+                tv_infoName.setText(detailInfo.get(i).infoname);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                tv_infoName.setLayoutParams(lp);
+
+                detailInfo_container.addView(tv_infoName);
+            }
+
 
             tv_heartCount.setText(String.valueOf(otherInfo.likecount));
             tv_commentCount.setText(String.valueOf(otherInfo.commentcount));

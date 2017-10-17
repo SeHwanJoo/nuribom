@@ -56,6 +56,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
     DetailSpotListClickResponse detailSpotListClickResponse;
     OtherInfo otherInfo;
+    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
+    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
     Intent detailIntent;
 
     NetworkService networkService;
@@ -72,11 +74,15 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     SwipeRefreshLayout spot_refreshLayout;
 
     String choice_sido = "";
+    String choice_category = "";
     Spinner spinner_location;
-    SpinnerAdapter adspin1;
+    Spinner spinner_category;
+    SpinnerAdapter adspin1; // location SpinnerAdater
+    SpinnerAdapter2 adspin2; // category SpinnerAdapter
     final static String[] arrayLocation = {"서울", "인천", "경기도", "강원도", "충청북도",
             "충청남도", "전라북도", "전라남도", "경상북도", "경상남도"};
-
+    final static String[] arrayCategory = {"전체", "음식점", "쇼핑", "숙박", "문화시설", "관광지"};
+    TextView tv_category;
     String search_keyword;
     SearchData searchData;
 
@@ -107,7 +113,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
         networkService = ApplicationController.getInstance().getNetworkService();
 
-
         btn_search = (ImageButton) view.findViewById(R.id.btn_search);
         btn_map = (ImageButton) view.findViewById(R.id.btn_map);
         real_searchBtn = (ImageButton) view.findViewById(R.id.real_searchBtn);
@@ -124,6 +129,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         filter_elevator = (ImageButton) view.findViewById(R.id.filter_elevator);
 
         spinner_location = (Spinner) view.findViewById(R.id.spinner_location);
+        spinner_category = (Spinner) view.findViewById(R.id.spinner_category);
 
         filter_all.setOnClickListener(this);
         filter_wheelchairs.setOnClickListener(this);
@@ -182,7 +188,34 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                choice_sido = "서울";
+            }
+        });
 
+        adspin2 = new SpinnerAdapter2(activity, arrayCategory, android.R.layout.simple_spinner_dropdown_item);
+        adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_category.setAdapter(adspin2);
+        spinner_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(adspin2.getItem(position).equals("전체")){
+                    choice_category = "";
+                }else if(adspin2.getItem(position).equals("음식점")){
+                    choice_category = "음식점";
+                }else if(adspin2.getItem(position).equals("쇼핑")){
+                    choice_category = "쇼핑";
+                }else if(adspin2.getItem(position).equals("숙박")){
+                    choice_category = "숙박";
+                }else if(adspin2.getItem(position).equals("문화시설")){
+                    choice_category = "문화시설";
+                }else if(adspin2.getItem(position).equals("관광지")){
+                    choice_category = "관광지";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                choice_category = "전체";
             }
         });
 
@@ -350,6 +383,65 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         }
     }
 
+    public class SpinnerAdapter2 extends ArrayAdapter<String> {
+        Context context;
+        String[] items = new String[] {};
+
+        public SpinnerAdapter2(final Context context,
+                               final String[] objects, final int textViewResourceId) {
+            super(context, textViewResourceId, objects);
+            this.items = objects;
+            this.context = context;
+        }
+
+        /**
+         * 스피너 클릭시 보여지는 View의 정의
+         */
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_dropdown_item, parent, false);
+            }
+
+            TextView tv_category = (TextView) convertView.findViewById(android.R.id.text1);
+            tv_category.setText(items[position]);
+            if(items[position].equals("전체")){
+                tv_category.setTextColor(Color.parseColor("#686868"));
+            }else {
+                tv_category.setTextColor(Color.parseColor("#1E3790"));
+            }
+            tv_category.setTextSize(12);
+            tv_category.setHeight(50);
+            return convertView;
+        }
+
+        /**
+         * 기본 스피너 View 정의
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_item, parent, false);
+            }
+
+            TextView tv_category = (TextView) convertView
+                    .findViewById(android.R.id.text1);
+            tv_category.setText(items[position]);
+            if(items[position].equals("전체")){
+                tv_category.setTextColor(Color.parseColor("#686868"));
+            }else {
+                tv_category.setTextColor(Color.parseColor("#1E3790"));
+            }
+            tv_category.setTextSize(12);
+            return convertView;
+        }
+    }
+
     //리스트 클릭 리스너
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -390,22 +482,15 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     /*
                      * TODO Detail ui 데이터들 셋팅을 위해 객체 보내기
                      */
-                    Log.d(TAG, "onResponse: data!!: " + detailSpotListClickResponse);
-                    Log.d(TAG, "onResponse: 리스트: " + detailSpotListClickResponse.detailInfo);
 
                     detailIntent = new Intent(context, TouristSpotDetail.class);
                     detailIntent.putExtra("stringAddr", addr);
                     detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
-//                    detailIntent.putExtra("detailInfo", detailSpotListClickResponse.detailInfo);
+                    detailIntent.putExtra("detailInfo", detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
-//                    detailIntent.putExtra("detailImage", detailSpotListClickResponse.detailImage);
+                    detailIntent.putExtra("detailImage", detailImage);
                     detailIntent.putExtra("otherInfo", otherInfo);
-
-                    //왜 null값이 들어가는지 ?
-                    Log.d(TAG, "onResponse: message: " + otherInfo.message);
-                    Log.d(TAG, "onResponse: likecount: " + otherInfo.likecount);
-                    Log.d(TAG, "onResponse: comment: " + otherInfo.commentcount);
 
                     startActivity(detailIntent);
 
