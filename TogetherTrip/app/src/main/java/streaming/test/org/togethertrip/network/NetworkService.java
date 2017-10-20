@@ -20,6 +20,10 @@ import streaming.test.org.togethertrip.datas.ReviewResult;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
+import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
+import streaming.test.org.togethertrip.datas.like.AddLikeResult;
+import streaming.test.org.togethertrip.datas.like.RemoveLikeInfo;
+import streaming.test.org.togethertrip.datas.like.RemoveLikeResult;
 
 /**
  * Created by taehyung on 2017-09-04.
@@ -60,4 +64,12 @@ public interface NetworkService {
     @GET("/course/list/{keyword}/{userid}")
     Call<CourseResult> getCourseResult(@Path("keyword") String keyword,
                                        @Path("userid") String userid);
+
+    //코스 좋아요
+    @POST("/course/like")
+    Call<AddLikeResult> addLikeResult (@Body AddLikeInfo addLikeInfo);
+
+    //코스 좋아요 취소
+    @POST("/course/like")
+    Call<RemoveLikeResult> removeLikeResult (@Body RemoveLikeInfo removeLikeInfo);
 }

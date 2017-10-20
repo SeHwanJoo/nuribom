@@ -22,7 +22,7 @@ import streaming.test.org.togethertrip.datas.CourseListDatas;
 
 public class CourseListAdapter extends BaseAdapter{
     Context context;
-    ArrayList<CourseListDatas> CourseListVDatas;
+    ArrayList<CourseListDatas> CourseListDatas;
 
     ImageView course_image;
     TextView coureName;
@@ -33,17 +33,17 @@ public class CourseListAdapter extends BaseAdapter{
 
     public CourseListAdapter(Context context, ArrayList<CourseListDatas> courseListDatas) {
         this.context = context;
-        CourseListVDatas = courseListDatas;
+        CourseListDatas = courseListDatas;
     }
 
         //이 리스트뷰가 몇개의 item을 가지고 있는지를 알려주는 함수
 
     @Override
     public int getCount() {
-        if(CourseListVDatas == null){
+        if(CourseListDatas == null){
             return 0;
         }else {
-            return CourseListVDatas.size();
+            return CourseListDatas.size();
         }
     }
 
@@ -52,7 +52,7 @@ public class CourseListAdapter extends BaseAdapter{
         @Override
         public Object getItem(int position) {
             //저장되어 있는 객체 중 position에 따라서 리턴
-            return CourseListVDatas.get(position);
+            return CourseListDatas.get(position);
         }
 
         //현재 어떤 포지션인지 알려주는 부분
@@ -73,15 +73,15 @@ public class CourseListAdapter extends BaseAdapter{
                 heart_count = (TextView)convertView.findViewById(R.id.tv_course_heartCount);
                 comment_count = (TextView)convertView.findViewById(R.id.tv_course_comment);
             }
-            Glide.with(context).load(CourseListVDatas.get(position).image)
+            Glide.with(context).load(CourseListDatas.get(position).image)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(course_image);
-            coureName.setText(String.valueOf(CourseListVDatas.get(position).title));
-            date.setText(CourseListVDatas.get(position).date);
-            category.setText(CourseListVDatas.get(position).category);
-            heart_count.setText(String.valueOf(CourseListVDatas.get(position).likecount));
-            comment_count.setText(String.valueOf(CourseListVDatas.get(position).commentcount));
+            coureName.setText(String.valueOf(CourseListDatas.get(position).title));
+            date.setText(CourseListDatas.get(position).date);
+            category.setText(CourseListDatas.get(position).category);
+            heart_count.setText(String.valueOf(CourseListDatas.get(position).likecount));
+            comment_count.setText(String.valueOf(CourseListDatas.get(position).commentcount));
             return convertView;
         }
 
