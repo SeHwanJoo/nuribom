@@ -45,70 +45,21 @@
             android:layout_marginBottom="60dp"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/login_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:orientation="horizontal"
-                    android:background="#fff"
-                    android:visibility="gone">
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2">
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="32dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/mypage_profile_defalt"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="5"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:layout_marginTop="18dp"
-                            android:text="찌니"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            android:textColor="#1D1D1D"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:layout_marginBottom="10dp"
-                            android:text="email@example.com"
-                            android:textSize="14sp"
-                            android:textColor="#686868"/>
-
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:background="#fff">
                 <RelativeLayout
-                    android:id="@+id/nologin_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#fff"
-                    android:visibility="visible">
+                    android:layout_height="match_parent">
                     <ImageButton
                         android:id="@+id/login_facebook"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
+                        android:background="#fff"
                         android:src="@drawable/mypage_login_withfacebook"/>
                     <ImageButton
                         android:id="@+id/login_kakao"
@@ -116,13 +67,12 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_below="@id/login_facebook"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="15dp"
+                        android:background="#fff"
                         android:src="@drawable/mypage_login_withkakao"/>
                 </RelativeLayout>
 
-
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -144,7 +94,7 @@
                 android:orientation="horizontal"
                 android:background="#fff">
                 <TextView
-                    android:id="@+id/settings_logout"
+                    android:id="@+id/settings_login"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -153,7 +103,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="로그아웃"
+                    android:text="로그인"
                     android:textColor="#1D1D1D"
                     android:textSize="14sp" />
 
@@ -167,7 +117,7 @@
                     android:background="#80000000" />
 
                 <TextView
-                    android:id="@+id/settings_profile"
+                    android:id="@+id/settings_signup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -176,7 +126,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="프로필 변경"
+                    android:text="아이디 만들기"
                     android:textColor="#1D1D1D"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -188,116 +138,6 @@
                 android:layout_centerVertical="true"
                 android:background="#dedede" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:background="#fff">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="내가 쓴 코스"
-                        android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_below="@id/textView7"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="18dp"
-                        android:layout_marginLeft="40dp"
-                        android:src="@drawable/mypage_mycource" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="0"
-                        android:textSize="24sp"
-                        android:textColor="#1E3790"
-                        android:layout_below="@+id/textView7"
-                        android:layout_toRightOf="@id/imageView7"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="내가 쓴 후기"
-                        android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_below="@id/textView8"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="40dp"
-                        android:src="@drawable/mypage_myreview"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="0"
-                        android:textSize="24sp"
-                        android:textColor="#1E3790"
-                        android:layout_below="@+id/textView8"
-                        android:layout_toRightOf="@id/imageView8"/>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="보관함"
-                        android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:id="@+id/imageView9"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_below="@id/textView9"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="40dp"
-                        android:src="@drawable/myreview_heart"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="0"
-                        android:textSize="24sp"
-                        android:textColor="#1E3790"
-                        android:layout_below="@+id/textView9"
-                        android:layout_toRightOf="@id/imageView9"/>
-                </RelativeLayout>
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

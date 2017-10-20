@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,6 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import streaming.test.org.togethertrip.R;
-import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
-import streaming.test.org.togethertrip.network.NetworkService;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivityLog";
@@ -73,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         //viewPager 연결
         mViewPager = (ViewPager) findViewById(R.id.container);
+        Log.d(TAG, "onCreate: mViewPager: " + mViewPager);
+        Log.d(TAG, "onCreate: mSectionPagerAdapter: " + mSectionsPagerAdapter);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
