@@ -7,11 +7,11 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import streaming.test.org.togethertrip.datas.CourseWriteDatas;
-import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import streaming.test.org.togethertrip.datas.CourseResult;
+import streaming.test.org.togethertrip.datas.CourseWriteDatas;
+import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.MessageResult;
@@ -24,6 +24,7 @@ import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.datas.like.RemoveLikeInfo;
 import streaming.test.org.togethertrip.datas.like.RemoveLikeResult;
+import streaming.test.org.togethertrip.datas.UserInfoResult;
 
 /**
  * Created by taehyung on 2017-09-04.
@@ -72,4 +73,8 @@ public interface NetworkService {
     //코스 좋아요 취소
     @POST("/course/like")
     Call<RemoveLikeResult> removeLikeResult (@Body RemoveLikeInfo removeLikeInfo);
+
+    @GET("/mypage/{userid}")
+    Call<UserInfoResult> getUserInfo(@Path("userid") String userid);
+
 }
