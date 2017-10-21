@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,7 +34,11 @@ public class MypageFragment extends Fragment {
     UserInfoResult userInfoResult;
     String checkString;
 
-    TextView login;
+
+
+    TextView loginOrLogout;
+    TextView signUpOrSignIn;
+    TextView mywrite_course, mywrite_review, myLocker;
 
     public MypageFragment(Activity activity){
         this.activity = activity;
@@ -50,28 +55,59 @@ public class MypageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_mypage, container, false);
-
-//        login = (TextView) view.findViewById(R.id.settings_login);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(activity, SignupActivity.class));
-//            }
-//        });
+//        View view = inflater.inflate(R.layout.activity_mypage, container, false);
+        View view = null;
 
         checkLogin();
-
         try {
-            if (userInfoResult.message.equals("yes")) {
+            if (userInfoResult.message.equals("no") ) { // 로그인이 안되어있을 때
                 view = inflater.inflate(R.layout.mypage_nologin, container, false);
 
-                return view;
+                loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+                signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+
+                loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(activity, SigninActivity.class));
+                    }
+                });
+                signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(activity, SignupActivity.class));
+                    }
+                });
+
+            }else{ // 로그인이 되어있을 떄
+                view = inflater.inflate(R.layout.activity_mypage, container, false);
+
+                loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
+                mywrite_course = (TextView) view.findViewById(R.id.mywrite_course);
+                mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
+                myLocker = (TextView) view.findViewById(R.id.mylocker);
+
+                mywrite_course.setText(""+userInfoResult.result.course);
+                mywrite_review.setText(""+(userInfoResult.result.coursecomment+userInfoResult.result.tripreviews));
+                myLocker.setText(""+(userInfoResult.result.courselike+userInfoResult.result.triplike));
+
+
+
             }
         }catch(Exception e){
             e.printStackTrace();
-        }
+            view = inflater.inflate(R.layout.mypage_nologin, container, false);
 
+            loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+            signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+
+            signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(activity, SignupActivity.class));
+                }
+            });
+        }
 
         return view;
     }
@@ -86,7 +122,7 @@ public class MypageFragment extends Fragment {
 
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
-        String userId = "zzz";
+        String userId = "joo";
 
         Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(userId);
         requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
@@ -108,4 +144,5 @@ public class MypageFragment extends Fragment {
             }
         });
     }
+
 }

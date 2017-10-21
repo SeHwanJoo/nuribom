@@ -3,13 +3,14 @@
     package="streaming.test.org.togethertrip">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".application.ApplicationController"
@@ -52,7 +53,6 @@
         <activity android:name=".ui.TouristSpotReviewWrite" />
         <activity android:name=".ui.CourseWrite" />
 
-
         <fragment
             android:name=".ui.CourseFragment"
             android:windowSoftInputMode="adjustPan" />
@@ -61,12 +61,14 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity android:name=".ui.Home_SearchActivity" />
-        <activity android:name=".ui.SignupActivity"/>
-        <activity android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity"
+        <activity android:name=".ui.SignupActivity" />
+        <activity
+            android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-        <activity android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPagerActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".ui.SigninActivity"></activity>
     </application>
 
 </manifest>

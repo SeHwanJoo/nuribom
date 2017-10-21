@@ -44,8 +44,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         tv_join = (TextView) findViewById(R.id.tv_join);
 
         tv_join.setOnClickListener(this);
-
-
     }
 
     @OnClick
