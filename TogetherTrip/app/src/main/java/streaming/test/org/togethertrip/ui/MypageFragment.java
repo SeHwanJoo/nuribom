@@ -37,7 +37,7 @@ public class MypageFragment extends Fragment {
 
 
     TextView loginOrLogout;
-    TextView signUpOrSignIn;
+    TextView signUpOrSignIn, settings_profile;
     TextView mywrite_course, mywrite_review, myLocker;
 
     public MypageFragment(Activity activity){
@@ -86,10 +86,18 @@ public class MypageFragment extends Fragment {
                 mywrite_course = (TextView) view.findViewById(R.id.mywrite_course);
                 mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
                 myLocker = (TextView) view.findViewById(R.id.mylocker);
+                settings_profile = (TextView) view.findViewById(R.id.settings_profile);
 
                 mywrite_course.setText(""+userInfoResult.result.course);
                 mywrite_review.setText(""+(userInfoResult.result.coursecomment+userInfoResult.result.tripreviews));
                 myLocker.setText(""+(userInfoResult.result.courselike+userInfoResult.result.triplike));
+
+                settings_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(context, ProfileChangeActivity.class));
+                    }
+                });
 
 
 

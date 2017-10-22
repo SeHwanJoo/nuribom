@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:hint="이메일을 입력하세요"
                 android:textSize="14sp"
-
+                android:textColor="#1D1D1D"
                 android:textColorHint="#686868" />
         </LinearLayout>
         <LinearLayout
@@ -43,20 +43,22 @@
             android:layout_marginTop="20dp"
             android:hint="비밀번호를 입력하세요"
             android:textSize="14sp"
-            android:textColorHint="#1D1D1D"/>
+            android:textColor="#1D1D1D"
+            android:textColorHint="#686868"/>
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_login"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/login_on"/>
-        <Button
+        <ImageButton
             android:id="@+id/btn_signup"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_off"/>
+            android:background="@drawable/join_join"/>
+        <!--TODO 로그인, 회원가입 버튼 이미지 자체 크기가 다름 수정 요청해야함 -->
     </LinearLayout>
 
 </RelativeLayout>

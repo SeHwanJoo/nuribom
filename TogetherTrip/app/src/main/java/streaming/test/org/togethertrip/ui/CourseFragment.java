@@ -122,12 +122,13 @@ public class CourseFragment extends Fragment {
         });
 
 
-        iv_heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iv_heart.setImageResource(R.drawable.course_main_heart_color);
-            }
-        });
+        //TODO 태형 : 여기서 널포인터나서 잠시 주석 처리 해놨음
+//        iv_heart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                iv_heart.setImageResource(R.drawable.course_main_heart_color);
+//            }
+//        });
 
         adspin1 = new CourseFragment.SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
 //        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
