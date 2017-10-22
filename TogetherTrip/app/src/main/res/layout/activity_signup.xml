@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.SignupActivity"
     android:orientation="vertical"
-    android:background="#fff">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/default_image"
-        android:layout_alignParentBottom="true"></RelativeLayout>
+    android:background="@drawable/login_background">
 
     <LinearLayout
         android:id="@+id/logo"
