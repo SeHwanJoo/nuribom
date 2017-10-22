@@ -7,6 +7,7 @@ package streaming.test.org.togethertrip.datas;
 public class CourseListDatas {
     public int courseid;
     public int likecount;
+    public String likeMessage;
     public int commentcount;
     public String userid;
     public String image;

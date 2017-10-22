@@ -22,8 +22,6 @@ import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
-import streaming.test.org.togethertrip.datas.like.RemoveLikeInfo;
-import streaming.test.org.togethertrip.datas.like.RemoveLikeResult;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
 
 /**
@@ -70,11 +68,9 @@ public interface NetworkService {
     @POST("/course/like")
     Call<AddLikeResult> addLikeResult (@Body AddLikeInfo addLikeInfo);
 
-    //코스 좋아요 취소
-    @POST("/course/like")
-    Call<RemoveLikeResult> removeLikeResult (@Body RemoveLikeInfo removeLikeInfo);
 
     @GET("/mypage/{userid}")
     Call<UserInfoResult> getUserInfo(@Path("userid") String userid);
+
 
 }

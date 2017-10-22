@@ -57,7 +57,6 @@ public class CourseFragment extends Fragment {
     ImageButton real_searchBtn;
     TextView tv_main;
     EditText edit_search;
-    ImageView iv_heart;
 
     String choice_sido = "";
     Spinner spinner_location;
@@ -74,6 +73,7 @@ public class CourseFragment extends Fragment {
         this.activity = activity;
         context = activity;
         courseListAdapter = new CourseListAdapter(context, null);
+        courseListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -92,7 +92,6 @@ public class CourseFragment extends Fragment {
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spinner_location = (Spinner) view.findViewById(R.id.spinner_course_location);
-        iv_heart = (ImageView) view.findViewById(R.id.iv_heart);
 
         //fab 버튼누르면 작성창
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -122,12 +121,6 @@ public class CourseFragment extends Fragment {
         });
 
 
-        iv_heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iv_heart.setImageResource(R.drawable.course_main_heart_color);
-            }
-        });
 
         adspin1 = new CourseFragment.SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
 //        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
@@ -203,6 +196,7 @@ public class CourseFragment extends Fragment {
                     courseListDatas = response.body().result;
                     courseListAdapter = new CourseListAdapter(context, courseListDatas);
                     CourselistView.setAdapter(courseListAdapter);
+                    courseListAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -226,6 +220,13 @@ public class CourseFragment extends Fragment {
             this.items = objects;
             this.context = context;
         }
+
+
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+        }
+
 
         /**
          * 스피너 클릭시 보여지는 View의 정의
