@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mypage.checkLogin();
+
     }
 
     //페이지 선택 확인을 위한 어댑터

@@ -486,9 +486,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
                     detailSpotListClickResponse = response.body().tripinfo;
                     otherInfo = response.body().otherinfo;
-                    /*
-                     * TODO Detail ui 데이터들 셋팅을 위해 객체 보내기
-                     */
 
                     detailIntent = new Intent(context, TouristSpotDetail.class);
                     Intent firstImgIntent = new Intent(context, SpotDetailImgFragment.class);

@@ -45,16 +45,17 @@
             android:layout_marginBottom="60dp"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:id="@+id/login_ll"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="horizontal"
                     android:background="#fff"
-                    android:visibility="gone">
+                    android:visibility="visible">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -91,38 +92,9 @@
                             android:text="email@example.com"
                             android:textSize="14sp"
                             android:textColor="#686868"/>
-
-
-
                     </LinearLayout>
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:id="@+id/nologin_rl"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#fff"
-                    android:visibility="visible">
-                    <ImageButton
-                        android:id="@+id/login_facebook"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/mypage_login_withfacebook"/>
-                    <ImageButton
-                        android:id="@+id/login_kakao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@id/login_facebook"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/mypage_login_withkakao"/>
-                </RelativeLayout>
-
-
-            </RelativeLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,6 +193,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/mypage_mycource" />
                     <TextView
+                        android:id="@+id/mywrite_course"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -255,6 +228,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/mypage_myreview"/>
                     <TextView
+                        android:id="@+id/mywrite_review"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -288,6 +262,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/myreview_heart"/>
                     <TextView
+                        android:id="@+id/mylocker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"

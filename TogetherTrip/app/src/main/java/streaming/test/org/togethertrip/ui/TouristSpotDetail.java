@@ -56,6 +56,7 @@ public class TouristSpotDetail extends FragmentActivity {
     RelativeLayout detail_mapRl;
     double mapX,mapY;
     TMapView tmapView;
+    ImageButton detail_directionBtn;
 
     Intent intent;
     String addr;
@@ -105,6 +106,19 @@ public class TouristSpotDetail extends FragmentActivity {
         //해당 관광지 x,y좌표 저장
         mapX = Double.parseDouble(detailCommon.mapx);
         mapY = Double.parseDouble(detailCommon.mapy);
+        //길안내 버튼
+        detail_directionBtn = (ImageButton) findViewById(R.id.detail_directionBtn);
+        detail_directionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(context, MapCourseGuideActivity.class);
+                mapIntent.putExtra("mapX", mapX);
+                mapIntent.putExtra("mapY", mapY);
+                mapIntent.putExtra("title", title);
+
+                startActivity(mapIntent);
+            }
+        });
 
         scrollView = (ScrollView) findViewById(R.id.touristSpot_detail_scroll);
         heartbtn = (ImageButton) findViewById(R.id.touristSpot_detail_heartbtn);

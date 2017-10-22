@@ -1,9 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="streaming.test.org.togethertrip.ui.Home_SearchActivity">
+    tools:context="streaming.test.org.togethertrip.ui.Home_SearchActivity"
+    android:orientation="vertical"
+    android:weightSum="10">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_weight="1"
+        android:id="@+id/firstRl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF">
+
+        <EditText
+            android:id="@+id/edit_homeSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="검색어를 입력해주세요."
+            android:textSize="14sp"
+            android:textColor="#8C8C8C"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="70dp"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_mint"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"/>
+        <ImageButton
+            android:id="@+id/STTBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_mic"
+            android:layout_toLeftOf="@+id/searchBtn"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp">
+            <ImageButton
+                android:id="@+id/tripImgBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="true"
+                android:background="@drawable/search_trips_selection_on"/>
+            <ImageButton
+                android:id="@+id/touristSpotImgBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="false"
+                android:background="@drawable/search_trips_selection_off"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/select_trip"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#263fe1" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <View
+                    android:id="@+id/select_tourist"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#dedede" />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/search_example"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색예시 : 광화문, 꽃집, 종각역 ..."
+                android:textSize="12sp"
+                android:textColor="#8C8C8C"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="8dp"/>
+
+            <GridView
+                android:visibility="gone"
+                android:id="@+id/course_gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnWidth="100dp"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:verticalSpacing="10dp"></GridView>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

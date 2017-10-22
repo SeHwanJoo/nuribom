@@ -2,7 +2,7 @@
     <string name="app_name">TogetherTrip</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 
-    <string-array name ="city">
+    <string-array name="city">
         <item>서울</item>
         <item>인천</item>
         <item>경기도</item>

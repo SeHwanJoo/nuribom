@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,8 +24,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     Context context;
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     TextView recommed_spot, recommend_course;
-    int colorid;
     View select_touristSpot, select_course;
+    ImageButton home_searchBtn;
 
     public HomeFragment(){
 
@@ -63,6 +64,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         select_touristSpot = (View) view.findViewById(R.id.select_touristSpot);
         select_course = (View)view.findViewById(R.id.select_course);
+
+        home_searchBtn = (ImageButton) view.findViewById(R.id.home_searchBtn);
+
+        home_searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),Home_SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recommed_spot.setOnClickListener(new View.OnClickListener() {
             @Override
