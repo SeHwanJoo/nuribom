@@ -12,12 +12,18 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
+
+import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
 
@@ -27,13 +33,13 @@ public class MapCourseGuideActivity extends AppCompatActivity {
 
     RelativeLayout mapView;
     String title;
-    double mapX, mapY;
+    double mapX, mapY; // 해당 관광지의 좌표
     TMapView tmapView;
 
     Intent mapIntent;
     LocationManager locationManager;
     LocationListener locationListener;
-    double currentX, currentY;
+    double currentX, currentY; // 현재 내 위치
     String locationProvider;
     boolean CompleteFlag;
 
@@ -51,6 +57,7 @@ public class MapCourseGuideActivity extends AppCompatActivity {
         mapY = mapIntent.getDoubleExtra("mapY", 0.0);
 
         initTmap();
+        currentLatLng();
 
 
     }
@@ -98,56 +105,106 @@ public class MapCourseGuideActivity extends AppCompatActivity {
         criteria.setCostAllowed(true); // 위치 정보를 얻어 오는데 들어가는 금전적 비용
         locationProvider = locationManager.getBestProvider(criteria, true);
 
-        //GPS 프로바이더를 통해 위치를 받도록 설정
-        //2초 간격으로 위치 업데이트
-        //위치 정보를 업데이트할 최소 거리 0m
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                //권한 없을 시 권한 주기
+                PermissionListener permissionListener = new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        Toast.makeText(MapCourseGuideActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+                    }
 
-        try{
-            
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                        Toast.makeText(MapCourseGuideActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                };
+                TedPermission.with(this)
+                        .setPermissionListener(permissionListener)
+                        .setRationaleMessage("위치 정보를 받아오려면 권한이 필요합니다.")
+                        .setDeniedMessage("거부하지마세용")
+                        .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                        .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)
+                        .check();
+            }
+            try {
+                Location location = new Location(LocationManager.NETWORK_PROVIDER);
+                currentX = location.getLatitude();
+                currentY = location.getLongitude();
+            }catch(Exception e1){
+                e1.printStackTrace();
+            }
+            try{
+                Location location = new Location(LocationManager.GPS_PROVIDER);
+                currentX = location.getLatitude();
+                currentY = location.getLongitude();
+            }catch(Exception e1){
+                e1.printStackTrace();
+            }
+            Log.d(TAG, "onLocationChanged: NETWORK PROVIDER : " + currentX + " / " + currentY);
+
+            if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+                //네트워크 이용 현재 위치 갱신
+                //2초 간격으로 위치 업데이트
+                //위치 정보를 업데이트할 최소 거리 0m
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        currentX = location.getLatitude();
+                        currentY = location.getLongitude();
+                        Log.d(TAG, "onLocationChanged: NETWORK PROVIDER : " + currentX + " / " + currentY);
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+
+                    }
+                });
+
+
+            }else if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                //GPS이용 현재 위치 갱신
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        currentX = location.getLatitude();
+                        currentY = location.getLongitude();
+
+                        Log.d(TAG, "onLocationChanged: GPS PROVIDER : " + currentX + " / " + currentY);
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+
+                    }
+                });
+            }else{
+                Log.d(TAG, "currentLatLng: 여기로 들어오면 안되는데... 제발 앞에 조건에서 걸리게해주세요");
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                currentX = location.getLatitude();
-                currentY = location.getLongitude();
-
-                if(!CompleteFlag){
-
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-
 
     }
 
@@ -166,5 +223,9 @@ public class MapCourseGuideActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.removeUpdates(locationListener);
+    }
 }

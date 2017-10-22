@@ -130,7 +130,7 @@ public class MypageFragment extends Fragment {
 
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
-        String userId = "joo";
+        String userId = "zzz";
 
         Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(userId);
         requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
