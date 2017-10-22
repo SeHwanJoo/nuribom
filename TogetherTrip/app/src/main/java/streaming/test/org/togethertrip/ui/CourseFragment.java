@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class CourseFragment extends Fragment {
     ImageButton real_searchBtn;
     TextView tv_main;
     EditText edit_search;
+    ImageView iv_heart;
 
     String choice_sido = "";
     Spinner spinner_location;
@@ -90,6 +92,7 @@ public class CourseFragment extends Fragment {
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spinner_location = (Spinner) view.findViewById(R.id.spinner_course_location);
+        iv_heart = (ImageView) view.findViewById(R.id.iv_heart);
 
         //fab 버튼누르면 작성창
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -117,6 +120,15 @@ public class CourseFragment extends Fragment {
                 courseSearch();
             }
         });
+
+
+        //TODO 태형 : 여기서 널포인터나서 잠시 주석 처리 해놨음
+//        iv_heart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                iv_heart.setImageResource(R.drawable.course_main_heart_color);
+//            }
+//        });
 
         adspin1 = new CourseFragment.SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
 //        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );

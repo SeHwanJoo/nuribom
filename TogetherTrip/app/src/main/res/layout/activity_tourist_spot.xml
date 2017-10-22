@@ -179,21 +179,24 @@
                 android:id="@+id/touristSpot_listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:textFilterEnabled="true">
 
             </ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp">
 
             <com.melnykov.fab.FloatingActionButton
                 android:id="@+id/touristSpot_fab_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/trips_write"
+                android:src="@drawable/course_main_write"
                 />
         </LinearLayout>
     </RelativeLayout>

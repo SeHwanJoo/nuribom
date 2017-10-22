@@ -1,9 +1,16 @@
 package streaming.test.org.togethertrip.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
@@ -21,15 +29,19 @@ import com.skp.Tmap.TMapView;
 import java.util.ArrayList;
 
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.datas.DetailImage;
+import streaming.test.org.togethertrip.datas.DetailInfo;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
 import streaming.test.org.togethertrip.datas.OtherInfo;
 
-import static android.support.v7.widget.ListPopupWindow.WRAP_CONTENT;
+import static android.support.constraint.ConstraintSet.WRAP_CONTENT;
 
-public class TouristSpotDetail extends AppCompatActivity {
+public class TouristSpotDetail extends FragmentActivity {
     final static String TAG = "TouristSpotDetailLog";
     private final static String mTMapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
+    Context context = this;
+    Activity activity = this;
 
     ScrollView scrollView;
     ImageView imgView;
@@ -44,6 +56,7 @@ public class TouristSpotDetail extends AppCompatActivity {
     RelativeLayout detail_mapRl;
     double mapX,mapY;
     TMapView tmapView;
+    ImageButton detail_directionBtn;
 
     Intent intent;
     String addr;
@@ -53,10 +66,15 @@ public class TouristSpotDetail extends AppCompatActivity {
 
     DetailSpotListClickResponse.DetailCommon detailCommon;
     DetailSpotListClickResponse.DetailIntro detailIntro;
-    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
+    ArrayList<DetailInfo> detailInfo;
     DetailWithTour detailWithTour;
-    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
+    ArrayList<DetailImage> detailImage;
     OtherInfo otherInfo;
+
+    ArrayList<SpotDetailImgFragment> imgList = new ArrayList<SpotDetailImgFragment>();
+    SpotDetailImgFragment spotDetailImgFragment;
+    ViewPager viewPager;
+    MyFragmentAdapter mFragmentAdapter;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -66,17 +84,16 @@ public class TouristSpotDetail extends AppCompatActivity {
         setContentView(R.layout.activity_tourist_spot_detail);
         intent = this.getIntent();
 
+        mFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager(), imgList);
+
         addr = intent.getStringExtra("stringAddr");
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
-        detailInfo = (ArrayList<DetailSpotListClickResponse.DetailInfo>) intent.getSerializableExtra("detailInfo");
+        detailInfo = intent.getParcelableArrayListExtra("detailInfo");
         detailWithTour = (DetailWithTour) intent.getSerializableExtra("detailWithTour");
-        detailImage = (ArrayList<DetailSpotListClickResponse.DetailImage>) intent.getSerializableExtra("detailImage");
+        detailImage = intent.getParcelableArrayListExtra("detailImage");
         otherInfo = (OtherInfo) intent.getSerializableExtra("otherInfo");
 
-        Log.d(TAG, "onCreate: Info 리스트: " + detailInfo);
-        Log.d(TAG, "onCreate: Image 리스트" + detailImage);
-        
         try {
             detailInfoSize = detailInfo.size();
             detailImageSize = detailImage.size();
@@ -89,9 +106,21 @@ public class TouristSpotDetail extends AppCompatActivity {
         //해당 관광지 x,y좌표 저장
         mapX = Double.parseDouble(detailCommon.mapx);
         mapY = Double.parseDouble(detailCommon.mapy);
+        //길안내 버튼
+        detail_directionBtn = (ImageButton) findViewById(R.id.detail_directionBtn);
+        detail_directionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(context, MapCourseGuideActivity.class);
+                mapIntent.putExtra("mapX", mapX);
+                mapIntent.putExtra("mapY", mapY);
+                mapIntent.putExtra("title", title);
+
+                startActivity(mapIntent);
+            }
+        });
 
         scrollView = (ScrollView) findViewById(R.id.touristSpot_detail_scroll);
-        imgView = (ImageView) findViewById(R.id.touristSpot_detail_img);
         heartbtn = (ImageButton) findViewById(R.id.touristSpot_detail_heartbtn);
         commentsbtn = (ImageButton) findViewById(R.id.touristSpot_detail_commentsbtn);
         tv_heartCount = (TextView) findViewById(R.id.touristSpot_detail_heartCount);
@@ -118,11 +147,25 @@ public class TouristSpotDetail extends AppCompatActivity {
         tv_braileblock = (TextView) findViewById(R.id.tv_braileblock);
         tv_handicapEtc = (TextView) findViewById(R.id.tv_handicapEtc);
 
+        //첫번째 화면에 firstImg 넣어주려고 했었는데
+        //
+        viewPager = (ViewPager) findViewById(R.id.touristSpot_detail_img_viewPager);
+        viewPager.setAdapter(mFragmentAdapter);
+
+        SpotDetailImgFragment firstSpotDetailImgFragment = new SpotDetailImgFragment(this);
+        imgList.add(0, firstSpotDetailImgFragment);
+        mFragmentAdapter.notifyDataSetChanged();
+
+        Log.d(TAG, "onCreate: ttt" + detailImage.get(0).originimgurl + " / " + firstSpotDetailImgFragment.iv_detailImg);
+
+        /*Glide.with(context)
+                .load(detailImage.get(0).originimgurl)
+                .placeholder(R.drawable.sally)
+                .error(R.drawable.sally)
+                .into(firstSpotDetailImgFragment.iv_detailImg); // -> null인 이유?*/
+
         //받아온 데이터들 상세보기에 대입!
         try {
-            /*
-             * 이미지 setting
-             */
             detail_spotName.setText(detailCommon.title);
             detail_overView.setText(Html.fromHtml(detailCommon.overview).toString());
             detail_spotAddr.setText(addr);
@@ -133,10 +176,20 @@ public class TouristSpotDetail extends AppCompatActivity {
             for(int i=0; i<detailInfoSize; i++){
                 TextView tv_infoName = new TextView(this);
                 tv_infoName.setText(detailInfo.get(i).infoname);
+                tv_infoName.setTextColor(Color.parseColor("#1D1D1D"));
+                tv_infoName.setTextSize(14);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                lp.setMargins(8, 13, 0, 0);
                 tv_infoName.setLayoutParams(lp);
 
+                TextView tv_infoText = new TextView(this);
+                tv_infoText.setText(detailInfo.get(i).infotext);
+                tv_infoText.setTextColor(Color.parseColor("#686868"));
+                tv_infoText.setTextSize(14);
+                tv_infoText.setLayoutParams(lp);
+
                 detailInfo_container.addView(tv_infoName);
+                detailInfo_container.addView(tv_infoText);
             }
 
 
@@ -152,6 +205,46 @@ public class TouristSpotDetail extends AppCompatActivity {
                 Log.d(TAG, "onCreate: in 하트여부체크 on");
                 heartbtn.setBackgroundResource(R.drawable.trips_heart_on);
             }
+
+            /*
+             * TODO 이미지 setting
+             */
+            spotDetailImgFragment = new SpotDetailImgFragment(this);
+
+            for (int i=1; i<detailImageSize; i++){
+                imgList.add(i, new SpotDetailImgFragment(this));
+
+                mFragmentAdapter.notifyDataSetChanged();
+
+                Log.d(TAG, "onCreate: imgList: " + imgList);
+                Log.d(TAG, "onCreate: imgList(i)aaaaaaaaa: " + imgList.get(i).iv_detailImg);
+                Log.d(TAG, "onCreate: detailImage(i): " + detailImage.get(i).originimgurl);
+
+            }
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                /*
+                * TODO 이런식으로 달면 드래그를 해야 그림이 그려짐. 해결방안찾아야함
+                 */
+                @Override
+                public void onPageSelected(int position) {
+                    Glide.with(context)
+                            .load(detailImage.get(position).originimgurl)
+                            .placeholder(R.drawable.trips_more)
+                            .error(R.drawable.trips_more)
+                            .into(imgList.get(position).iv_detailImg);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,4 +364,31 @@ public class TouristSpotDetail extends AppCompatActivity {
 //        marker.setAutoCalloutVisible(true); //풍선뷰 보일지 여부
         tmapView.addMarkerItem("marker", marker);
     }
+
+    //FragmentAdapter
+    private class MyFragmentAdapter extends FragmentPagerAdapter{
+        private ArrayList<SpotDetailImgFragment> imgList;
+
+        public MyFragmentAdapter(FragmentManager fm, ArrayList<SpotDetailImgFragment> imgList){
+            super(fm);
+            this.imgList = imgList;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            try{
+                return imgList.get(position);
+            }catch(Exception e){
+                e.printStackTrace();
+                return new SpotDetailImgFragment();
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return imgList.size();
+        }
+    }
+
+
 }

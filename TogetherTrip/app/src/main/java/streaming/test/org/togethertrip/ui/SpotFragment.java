@@ -30,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.DetailImage;
+import streaming.test.org.togethertrip.datas.DetailInfo;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResponse;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
@@ -56,9 +58,10 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
     DetailSpotListClickResponse detailSpotListClickResponse;
     OtherInfo otherInfo;
-    ArrayList<DetailSpotListClickResponse.DetailInfo> detailInfo;
-    ArrayList<DetailSpotListClickResponse.DetailImage> detailImage;
+    ArrayList<DetailInfo> detailInfo;
+    ArrayList<DetailImage> detailImage;
     Intent detailIntent;
+    String firstImgUri;
 
     NetworkService networkService;
 
@@ -79,7 +82,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     Spinner spinner_category;
     SpinnerAdapter adspin1; // location SpinnerAdater
     SpinnerAdapter2 adspin2; // category SpinnerAdapter
-    final static String[] arrayLocation = {"서울", "인천", "경기도", "강원도", "충청북도",
+    final static String[] arrayLocation = {"전체","서울", "인천", "경기도", "강원도", "충청북도",
             "충청남도", "전라북도", "전라남도", "경상북도", "경상남도"};
     final static String[] arrayCategory = {"전체", "음식점", "쇼핑", "숙박", "문화시설", "관광지"};
     TextView tv_category;
@@ -103,7 +106,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -163,7 +165,9 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         spinner_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(adspin1.getItem(position).equals("서울")){
+                if(adspin1.getItem(position).equals("전체")){
+                    choice_sido = "";
+                }else if(adspin1.getItem(position).equals("서울")){
                     choice_sido = "서울";
                 }else if(adspin1.getItem(position).equals("인천")){
                     choice_sido = "인천";
@@ -227,6 +231,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                 /*
                 * TODO (후기)작성버튼 클릭시
                  */
+                startActivity(new Intent(context, TouristSpotReviewWrite.class));
             }
         });
 
@@ -261,7 +266,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onResponse(Call<TouristSpotSearchResult> call, Response<TouristSpotSearchResult> response) {
                 if (response.isSuccessful()) {
-
                     spotResultListDatas = response.body().result;
                     //    Log.v("YG", spotResultListDatas.get(0).Tripinfo.toString());
                     Log.d(TAG, "onResponse: search() 성공");
@@ -295,6 +299,9 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                 }else{
                     filter_all.setBackgroundResource(R.drawable.trips_facilityfilter_all_off);
                 }
+
+
+
                 break;
             case R.id.filter_wheelchairs:
                 if(filter_wheelchairs.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.trips_facilityfilter_wheelchairs_off).getConstantState())) {
@@ -479,18 +486,20 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
                     detailSpotListClickResponse = response.body().tripinfo;
                     otherInfo = response.body().otherinfo;
-                    /*
-                     * TODO Detail ui 데이터들 셋팅을 위해 객체 보내기
-                     */
 
                     detailIntent = new Intent(context, TouristSpotDetail.class);
+                    Intent firstImgIntent = new Intent(context, SpotDetailImgFragment.class);
                     detailIntent.putExtra("stringAddr", addr);
                     detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
-                    detailIntent.putExtra("detailInfo", detailInfo);
+                    detailIntent.putParcelableArrayListExtra("detailInfo", detailSpotListClickResponse.detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
-                    detailIntent.putExtra("detailImage", detailImage);
+                    detailIntent.putParcelableArrayListExtra("detailImage", detailSpotListClickResponse.detailImage);
                     detailIntent.putExtra("otherInfo", otherInfo);
+                    firstImgIntent.putExtra("firstImgUri", firstImgUri);
+
+                    Log.d(TAG, "onResponse: detailInfo: " + detailSpotListClickResponse.detailInfo);
+                    Log.d(TAG, "onResponse: detailImage: " + detailSpotListClickResponse.detailImage);
 
                     startActivity(detailIntent);
 

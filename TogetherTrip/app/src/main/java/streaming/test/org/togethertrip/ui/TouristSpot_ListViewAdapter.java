@@ -48,6 +48,9 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     DetailWithTour detailWithTour;
 
+    int filterResource;
+
+
 
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
@@ -186,6 +189,9 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
         }
     }
 
+
+
+
     public void checkFacilities(){
         try {
             if (!elevator.equals(null)) {
@@ -216,6 +222,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
             filter_wheelchairs.setBackgroundResource(R.drawable.trips_facilityfilter_wheelchairs_off);
         }
     }
+
 
 
 }

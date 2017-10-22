@@ -45,50 +45,56 @@
             android:layout_marginBottom="60dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:background="#fff">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="32dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/mypage_profile_defalt"/>
-                </LinearLayout>
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="18dp"
-                        android:text="찌니"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:textColor="#1D1D1D"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:text="email@example.com"
-                        android:textSize="14sp"
-                        android:textColor="#686868"/>
+                    android:id="@+id/login_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:background="#fff"
+                    android:visibility="visible">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/mypage_profile_defalt"/>
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="18dp"
+                            android:text="찌니"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#1D1D1D"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="10dp"
+                            android:text="email@example.com"
+                            android:textSize="14sp"
+                            android:textColor="#686868"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,7 +116,7 @@
                 android:orientation="horizontal"
                 android:background="#fff">
                 <TextView
-                    android:id="@+id/settings_login"
+                    android:id="@+id/settings_logout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -133,7 +139,7 @@
                     android:background="#80000000" />
 
                 <TextView
-                    android:id="@+id/settings_signup"
+                    android:id="@+id/settings_profile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -142,7 +148,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="프로필 변경(회원가입)"
+                    android:text="프로필 변경"
                     android:textColor="#1D1D1D"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -187,6 +193,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/mypage_mycource" />
                     <TextView
+                        android:id="@+id/mywrite_course"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -221,6 +228,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/mypage_myreview"/>
                     <TextView
+                        android:id="@+id/mywrite_review"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -254,6 +262,7 @@
                         android:layout_marginLeft="40dp"
                         android:src="@drawable/myreview_heart"/>
                     <TextView
+                        android:id="@+id/mylocker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"

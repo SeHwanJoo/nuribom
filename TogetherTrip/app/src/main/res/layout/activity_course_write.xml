@@ -7,7 +7,8 @@
     android:orientation="vertical"
     tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
     android:weightSum="10"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    >
 
 
     <LinearLayout
