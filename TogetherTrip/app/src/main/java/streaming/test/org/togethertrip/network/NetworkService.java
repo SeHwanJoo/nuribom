@@ -21,6 +21,7 @@ import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
+import streaming.test.org.togethertrip.datas.duplicationcheck.EmailCheckResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.datas.like.AddTripsLikeInfo;
@@ -47,6 +48,9 @@ public interface NetworkService {
     //로그인
     @POST("users/login")
     Call<LoginResult> requestSignin(@Body LoginDatas loginDatas);
+    //이메일중복체크
+    @GET("users/emailtest/{userid}")
+    Call<EmailCheckResult> emailCheck (@Path("userid")String userid);
 
     //코스작성
     @POST("edit")
