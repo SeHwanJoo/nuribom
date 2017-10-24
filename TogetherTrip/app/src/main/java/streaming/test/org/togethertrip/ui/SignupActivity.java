@@ -18,6 +18,7 @@ import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.MessageResult;
 import streaming.test.org.togethertrip.datas.RegisterDatas;
+import streaming.test.org.togethertrip.datas.duplicationcheck.EmailCheckResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
@@ -30,6 +31,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     ImageButton btn_join;
     CheckBox cb1, cb2;
 
+
     String name;
     String email;
     String password;
@@ -39,13 +41,14 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_email = (EditText) findViewById(R.id.edit_email);
         edit_password = (EditText) findViewById(R.id.edit_password);
         edit_checkPassword = (EditText) findViewById(R.id.edit_checkPassword);
         btn_join = (ImageButton) findViewById(R.id.btn_join);
         cb1 = (CheckBox) findViewById(R.id.cb1);
-        cb2 = (CheckBox) findViewById(R.id.cb2); 
+        cb2 = (CheckBox) findViewById(R.id.cb2);
 
         btn_join.setOnClickListener(this);
     }
@@ -77,38 +80,67 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 }else if(!cb2.isChecked()){
                     Toast.makeText(getApplicationContext(), "개인정보 취급방침에 동의해주세요.", Toast.LENGTH_SHORT).show();
                 }else{ // 모든 항목 정상 입력시
-                    RegisterDatas registerDatas = new RegisterDatas();
-                    registerDatas.userid = edit_name.getText().toString();
-                    registerDatas.email = edit_email.getText().toString();
-                    registerDatas.password = edit_password.getText().toString();
-
-                    NetworkService networkService = ApplicationController.getInstance().getNetworkService();
-                    Call<MessageResult> requestRegister = networkService.requestSignup(registerDatas);
-                    Log.d(TAG, "requestRegister: " + requestRegister);
-                    requestRegister.enqueue(new Callback<MessageResult>() {
-                        @Override
-                        public void onResponse(Call<MessageResult> call, Response<MessageResult> response) {
-                            Log.d(TAG, "response.isSuccessful(): " + response.isSuccessful());
-                            if (response.isSuccessful()) {
-                                Log.d(TAG, "reponse.body: " + response.body().message);
-                                if (response.body().message.equals("ok")) {
-                                    Toast.makeText(SignupActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }else{
-                                    Toast.makeText(SignupActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<MessageResult> call, Throwable t) {
-                            Toast.makeText(SignupActivity.this, "네트워크가 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onFailure: ");
-                        }
-                    });
+                    emailCheck(edit_email.getText().toString());
                 }
-                break;
-
+               break; // switch 브레이크
         }
     }
+
+    public void emailCheck(String userid){
+        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+
+        Call<EmailCheckResult> emailDuplication  = networkService.emailCheck(userid);
+        emailDuplication.enqueue(new Callback<EmailCheckResult>() {
+            @Override
+            public void onResponse(Call<EmailCheckResult> call, Response<EmailCheckResult> response) {
+                Log.d(TAG, "onResponse: response: " + response);
+                if (response.isSuccessful()) {
+                    if (response.body().message.equals("yes")) {
+                        //email 중복이 아닐때
+                        RegisterDatas registerDatas = new RegisterDatas();
+                        registerDatas.userid = edit_name.getText().toString();
+                        registerDatas.email = edit_email.getText().toString();
+                        registerDatas.password = edit_password.getText().toString();
+
+                        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+                        Call<MessageResult> requestRegister = networkService.requestSignup(registerDatas);
+                        Log.d(TAG, "requestRegister: " + requestRegister);
+                        requestRegister.enqueue(new Callback<MessageResult>() {
+                            @Override
+                            public void onResponse(Call<MessageResult> call, Response<MessageResult> response) {
+                                Log.d(TAG, "response.isSuccessful(): " + response.isSuccessful());
+                                if (response.isSuccessful()) {
+                                    Log.d(TAG, "reponse.body: " + response.body().message);
+                                    if (response.body().message.equals("ok")) {
+                                        Toast.makeText(SignupActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }else{
+                                        Toast.makeText(SignupActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<MessageResult> call, Throwable t) {
+                                Toast.makeText(SignupActivity.this, "네트워크가 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, "onFailure: ");
+                            }
+                        });
+
+                    }else{
+                        //emali이 중복일 때
+                        Toast.makeText(SignupActivity.this, "이메일이 중복되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Log.d(TAG, "onResponse: response.isSuccessful(): " + response.isSuccessful());
+                }
+            }
+            @Override
+            public void onFailure(Call<EmailCheckResult> call, Throwable t) {
+                Toast.makeText(SignupActivity.this, "네트워크가 원할하지 않습니다.", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailure: ");
+            }
+        });
+    }
 }
+
