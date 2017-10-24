@@ -6,22 +6,25 @@
     android:layout_height="300dp"
     android:divider="#dddddd"
     android:descendantFocusability="blocksDescendants">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp">
+
         <ImageView
             android:id="@+id/iv_course_item_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="#adadad"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            tools:background="#adadad" />
+
         <ImageButton
             android:id="@+id/ib_bigImgHeart"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/trips_heart_off"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:background="@drawable/trips_heart_off" />
     </RelativeLayout>
 
     <LinearLayout

@@ -98,9 +98,6 @@ public class MypageFragment extends Fragment {
                         startActivity(new Intent(context, ProfileChangeActivity.class));
                     }
                 });
-
-
-
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -108,7 +105,12 @@ public class MypageFragment extends Fragment {
 
             loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
             signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
-
+            loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(activity, SigninActivity.class));
+                }
+            });
             signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -130,7 +132,7 @@ public class MypageFragment extends Fragment {
 
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
-        String userId = "zzz";
+        String userId = "joo";
 
         Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(userId);
         requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {

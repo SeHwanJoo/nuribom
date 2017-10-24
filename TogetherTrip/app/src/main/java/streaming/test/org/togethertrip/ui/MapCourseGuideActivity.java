@@ -21,20 +21,32 @@ import com.gun0912.tedpermission.TedPermission;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
+import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import okhttp3.Request;
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.network.TMapNetworkManager;
+import streaming.test.org.togethertrip.datas.tmapapi.TmapAPIResult;
 
 public class MapCourseGuideActivity extends AppCompatActivity {
     final static String TAG = "MapCourseGuideActivity";
     private final static String mTMapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
+    private final int FINDPATH = 0;
 
     RelativeLayout mapView;
     String title;
     double mapX, mapY; // 해당 관광지의 좌표
     TMapView tmapView;
+    ArrayList<TMapPoint> passList;
+    TmapAPIResult RouteResult;
+    int Idx;
+
 
     Intent mapIntent;
     LocationManager locationManager;
@@ -50,16 +62,17 @@ public class MapCourseGuideActivity extends AppCompatActivity {
         mapView = (RelativeLayout) findViewById(R.id.mapView);
 
         CompleteFlag = false;
+        passList = new ArrayList<>();
 
         mapIntent = getIntent();
         title = mapIntent.getStringExtra("title");
-        mapX = mapIntent.getDoubleExtra("mapX", 0.0);
-        mapY = mapIntent.getDoubleExtra("mapY", 0.0);
+        mapY = mapIntent.getDoubleExtra("mapX", 0.0);
+        mapX = mapIntent.getDoubleExtra("mapY", 0.0);
+
+        Idx = 0;
 
         initTmap();
         currentLatLng();
-
-
     }
 
     //맵 초기화 및 생성
@@ -128,6 +141,7 @@ public class MapCourseGuideActivity extends AppCompatActivity {
                         .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)
                         .check();
             }
+            //Network 이용 현재 위치 받아오기
             try {
                 Location location = new Location(LocationManager.NETWORK_PROVIDER);
                 currentX = location.getLatitude();
@@ -135,6 +149,8 @@ public class MapCourseGuideActivity extends AppCompatActivity {
             }catch(Exception e1){
                 e1.printStackTrace();
             }
+
+            //GPS이용 현재 위치 받아오기
             try{
                 Location location = new Location(LocationManager.GPS_PROVIDER);
                 currentX = location.getLatitude();
@@ -142,7 +158,52 @@ public class MapCourseGuideActivity extends AppCompatActivity {
             }catch(Exception e1){
                 e1.printStackTrace();
             }
+            
             Log.d(TAG, "onLocationChanged: NETWORK PROVIDER : " + currentX + " / " + currentY);
+
+            try{
+                //Tmap 보호자 경로 탐색
+                Log.d(TAG, "currentLatLng: 보호자 경로 검색 try");
+                Log.d(TAG, "currentLatLng: getContext: " +MainActivity.getContext());
+                TMapNetworkManager.getInstance().getSearchFindPath(MainActivity.getContext(), currentY, currentX,mapY, mapX, "상수네집", "광화문", new TMapNetworkManager.OnResultListner<TmapAPIResult>() {
+                    @Override
+                    public void onSuccess(Request request, TmapAPIResult result) {
+                        Toast.makeText(MapCourseGuideActivity.this, "Tmap 경로 탐색 성공", Toast.LENGTH_SHORT).show();
+                        RouteResult = result;
+
+                        for(int i=0;i<result.features.size(); i++){
+                            if(result.features.get(i) != null && i != 0){
+                                if(result.features.get(i).geometry.type.equals("Point")){
+                                    TMapPoint point = new TMapPoint(result.features.get(i).geometry.coordinates[1], result.features.get(i).geometry.coordinates[0]);
+                                    passList.add(point);
+                                }
+                            }
+                        }
+//                        //TTS 음성 라이브러리 사용
+//                        if(Idx == 0 && RouteResult.features != null) {
+//
+//                            String toSpeak = RouteResult.features.get(Idx).properties.description + "해주세요.";
+//
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                                ttsGreater21(toSpeak);
+//                            } else {
+//                                ttsUnder20(toSpeak);
+//                            }
+//
+//                            Idx++;
+//                        }
+                    }
+
+                    @Override
+                    public void onFail(Request requst, IOException exception) {
+                        Toast.makeText(MapCourseGuideActivity.this, "Tmap 경로 탐색 실패", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }catch(UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+
+            drawLine();
 
             if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
                 //네트워크 이용 현재 위치 갱신
@@ -154,6 +215,10 @@ public class MapCourseGuideActivity extends AppCompatActivity {
                         currentX = location.getLatitude();
                         currentY = location.getLongitude();
                         Log.d(TAG, "onLocationChanged: NETWORK PROVIDER : " + currentX + " / " + currentY);
+
+                        //경로 탐색 시작
+                        drawLine();
+//                        mHandler.sendEmptyMessage(FINDPATH); // 경로 요청
                     }
 
                     @Override
@@ -182,6 +247,10 @@ public class MapCourseGuideActivity extends AppCompatActivity {
                         currentY = location.getLongitude();
 
                         Log.d(TAG, "onLocationChanged: GPS PROVIDER : " + currentX + " / " + currentY);
+
+                        //경로 탐색 시작
+                        drawLine();
+//                        mHandler.sendEmptyMessage(FINDPATH); // 경로 요청
                     }
 
                     @Override
@@ -208,24 +277,66 @@ public class MapCourseGuideActivity extends AppCompatActivity {
 
     }
 
-    //지도에 경로 그리기
     public void drawLine(){
+        Log.d(TAG, "drawLine: 진입");
         TMapPoint startPoint = new TMapPoint(currentX, currentY);
         TMapPoint endPoint = new TMapPoint(mapX, mapY);
 
+        Log.d(TAG, "drawLine: TMapPoint: " + startPoint + " / " + endPoint);
+
         final TMapData tmapData = new TMapData();
-        try {
-            tmapData.findPathDataWithType(TMapData.TMapPathType.PEDESTRIAN_PATH, startPoint, endPoint);
-        } catch (Exception e) {
+        tmapData.findPathDataWithType(TMapData.TMapPathType.PEDESTRIAN_PATH, startPoint, endPoint, passList, 0, new TMapData.FindPathDataListenerCallback() {
+            @Override
+            public void onFindPathData(TMapPolyLine tMapPolyLine) {
+                tmapView.removeAllTMapPolyLine();
+                tmapView.setLocationPoint(currentY, currentX);
+                tmapView.setCompassMode(true);
+                tmapView.addTMapPath(tMapPolyLine);
+            }
+        });
+    }
+
+    //TMap 경로 탐색 및 표시
+    public void findPath(){
+        TMapData tmapData = new TMapData();
+        tmapView.setLocationPoint(currentY, currentX);
+        tmapView.setCenterPoint(currentY, currentX);
+        tmapView.setCompassMode(true);
+
+        TMapPoint startPoint = new TMapPoint(currentX, currentY);
+        TMapPoint endPoint = new TMapPoint(mapX, mapY);
+        Log.d(TAG, "findPath: startPoint: " + startPoint);
+        Log.d(TAG, "findPath: endPoint: " + endPoint);
+
+        try{
+            TMapPolyLine polyLine = tmapData.findPathData(startPoint, endPoint);
+            tmapData.findPathDataWithType(TMapData.TMapPathType.PEDESTRIAN_PATH, startPoint, endPoint, passList, 0, new TMapData.FindPathDataListenerCallback() {
+                @Override
+                public void onFindPathData(TMapPolyLine tMapPolyLine) {
+                    tmapView.removeAllTMapPolyLine();
+                    tmapView.addTMapPath(tMapPolyLine);
+                }
+            });
+            Log.d(TAG, "findPath: polyLine: " + polyLine);
+            tmapView.addTMapPolyLine("findPath", polyLine);
+        }catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
+
+//    private Handler mHandler = new Handler(){
+//        public void handleMessage(Message msg){
+//            if(msg.what == FINDPATH) { // 경로찾기
+//                //TMap 표시
+//                findPath();
+//            }
+//            super.handleMessage(msg);
+//        }
+//    };
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.removeUpdates(locationListener);
     }
 }

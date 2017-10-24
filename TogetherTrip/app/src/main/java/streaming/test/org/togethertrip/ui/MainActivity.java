@@ -25,7 +25,7 @@ import streaming.test.org.togethertrip.R;
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivityLog";
     Activity activity = this;
-    Context context =this;
+    static Context context;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //키보드 생성시 화면 밀림현상 없애기
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        context = this;
 
         //Fragment 생성
         alarm = new AlarmFragment();
@@ -223,6 +224,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public static Context getContext(){
+        return context;
+    }
+
 
 
 }

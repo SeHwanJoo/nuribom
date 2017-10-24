@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.application;
 
 import android.app.Application;
+import android.content.Context;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,8 +17,9 @@ public class ApplicationController extends Application {
 
     private static String baseUrl = "http://52.78.40.158:3000/";  // 베이스 url 초기화
 
-
     private NetworkService networkService;                        // 네트워크 서비스 객체 선언
+
+    private static Context context;
 
     public static ApplicationController getInstance() {
         return instance;
@@ -33,6 +35,8 @@ public class ApplicationController extends Application {
     public void onCreate() {
         super.onCreate();
 
+        context = this;
+
         ApplicationController.instance = this; //인스턴스 객체 초기화
         buildService();
     }
@@ -45,6 +49,10 @@ public class ApplicationController extends Application {
                 .build();
 
         networkService = retrofit.create(NetworkService.class);
+    }
+
+    public static Context getContext(){
+        return context;
     }
 
 }

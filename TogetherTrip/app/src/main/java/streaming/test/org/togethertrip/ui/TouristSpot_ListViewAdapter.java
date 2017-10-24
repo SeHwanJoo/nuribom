@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
+import android.net.Network;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,9 +16,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.DetailWithTour;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchList;
+import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
+import streaming.test.org.togethertrip.datas.like.AddLikeResult;
+import streaming.test.org.togethertrip.datas.like.AddTripsLikeInfo;
+import streaming.test.org.togethertrip.network.NetworkService;
 
 /**
  * Created by taehyung on 2017-09-05.
@@ -32,15 +41,12 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
     String contentId;
     String contentTypeId;
 
-    String parking;
-    String route;
-    String wheelchair;
-    String elevator;
-    String restroom;
-    String handicapEtc;
-    String braileblock;
-
+    String parking, route, wheelchair, elevator, restroom, handicapEtc, braileblock;
     String addr;
+
+    AddTripsLikeInfo addTripsLikeInfo;
+    ImageButton ib_bigImgHeart;
+    TextView tv_heartCount;
 
     Filter listFilter;
     ArrayList<TouristSpotSearchList> filteredItemList;
@@ -50,7 +56,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
 
     int filterResource;
 
-
+    NetworkService networkService;
 
     public TouristSpot_ListViewAdapter(Context context){
         this.context = context;
@@ -81,7 +87,7 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
@@ -90,11 +96,11 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iv_bigImg = (ImageView) convertView.findViewById(R.id.iv_bigImg);
-        ImageButton ib_bigImgHeart = (ImageButton) convertView.findViewById(R.id.ib_bigImgHeart);
+        ib_bigImgHeart = (ImageButton) convertView.findViewById(R.id.ib_bigImgHeart);
         ImageView iv_profileImg = (ImageView) convertView.findViewById(R.id.iv_profileImg);
         TextView tv_spotName = (TextView) convertView.findViewById(R.id.tv_spotName);
         TextView tv_spotAddr = (TextView) convertView.findViewById(R.id.tv_spotAddr);
-        TextView tv_heartCount = (TextView) convertView.findViewById(R.id.tv_heartCount);
+        tv_heartCount = (TextView) convertView.findViewById(R.id.tv_heartCount);
         TextView tv_commentCount = (TextView)convertView.findViewById(R.id.tv_commentCount);
 
         filter_bathroom = (ImageButton) convertView.findViewById(R.id.filter_bathroom);
@@ -125,6 +131,41 @@ public class TouristSpot_ListViewAdapter extends BaseAdapter implements Filterab
 
         //시설 정보 유무에 따른 이미지
         checkFacilities();
+
+
+        networkService = ApplicationController.getInstance().getNetworkService();
+        //하트 버튼 눌렸을 때, 하트 색 바꾸기
+        ib_bigImgHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTripsLikeInfo = new AddTripsLikeInfo();
+                addTripsLikeInfo.userid = "joo";
+                addTripsLikeInfo.contentid = touristSpotSearchResultList.get(position).tripinfo.contentid;
+
+                Call<AddLikeResult> addTripsLike = networkService.addTripLikeResult(addTripsLikeInfo);
+                addTripsLike.enqueue(new Callback<AddLikeResult>() {
+                    @Override
+                    public void onResponse(Call<AddLikeResult> call, Response<AddLikeResult> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().result.message.equals("like")){
+                                ib_bigImgHeart.setBackgroundResource(R.drawable.trips_heart_on);
+                                tv_heartCount.setText(response.body().result.likecount);
+                            }else if(response.body().result.message.equals("unlike")){
+                                ib_bigImgHeart.setBackgroundResource(R.drawable.trips_heart_off);
+                                tv_heartCount.setText(response.body().result.likecount);
+                            }
+                        }
+
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddLikeResult> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
         //상세보기에서 주소 보여주기 위함
         addr = touristSpotSearchResultList.get(position).tripinfo.addr1;

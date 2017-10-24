@@ -23,6 +23,7 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
+import streaming.test.org.togethertrip.datas.like.AddTripsLikeInfo;
 
 /**
  * Created by taehyung on 2017-09-04.
@@ -67,6 +68,10 @@ public interface NetworkService {
     //코스 좋아요
     @POST("/course/like")
     Call<AddLikeResult> addLikeResult (@Body AddLikeInfo addLikeInfo);
+
+    //관광지 좋아요
+    @POST("trips/like")
+    Call<AddLikeResult> addTripLikeResult(@Body AddTripsLikeInfo addLikeInfo);
 
 
     @GET("/mypage/{userid}")
