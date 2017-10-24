@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,15 +37,19 @@ public class MypageFragment extends Fragment {
     UserInfoResult userInfoResult;
     String checkString;
 
-
+    String email, profileImg, nickName, token;
 
     TextView loginOrLogout;
     TextView signUpOrSignIn, settings_profile;
     TextView mywrite_course, mywrite_review, myLocker;
 
-    public MypageFragment(Activity activity){
+    public MypageFragment(Activity activity, String email, String profileImg, String nickName, String token){
         this.activity = activity;
         this.context = activity;
+        this.email = email;
+        this.profileImg = profileImg;
+        this.nickName = nickName;
+        this.token = token;
     }
 
     @Override
@@ -79,7 +86,7 @@ public class MypageFragment extends Fragment {
                     }
                 });
 
-            }else{ // 로그인이 되어있을 떄
+            }else{ // 로그인이 되어있을 때
                 view = inflater.inflate(R.layout.activity_mypage, container, false);
 
                 loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
@@ -87,10 +94,22 @@ public class MypageFragment extends Fragment {
                 mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
                 myLocker = (TextView) view.findViewById(R.id.mylocker);
                 settings_profile = (TextView) view.findViewById(R.id.settings_profile);
+                CircleImageView userProfile = (CircleImageView) view.findViewById(R.id.userProfile);
+                TextView userNickName = (TextView) view.findViewById(R.id.userNickName);
+                TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
 
+                userEmail.setText(email);
+                userNickName.setText(nickName);
+                if(userProfile == null) {
+                    userProfile.setImageResource(R.drawable.mypage_profile_defalt);
+                }else{
+                    Glide.with(context).load(profileImg).into(userProfile);
+                }
                 mywrite_course.setText(""+userInfoResult.result.course);
                 mywrite_review.setText(""+(userInfoResult.result.coursecomment+userInfoResult.result.tripreviews));
                 myLocker.setText(""+(userInfoResult.result.courselike+userInfoResult.result.triplike));
+
+
 
                 settings_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -132,16 +151,20 @@ public class MypageFragment extends Fragment {
 
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
-        String userId = "joo";
+        if(nickName == null){
+            nickName="No Login User@";
+        }
 
-        Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(userId);
+        Log.d(TAG, "checkLogin: email: " + nickName);
+
+        Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(nickName);
         requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
             @Override
             public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
                 if (response.isSuccessful()) {
                     userInfoResult = response.body();
 
-                    Log.d(TAG, "onResponse: result joo: " + userInfoResult.result);
+                    Log.d(TAG, "onResponse: result: " + userInfoResult.result);
                     Log.d(TAG, "onResponse: message : " + userInfoResult.message);
                 } else {
                     Log.d(TAG, "onResponse: search response is not success");

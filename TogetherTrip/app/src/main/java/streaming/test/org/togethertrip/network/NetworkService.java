@@ -20,10 +20,12 @@ import streaming.test.org.togethertrip.datas.ReviewResult;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
+import streaming.test.org.togethertrip.datas.UserInfoResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
-import streaming.test.org.togethertrip.datas.UserInfoResult;
 import streaming.test.org.togethertrip.datas.like.AddTripsLikeInfo;
+import streaming.test.org.togethertrip.datas.login.LoginDatas;
+import streaming.test.org.togethertrip.datas.login.LoginResult;
 
 /**
  * Created by taehyung on 2017-09-04.
@@ -41,6 +43,10 @@ public interface NetworkService {
     //회원가입
     @POST("users")
     Call<MessageResult> requestSignup(@Body RegisterDatas registerDatas);
+
+    //로그인
+    @POST("users/login")
+    Call<LoginResult> requestSignin(@Body LoginDatas loginDatas);
 
     //코스작성
     @POST("edit")
