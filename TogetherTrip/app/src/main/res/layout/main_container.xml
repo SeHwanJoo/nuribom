@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3.9"
-            android:background="#713300">
+            android:background="@drawable/history">
 
         </LinearLayout>
 
