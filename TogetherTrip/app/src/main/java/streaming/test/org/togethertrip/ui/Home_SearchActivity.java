@@ -60,6 +60,7 @@ public class Home_SearchActivity extends AppCompatActivity {
     String firstImgUri;
     OtherInfo otherInfo;
     String addr;
+    String nickName;
 
 
     Activity activity = this;
@@ -68,6 +69,8 @@ public class Home_SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_search);
+        Intent intent = getIntent();
+        nickName = intent.getStringExtra("nickName");
 
         courseListAdapter = new CourseListAdapter(getApplicationContext(), null);
 
@@ -153,7 +156,7 @@ public class Home_SearchActivity extends AppCompatActivity {
 
         courseSearchData = new CourseSearchData();
 
-        courseSearchData.userid = "joo";
+        courseSearchData.userid = nickName;
         courseSearchData.keyword = search_keyword;
 
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -190,10 +193,8 @@ public class Home_SearchActivity extends AppCompatActivity {
 
         Log.d(TAG, "search: " + search_keyword);
         searchData = new SearchData();
-        /*
-         * TODO 나중에 userid는 받아와야됨~
-         */
-        searchData.userid = "joo";
+
+        searchData.userid = nickName;
         searchData.keyword = search_keyword;
 
         networkService = ApplicationController.getInstance().getNetworkService();
@@ -235,7 +236,7 @@ public class Home_SearchActivity extends AppCompatActivity {
         /*
         * TODO 나중에 userid는 받아와야함!
          */
-        detailSpotListDatas.userid = "joo";
+        detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;
         Log.d(TAG, "onResponse: addr: " + addr);

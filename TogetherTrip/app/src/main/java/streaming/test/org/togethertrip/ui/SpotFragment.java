@@ -90,16 +90,17 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     SearchData searchData;
 
     String addr;
+    String nickName;
 
 
     public SpotFragment(){
 
     }
 
-    public SpotFragment(Activity activity){
+    public SpotFragment(Activity activity, String nickName){
         this.activity = activity;
         context = activity;
-
+        this.nickName = nickName;
         adapter = new TouristSpot_ListViewAdapter(context, null);
     }
 
@@ -258,7 +259,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         /*
          * TODO 나중에 userid는 받아와야됨~
          */
-        searchData.userid = "joo";
+        searchData.userid = nickName;
         searchData.keyword = search_keyword;
 
         Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
@@ -470,7 +471,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         /*
         * TODO 나중에 userid는 받아와야함!
          */
-        detailSpotListDatas.userid = "joo";
+        detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;
         Log.d(TAG, "onResponse: addr: " + addr);
