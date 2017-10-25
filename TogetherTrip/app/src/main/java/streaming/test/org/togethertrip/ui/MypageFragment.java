@@ -100,7 +100,8 @@ public class MypageFragment extends Fragment {
 
                 userEmail.setText(email);
                 userNickName.setText(nickName);
-                if(userProfile == null) {
+                Log.d(TAG, "onCreateView: image in Mypage: " + profileImg);
+                if(profileImg == null) {
                     userProfile.setImageResource(R.drawable.mypage_profile_defalt);
                 }else{
                     Glide.with(context).load(profileImg).into(userProfile);

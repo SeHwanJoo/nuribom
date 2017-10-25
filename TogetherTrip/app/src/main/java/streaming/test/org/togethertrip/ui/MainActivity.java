@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Fragment 생성
         alarm = new AlarmFragment();
-        course = new CourseFragment(this);
-        home = new HomeFragment(this);
+        course = new CourseFragment(this, receivedUserNickName);
+        home = new HomeFragment(this, receivedUserNickName);
         mypage = new MypageFragment(this, receivedEmail, receivedProfileImg, receivedUserNickName, token);
-        spot = new SpotFragment(this);
+        spot = new SpotFragment(this, receivedUserNickName);
 
         //Fragment 추가
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,15 +62,16 @@ public class CourseFragment extends Fragment {
     SpinnerAdapter adspin1;
     final static String[] arrayLocation = {"서울", "인천", "경기도", "강원도", "충청북도",
             "충청남도", "전라북도", "전라남도", "경상북도", "경상남도"};
-    String addr;
+    String nickName;
 
     public CourseFragment(){
 
     }
 
-    public CourseFragment(Activity activity){
+    public CourseFragment(Activity activity, String nickName){
         this.activity = activity;
         context = activity;
+        this.nickName = nickName;
         courseListAdapter = new CourseListAdapter(context, null);
         courseListAdapter.notifyDataSetChanged();
     }
@@ -182,7 +182,7 @@ public class CourseFragment extends Fragment {
 
         courseSearchData = new CourseSearchData();
 
-       courseSearchData.userid = "joo";
+       courseSearchData.userid = nickName;
        courseSearchData.keyword = search_keyword;
 
         networkService = ApplicationController.getInstance().getNetworkService();

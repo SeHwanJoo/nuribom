@@ -27,12 +27,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     View select_touristSpot, select_course;
     ImageButton home_searchBtn;
 
+    String nickName;
+
     public HomeFragment(){
 
     }
 
-    public HomeFragment(Activity activity){
+    public HomeFragment(Activity activity,String nickName){
         this.activity = activity;
+        this.nickName = nickName;
         context = activity;
     }
 
@@ -71,6 +74,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),Home_SearchActivity.class);
+                intent.putExtra("nickName", nickName);
                 startActivity(intent);
             }
         });
