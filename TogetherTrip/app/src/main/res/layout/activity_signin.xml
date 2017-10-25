@@ -95,7 +95,6 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:background="@drawable/login_join"/>
-        <!--TODO 로그인, 회원가입 버튼 이미지 자체 크기가 다름 수정 요청해야함 -->
 
     </LinearLayout>
 

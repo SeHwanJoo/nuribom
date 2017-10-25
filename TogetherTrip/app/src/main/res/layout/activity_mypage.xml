@@ -61,6 +61,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2">
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/userProfile"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="32dp"
@@ -74,6 +75,7 @@
                         android:layout_weight="5"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/userNickName"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -84,6 +86,7 @@
                             android:textSize="16sp"
                             android:textColor="#1D1D1D"/>
                         <TextView
+                            android:id="@+id/userEmail"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"

@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     MypageFragment mypage;
     SpotFragment spot;
 
+    String receivedEmail, receivedProfileImg, receivedUserNickName, token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +57,17 @@ public class MainActivity extends AppCompatActivity {
         //키보드 생성시 화면 밀림현상 없애기
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         context = this;
+        Intent receivedIntent = getIntent();
+        receivedEmail = receivedIntent.getStringExtra("email");
+        receivedProfileImg = receivedIntent.getStringExtra("profileImg");
+        receivedUserNickName = receivedIntent.getStringExtra("userNickName");
+        token = receivedIntent.getStringExtra("token");
 
         //Fragment 생성
         alarm = new AlarmFragment();
         course = new CourseFragment(this);
         home = new HomeFragment(this);
-        mypage = new MypageFragment(this);
+        mypage = new MypageFragment(this, receivedEmail, receivedProfileImg, receivedUserNickName, token);
         spot = new SpotFragment(this);
 
         //Fragment 추가

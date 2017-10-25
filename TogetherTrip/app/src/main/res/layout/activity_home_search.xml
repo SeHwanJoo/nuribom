@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="false"
-                android:background="@drawable/search_trips_selection_off"/>
+                android:background="@drawable/search_course_selection_on"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,6 +115,14 @@
                 android:textColor="#8C8C8C"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="8dp"/>
+            <ListView
+                android:visibility="gone"
+                android:id="@+id/touristSpot_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textFilterEnabled="true">
+
+            </ListView>
 
             <GridView
                 android:visibility="gone"
