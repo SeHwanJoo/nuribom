@@ -25,13 +25,13 @@
             android:layout_centerInParent="true"/>
 
         <Button
-            android:text="작성"
             android:id="@+id/completeBtn"
-            android:layout_width="60dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:background="@drawable/course_complete" />
 
     </RelativeLayout>
 
@@ -241,7 +241,8 @@
                 android:id= "@+id/button_review_img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:background="@drawable/default_image"/>
         </LinearLayout>
     </LinearLayout>
     <TextView

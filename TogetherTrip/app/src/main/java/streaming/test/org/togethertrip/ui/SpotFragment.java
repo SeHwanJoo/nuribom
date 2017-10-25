@@ -281,7 +281,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
                 //검색시 통신 실패
-                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -511,7 +515,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onFailure(Call<DetailSpotListClickResult> call, Throwable t) {
                 //검색시 통신 실패
-                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

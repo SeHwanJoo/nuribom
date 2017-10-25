@@ -156,6 +156,7 @@ public class Home_SearchActivity extends AppCompatActivity {
 
         courseSearchData = new CourseSearchData();
 
+        Log.d(TAG, "courseSearch: " + nickName);
         courseSearchData.userid = nickName;
         courseSearchData.keyword = search_keyword;
 
@@ -233,9 +234,6 @@ public class Home_SearchActivity extends AppCompatActivity {
         Log.d(TAG, "clickItem: contentId / contentTypeId : " + detailSpotListDatas.contentid +
                 " / " + detailSpotListDatas.contenttypeid);
 
-        /*
-        * TODO 나중에 userid는 받아와야함!
-         */
         detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;

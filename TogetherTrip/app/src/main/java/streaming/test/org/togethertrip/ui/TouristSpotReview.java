@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -30,7 +32,8 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
     private SwipeRefreshLayout refreshLayout;
     private TouristSpotReviewListData data;
     NetworkService service;
-    Button change,reviewbtn;
+    Button change;
+    FloatingActionButton reviewbtn;
 
     //Back 키 두번 클릭 여부 확인
     private final long FINSH_INTERVAL_TIME = 2000;
@@ -45,7 +48,7 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
         service = ApplicationController.getInstance().getNetworkService();
 
         ////////////////////////뷰 객체 초기화////////////////////////
-        reviewbtn = (Button)findViewById(R.id.reviewbtn);
+        reviewbtn = (FloatingActionButton) findViewById(R.id.reviewFab);
         recyclerView = (RecyclerView)findViewById(R.id.touristSpot_recyclerView);
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.RefreshLayout);
         recyclerView.setHasFixedSize(true);

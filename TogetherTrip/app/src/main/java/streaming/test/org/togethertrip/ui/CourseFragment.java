@@ -202,8 +202,11 @@ public class CourseFragment extends Fragment {
 
             @Override
             public void onFailure(Call<CourseResult> call, Throwable t) {
-                Toast.makeText(context, "통신실패", Toast.LENGTH_SHORT).show();
-
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
