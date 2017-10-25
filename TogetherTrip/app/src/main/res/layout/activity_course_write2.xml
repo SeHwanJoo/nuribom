@@ -33,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4.5"
-                android:src="@drawable/sally"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout
@@ -111,7 +110,8 @@
                         android:hint="내용을 입력하세요"
                         android:textSize="14sp"
                         android:textColorHint="#686868"
-                        android:textColor="#1D1D1D"/>
+                        android:textColor="#1D1D1D"
+                        android:id="@+id/page_content"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

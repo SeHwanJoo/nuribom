@@ -18,17 +18,19 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
 import static streaming.test.org.togethertrip.R.id.courseTitle;
 
-public class CourseWrite extends AppCompatActivity implements CourseWriteFragment.DataSetListner{
+public class CourseWrite extends AppCompatActivity implements CourseWriteFragment.DataSetListner,CourseWriteFragment2.DataSetListner{
     Button okbtn;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     CourseWriteFragment courseWriteFragment;
@@ -37,6 +39,9 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     private ViewPager mViewPager;
     FloatingActionButton nextfab;
     CourseWriteDatas courseWriteDatas;
+    ArrayList<CourseWriteDatas.Page> page;
+
+    MultipartBody.Part[] images;
 
     //번들로 받을 데이터
     Uri uri;
@@ -53,11 +58,17 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_write_viewpager);
 
+        courseWriteDatas = new CourseWriteDatas();
+        courseWriteDatas.main = new CourseWriteDatas.Main();
+        courseWriteDatas.page = new ArrayList<CourseWriteDatas.Page>();
+        images = new MultipartBody.Part[500];
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         courseWriteFragment = new CourseWriteFragment(this);
-        courseWriteFragment2 = new CourseWriteFragment2(this);
         fragmentList.add(position, courseWriteFragment);
         position++;
+
+        networkService = ApplicationController.getInstance().getNetworkService();
 
         okbtn = (Button)findViewById(R.id.okbtn);
 
@@ -71,7 +82,7 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
             public void onClick(View v) {
 //                startActivity(new Intent(getBaseContext(),CourseWrite.class));
 
-                fragmentList.add(position, new CourseWriteFragment2(getBaseContext()));
+                fragmentList.add(position, new CourseWriteFragment2(getBaseContext(),position-1));
                 position++;
                 mSectionsPagerAdapter.notifyDataSetChanged();
 
@@ -88,9 +99,10 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("bundleeeee", "onItemClick: detailIntent: " + title);
-
-                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
+                okNetwork();
+//                Log.d("bundleeeee", "onItemClick: detailIntent: " + title);
+//
+//                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(CourseWrite.this,data.title, Toast.LENGTH_SHORT).show();
 //                okNetwork();
             }
@@ -105,12 +117,9 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     }
 
     public void okNetwork(){
-
-        courseWriteDatas.main.title="abc";
-        Log.d("gggggg", "search: searchData.keyword: " + courseWriteDatas.main.title);
-
-
-        Call<CourseWriteResult> courseWriteTitle = networkService.writeCourse(courseWriteDatas);
+//        courseWriteDatas.notify();
+        courseWriteDatas.main.userid = "joo";
+        Call<CourseWriteResult> courseWriteTitle = networkService.writeCourse(courseWriteDatas,images);
         courseWriteTitle.enqueue(new Callback<CourseWriteResult>() {
             @Override
             public void onResponse(Call<CourseWriteResult> call, Response<CourseWriteResult> response) {
@@ -131,6 +140,52 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         });
     }
 
+    @Override
+    public void FragmentImageSet(int position, MultipartBody.Part image) {
+        if(image != null) {
+            images[position+1] = image;
+            Log.i("fat_im", String.valueOf(image));
+        }
+    }
+
+    @Override
+    public void FragmentContentSet(int position, String content) {
+//        courseWriteDatas.page.add(position,)
+        if(content != null) {
+//            courseWriteDatas.page[position].content = new String();
+            try{
+                courseWriteDatas.page.get(position).content = content;
+            } catch(IndexOutOfBoundsException e){
+                for(int i = position-courseWriteDatas.page.size();i>=0;i--){
+                    courseWriteDatas.page.add(new CourseWriteDatas.Page());
+                }
+                courseWriteDatas.page.get(position).content = content;
+            }
+            Log.i("fat_co",content);
+        }
+    }
+
+    @Override
+    public void FirstFragmentImageSet(MultipartBody.Part image) {
+        if(image != null) images[0] = image;
+        Log.i("fat_imf", String.valueOf(image));
+    }
+
+    @Override
+    public void FirstFragmentCategorySet(String category) {
+        if(category != null) {
+            courseWriteDatas.main.category = category;
+            Log.i("fat_ca",category);
+        }
+    }
+
+    @Override
+    public void FirstFragmentTitleSet(String title) {
+        if(title != null) {
+            courseWriteDatas.main.title = title;
+            Log.i("fat_ti",title);
+        }
+    }
 
 
     //페이지 선택 확인을 위한 어댑터
@@ -177,14 +232,6 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         super.onBackPressed();
         position = 0;
         finish();
-    }
-
-    @Override
-    public void FirstFragmentDataSet(Uri uri, String category, String title) {
-        this. uri = uri;
-        this.category = category;
-        this.title = title;
-
     }
 
 
