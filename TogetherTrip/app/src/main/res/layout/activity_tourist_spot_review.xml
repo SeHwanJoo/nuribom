@@ -42,7 +42,6 @@
             android:background="#e4e4e4"
             android:orientation="horizontal"
             android:padding="10px">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
