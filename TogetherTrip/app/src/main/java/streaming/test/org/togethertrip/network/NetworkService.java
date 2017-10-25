@@ -53,8 +53,10 @@ public interface NetworkService {
     Call<EmailCheckResult> emailCheck (@Path("userid")String userid);
 
     //코스작성
-    @POST("edit")
-    Call<CourseWriteResult> writeCourse(@Body CourseWriteDatas courseWriteDatas);
+    @Multipart
+    @POST("/course/edit")
+    Call<CourseWriteResult> writeCourse(@Part("body") CourseWriteDatas courseWriteDatas,
+                                        @Part MultipartBody.Part[] image);
 
     // 후기 작성
     @Multipart

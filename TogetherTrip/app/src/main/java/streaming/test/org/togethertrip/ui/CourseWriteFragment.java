@@ -3,14 +3,17 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.melnykov.fab.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import streaming.test.org.togethertrip.R;
 
 
@@ -48,7 +59,9 @@ public class CourseWriteFragment extends Fragment {
     FloatingActionButton nextfab;
 
     String title;
-    Uri mUri;
+//    Uri mUri;
+    String imgUrl;
+    Uri uri;
     DataSetListner mListner;
 
 
@@ -86,7 +99,6 @@ public class CourseWriteFragment extends Fragment {
         courseTitle = (EditText) view.findViewById(R.id.courseTitle);
 
         try{
-            mListner.FirstFragmentDataSet(mUri, choice_category, title);
             courseTitle.addTextChangedListener(new TextWatcher() {
 
                     @Override
@@ -103,6 +115,7 @@ public class CourseWriteFragment extends Fragment {
                     public void afterTextChanged(Editable s) {
                         //입력이 끝났을 때
                         title = courseTitle.getText().toString();
+                        ((DataSetListner)activity).FirstFragmentTitleSet(courseTitle.getText().toString());
                     }
                 });
         }catch(Exception e){
@@ -161,12 +174,16 @@ public class CourseWriteFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(adspin1.getItem(position).equals("카테고리1")){
                     choice_category = "카테고리1";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리1");
                 }else if(adspin1.getItem(position).equals("카테고리2")){
                     choice_category = "카테고리2";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리2");
                 }else if(adspin1.getItem(position).equals("카테고리3")){
                     choice_category = "카테고리3";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리3");
                 }else if(adspin1.getItem(position).equals("카테고리4")){
                     choice_category = "카테고리4";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리4");
                 }
             }
 
@@ -204,20 +221,68 @@ TODO 메롱
         //getActivity().startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
         startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
     }
+    public void getImageNameToUri(Uri data) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(data, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        String imgPath = cursor.getString(column_index);
+        String imgName = imgPath.substring(imgPath.lastIndexOf("/") + 1);
+        this.imgUrl = imgPath;
+    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PICK_IMAGE_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Glide.with(context).load(data.getData()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
+                try {
+                    //Uri에서 이미지 이름을 얻어온다.
+                    getImageNameToUri(data.getData());
 
-                Uri uri = data.getData();
-                Log.d(TAG, "onActivityResult: " + uri) ;
-                Glide.with(context).load(uri).into(imageView);
-                mUri = uri;
-            }else{
-                Toast.makeText(context, "이미지를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    uri = data.getData();
+                    Glide.with(context).load(data.getData()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (imgUrl == "") {
+                    ((DataSetListner)activity).FirstFragmentImageSet(null);
+                } else {
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+
+                    options.inSampleSize = 2; //얼마나 줄일지 설정하는 옵션 4--> 1/4로 줄이겠다
+
+                    InputStream in = null; // here, you need to get your context.
+                    try {
+                        in = context.getContentResolver().openInputStream(uri);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                        /*inputstream 형태로 받은 이미지로 부터 비트맵을 만들어 바이트 단위로 압축
+                        그이우 스트림 배열에 담아서 전송합니다.
+                         */
+
+                    Bitmap bitmap = BitmapFactory.decodeStream(in, null, options); // InputStream 으로부터 Bitmap 을 만들어 준다.
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+                    // 압축 옵션( JPEG, PNG ) , 품질 설정 ( 0 - 100까지의 int형 ), 압축된 바이트 배열을 담을 스트림
+                    RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray());
+
+                    File photo = new File(imgUrl); // 가져온 파일의 이름을 알아내려고 사용합니다
+
+
+                    // MultipartBody.Part 실제 파일의 이름을 보내기 위해 사용!!
+                    ((DataSetListner)activity).FirstFragmentImageSet(MultipartBody.Part.createFormData("image", photo.getName(), photoBody));
+
+                    Glide.with(context).load(data.getData()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(imageView);
+
+                }
             }
         }
     }
@@ -282,23 +347,36 @@ TODO 메롱
 
 
     public interface DataSetListner{
-        void FirstFragmentDataSet(Uri uri, String category, String title);
+        void FirstFragmentImageSet(MultipartBody.Part image);
+        void FirstFragmentCategorySet( String category);
+        void FirstFragmentTitleSet(String title);
     }
-
     @Override
+
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof DataSetListner){
-            mListner = (DataSetListner) context;
-        }else{
-            throw new RuntimeException(context.toString() + "must be implement DataSetListner");
+        if(context instanceof Activity) {
+            // 사용될 activity 에 context 정보 가져오는 부분
+            this.activity = (Activity)context;
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListner = null;
-    }
+
+
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if(context instanceof DataSetListner){
+//            mListner = (DataSetListner) context;
+//        }else{
+//            throw new RuntimeException(context.toString() + "must be implement DataSetListner");
+//        }
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        mListner = null;
+//    }
 }
 
