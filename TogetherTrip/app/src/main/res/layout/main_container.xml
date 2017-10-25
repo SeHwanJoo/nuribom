@@ -184,7 +184,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
+            android:layout_weight="1.7"
             android:orientation="horizontal">
 
             <TextView
@@ -210,26 +210,58 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
+                android:orientation="horizontal"
+                android:background="#fff">
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_first2"
+                        android:padding="8dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
-                <ImageView
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_second"
+                        android:padding="6dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_third"
+                        android:padding="6dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
             </LinearLayout>
         </HorizontalScrollView>
 

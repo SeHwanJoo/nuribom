@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import streaming.test.org.togethertrip.R;
@@ -26,6 +28,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     TextView recommed_spot, recommend_course;
     View select_touristSpot, select_course;
     ImageButton home_searchBtn;
+
+    ImageView recommend_spot_img_first,recommend_spot_img_second, recommend_spot_img_third;
 
     String nickName;
 
@@ -49,6 +53,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_container, container, false);
+
+        recommend_spot_img_first = (ImageView) view.findViewById(R.id.recommend_spot_img_first);
+        recommend_spot_img_second = (ImageView) view.findViewById(R.id.recommend_spot_img_second);
+        recommend_spot_img_third = (ImageView )view.findViewById(R.id.recommend_spot_img_third);
+
+        GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.border_round);
+        recommend_spot_img_first.setBackground(drawable);
+        recommend_spot_img_first.setClipToOutline(true);
+
 
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);
         filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
