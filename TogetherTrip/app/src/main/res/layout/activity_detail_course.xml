@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
+    android:weightSum="10"
+    android:clipToPadding="false"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="15dp"
+        android:weightSum="10"
+        android:orientation="vertical"
+        android:background="#000"
+        android:elevation="5dp">
+
+        <!-- 이미지 추가 버튼으로 대체해야함-->
+        <ImageView
+            android:id="@+id/course_detail_elbum"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:background="#fff">
+
+            <TextView
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/course_detail_calenderview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#95989A"
+                android:hint="기간은 자동으로 입력됩니다."/>
+
+            <TextView
+                android:text="카테고리"
+                android:id="@+id/course_detail_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="16dp"
+                />
+            <TextView
+                android:id="@+id/course_detail_courseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="16dp"
+                android:text="제목을 입력해주세요"
+                android:textSize="24sp"
+                android:textColor="#1D1D1D"
+                android:background="@null" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/course_detail_profile_image"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/sally"/>
+                <TextView
+                    android:id="@+id/course_detail_writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="작성자"
+                    android:textSize="16sp"
+                    android:textColor="#686868"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

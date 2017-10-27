@@ -12,6 +12,9 @@ import retrofit2.http.Path;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
+import streaming.test.org.togethertrip.datas.DetailCourseDatas;
+import streaming.test.org.togethertrip.datas.DetailCourseInfo;
+import streaming.test.org.togethertrip.datas.DetailCourseResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.MessageResult;
@@ -48,6 +51,7 @@ public interface NetworkService {
     //로그인
     @POST("users/login")
     Call<LoginResult> requestSignin(@Body LoginDatas loginDatas);
+
     //이메일중복체크
     @GET("users/emailtest/{userid}")
     Call<EmailCheckResult> emailCheck (@Path("userid")String userid);
@@ -57,6 +61,15 @@ public interface NetworkService {
     @POST("/course/edit")
     Call<CourseWriteResult> writeCourse(@Part("body") CourseWriteDatas courseWriteDatas,
                                         @Part MultipartBody.Part[] image);
+
+    //코스 상세보기
+    @POST("course/")
+    Call<DetailCourseDatas> clickDetailCourseList (@Body DetailCourseInfo detailCourseInfo);
+
+    //코스 그리드뷰 띄우기
+    @GET("/course/list/{keyword}/{userid}")
+    Call<CourseResult> getCourseResult(@Path("keyword") String keyword,
+                                       @Path("userid") String userid);
 
     // 후기 작성
     @Multipart
@@ -72,10 +85,6 @@ public interface NetworkService {
     @GET("/trips/reviews/{contentid}")
     Call<TouristSpotReviewResult> getMainResult(@Path("contentid") String contentid);
 
-    //관광코스 그리드뷰 띄우기
-    @GET("/course/list/{keyword}/{userid}")
-    Call<CourseResult> getCourseResult(@Path("keyword") String keyword,
-                                       @Path("userid") String userid);
 
     //코스 좋아요
     @POST("/course/like")

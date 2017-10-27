@@ -25,7 +25,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action
@@ -40,7 +39,6 @@
                 <action
                     android:name="android.intent.action.MAIN"
                     android:windowSoftInputMode="adjustPan" />
-
             </intent-filter>
         </activity>
         <activity
@@ -84,6 +82,7 @@
         <activity android:name=".ui.SigninActivity" />
         <activity android:name=".ui.ProfileChangeActivity" />
         <activity android:name=".ui.MapCourseGuideActivity" />
+        <activity android:name=".ui.DetailCourseActivity"></activity>
     </application>
 
 </manifest>

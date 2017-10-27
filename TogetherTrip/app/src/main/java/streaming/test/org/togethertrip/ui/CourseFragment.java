@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,18 +35,28 @@ import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseSearchData;
+import streaming.test.org.togethertrip.datas.CourseWriteDatas;
+import streaming.test.org.togethertrip.datas.DetailCourseDatas;
+import streaming.test.org.togethertrip.datas.DetailCourseInfo;
+import streaming.test.org.togethertrip.datas.DetailCourseResult;
+import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
+import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 
 /**
  * Created by minseung on 2017-10-08.
  */
 
-public class CourseFragment extends Fragment {
+public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener{
     Activity activity;
     Context context;
     FloatingActionButton fab;
+    ArrayList<DetailCourseDatas.Page> page;
+
+    private List<Fragment> fragmentList = new ArrayList<Fragment>();
+    Intent detailIntent;
 
     GridView CourselistView;
     CourseListAdapter courseListAdapter;
@@ -57,6 +70,7 @@ public class CourseFragment extends Fragment {
     ImageButton real_searchBtn;
     TextView tv_main;
     EditText edit_search;
+    SwipeRefreshLayout spot_refreshLayout;
 
     String choice_sido = "";
     Spinner spinner_location;
@@ -121,7 +135,6 @@ public class CourseFragment extends Fragment {
         });
 
 
-
         adspin1 = new CourseFragment.SpinnerAdapter(activity, arrayLocation, android.R.layout.simple_spinner_dropdown_item);
 //        adspin1 = ArrayAdapter.createFromResource(activity, R.array.city, android.R.layout.simple_spinner_dropdown_item );
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -151,6 +164,7 @@ public class CourseFragment extends Fragment {
                     choice_sido = "경상남도";
                 }
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -191,12 +205,20 @@ public class CourseFragment extends Fragment {
         requestCourseData.enqueue(new Callback<CourseResult>() {
 
             @Override
-            public void onResponse(Call<CourseResult> call, Response<CourseResult> response) {
+            public void onResponse(Call<CourseResult> call, final Response<CourseResult> response) {
                 if (response.isSuccessful()) {
                     courseListDatas = response.body().result;
                     courseListAdapter = new CourseListAdapter(context, courseListDatas);
                     CourselistView.setAdapter(courseListAdapter);
                     courseListAdapter.notifyDataSetChanged();
+                    CourselistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            detailIntent = new Intent(context, DetailCourseActivity.class);
+                            detailIntent.putExtra("courseid",response.body().result.get(position).courseid);
+                            startActivity(detailIntent);
+                        }
+                    });
                 }
             }
 
@@ -267,4 +289,57 @@ public class CourseFragment extends Fragment {
             return convertView;
         }
     }
+//    //리스트 클릭 리스너
+//    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+//        @Override
+//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            clickItem(view, position);
+//        }
+//    };
+//
+//    // detail 네트워킹
+//    public void clickItem(View view, int position){
+//
+//        Log.d(TAG, "clickItem: 진입");
+
+//        DetailCourseInfo detailCourseInfo = new DetailCourseInfo();
+//        detailCourseInfo.userid = "joo";
+//        detailCourseInfo.courseid = String.valueOf(courseListDatas.get(position).courseid);
+//
+//        Log.d(TAG, "clickItem: userid / courseId : " + courseListDatas.get(position).userid +
+//                " / " + String.valueOf(courseListDatas.get(position).courseid));
+//
+//
+//        NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
+//        Log.d(TAG, "clickItem: networkService: " + list_networkService);
+//        Call<DetailCourseResult> requestDetailCourseList = list_networkService.clickDetailCourseList(detailCourseInfo);
+//        requestDetailCourseList.enqueue(new Callback<DetailCourseResult>() {
+//            @Override
+//            public void onResponse(Call<DetailCourseResult> call, Response<DetailCourseResult> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d(TAG, "onResponse: detail 통신");
+//
+
+//
+//
+//                } else {
+//                    Log.d(TAG, "onResponse: clickList response is not success");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<DetailCourseResult> call, Throwable t) {
+//                //검색시 통신 실패
+//                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+    //Swipe시 갱신되는 메소드
+    @Override
+    public void onRefresh() {
+        courseSearch();
+        spot_refreshLayout.setRefreshing(false);
+    }
+
+
 }
