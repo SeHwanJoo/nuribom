@@ -13,48 +13,48 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/firstRl"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#cac7c7">
+        <RelativeLayout
+            android:id="@+id/firstRl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#cac7c7">
 
-        <TextView
-            android:id="@+id/tv_courst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="작성하기"
-            android:textSize="18dp"
-            android:textColor="#1D1D1D"/>
+            <TextView
+                android:id="@+id/tv_courst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="작성하기"
+                android:textSize="18dp"
+                android:textColor="#1D1D1D"/>
 
-        <Button
-            android:id="@+id/okbtn"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/course_complete"/>
+            <Button
+                android:id="@+id/okbtn"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/course_complete"/>
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/lineRl1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/firstRl"
-        android:background="#aaaaaa"></RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/lineRl1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/firstRl"
+            android:background="#aaaaaa"></RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </android.support.v4.view.ViewPager>
 
-</LinearLayout>
+    </LinearLayout>
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/nextfab"
         android:layout_width="wrap_content"

@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.AlarmActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="10">
     <RelativeLayout
         android:id="@+id/firstRl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#e4e4e4"
-        android:layout_weight="1">
+        android:background="#fff"
+        android:layout_weight="1"
+        android:elevation="2dp">
         <TextView
             android:id="@+id/tv_main"
             android:layout_width="wrap_content"
@@ -21,12 +23,54 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8">
+        android:id="@+id/swipelayout"
+        android:layout_weight="9">
 
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="새로운 알람"
+                    android:textColor="#0089AD"
+                    android:textSize="14dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="11dp"
+                    android:elevation="1dp"
+                    android:background="#fff"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alarm_rcv"
+                    android:background="#fff"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이전 알람"
+                    android:textColor="#1E3790"
+                    android:textSize="14dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="11dp"
+                    android:elevation="1dp"
+                    android:background="#fff"/>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alarm_rcv1"
+                    android:background="#fff"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+         </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

@@ -90,16 +90,17 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     SearchData searchData;
 
     String addr;
+    String nickName;
 
 
     public SpotFragment(){
 
     }
 
-    public SpotFragment(Activity activity){
+    public SpotFragment(Activity activity, String nickName){
         this.activity = activity;
         context = activity;
-
+        this.nickName = nickName;
         adapter = new TouristSpot_ListViewAdapter(context, null);
     }
 
@@ -258,7 +259,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         /*
          * TODO 나중에 userid는 받아와야됨~
          */
-        searchData.userid = "joo";
+        searchData.userid = nickName;
         searchData.keyword = search_keyword;
 
         Call<TouristSpotSearchResult> requestDriverApplyOwner = networkService.searchTouristSpot(searchData);
@@ -280,7 +281,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onFailure(Call<TouristSpotSearchResult> call, Throwable t) {
                 //검색시 통신 실패
-                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -470,7 +475,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         /*
         * TODO 나중에 userid는 받아와야함!
          */
-        detailSpotListDatas.userid = "joo";
+        detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;
         Log.d(TAG, "onResponse: addr: " + addr);
@@ -510,7 +515,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             @Override
             public void onFailure(Call<DetailSpotListClickResult> call, Throwable t) {
                 //검색시 통신 실패
-                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

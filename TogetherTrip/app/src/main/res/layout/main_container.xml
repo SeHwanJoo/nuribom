@@ -12,13 +12,14 @@
         android:background="#fff"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tv_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_main"
+            android:layout_width="48dp"
+            android:layout_height="24.5dp"
             android:text="Together Trip"
             android:textSize="25dp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:src="@drawable/login_logo"/>
 
         <Button
             android:id="@+id/btn_search"
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3.9"
-            android:background="#713300">
+            android:background="@drawable/history">
 
         </LinearLayout>
 
@@ -69,7 +70,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.1"
+            android:layout_weight="6.5"
             android:orientation="vertical"
             android:background="#fff">
             <TextView
@@ -183,8 +184,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.5"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:background="#fff">
 
             <TextView
                 android:id="@+id/recommend_spot"
@@ -205,30 +207,64 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6">
+            android:layout_weight="6"
+            android:background="#000"
+            android:elevation="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#fff">
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_first2"
+                        android:padding="8dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
-                <ImageView
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_second"
+                        android:padding="6dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/border_round"/>
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/recommend_spot_img_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_third"
+                        android:padding="6dp"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_frame"/>
+                </FrameLayout>
             </LinearLayout>
         </HorizontalScrollView>
 

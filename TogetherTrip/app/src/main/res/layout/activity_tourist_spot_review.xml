@@ -1,97 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e4e4e4"
+    android:background="#F9F9F9"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:id="@+id/firstRl"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#e4e4e4">
-
-        <TextView
-            android:id="@+id/tv_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="후기보기"
-            android:textSize="25dp" />
-
-        <Button
-            android:id="@+id/reviewbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="후기작성icon" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/lineRl1"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/firstRl"
-        android:background="#5a5a5a"></RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:background="#cac7c7"
-        android:orientation="horizontal"
-        android:padding="10px">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F9F9F9">
+        <RelativeLayout
+            android:id="@+id/firstRl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#fff">
 
             <TextView
-                android:id="@+id/latesttxt"
+                android:id="@+id/tv_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10px"
-                android:text="최신순" />
+                android:layout_centerInParent="true"
+                android:text="여행지 후기"
+                android:textSize="18sp"
+                android:textColor="#1D1D1D"/>
 
-            <TextView
-                android:id="@+id/ratingtxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10px"
-                android:text="별점순" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10px">
+            android:id="@+id/lineRl1"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/firstRl"
+            android:background="#E6E6E6"></RelativeLayout>
 
-            <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:background="#e4e4e4"
+            android:orientation="horizontal"
+            android:padding="10px">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/latesttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10px"
+                    android:text="최신순"
+                    android:textSize="12sp"
+                    android:textColor="#1D1D1D"/>
+
+                <TextView
+                    android:id="@+id/ratingtxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10px"
+                    android:text="별점순"
+                    android:textSize="12sp"
+                    android:textColor="#8C8C8C" />
+            </LinearLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="포토후기 모아보기" />
-        </RelativeLayout>
+                android:layout_margin="10px"
+                >
+            </RelativeLayout>
+        </LinearLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:id="@+id/RefreshLayout">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/touristSpot_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/reviewFab"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:id="@+id/RefreshLayout">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/touristSpot_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#d6d6d6">
-        </android.support.v7.widget.RecyclerView>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="25dp"
+        android:src="@drawable/course_morewrite"/>
+</FrameLayout>
 
