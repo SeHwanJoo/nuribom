@@ -3,7 +3,42 @@
 
     <item
         is-multidex="true"
-<<<<<<< HEAD
+        jar="C:\Users\taehyung\.android\build-cache\c5081694415d362c3a7fbca6588e0db5479bf507\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4c0c3a9709adc7608860b0a9f65f661cd3ff4d07">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f43cc3c87efdee8c54b7bbd4282f5233ad41e65f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\taehyung\.android\build-cache\4fd71549fad79fe515b1af1c2b0f144b6eced7a9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="eb366c8b72908e2afa66c66b0a3f1318265a473e">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b6a18c134f3691d3112515d40345c4ea89a45ab1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\taehyung\.android\build-cache\bafde511ecbad581b0d77f65367c818a070ef8fa\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bd47a98a8f3d53220afca6f869f37c56c273c8d9">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7cede346ea7cea3688211e26637de2d38ec19bc3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\taehyung\.android\build-cache\ff6357326213b025e90c02c2ce541403c7d45994\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="453427e529ccd47ef859c7d739a59ab32f7f14ee">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f17fa71ab8d64ba871444ea7fa4464adbd841715\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="D:\nuribom\TogetherTrip\y-photopicker\build\intermediates\bundles\default\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -19,32 +54,33 @@
         revision="25.0.0"
         sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
         <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_133d5ea1dd63aea0c05e655bbbceeb4095c1791c\classes.dex" />
-=======
-        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c77aaa04d26efdbd46329adf73ff63705ccfa1b9">
-        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d268ad5f073a000623d70d0fbd7d7697de98f015\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
-        jumboMode="true"
+        jar="C:\Users\taehyung\.android\build-cache\c8296f8e8f9f73f225ed360adbd9e879897fb6c7\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
-        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_c275575f74c5a6f9d33a5de587974f05fd8a7050\classes.dex" />
+        sha1="ed18fdd695456683717079e695c5683cdc042d89">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_59bc5080276bad6481dfd984be40b60108514ad9\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        jar="C:\Users\taehyung\.android\build-cache\44344ad01bed7e649992f7d61e11e99bc4631064\output\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4f3d39d8044dfe2432c0787b81fb851055309bc6\classes.dex" />
->>>>>>> bf7bc6d2e86ae381ea7ba000d46f4decfcdb97e3
+        sha1="e1fb737d72e295a54c677c0ab9aecfe3518e2ec6">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_01c4ff2015df47387db544fb3ffdfb2761eade44\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\taehyung\.android\build-cache\94580ac9ca36c206f57532ca4772c4816ac50887\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="49743d94bd8f62b64049c3e3065c18598ce2ca7f">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9c25710d858928c521dcef809bffa26082797b17\classes.dex" />
     </item>
 
 </items>

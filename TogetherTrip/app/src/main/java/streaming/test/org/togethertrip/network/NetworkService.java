@@ -9,6 +9,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import streaming.test.org.togethertrip.datas.AlarmDatas;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
@@ -91,5 +92,7 @@ public interface NetworkService {
     @GET("/mypage/{userid}")
     Call<UserInfoResult> getUserInfo(@Path("userid") String userid);
 
+    @GET("/users/alarm/{userid}")
+    Call<AlarmDatas> getAlarm(@Path("userid") String userid);
 
 }

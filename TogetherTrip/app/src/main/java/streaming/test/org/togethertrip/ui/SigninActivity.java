@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +68,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     loginDatas = new LoginDatas();
                     loginDatas.email = input_email.getText().toString();
                     loginDatas.password = input_password.getText().toString();
+                    loginDatas.token = FirebaseInstanceId.getInstance().getToken();
 
                     requestSignin(loginDatas);
 
@@ -82,6 +85,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     //로그인 네트워크
     public void requestSignin(LoginDatas loginDatas){
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+
         Call<LoginResult> requestLogin = networkService.requestSignin(loginDatas);
         requestLogin.enqueue(new Callback<LoginResult>() {
             @Override
@@ -100,6 +104,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+
+//                        intent.putExtra("token", loginEchoResult.token);
                         startActivity(intent);
                         finish();
                     }else{
