@@ -3,6 +3,7 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -67,6 +68,8 @@ public class MypageFragment extends Fragment {
 
     String profileImgString;
 
+    SharedPreferences loginInfo;
+
 
     public MypageFragment(Activity activity, String email, String profileImg, String nickName, String token){
         this.activity = activity;
@@ -80,7 +83,6 @@ public class MypageFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -247,20 +249,28 @@ public class MypageFragment extends Fragment {
         });
     }
 
+    //다이얼로그 취소 클릭시
     private View.OnClickListener leftListner = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //취소 클릭시
+
             logoutDialog.dismiss();
         }
     };
 
+    //다이얼로그 로그아웃 클릭시
     private View.OnClickListener rightLisnter = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //로그아웃 클릭시
             logout();
             Intent intent = new Intent(context, MainActivity.class);
+
+            //로그인시 자동로그인 내역 삭제
+            loginInfo = activity.getSharedPreferences("loginSetting", 0);
+            SharedPreferences.Editor editor = loginInfo.edit();
+            editor.clear();
+            editor.commit();
+
             //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

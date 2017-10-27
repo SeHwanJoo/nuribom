@@ -3,6 +3,7 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,15 @@ import java.util.List;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.login.LoginDatas;
+import streaming.test.org.togethertrip.datas.login.LoginEchoResult;
+import streaming.test.org.togethertrip.datas.login.LoginResult;
+import streaming.test.org.togethertrip.network.NetworkService;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivityLog";
@@ -48,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     SpotFragment spot;
 
     String receivedEmail, receivedProfileImg, receivedUserNickName, token;
+
+    LoginEchoResult loginEchoResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
 
         mypage.checkLogin();
 
+        if(mypage.email==null) {
+            SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
+
+            LoginDatas loginDatas = new LoginDatas();
+            loginDatas.email = loginInfo.getString("email", "No Login User##");
+            loginDatas.password = loginInfo.getString("password", "");
+            requestAutoSignin(loginDatas);
+        }
     }
 
     //페이지 선택 확인을 위한 어댑터
@@ -242,6 +262,47 @@ public class MainActivity extends AppCompatActivity {
 
     public static Context getContext(){
         return context;
+    }
+
+    //로그인 네트워크
+    public void requestAutoSignin(LoginDatas loginDatas){
+        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+
+        Call<LoginResult> requestLogin = networkService.requestSignin(loginDatas);
+        requestLogin.enqueue(new Callback<LoginResult>() {
+            @Override
+            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "reponse.body: " + response.body().message);
+                    if (response.body().message.equals("ok")) { // 로그인 성공
+                        loginEchoResult = response.body().result;
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("email", loginEchoResult.email);
+                        intent.putExtra("password", loginEchoResult.password);
+                        intent.putExtra("profileImg", loginEchoResult.img);
+                        intent.putExtra("userNickName", loginEchoResult.userid);
+                        //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
+                        intent.putExtra("token", loginEchoResult.token);
+
+                        //기존에 쌓여있던 task를 모두 삭제
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        //TOP에 있는 액티비티 제거
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+//                        intent.putExtra("token", loginEchoResult.token);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "아이디 혹은 암호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResult> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

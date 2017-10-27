@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     LoginResult loginResult;
     LoginEchoResult loginEchoResult;
     LoginDatas loginDatas;
+
+    SharedPreferences loginInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +99,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         loginEchoResult = response.body().result;
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("email", loginEchoResult.email);
+                        intent.putExtra("password", loginEchoResult.password);
                         intent.putExtra("profileImg", loginEchoResult.img);
                         intent.putExtra("userNickName", loginEchoResult.userid);
                         //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
@@ -104,6 +108,11 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+                        loginInfo = getSharedPreferences("loginSetting", 0);
+                        SharedPreferences.Editor editor = loginInfo.edit();
+                        editor.putString("email", loginEchoResult.email);
+                        editor.putString("password", loginEchoResult.password);
+                        editor.commit();
 
 //                        intent.putExtra("token", loginEchoResult.token);
                         startActivity(intent);
