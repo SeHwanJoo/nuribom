@@ -43,6 +43,8 @@ public class MypageFragment extends Fragment {
     TextView signUpOrSignIn, settings_profile;
     TextView mywrite_course, mywrite_review, myLocker;
 
+    LogoutDialog logoutDialog;
+
     public MypageFragment(Activity activity, String email, String profileImg, String nickName, String token){
         this.activity = activity;
         this.context = activity;
@@ -61,7 +63,7 @@ public class MypageFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        View view = inflater.inflate(R.layout.activity_mypage, container, false);
         View view = null;
 
@@ -100,7 +102,8 @@ public class MypageFragment extends Fragment {
 
                 userEmail.setText(email);
                 userNickName.setText(nickName);
-                if(userProfile == null) {
+                Log.d(TAG, "onCreateView: image in Mypage: " + profileImg);
+                if(profileImg == null) {
                     userProfile.setImageResource(R.drawable.mypage_profile_defalt);
                 }else{
                     Glide.with(context).load(profileImg).into(userProfile);
@@ -109,7 +112,13 @@ public class MypageFragment extends Fragment {
                 mywrite_review.setText(""+(userInfoResult.result.coursecomment+userInfoResult.result.tripreviews));
                 myLocker.setText(""+(userInfoResult.result.courselike+userInfoResult.result.triplike));
 
-
+                loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        logoutDialog = new LogoutDialog(context, leftListner, rightLisnter);
+                        logoutDialog.show();
+                    }
+                });
 
                 settings_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -119,6 +128,7 @@ public class MypageFragment extends Fragment {
                 });
             }
         }catch(Exception e){
+            //로그인 유무 체크 중 예외 발생시 디폴트로 No Login으로 띄우기
             e.printStackTrace();
             view = inflater.inflate(R.layout.mypage_nologin, container, false);
 
@@ -172,10 +182,63 @@ public class MypageFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<UserInfoResult> call, Throwable t) {
-                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                if(nickName==null){
+                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
     }
+
+    public void logout(){
+
+        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+
+        nickName = "No Login User##";
+
+        Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(nickName);
+        requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
+            @Override
+            public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
+                if (response.isSuccessful()) {
+                    userInfoResult = response.body();
+
+                    Log.d(TAG, "onResponse: logout result: " + userInfoResult.result);
+                    Log.d(TAG, "onResponse: logout message : " + userInfoResult.message);
+                } else {
+                    Log.d(TAG, "onResponse: search response is not success");
+                }
+            }
+            @Override
+            public void onFailure(Call<UserInfoResult> call, Throwable t) {
+                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "로그아웃에 실패했습니다.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private View.OnClickListener leftListner = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //취소 클릭시
+            logoutDialog.dismiss();
+        }
+    };
+
+    private View.OnClickListener rightLisnter = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //로그아웃 클릭시
+            logout();
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+            logoutDialog.dismiss();
+
+
+        }
+    };
 
 }

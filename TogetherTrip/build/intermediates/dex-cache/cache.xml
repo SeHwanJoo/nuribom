@@ -3,6 +3,7 @@
 
     <item
         is-multidex="true"
+<<<<<<< HEAD
         jar="C:\project\nuribom\TogetherTrip\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
@@ -27,6 +28,23 @@
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_9b27dafa43509b509d0589441f3575bb57d4ce41\classes.dex" />
+=======
+        jar="D:\nuribom\TogetherTrip\y-photopicker\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="dc8ab0062739a1d7921a388cce50aa8849f584ce">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\4\classes_c5a969393a8af37278655bd32cbb7af9599ca002\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
+        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_133d5ea1dd63aea0c05e655bbbceeb4095c1791c\classes.dex" />
+>>>>>>> 6c11fb0dd3f2ce488eb5e088990a38bd019f65cc
     </item>
 
 </items>
