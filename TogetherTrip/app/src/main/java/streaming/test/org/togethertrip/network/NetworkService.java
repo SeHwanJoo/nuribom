@@ -48,9 +48,11 @@ public interface NetworkService {
     //로그인
     @POST("users/login")
     Call<LoginResult> requestSignin(@Body LoginDatas loginDatas);
+
     //이메일중복체크
     @GET("users/emailtest/{userid}")
     Call<EmailCheckResult> emailCheck (@Path("userid")String userid);
+
 
     //코스작성
     @Multipart

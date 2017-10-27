@@ -1,5 +1,6 @@
 package streaming.test.org.togethertrip.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import streaming.test.org.togethertrip.network.NetworkService;
 
 public class SigninActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "SigninActivityLog";
+    Activity activity;
+
     EditText input_email, input_password;
     ImageButton btn_login, btn_signup;
     String email, password;
@@ -34,6 +37,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+
+        activity = this;
 
         input_email = (EditText) findViewById(R.id.input_email);
         input_password = (EditText) findViewById(R.id.input_password);
@@ -85,13 +90,16 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d(TAG, "reponse.body: " + response.body().message);
                     if (response.body().message.equals("ok")) { // 로그인 성공
                         loginEchoResult = response.body().result;
-
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("email", loginEchoResult.email);
                         intent.putExtra("profileImg", loginEchoResult.img);
                         intent.putExtra("userNickName", loginEchoResult.userid);
                         //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
                         intent.putExtra("token", loginEchoResult.token);
+
+                        //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                         startActivity(intent);
                         finish();
                     }else{

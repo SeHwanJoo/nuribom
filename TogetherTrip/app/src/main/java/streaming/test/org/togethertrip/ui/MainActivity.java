@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //키보드 생성시 화면 밀림현상 없애기
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         context = this;
+
         Intent receivedIntent = getIntent();
         receivedEmail = receivedIntent.getStringExtra("email");
         receivedProfileImg = receivedIntent.getStringExtra("profileImg");
