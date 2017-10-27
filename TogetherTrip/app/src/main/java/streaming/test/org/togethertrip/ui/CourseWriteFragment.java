@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -192,19 +191,6 @@ public class CourseWriteFragment extends Fragment {
 
             }
         });
-
-
-
-        // 줄때
-//        Fragment f = new Fragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("Obj", course1);   // Object 넘기기
-//        f.setArguments(bundle);
-/*
-TODO 메롱
- */
-        Toast.makeText(context, "김태형은 핵바보다", Toast.LENGTH_SHORT).show();
-
 
         return view;
     }

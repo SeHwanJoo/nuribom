@@ -76,8 +76,9 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/sally"/>
+                    android:src="@drawable/mypage_profile_defalt"/>
                 <TextView
+                    android:id="@+id/tv_writer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="작성자"

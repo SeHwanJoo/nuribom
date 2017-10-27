@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import streaming.test.org.togethertrip.R;
 
 /**
@@ -25,11 +27,17 @@ public class SpotDetailImgFragment extends Fragment{
 
     public ImageView iv_detailImg;
 
-    public SpotDetailImgFragment(){}
+    String firstImgUri;
+
+    public SpotDetailImgFragment() {}
     public SpotDetailImgFragment(Activity activity){
         this.activity = activity;
         context = activity;
-
+    }
+    public SpotDetailImgFragment(Activity activity, String firstImgUri){
+        this.activity = activity;
+        context = activity;
+        this.firstImgUri = firstImgUri;
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +50,10 @@ public class SpotDetailImgFragment extends Fragment{
         View view = inflater.inflate(R.layout.tourist_spot_detail_img, container, false);
 
         iv_detailImg = (ImageView) view.findViewById(R.id.iv_detailImg);
+
+        Glide.with(this)
+                .load(firstImgUri)
+                .into(iv_detailImg);
 
         return view;
     }

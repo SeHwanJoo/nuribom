@@ -39,11 +39,18 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
     private final long FINSH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
+    Intent getContent;
+
+    String contentId, contentTypeId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_review);
         Log.i("Tag", "메인");
+
+        getContent = this.getIntent();
+        contentId = getContent.getStringExtra("contentId");
+        contentTypeId = getContent.getStringExtra("contentTypeId");
         ////////////////////////서비스 객체 초기화////////////////////////
         service = ApplicationController.getInstance().getNetworkService();
 
@@ -79,7 +86,7 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
         /*
           OnCreate()- 생명주기 내의 통신
          */
-        Call<TouristSpotReviewResult> requestMainData = service.getMainResult("trips");
+        Call<TouristSpotReviewResult> requestMainData = service.getMainResult(contentId);
         requestMainData.enqueue(new Callback<TouristSpotReviewResult>() {
             @Override
             public void onResponse(Call<TouristSpotReviewResult> call, Response<TouristSpotReviewResult> response) {

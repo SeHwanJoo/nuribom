@@ -75,6 +75,9 @@ public class TouristSpotDetail extends FragmentActivity {
     SpotDetailImgFragment spotDetailImgFragment;
     ViewPager viewPager;
     MyFragmentAdapter mFragmentAdapter;
+    String firstImgUri;
+
+    String contentId, contentTypeId;
 
     //@BindView(R.id.touristSpot_detail_commentsbtn) ImageButton commentsbtn;
 
@@ -83,9 +86,12 @@ public class TouristSpotDetail extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_detail);
         intent = this.getIntent();
+        firstImgUri = intent.getStringExtra("firstImgUri");
 
         mFragmentAdapter = new MyFragmentAdapter(getSupportFragmentManager(), imgList);
 
+        contentId = intent.getStringExtra("contentId");
+        contentTypeId = intent.getStringExtra("contentTypeId");
         addr = intent.getStringExtra("stringAddr");
         detailCommon = (DetailSpotListClickResponse.DetailCommon) intent.getSerializableExtra("detailCommon");
         detailIntro = (DetailSpotListClickResponse.DetailIntro) intent.getSerializableExtra("detailIntro");
@@ -152,7 +158,7 @@ public class TouristSpotDetail extends FragmentActivity {
         viewPager = (ViewPager) findViewById(R.id.touristSpot_detail_img_viewPager);
         viewPager.setAdapter(mFragmentAdapter);
 
-        SpotDetailImgFragment firstSpotDetailImgFragment = new SpotDetailImgFragment(this);
+        SpotDetailImgFragment firstSpotDetailImgFragment = new SpotDetailImgFragment(this,firstImgUri);
         imgList.add(0, firstSpotDetailImgFragment);
         mFragmentAdapter.notifyDataSetChanged();
 
@@ -209,17 +215,10 @@ public class TouristSpotDetail extends FragmentActivity {
             /*
              * TODO 이미지 setting
              */
-            spotDetailImgFragment = new SpotDetailImgFragment(this);
-
             for (int i=1; i<detailImageSize; i++){
                 imgList.add(i, new SpotDetailImgFragment(this));
 
                 mFragmentAdapter.notifyDataSetChanged();
-
-                Log.d(TAG, "onCreate: imgList: " + imgList);
-                Log.d(TAG, "onCreate: imgList(i)aaaaaaaaa: " + imgList.get(i).iv_detailImg);
-                Log.d(TAG, "onCreate: detailImage(i): " + detailImage.get(i).originimgurl);
-
             }
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -233,7 +232,7 @@ public class TouristSpotDetail extends FragmentActivity {
                 @Override
                 public void onPageSelected(int position) {
                     Glide.with(context)
-                            .load(detailImage.get(position).originimgurl)
+                            .load(detailImage.get(position+1).originimgurl)
                             .placeholder(R.drawable.trips_more)
                             .error(R.drawable.trips_more)
                             .into(imgList.get(position).iv_detailImg);
@@ -263,6 +262,8 @@ public class TouristSpotDetail extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TouristSpotReview.class);
+                intent.putExtra("contentId", contentId);
+                intent.putExtra("contentTypeId", contentTypeId);
                 startActivity(intent);
             }
         });

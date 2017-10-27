@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -91,8 +90,6 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
                 mViewPager.setPageMargin(getResources().getDisplayMetrics().widthPixels / -10);
                 mViewPager.setPageMargin(getResources().getDisplayMetrics().heightPixels/ -10);
                 mViewPager.setCurrentItem(position,true);
-
-                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
             }
         });
 

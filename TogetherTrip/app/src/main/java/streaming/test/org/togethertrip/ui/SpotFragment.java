@@ -91,6 +91,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
     String addr;
     String nickName;
+    String contentId, contentTypeId;
 
 
     public SpotFragment(){
@@ -478,7 +479,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;
-        Log.d(TAG, "onResponse: addr: " + addr);
+        contentId = spotResultListDatas.get(position).tripinfo.contentid;
+        contentTypeId = spotResultListDatas.get(position).tripinfo.contenttypeid;
 
         NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
         Log.d(TAG, "clickItem: networkService: " + list_networkService);
@@ -495,13 +497,20 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     detailIntent = new Intent(context, TouristSpotDetail.class);
                     Intent firstImgIntent = new Intent(context, SpotDetailImgFragment.class);
                     detailIntent.putExtra("stringAddr", addr);
+                    detailIntent.putExtra("contentId", contentId);
+                    detailIntent.putExtra("contentTypeId", contentTypeId);
                     detailIntent.putExtra("detailCommon", detailSpotListClickResponse.detailCommon);
                     detailIntent.putExtra("detailIntro", detailSpotListClickResponse.detailIntro);
                     detailIntent.putParcelableArrayListExtra("detailInfo", detailSpotListClickResponse.detailInfo);
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
                     detailIntent.putParcelableArrayListExtra("detailImage", detailSpotListClickResponse.detailImage);
                     detailIntent.putExtra("otherInfo", otherInfo);
+                    detailIntent.putExtra("firstImgUri", detailSpotListClickResponse.detailImage.get(0).originimgurl);
+
+                    firstImgUri = detailSpotListClickResponse.detailImage.get(0).originimgurl;
+
                     firstImgIntent.putExtra("firstImgUri", firstImgUri);
+                    Log.d(TAG, "onResponse: firstImgUri: " + firstImgUri);
 
                     Log.d(TAG, "onResponse: detailInfo: " + detailSpotListClickResponse.detailInfo);
                     Log.d(TAG, "onResponse: detailImage: " + detailSpotListClickResponse.detailImage);
