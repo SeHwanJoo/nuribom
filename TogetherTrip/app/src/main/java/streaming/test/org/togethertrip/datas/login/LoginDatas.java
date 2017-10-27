@@ -7,4 +7,5 @@ package streaming.test.org.togethertrip.datas.login;
 public class LoginDatas {
     public String email;
     public String password;
+    public String token;
 }

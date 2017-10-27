@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,6 +63,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     loginDatas = new LoginDatas();
                     loginDatas.email = input_email.getText().toString();
                     loginDatas.password = input_password.getText().toString();
+                    loginDatas.token = FirebaseInstanceId.getInstance().getToken();
 
                     requestSignin(loginDatas);
 
@@ -77,6 +80,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     //로그인 네트워크
     public void requestSignin(LoginDatas loginDatas){
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
+
         Call<LoginResult> requestLogin = networkService.requestSignin(loginDatas);
         requestLogin.enqueue(new Callback<LoginResult>() {
             @Override
@@ -91,7 +95,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         intent.putExtra("profileImg", loginEchoResult.img);
                         intent.putExtra("userNickName", loginEchoResult.userid);
                         //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
-                        intent.putExtra("token", loginEchoResult.token);
+//                        intent.putExtra("token", loginEchoResult.token);
                         startActivity(intent);
                         finish();
                     }else{

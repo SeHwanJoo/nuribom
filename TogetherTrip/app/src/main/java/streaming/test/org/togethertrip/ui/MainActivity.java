@@ -61,10 +61,14 @@ public class MainActivity extends AppCompatActivity {
         receivedEmail = receivedIntent.getStringExtra("email");
         receivedProfileImg = receivedIntent.getStringExtra("profileImg");
         receivedUserNickName = receivedIntent.getStringExtra("userNickName");
-        token = receivedIntent.getStringExtra("token");
+//        token = receivedIntent.getStringExtra("token");
+
+        Intent intent = getIntent();
+
+        int currentposition = intent.getIntExtra("position",0);
 
         //Fragment 생성
-        alarm = new AlarmFragment();
+        alarm = new AlarmFragment(this);
         course = new CourseFragment(this);
         home = new HomeFragment(this);
         mypage = new MypageFragment(this, receivedEmail, receivedProfileImg, receivedUserNickName, token);
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: mViewPager: " + mViewPager);
         Log.d(TAG, "onCreate: mSectionPagerAdapter: " + mSectionsPagerAdapter);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(currentposition);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

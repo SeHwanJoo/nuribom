@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "946230360482",
+    "firebase_url": "https://nuribom-163a4.firebaseio.com",
+    "project_id": "nuribom-163a4",
+    "storage_bucket": "nuribom-163a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946230360482:android:1ec10a6f54893827",
+        "android_client_info": {
+          "package_name": "streaming.test.org.togethertrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946230360482-1uakqjbcuhk22kf4svfbjs3l6sormvbc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkcDDjUenTKQa5Y3hiLUz_Vy_1ub4EQNc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
