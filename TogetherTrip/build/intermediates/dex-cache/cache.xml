@@ -3,6 +3,7 @@
 
     <item
         is-multidex="true"
+<<<<<<< HEAD
         jar="D:\nuribom\TogetherTrip\y-photopicker\build\intermediates\bundles\default\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -18,6 +19,32 @@
         revision="25.0.0"
         sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
         <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_133d5ea1dd63aea0c05e655bbbceeb4095c1791c\classes.dex" />
+=======
+        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c77aaa04d26efdbd46329adf73ff63705ccfa1b9">
+        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_d268ad5f073a000623d70d0fbd7d7697de98f015\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
+        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_c275575f74c5a6f9d33a5de587974f05fd8a7050\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\Dayoung\Documents\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_4f3d39d8044dfe2432c0787b81fb851055309bc6\classes.dex" />
+>>>>>>> bf7bc6d2e86ae381ea7ba000d46f4decfcdb97e3
     </item>
 
 </items>
