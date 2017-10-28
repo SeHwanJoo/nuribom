@@ -79,6 +79,8 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), TouristSpotReviewWrite.class);
+                intent.putExtra("contentId", contentId);
+                intent.putExtra("contentTypeId", contentTypeId);
                 startActivity(intent);
             }
         });

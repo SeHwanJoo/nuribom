@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
 
             LoginDatas loginDatas = new LoginDatas();
-            loginDatas.email = loginInfo.getString("email", "No Login User##");
+            loginDatas.email = loginInfo.getString("email", "");
             loginDatas.password = loginInfo.getString("password", "");
             requestAutoSignin(loginDatas);
         }

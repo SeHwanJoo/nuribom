@@ -190,7 +190,7 @@ public class MypageFragment extends Fragment {
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
         if(nickName == null){
-            nickName="No Login User@";
+            nickName="";
         }
 
         Log.d(TAG, "checkLogin: email: " + nickName);
@@ -225,7 +225,7 @@ public class MypageFragment extends Fragment {
 
         NetworkService networkService = ApplicationController.getInstance().getNetworkService();
 
-        nickName = "No Login User##";
+        nickName = "";
 
         Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(nickName);
         requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {

@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -68,10 +69,17 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
     TextView imgNameTextView;
     int year, month, day ;
 
+    Intent getContent;
+    String nickname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_review_write);
+        getContent= this.getIntent();
+
+        SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
+        nickname = loginInfo.getString("nickName", "");
 
         ratingbar_review_stars = (RatingBar)findViewById(R.id.ratingbar_review_stars);
         edit_contents = (EditText)findViewById(R.id.edittext_review_content);
@@ -87,13 +95,15 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
         img[0] = (ImageView)findViewById(R.id.imageview_review_1);
         img[1] = (ImageView)findViewById(R.id.imageview_review_2);
         //img[2] = (ImageView)findViewById(R.id.
-        edit_userid = "joo";
-        edit_contentid = "trips";
+        edit_userid = nickname;
+        edit_contentid = getContent.getStringExtra("contentId");
         GregorianCalendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day= calendar.get(Calendar.DAY_OF_MONTH);
 
+        Log.d(TAG, "onCreate: edit_userid: " + edit_userid);
+        Log.d(TAG, "onCreate: edit_contentid: " + edit_contentid);
 
          /*날짜 선택 다이얼로그*/
         imageViewDate.setOnClickListener(new View.OnClickListener() {
