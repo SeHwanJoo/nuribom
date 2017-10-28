@@ -30,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.CourseInfo;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseSearchData;
@@ -47,6 +48,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
     Context context;
     FloatingActionButton fab;
     ArrayList<DetailCourseDatas.Page> page;
+    CourseInfo courseInfo;
 
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     Intent detailIntent;
@@ -100,6 +102,12 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spinner_location = (Spinner) view.findViewById(R.id.spinner_course_location);
+
+        courseInfo = new CourseInfo();
+        courseInfo.userid = "";
+        //TODO userid sharedpreference로 받아와야함
+        courseInfo.keyword = "";
+        //TODO 검색했을때 키워드 받아오기
 
         //fab 버튼누르면 작성창
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -166,27 +174,26 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
             }
         });
 
-
+        courseSearch();
 
         return view;
     }
 
 
 
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-         courseSearch();
-    }
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//         courseSearch();
+//    }
 
     //코스 검색
     public void courseSearch(){
 //        Log.d(TAG, "search: " + search_keyword);
         search_keyword = edit_search.getText().toString();
 
-        if(search_keyword == null) search_keyword = "go";
-        else if(search_keyword.equals("")) search_keyword = "go";
+        if(search_keyword == null) search_keyword = "";
+        else if(search_keyword.equals("")) search_keyword = "";
 
         courseSearchData = new CourseSearchData();
 
@@ -195,7 +202,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
 
         networkService = ApplicationController.getInstance().getNetworkService();
 
-        Call<CourseResult> requestCourseData = networkService.getCourseResult(courseSearchData.keyword,courseSearchData.userid);
+        Call<CourseResult> requestCourseData = networkService.getCourseResult(courseInfo);
         requestCourseData.enqueue(new Callback<CourseResult>() {
 
             @Override

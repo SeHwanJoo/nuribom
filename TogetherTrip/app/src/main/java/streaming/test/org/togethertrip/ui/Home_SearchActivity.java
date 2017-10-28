@@ -22,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.CourseInfo;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseSearchData;
@@ -45,6 +46,7 @@ public class Home_SearchActivity extends AppCompatActivity {
 
     NetworkService networkService;
     String search_keyword;
+    CourseInfo courseInfo;
 
     GridView CourselistView;
     CourseListAdapter courseListAdapter;
@@ -90,7 +92,9 @@ public class Home_SearchActivity extends AppCompatActivity {
         touristSpot_listView = (ListView) findViewById(R.id.touristSpot_listView);
 
         touristSpot_listView.setOnItemClickListener(itemClickListener);
-
+        courseInfo = new CourseInfo();
+        courseInfo.userid = "";
+        courseInfo.keyword= "";
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +166,7 @@ public class Home_SearchActivity extends AppCompatActivity {
 
         networkService = ApplicationController.getInstance().getNetworkService();
 
-        Call<CourseResult> requestCourseData = networkService.getCourseResult(courseSearchData.keyword, courseSearchData.userid);
+        Call<CourseResult> requestCourseData = networkService.getCourseResult(courseInfo);
         requestCourseData.enqueue(new Callback<CourseResult>() {
 
             @Override

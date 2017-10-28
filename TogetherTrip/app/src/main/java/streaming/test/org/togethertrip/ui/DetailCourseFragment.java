@@ -53,7 +53,7 @@ import streaming.test.org.togethertrip.datas.DetailCourseResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.network.NetworkService;
 
-import static streaming.test.org.togethertrip.ui.CourseWrite.position;
+//import static streaming.test.org.togethertrip.ui.CourseWrite.position;
 
 public class DetailCourseFragment extends Fragment {
 
