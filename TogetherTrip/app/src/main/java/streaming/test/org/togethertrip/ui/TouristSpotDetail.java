@@ -226,9 +226,6 @@ public class TouristSpotDetail extends FragmentActivity {
 
                 }
 
-                /*
-                * TODO 이런식으로 달면 드래그를 해야 그림이 그려짐. 해결방안찾아야함
-                 */
                 @Override
                 public void onPageSelected(int position) {
                     Glide.with(context)

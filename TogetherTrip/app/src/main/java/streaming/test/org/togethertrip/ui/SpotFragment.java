@@ -252,8 +252,8 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     public void search(){
         search_keyword = edit_search.getText().toString();
 
-        if(search_keyword == null) search_keyword = "광화문";
-        else if(search_keyword.equals("")) search_keyword = "광화문";
+        if(search_keyword == null) search_keyword = "한강";
+        else if(search_keyword.equals("")) search_keyword = "한강";
 
         Log.d(TAG, "search: " + search_keyword);
         searchData = new SearchData();

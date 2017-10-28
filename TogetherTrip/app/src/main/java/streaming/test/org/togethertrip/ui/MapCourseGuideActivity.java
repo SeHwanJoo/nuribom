@@ -30,9 +30,8 @@ import java.util.ArrayList;
 
 import okhttp3.Request;
 import streaming.test.org.togethertrip.R;
-import streaming.test.org.togethertrip.application.ApplicationController;
-import streaming.test.org.togethertrip.network.TMapNetworkManager;
 import streaming.test.org.togethertrip.datas.tmapapi.TmapAPIResult;
+import streaming.test.org.togethertrip.network.TMapNetworkManager;
 
 public class MapCourseGuideActivity extends AppCompatActivity {
     final static String TAG = "MapCourseGuideActivity";
@@ -105,7 +104,7 @@ public class MapCourseGuideActivity extends AppCompatActivity {
         tmapView.addMarkerItem("marker", marker);
     }
 
-    //현재위치 받아오기
+    //현재위치 받아오기 및 길 라인 그리기 메소드
     public void currentLatLng() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -136,7 +135,7 @@ public class MapCourseGuideActivity extends AppCompatActivity {
                 TedPermission.with(this)
                         .setPermissionListener(permissionListener)
                         .setRationaleMessage("위치 정보를 받아오려면 권한이 필요합니다.")
-                        .setDeniedMessage("거부하지마세용")
+                        .setDeniedMessage("길찾기를 실행하려면 권한이 필요합니다. 허용해주세요.")
                         .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
                         .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION)
                         .check();
@@ -162,13 +161,12 @@ public class MapCourseGuideActivity extends AppCompatActivity {
             Log.d(TAG, "onLocationChanged: NETWORK PROVIDER : " + currentX + " / " + currentY);
 
             try{
-                //Tmap 보호자 경로 탐색
+                //Tmap 보행자 경로 탐색
                 Log.d(TAG, "currentLatLng: 보호자 경로 검색 try");
                 Log.d(TAG, "currentLatLng: getContext: " +MainActivity.getContext());
-                TMapNetworkManager.getInstance().getSearchFindPath(MainActivity.getContext(), currentY, currentX,mapY, mapX, "상수네집", "광화문", new TMapNetworkManager.OnResultListner<TmapAPIResult>() {
+                TMapNetworkManager.getInstance().getSearchFindPath(MainActivity.getContext(), currentY, currentX,mapY, mapX, "현재 위치", "여행지", new TMapNetworkManager.OnResultListner<TmapAPIResult>() {
                     @Override
                     public void onSuccess(Request request, TmapAPIResult result) {
-                        Toast.makeText(MapCourseGuideActivity.this, "Tmap 경로 탐색 성공", Toast.LENGTH_SHORT).show();
                         RouteResult = result;
 
                         for(int i=0;i<result.features.size(); i++){
@@ -268,9 +266,9 @@ public class MapCourseGuideActivity extends AppCompatActivity {
 
                     }
                 });
-            }else{
-                Log.d(TAG, "currentLatLng: 여기로 들어오면 안되는데... 제발 앞에 조건에서 걸리게해주세요");
             }
+
+
         }catch(Exception e){
             e.printStackTrace();
         }
