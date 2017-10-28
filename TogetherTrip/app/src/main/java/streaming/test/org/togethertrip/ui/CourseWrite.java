@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -27,6 +28,7 @@ import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
+import static android.R.attr.data;
 import static streaming.test.org.togethertrip.R.id.courseTitle;
 
 public class CourseWrite extends AppCompatActivity implements CourseWriteFragment.DataSetListner,CourseWriteFragment2.DataSetListner{
@@ -50,7 +52,7 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     NetworkService networkService;
     Bundle course1Bundle;
 
-    static int position = 0;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         courseWriteDatas.main = new CourseWriteDatas.Main();
         courseWriteDatas.page = new ArrayList<CourseWriteDatas.Page>();
         images = new MultipartBody.Part[500];
+
+        position = 0;
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         courseWriteFragment = new CourseWriteFragment(this);
@@ -100,7 +104,8 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
 //                Log.d("bundleeeee", "onItemClick: detailIntent: " + title);
 //
 //                Toast.makeText(CourseWrite.this, "받은 데이터: " + title+uri+category, Toast.LENGTH_SHORT).show();
-//                Toast.makeText(CourseWrite.this,data.title, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CourseWrite.this,"글 작성 완료", Toast.LENGTH_SHORT).show();
+                finish();
 //                okNetwork();
             }
         });

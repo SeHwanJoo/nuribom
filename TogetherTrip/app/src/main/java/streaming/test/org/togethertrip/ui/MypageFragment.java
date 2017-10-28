@@ -35,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
+import streaming.test.org.togethertrip.datas.ResultMessage;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
@@ -47,6 +48,7 @@ public class MypageFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Activity activity;
     Context context;
+
 
     NetworkService networkservice;
     UserInfoResult userInfoResult;
@@ -66,16 +68,14 @@ public class MypageFragment extends Fragment {
     String imgUrl;
     Uri uri;
 
-    String profileImgString;
 
     SharedPreferences loginInfo;
 
 
-    public MypageFragment(Activity activity, String email, String profileImg, String nickName, String token){
+    public MypageFragment(Activity activity, String email, String nickName, String token){
         this.activity = activity;
         this.context = activity;
         this.email = email;
-        this.profileImgString = profileImg;
         this.nickName = nickName;
         this.token = token;
     }
@@ -132,7 +132,7 @@ public class MypageFragment extends Fragment {
                 if(profileImg == null) { // profileImge가 널일때 디폴트 이미지로
                     userProfile.setImageResource(R.drawable.mypage_profile_defalt);
                 }else{ // 그렇지 않으면 해당 이미지로
-                    Glide.with(context).load(profileImgString).into(userProfile);
+                    Glide.with(context).load(userInfoResult.userdata.img).into(userProfile);
                 }
 
                 mywrite_course.setText(""+userInfoResult.result.course);
@@ -152,6 +152,8 @@ public class MypageFragment extends Fragment {
                     public void onClick(View v) {
 //                        startActivity(new Intent(context, ProfileChangeActivity.class));
                         pickImage();
+                        network_modify();
+
                     }
                 });
             }
@@ -220,6 +222,63 @@ public class MypageFragment extends Fragment {
         });
     }
 
+    public synchronized void network_modify(){
+        if(imgUrl == null){
+            uri = null;
+            Log.i("im","짱구");
+        }else{
+            BitmapFactory.Options options = new BitmapFactory.Options();
+
+            options.inSampleSize = 2; // 1/2로 크기를 줄이겠다는 뜻
+
+            InputStream in = null;
+            ByteArrayOutputStream baos = null;
+
+            try{
+                in = context.getContentResolver().openInputStream(uri);
+
+                Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
+
+                RequestBody phtoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray());
+
+                File photo = new File(imgUrl);
+
+                MultipartBody.Part image = MultipartBody.Part.createFormData("image", photo.getName(), phtoBody);
+                loginInfo = activity.getSharedPreferences("loginSetting",0);
+                RequestBody userid = RequestBody.create(MediaType.parse("multipart/from-data"),loginInfo.getString("nickname",""));
+                networkservice = ApplicationController.getInstance().getNetworkService();
+                Call<ResultMessage> modifyProfile = networkservice.modifyProfile(image,userid);
+                modifyProfile.enqueue(new Callback<ResultMessage>() {
+                    @Override
+                    public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
+                        if (response.isSuccessful()) {
+                            if(response.body().message.equals("ok")){
+                                Toast.makeText(context,"프로필 사진이 변경되었습니다.",Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResultMessage> call, Throwable t) {
+                    }
+                });
+
+
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                //자원 정리
+                if(baos!=null)  try{ baos.close();} catch(Exception e) {}
+                if(in!=null) try{ in.close(); } catch(Exception e) {}
+            }
+
+        }
+    }
+
     //로그아웃 네트워킹
     public void logout(){
 
@@ -281,11 +340,12 @@ public class MypageFragment extends Fragment {
         }
     };
 
-    private void pickImage(){
+    private synchronized void pickImage(){
         intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST_CODE);
+
     }
 
     //프로필 변경 네트워크
@@ -313,52 +373,17 @@ public class MypageFragment extends Fragment {
             if(resultCode == Activity.RESULT_OK){
                 try{
                     getImageNameToUri(data.getData());
-                    profileImgString = data.getDataString();
                     uri = data.getData();
                     Glide.with(context)
                             .load(data.getDataString())
                             .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                             .into(userProfile);
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }
 
-                if(imgUrl == ""){
-                    ((CourseWriteFragment.DataSetListner) activity).FirstFragmentImageSet(null);
-                }else{
-                    BitmapFactory.Options options = new BitmapFactory.Options();
 
-                    options.inSampleSize = 2; // 1/2로 크기를 줄이겠다는 뜻
-
-                    InputStream in = null;
-                    ByteArrayOutputStream baos = null;
-
-                    try{
-                        in = context.getContentResolver().openInputStream(uri);
-
-                        Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
-                        baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-
-                        RequestBody phtoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray());
-
-                        File photo = new File(imgUrl);
-
-                        ((CourseWriteFragment.DataSetListner) activity).FirstFragmentImageSet(MultipartBody.Part.createFormData("image", photo.getName(), phtoBody));
-
-                        Glide.with(context)
-                                .load(data.getDataString())
-                                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                                .into(userProfile);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }finally{
-                        //자원 정리
-                        if(baos!=null)  try{ baos.close();} catch(Exception e) {}
-                        if(in!=null) try{ in.close(); } catch(Exception e) {}
-                    }
-
-                }
             }
         }
     }

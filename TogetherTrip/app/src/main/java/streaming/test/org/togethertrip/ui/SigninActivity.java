@@ -112,6 +112,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         editor.putString("email", loginEchoResult.email);
                         editor.putString("password", loginEchoResult.password);
                         editor.putString("nickname", loginEchoResult.userid);
+
                         editor.commit();
 
 //                        intent.putExtra("token", loginEchoResult.token);

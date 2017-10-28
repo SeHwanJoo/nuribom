@@ -10,6 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import streaming.test.org.togethertrip.datas.AlarmDatas;
+import streaming.test.org.togethertrip.datas.CourseInfo;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
@@ -19,6 +20,7 @@ import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.MessageResult;
 import streaming.test.org.togethertrip.datas.RegisterDatas;
+import streaming.test.org.togethertrip.datas.ResultMessage;
 import streaming.test.org.togethertrip.datas.ReviewResult;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
@@ -72,9 +74,8 @@ public interface NetworkService {
     Call<DetailCourseDatas> clickDetailCourseList (@Body DetailCourseInfo detailCourseInfo);
 
     //코스 그리드뷰 띄우기
-    @GET("/course/list/{keyword}/{userid}")
-    Call<CourseResult> getCourseResult(@Path("keyword") String keyword,
-                                       @Path("userid") String userid);
+    @POST("/course/list")
+    Call<CourseResult> getCourseResult(@Body CourseInfo courseInfo);
 
     // 후기 작성
     @Multipart
@@ -105,5 +106,10 @@ public interface NetworkService {
 
     @GET("/users/alarm/{userid}")
     Call<AlarmDatas> getAlarm(@Path("userid") String userid);
+
+    @Multipart
+    @POST("/users/modify")
+    Call<ResultMessage> modifyProfile(@Part MultipartBody.Part image,
+                                      @Part RequestBody userid);
 
 }
