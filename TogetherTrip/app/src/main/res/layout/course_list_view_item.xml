@@ -12,6 +12,7 @@
         android:layout_height="100dp">
 
         <ImageView
+            android:scaleType="fitCenter"
             android:id="@+id/iv_course_item_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,7 +55,7 @@
                     android:layout_alignParentTop="true"
                     android:text="종로뿌시기"
                     android:textColor="#1D1D1D"
-                    android:textSize="30sp" />
+                    android:textSize="20dp" />
             </RelativeLayout>
 
             <RelativeLayout

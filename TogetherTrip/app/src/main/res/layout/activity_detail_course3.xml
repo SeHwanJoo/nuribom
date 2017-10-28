@@ -1,16 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="streaming.test.org.togethertrip.ui.DetailCourseActivity">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
+    android:orientation="vertical"
+    tools:context="streaming.test.org.togethertrip.ui.CourseWrite"
+    android:weightSum="10">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/firstRl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#cac7c7">
+
+            <TextView
+                android:id="@+id/tv_courst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="여행코스"
+                android:textSize="18dp"
+                android:textColor="#1D1D1D"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/lineRl1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/firstRl"
+            android:background="#aaaaaa"></RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:orientation="horizontal"
+            android:background="#000">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff">
+                <LinearLayout
+                    android:id="@+id/heartLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
+                    <ImageButton
+                        android:id="@+id/touristSpot_detail_heartbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/trips_heart_on"/>
+                    <TextView
+                        android:id="@+id/touristSpot_detail_heartCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:text="00"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/commentLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageButton
+                        android:id="@+id/touristSpot_detail_commentsbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/trips_comment"/>
+                    <TextView
+                        android:id="@+id/touristSpot_detail_commentsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:text="00"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+
+

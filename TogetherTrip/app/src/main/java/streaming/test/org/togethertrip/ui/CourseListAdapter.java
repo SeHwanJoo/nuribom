@@ -3,6 +3,7 @@ package streaming.test.org.togethertrip.ui;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Network;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,12 @@ public class CourseListAdapter extends BaseAdapter{
     TextView courseid;
     AddLikeInfo addLikeInfo;
     ImageView iv_heart;
-
+    private LayoutInflater mInflater;
 
     public CourseListAdapter(Context context, ArrayList<CourseListDatas> courseListDatas) {
         this.context = context;
         CourseListDatas = courseListDatas;
+        this.mInflater = (LayoutInflater) context.getSystemService (Context.LAYOUT_INFLATER_SERVICE);
     }
 
     //이 리스트뷰가 몇개의 item을 가지고 있는지를 알려주는 함수
@@ -80,22 +82,30 @@ public class CourseListAdapter extends BaseAdapter{
     //순차적으로 한칸씩 화면을 구성해주는 부분
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        final CourseListViewHolder viewHolder;
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.course_list_view_item, null);
-            course_image = (ImageView)convertView.findViewById(R.id.iv_course_item_image);
-            coureName = (TextView)convertView.findViewById(R.id.tv_course_item_courseName);
-            date = (TextView)convertView.findViewById(R.id.tv_course_item_date);
-            category = (TextView)convertView.findViewById(R.id.tv_course_item_type);
-            heart_count = (TextView)convertView.findViewById(R.id.tv_course_heartCount);
-            comment_count = (TextView)convertView.findViewById(R.id.tv_course_comment);
-            iv_heart = (ImageView)convertView.findViewById(R.id.iv_heart);
-        }
+            //convertView = mInflater.inflate(R.layout.course_list_view_item, parent, false);
 
+            viewHolder = new CourseListViewHolder();
+            viewHolder.course_image = (ImageView)convertView.findViewById(R.id.iv_course_item_image);
+            viewHolder.coureName = (TextView)convertView.findViewById(R.id.tv_course_item_courseName);
+            viewHolder.date = (TextView)convertView.findViewById(R.id.tv_course_item_date);
+            viewHolder.category = (TextView)convertView.findViewById(R.id.tv_course_item_type);
+            viewHolder.heart_count = (TextView)convertView.findViewById(R.id.tv_course_heartCount);
+            viewHolder.comment_count = (TextView)convertView.findViewById(R.id.tv_course_comment);
+            viewHolder.iv_heart = (ImageView)convertView.findViewById(R.id.iv_heart);
+
+            convertView.setTag(viewHolder);
+        }
+        else{
+            viewHolder = (CourseListViewHolder) convertView.getTag();
+        }
         service = ApplicationController.getInstance().getNetworkService();
 
 
         //답변에서 하트 눌렀을 때, 하트 색바꾸기
-        iv_heart.setOnClickListener(new View.OnClickListener(){
+        viewHolder.iv_heart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 addLikeInfo = new AddLikeInfo();
@@ -110,14 +120,15 @@ public class CourseListAdapter extends BaseAdapter{
                         if (response.isSuccessful()) {
                             if (response.body().result.message.equals("like")) {
                                 Toast.makeText(context, "좋아요", Toast.LENGTH_SHORT).show();
-                                iv_heart.setBackgroundResource(R.drawable.course_main_heart_color);
-                                heart_count.setText(String.valueOf(response.body().result.likecount));
+                                viewHolder.iv_heart.setBackgroundResource(R.drawable.course_main_heart_color);
+                                viewHolder.heart_count.setText(String.valueOf(response.body().result.likecount));
+                                Log.i("likecount",String.valueOf(response.body().result.likecount));
                             }
                             else if (response.body().result.message.equals("unlike")) {
                                 Toast.makeText(context, "좋아요 취소", Toast.LENGTH_SHORT).show();
-                                iv_heart.setBackgroundResource(R.drawable.course_main_heart_line);
-//                                        iv_heart.setBackgroundResource(R.drawable.course_main_heart_line);
-                                heart_count.setText(String.valueOf(response.body().result.likecount));
+                                viewHolder.iv_heart.setBackgroundResource(R.drawable.course_main_heart_line);
+//                              iv_heart.setBackgroundResource(R.drawable.course_main_heart_line);
+                                viewHolder.heart_count.setText(String.valueOf(response.body().result.likecount));
                             }
                             notifyDataSetChanged();
 
@@ -134,18 +145,21 @@ public class CourseListAdapter extends BaseAdapter{
         });
 
 
-
         Glide.with(context).load(CourseListDatas.get(position).image)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
-                .into(course_image);
-        coureName.setText(String.valueOf(CourseListDatas.get(position).title));
-        date.setText(CourseListDatas.get(position).date);
-        category.setText(CourseListDatas.get(position).category);
-        heart_count.setText(String.valueOf(CourseListDatas.get(position).likecount));
-        comment_count.setText(String.valueOf(CourseListDatas.get(position).commentcount));
+                .into(viewHolder.course_image);
+        if(CourseListDatas.get(position).image != null)Log.i("image",CourseListDatas.get(position).image);
+        viewHolder.coureName.setText(String.valueOf(CourseListDatas.get(position).title));
+        viewHolder.date.setText(CourseListDatas.get(position).date);
+        viewHolder.category.setText(CourseListDatas.get(position).category);
+        viewHolder.heart_count.setText(String.valueOf(CourseListDatas.get(position).likecount));
+        viewHolder.comment_count.setText(String.valueOf(CourseListDatas.get(position).commentcount));
         return convertView;
     }
+
+    // 캐시된 뷰가 없을 경우 새로 생성하고 뷰홀더를 생성한다
+
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
