@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4.5"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +48,17 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:id="@+id/place">
+                 <TextView
+                     android:layout_marginTop="20dp"
+                     android:id="@+id/course_number"
+                     android:textAlignment="center"
+                     android:text="1"
+                     android:textColor="#FFFFFF"
+                     android:background="@drawable/course_ellipse"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_toRightOf="@+id/course_number"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
                     android:id="@+id/course_detail_spotname"
@@ -58,7 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                        android:id="@+id/course_detail_location"
+                    android:layout_toRightOf="@+id/course_number"
+                    android:id="@+id/course_detail_location"
                         android:layout_below="@+id/course_detail_spotname"
                         android:layout_marginLeft="20dp"
                         android:textColor="#8C8C8C"
@@ -85,13 +96,13 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/page_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="내용을 입력하세요"
-                        android:textSize="14sp"
-                        android:textColorHint="#686868"
                         android:textColor="#1D1D1D"
-                        android:id="@+id/page_content"/>
+                        android:textColorHint="#686868"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

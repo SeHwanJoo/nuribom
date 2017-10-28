@@ -21,16 +21,19 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan"
-        >
+        android:windowSoftInputMode="adjustPan">
+
         <service android:name=".application.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <service android:name=".application.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -46,6 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action
@@ -53,6 +57,7 @@
                     android:windowSoftInputMode="adjustPan" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.TouristSpotActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -96,5 +101,6 @@
         <activity android:name=".ui.MapCourseGuideActivity" />
         <activity android:name=".ui.DetailCourseActivity"></activity>
     </application>
+
 
 </manifest>

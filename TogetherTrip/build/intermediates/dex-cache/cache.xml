@@ -3,84 +3,93 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\c5081694415d362c3a7fbca6588e0db5479bf507\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4c0c3a9709adc7608860b0a9f65f661cd3ff4d07">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f43cc3c87efdee8c54b7bbd4282f5233ad41e65f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\4fd71549fad79fe515b1af1c2b0f144b6eced7a9\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="eb366c8b72908e2afa66c66b0a3f1318265a473e">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b6a18c134f3691d3112515d40345c4ea89a45ab1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\bafde511ecbad581b0d77f65367c818a070ef8fa\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="bd47a98a8f3d53220afca6f869f37c56c273c8d9">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7cede346ea7cea3688211e26637de2d38ec19bc3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\ff6357326213b025e90c02c2ce541403c7d45994\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="453427e529ccd47ef859c7d739a59ab32f7f14ee">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f17fa71ab8d64ba871444ea7fa4464adbd841715\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\nuribom\TogetherTrip\y-photopicker\build\intermediates\bundles\default\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="dc8ab0062739a1d7921a388cce50aa8849f584ce">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\4\classes_c5a969393a8af37278655bd32cbb7af9599ca002\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_133d5ea1dd63aea0c05e655bbbceeb4095c1791c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\c8296f8e8f9f73f225ed360adbd9e879897fb6c7\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ed18fdd695456683717079e695c5683cdc042d89">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_59bc5080276bad6481dfd984be40b60108514ad9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\44344ad01bed7e649992f7d61e11e99bc4631064\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e1fb737d72e295a54c677c0ab9aecfe3518e2ec6">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_01c4ff2015df47387db544fb3ffdfb2761eade44\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\taehyung\.android\build-cache\94580ac9ca36c206f57532ca4772c4816ac50887\output\jars\classes.jar"
-        jumboMode="false"
+        jar="C:\Users\user\.android\build-cache\8d1dbaf66382b57b608ba4d76ae569d1fc184ade\output\jars\classes.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="49743d94bd8f62b64049c3e3065c18598ce2ca7f">
-        <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9c25710d858928c521dcef809bffa26082797b17\classes.dex" />
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2adc195415e9bf595beeb995db7efa167bf369b8\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\edef9a608393522f99e54239935e478e2feb784f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4c0c3a9709adc7608860b0a9f65f661cd3ff4d07">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b7190d80490a3df27648389a849e985548ac9e78\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d5f29d593a100f1012ec3a9201e5ec5948b21f0c">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6a806623e4cede69513f4ab62eafc63789ee1475\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\c1c0f3a79fd36b40706332e380ed41ec4722f8dd\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e1fb737d72e295a54c677c0ab9aecfe3518e2ec6">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9c370f2c053bfcdd0373be22743d0158327ca23e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\a02ce68b16eaaf36e4961c3db22688179d46c068\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="eb366c8b72908e2afa66c66b0a3f1318265a473e">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8d298f84735585336ec3bd9ed699660d409a825b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\c06fa58410c9146be7a7f378d69a6306622c6891\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bd47a98a8f3d53220afca6f869f37c56c273c8d9">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_371cb91b0c4802a3caa919ec399032f6004e6dd0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Documents\Noribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_a5ca45f87316f3ea6c2bb5844b5f4cb5db81e868\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_e3710241e08c631a85d42fa065add5f62e490799\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\9202f48baa0e00a57801f19a51caa187ba023631\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="453427e529ccd47ef859c7d739a59ab32f7f14ee">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d0b83235d4100dbdac092fa6dd49c9f4d34b42c5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\user\.android\build-cache\2f815019db7a5597e81a8607f671c048d1060797\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ed18fdd695456683717079e695c5683cdc042d89">
+        <dex dex="C:\Users\user\Documents\Noribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e929fe4ce6dbd4b75f274240a8ab06c46a1572be\classes.dex" />
     </item>
 
 </items>

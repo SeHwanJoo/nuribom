@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            tools:background="#adadad" />
+            tools:background="@drawable/default_image" />
 
         <ImageButton
             android:id="@+id/ib_bigImgHeart"
