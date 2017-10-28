@@ -19,11 +19,11 @@
     <application
         android:name=".application.ApplicationController"
         android:allowBackup="true"
-        android:icon="@drawable/small1"
+        android:icon="@drawable/big2"
         android:label="@string/app_name"
         android:hardwareAccelerated="false"
         android:largeHeap="true"
-        android:roundIcon="@drawable/small1"
+        android:roundIcon="@drawable/big2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
@@ -100,7 +100,6 @@
         <activity android:name=".ui.ProfileChangeActivity" />
         <activity android:name=".ui.MapCourseGuideActivity" />
         <activity android:name=".ui.DetailCourseActivity"></activity>
-        <activity android:name=".ui.CourseListVIewHolder"></activity>
     </application>
 
 

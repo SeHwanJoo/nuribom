@@ -79,7 +79,8 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
         getContent= this.getIntent();
 
         SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
-        nickname = loginInfo.getString("nickName", "");
+        nickname = loginInfo.getString("nickname", "");
+        Log.d(TAG, "onCreate: nickname: "  + nickname);
 
         ratingbar_review_stars = (RatingBar)findViewById(R.id.ratingbar_review_stars);
         edit_contents = (EditText)findViewById(R.id.edittext_review_content);
@@ -134,12 +135,13 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
                 if (edit_userid.length() == 0 || edit_contents.length() == 0) {
                     Toast.makeText(getApplication(), "아이디 및 내용을 확인해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
+
                    /* RequestBody 객체에 edittext값들을 저장.*/
                     final RequestBody userid = RequestBody.create(MediaType.parse("multipart/from-data"), edit_userid);
                     final RequestBody contentid = RequestBody.create(MediaType.parse("multipart/from-data"), edit_contentid);
                     RequestBody stars = RequestBody.create(MediaType.parse("multipart/from-data"), String.valueOf(ratingbar_review_stars.getRating()));
                     final RequestBody content = RequestBody.create(MediaType.parse("multipart/from-data"), edit_contents.getText().toString());
-                    final RequestBody date = RequestBody.create(MediaType.parse("multipart/from-data"),msg);
+                    final RequestBody date = RequestBody.create(MediaType.parse("multipart/from-data"), msg);
 
                     MultipartBody.Part[] image = new MultipartBody.Part[3];
 
@@ -149,7 +151,7 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
                         if (imgUrls.get(i) == "") {
                             image = null;
                         } else {
-                            data[i]=Uri.fromFile(new File(imgUrls.get(i)));
+                            data[i] = Uri.fromFile(new File(imgUrls.get(i)));
 
                             /**
                              * 비트맵 관련한 자료는 아래의 링크에서 참고
@@ -186,6 +188,7 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
 
 
                         }
+
 
 //                    /*
 //                    이번에는 post 메소드 입니다. body(이미지),writer,title,content 를 넘깁니다.

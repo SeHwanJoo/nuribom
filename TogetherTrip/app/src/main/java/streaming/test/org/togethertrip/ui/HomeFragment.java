@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -58,9 +57,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         recommend_spot_img_second = (ImageView) view.findViewById(R.id.recommend_spot_img_second);
         recommend_spot_img_third = (ImageView )view.findViewById(R.id.recommend_spot_img_third);
 
-        GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.border_round);
-        recommend_spot_img_first.setBackground(drawable);
-        recommend_spot_img_first.setClipToOutline(true);
+        //TODO sdk19버전에서 사용 불가능! 잠시 주석처리
+//        GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.border_round);
+//        recommend_spot_img_first.setBackground(drawable);
+//        recommend_spot_img_first.setClipToOutline(true);
 
 
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);

@@ -208,7 +208,6 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
             @Override
             public void onResponse(Call<CourseResult> call, final Response<CourseResult> response) {
                 if (response.isSuccessful()) {
-                    courseListDatas.clear();
                     courseListDatas = response.body().result;
                     courseListAdapter = new CourseListAdapter(context, courseListDatas);
                     CourselistView.setAdapter(courseListAdapter);
