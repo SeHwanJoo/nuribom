@@ -112,6 +112,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         SharedPreferences.Editor editor = loginInfo.edit();
                         editor.putString("email", loginEchoResult.email);
                         editor.putString("password", loginEchoResult.password);
+                        editor.putString("nickname", loginEchoResult.userid);
+
                         editor.commit();
 
 //                        intent.putExtra("token", loginEchoResult.token);

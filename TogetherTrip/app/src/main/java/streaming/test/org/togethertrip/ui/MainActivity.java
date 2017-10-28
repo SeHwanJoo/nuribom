@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         course = new CourseFragment(this, receivedUserNickName);
         home = new HomeFragment(this, receivedUserNickName);
-        mypage = new MypageFragment(this, receivedEmail, receivedProfileImg, receivedUserNickName, token);
+        mypage = new MypageFragment(this, receivedEmail, receivedUserNickName, token);
         spot = new SpotFragment(this, receivedUserNickName);
         alarm = new AlarmFragment(this);
 

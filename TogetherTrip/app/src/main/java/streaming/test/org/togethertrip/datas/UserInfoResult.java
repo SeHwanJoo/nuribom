@@ -7,6 +7,7 @@ package streaming.test.org.togethertrip.datas;
 public class UserInfoResult {
     public String message;
     public Info result;
+    public UserData userdata;
 
     public class Info {
         public int triplike;
@@ -14,5 +15,11 @@ public class UserInfoResult {
         public int coursecomment;
         public int tripreviews;
         public int course;
+    }
+    public class UserData{
+        public String img;
+        public String email;
+        public String password;
+        public String userid;
     }
 }

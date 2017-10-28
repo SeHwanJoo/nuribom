@@ -15,11 +15,11 @@ import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.CourseWriteResult;
 import streaming.test.org.togethertrip.datas.DetailCourseDatas;
 import streaming.test.org.togethertrip.datas.DetailCourseInfo;
-import streaming.test.org.togethertrip.datas.DetailCourseResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.datas.DetailSpotListDatas;
 import streaming.test.org.togethertrip.datas.MessageResult;
 import streaming.test.org.togethertrip.datas.RegisterDatas;
+import streaming.test.org.togethertrip.datas.ResultMessage;
 import streaming.test.org.togethertrip.datas.ReviewResult;
 import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
@@ -102,5 +102,10 @@ public interface NetworkService {
 
     @GET("/users/alarm/{userid}")
     Call<AlarmDatas> getAlarm(@Path("userid") String userid);
+
+    @Multipart
+    @POST("/users/modify")
+    Call<ResultMessage> modifyProfile(@Part MultipartBody.Part image,
+                                      @Part RequestBody userid);
 
 }
