@@ -100,7 +100,7 @@
                 <ImageView
                     android:id="@+id/iv_heart"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/trips_heart_off" />
@@ -110,16 +110,16 @@
                 <TextView
                     android:id="@+id/tv_course_heartCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:layout_marginTop="-5dp"
                     android:layout_marginRight="10dp"
-                    android:gravity="center"
                     android:text="00" />
 
                 <ImageView
                     android:id="@+id/iv_item_comment"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/trips_comment" />
@@ -131,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_weight="1"
+                    android:layout_marginTop="-5dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:text="00" />

@@ -13,10 +13,11 @@
             android:id="@+id/iv_bigImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="#adadad"
+            android:background="@drawable/default_image"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
         <ImageButton
             android:id="@+id/ib_bigImgHeart"
             android:layout_width="30dp"
@@ -102,11 +103,14 @@
                 <!-- height 조절해야될 수도 있음-->
                 <ImageView
                     android:id="@+id/iv_heart"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/trips_heart_off" />
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"></View>
 
                 <TextView
                     android:id="@+id/tv_heartCount"
@@ -128,8 +132,8 @@
                 <!-- height 조절해야될 수도 있음-->
                 <ImageView
                     android:id="@+id/iv_comment"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/trips_comment" />

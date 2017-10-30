@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class CourseWriteFragment extends Fragment {
     ImageView imageView;
     Intent intent;
     EditText courseTitle;
+    RelativeLayout imageRl;
 
     //CourseWrite 액티비티의 버튼
     Button okBtn;
@@ -88,6 +90,14 @@ public class CourseWriteFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_course_write, container, false);
 
         imageView =(ImageView)view.findViewById(R.id.elbum);
+        imageRl = (RelativeLayout) view.findViewById(R.id.imageRl);
+        //레이아웃을 눌러도 imageView를 클릭한 것처럼 행동
+        imageRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.performClick();
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,8 +307,8 @@ public class CourseWriteFragment extends Fragment {
 
             TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
             tv.setText(items[position]);
-            tv.setTextColor(Color.parseColor("#1E3790"));
-            tv.setTextSize(12);
+            tv.setTextColor(Color.parseColor("#686868"));
+            tv.setTextSize(14);
             tv.setHeight(50);
             return convertView;
         }
@@ -317,8 +327,8 @@ public class CourseWriteFragment extends Fragment {
             TextView tv = (TextView) convertView
                     .findViewById(android.R.id.text1);
             tv.setText(items[position]);
-            tv.setTextColor(Color.parseColor("#1E3790"));
-            tv.setTextSize(12);
+            tv.setTextColor(Color.parseColor("#686868"));
+            tv.setTextSize(16);
             return convertView;
         }
     }

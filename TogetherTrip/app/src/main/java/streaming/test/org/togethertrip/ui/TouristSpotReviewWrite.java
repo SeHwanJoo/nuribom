@@ -67,7 +67,9 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
     ImageView imageViewDate;
     LinearLayout datepicker;
     TextView imgNameTextView;
+    TextView tv_rating_count;
     int year, month, day ;
+    String ratingNumber;
 
     Intent getContent;
     String nickname;
@@ -83,6 +85,7 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
         Log.d(TAG, "onCreate: nickname: "  + nickname);
 
         ratingbar_review_stars = (RatingBar)findViewById(R.id.ratingbar_review_stars);
+        tv_rating_count = (TextView) findViewById(R.id.tv_rating_count);
         edit_contents = (EditText)findViewById(R.id.edittext_review_content);
         completeBtn = (Button)findViewById(R.id.completeBtn);
         addImgBtn = (Button)findViewById(R.id.button_review_img);
@@ -102,6 +105,19 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day= calendar.get(Calendar.DAY_OF_MONTH);
+
+        //레이팅바에 따른 숫자 변화
+        ratingbar_review_stars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingNumber = String.valueOf(rating);
+                tv_rating_count.setText(ratingNumber);
+                Log.d(TAG, "onRatingChanged: ratingbar Count: " + rating);
+            }
+        });
+        //입력 안할 시에 디폴트값 3.0
+        if(ratingNumber == null) ratingNumber = "3.0";
+
 
         Log.d(TAG, "onCreate: edit_userid: " + edit_userid);
         Log.d(TAG, "onCreate: edit_contentid: " + edit_contentid);

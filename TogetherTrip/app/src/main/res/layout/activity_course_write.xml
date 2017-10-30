@@ -24,13 +24,20 @@
         android:elevation="5dp">
 
         <!-- 이미지 추가 버튼으로 대체해야함-->
-        <ImageView
-            android:id="@+id/elbum"
+        <RelativeLayout
+            android:id="@+id/imageRl"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
-            android:scaleType="centerCrop"/>
-
+            android:background="#cecece">
+            <ImageView
+                android:id="@+id/elbum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/review_write_image"
+                android:scaleType="centerCrop"/>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -59,8 +66,8 @@
                 android:id="@+id/courseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="14dp"
                 android:hint="제목을 입력해주세요"
                 android:textSize="24sp"
                 android:textColor="#1D1D1D"
