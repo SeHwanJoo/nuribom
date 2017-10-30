@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="typekit-1.0.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/6842548463065c0c61d37198f33a586a78c5f658/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/6842548463065c0c61d37198f33a586a78c5f658/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/2da353e7fe7eb0b2e6e14bef56fac90c9c160e55/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/2da353e7fe7eb0b2e6e14bef56fac90c9c160e55/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
