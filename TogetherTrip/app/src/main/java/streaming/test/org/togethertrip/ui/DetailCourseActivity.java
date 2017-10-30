@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import streaming.test.org.togethertrip.datas.DetailCourseDatas;
 import streaming.test.org.togethertrip.datas.DetailCourseInfo;
 import streaming.test.org.togethertrip.datas.DetailCourseResult;
 import streaming.test.org.togethertrip.network.NetworkService;
+import streaming.test.org.togethertrip.ui.comment.CommentActivity;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,7 +37,8 @@ public class DetailCourseActivity extends AppCompatActivity {
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     ArrayList<CourseListDatas> courseListDatas;
     Context context;
-
+    LinearLayout commentLayout;
+    ImageButton comment;
     DetailCourseFragment detailCourseFragment;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -42,12 +47,13 @@ public class DetailCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_course3);
+        commentLayout = (LinearLayout)findViewById(R.id.commentLayout);
+        comment = (ImageButton)findViewById(R.id.touristSpot_detail_commentsbtn);
         getIntent = getIntent();
         Log.d(TAG, "clickItem: 진입");
-        DetailCourseInfo detailCourseInfo = new DetailCourseInfo();
+        final DetailCourseInfo detailCourseInfo = new DetailCourseInfo();
         detailCourseInfo.userid = "joo";
         detailCourseInfo.courseid = getIntent.getExtras().getInt("courseid");
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -56,7 +62,18 @@ public class DetailCourseActivity extends AppCompatActivity {
         Log.d(TAG, "clickItem: userid / courseId : " +  detailCourseInfo.userid +
                 " / " + String.valueOf( detailCourseInfo.courseid));
 
+        //댓글 창으로 넘어가는 부분
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent commentIntent = new Intent(getApplicationContext(), CommentActivity.class);
+                commentIntent.putExtra("courseid",detailCourseInfo.courseid);
+                startActivity(commentIntent);
+            }
+        });
 
+
+        // 코스 디테일 프레그먼트 통신
         NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
         Log.d(TAG, "clickItem: networkService: " + list_networkService);
         Call<DetailCourseDatas> requestDetailCourseList = list_networkService.clickDetailCourseList(detailCourseInfo);

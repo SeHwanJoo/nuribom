@@ -1,14 +1,11 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Network;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +21,10 @@ import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
-import streaming.test.org.togethertrip.datas.CourseSearchData;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.network.NetworkService;
+import streaming.test.org.togethertrip.viewholder.CourseListViewHolder;
 
 /**
  * Created by minseung on 2017-10-07.

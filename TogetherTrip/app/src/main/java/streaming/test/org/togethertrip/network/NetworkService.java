@@ -26,6 +26,10 @@ import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
+import streaming.test.org.togethertrip.datas.comment.CommentInfo;
+import streaming.test.org.togethertrip.datas.comment.CommentResult;
+import streaming.test.org.togethertrip.datas.comment.CommentWriteDatas;
+import streaming.test.org.togethertrip.datas.comment.CommentWriteResult;
 import streaming.test.org.togethertrip.datas.duplicationcheck.EmailCheckResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
@@ -87,6 +91,13 @@ public interface NetworkService {
     @GET("/trips/reviews/{contentid}")
     Call<TouristSpotReviewResult> getMainResult(@Path("contentid") String contentid);
 
+    // 댓글 작성
+    @POST("/course/comment")
+    Call<CommentWriteResult> writeComment(@Body CommentWriteDatas commentWriteDatas);
+
+    //댓글 불러오기
+    @POST("/course/comments")
+    Call<CommentResult> getComment(@Body CommentInfo commentInfo);
 
     //코스 좋아요
     @POST("/course/like")

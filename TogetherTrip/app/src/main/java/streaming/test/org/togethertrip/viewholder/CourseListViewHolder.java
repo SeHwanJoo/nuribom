@@ -1,4 +1,4 @@
-package streaming.test.org.togethertrip.ui;
+package streaming.test.org.togethertrip.viewholder;
 
 import android.widget.ImageView;
 import android.widget.TextView;
