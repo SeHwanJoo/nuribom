@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +34,9 @@ import streaming.test.org.togethertrip.datas.CourseInfo;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
 import streaming.test.org.togethertrip.datas.CourseResult;
 import streaming.test.org.togethertrip.datas.CourseSearchData;
-import streaming.test.org.togethertrip.datas.CourseWriteDatas;
 import streaming.test.org.togethertrip.datas.DetailCourseDatas;
-import streaming.test.org.togethertrip.datas.DetailCourseInfo;
-import streaming.test.org.togethertrip.datas.DetailCourseResult;
-import streaming.test.org.togethertrip.datas.DetailSpotListClickResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
-import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 
 /**

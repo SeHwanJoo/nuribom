@@ -28,12 +28,20 @@
             android:elevation="5dp">
 
             <!-- 이미지 추가 버튼으로 대체해야함-->
-            <ImageView
-                android:id="@+id/elbum2"
+            <RelativeLayout
+                android:id="@+id/imageRl"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4.5"
-                android:scaleType="centerCrop"/>
+                android:background="#cecece">
+                <ImageView
+                    android:id="@+id/elbum2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/review_write_image"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,7 +61,7 @@
                         android:id="@+id/plusPlace"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="7dp"
                         android:src="@drawable/course_more_place"/>
@@ -61,7 +69,7 @@
                         android:id="@+id/placetv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_vertical"
                         android:text="장소를 입력해주세요"
                         android:textSize="16sp"
                         android:textColor="#1E3790"/>
@@ -81,7 +89,7 @@
                         android:id="@+id/visitDayIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="7dp"
                         android:src="@drawable/course_date"/>
@@ -89,7 +97,7 @@
                         android:id="@+id/visitDaytv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_vertical"
                         android:text="방문 날짜를 선택해주세요"
                         android:textSize="14sp"
                         android:textColor="#686868"/>

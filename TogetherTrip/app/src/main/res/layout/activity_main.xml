@@ -7,14 +7,6 @@
     tools:context="streaming.test.org.togethertrip.ui.MainActivity"
     android:orientation="vertical">
 
-
-    <View
-        android:id="@+id/lineRl1"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/firstRl"
-        android:background="#cecece"></View>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -38,13 +30,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#000">
+        android:layout_weight="0.8"
+        android:background="#fff">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:background="#fff"
+            android:orientation="horizontal"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
             >
             <FrameLayout
                 android:layout_width="0dp"
@@ -54,11 +49,9 @@
 
                 <Button
                     android:id="@+id/button_home"
-                    android:layout_width="match_parent"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_home_on"/>
             </FrameLayout>
 
@@ -70,11 +63,9 @@
 
                 <Button
                     android:id="@+id/button_spot"
-                    android:layout_width="match_parent"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_trip_off"/>
             </FrameLayout>
 
@@ -86,11 +77,9 @@
 
                 <Button
                     android:id="@+id/button_course"
-                    android:layout_width="match_parent"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_course_off" />
             </FrameLayout>
 
@@ -102,11 +91,9 @@
 
                 <Button
                     android:id="@+id/button_alarm"
-                    android:layout_width="match_parent"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_alrarm_off"/>
             </FrameLayout>
             <FrameLayout
@@ -117,11 +104,9 @@
 
                 <Button
                     android:id="@+id/button_mypage"
-                    android:layout_width="match_parent"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:background="@drawable/navi_mypage_off"/>
             </FrameLayout>
         </LinearLayout>

@@ -261,6 +261,7 @@ public class TouristSpotDetail extends FragmentActivity {
                 Intent intent = new Intent(getApplicationContext(), TouristSpotReview.class);
                 intent.putExtra("contentId", contentId);
                 intent.putExtra("contentTypeId", contentTypeId);
+                intent.putExtra("spotName", detailCommon.title);
                 startActivity(intent);
             }
         });

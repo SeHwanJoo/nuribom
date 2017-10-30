@@ -102,7 +102,6 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         intent.putExtra("password", loginEchoResult.password);
                         intent.putExtra("profileImg", loginEchoResult.img);
                         intent.putExtra("userNickName", loginEchoResult.userid);
-                        //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
                         intent.putExtra("token", loginEchoResult.token);
 
                         //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
@@ -112,6 +111,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                         SharedPreferences.Editor editor = loginInfo.edit();
                         editor.putString("email", loginEchoResult.email);
                         editor.putString("password", loginEchoResult.password);
+                        editor.putString("nickname", loginEchoResult.userid);
+
                         editor.commit();
 
 //                        intent.putExtra("token", loginEchoResult.token);

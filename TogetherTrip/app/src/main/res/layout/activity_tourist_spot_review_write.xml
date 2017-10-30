@@ -21,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="후기 작성하기"
-            android:textSize="25sp"
+            android:textSize="18sp"
+            android:textColor="#1D1D1D"
             android:layout_centerInParent="true"/>
 
         <Button
@@ -196,6 +197,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_rating_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

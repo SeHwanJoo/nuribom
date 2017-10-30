@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -66,14 +67,25 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
     ImageView imageViewDate;
     LinearLayout datepicker;
     TextView imgNameTextView;
+    TextView tv_rating_count;
     int year, month, day ;
+    String ratingNumber;
+
+    Intent getContent;
+    String nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_spot_review_write);
+        getContent= this.getIntent();
+
+        SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
+        nickname = loginInfo.getString("nickname", "");
+        Log.d(TAG, "onCreate: nickname: "  + nickname);
 
         ratingbar_review_stars = (RatingBar)findViewById(R.id.ratingbar_review_stars);
+        tv_rating_count = (TextView) findViewById(R.id.tv_rating_count);
         edit_contents = (EditText)findViewById(R.id.edittext_review_content);
         completeBtn = (Button)findViewById(R.id.completeBtn);
         addImgBtn = (Button)findViewById(R.id.button_review_img);
@@ -87,13 +99,28 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
         img[0] = (ImageView)findViewById(R.id.imageview_review_1);
         img[1] = (ImageView)findViewById(R.id.imageview_review_2);
         //img[2] = (ImageView)findViewById(R.id.
-        edit_userid = "joo";
-        edit_contentid = "trips";
+        edit_userid = nickname;
+        edit_contentid = getContent.getStringExtra("contentId");
         GregorianCalendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day= calendar.get(Calendar.DAY_OF_MONTH);
 
+        //레이팅바에 따른 숫자 변화
+        ratingbar_review_stars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingNumber = String.valueOf(rating);
+                tv_rating_count.setText(ratingNumber);
+                Log.d(TAG, "onRatingChanged: ratingbar Count: " + rating);
+            }
+        });
+        //입력 안할 시에 디폴트값 3.0
+        if(ratingNumber == null) ratingNumber = "3.0";
+
+
+        Log.d(TAG, "onCreate: edit_userid: " + edit_userid);
+        Log.d(TAG, "onCreate: edit_contentid: " + edit_contentid);
 
          /*날짜 선택 다이얼로그*/
         imageViewDate.setOnClickListener(new View.OnClickListener() {
@@ -124,12 +151,13 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
                 if (edit_userid.length() == 0 || edit_contents.length() == 0) {
                     Toast.makeText(getApplication(), "아이디 및 내용을 확인해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
+
                    /* RequestBody 객체에 edittext값들을 저장.*/
                     final RequestBody userid = RequestBody.create(MediaType.parse("multipart/from-data"), edit_userid);
                     final RequestBody contentid = RequestBody.create(MediaType.parse("multipart/from-data"), edit_contentid);
                     RequestBody stars = RequestBody.create(MediaType.parse("multipart/from-data"), String.valueOf(ratingbar_review_stars.getRating()));
                     final RequestBody content = RequestBody.create(MediaType.parse("multipart/from-data"), edit_contents.getText().toString());
-                    final RequestBody date = RequestBody.create(MediaType.parse("multipart/from-data"),msg);
+                    final RequestBody date = RequestBody.create(MediaType.parse("multipart/from-data"), msg);
 
                     MultipartBody.Part[] image = new MultipartBody.Part[3];
 
@@ -139,7 +167,7 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
                         if (imgUrls.get(i) == "") {
                             image = null;
                         } else {
-                            data[i]=Uri.fromFile(new File(imgUrls.get(i)));
+                            data[i] = Uri.fromFile(new File(imgUrls.get(i)));
 
                             /**
                              * 비트맵 관련한 자료는 아래의 링크에서 참고
@@ -176,6 +204,7 @@ public class TouristSpotReviewWrite extends AppCompatActivity {
 
 
                         }
+
 
 //                    /*
 //                    이번에는 post 메소드 입니다. body(이미지),writer,title,content 를 넘깁니다.

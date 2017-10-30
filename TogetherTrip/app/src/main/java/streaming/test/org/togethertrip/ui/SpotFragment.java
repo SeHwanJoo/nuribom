@@ -114,6 +114,10 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tourist_spot, container, false);
+        //프래그먼트에 포커스 주기
+        //TODO 없어도 되는데 태형 테스트폰에서는 되는데 지현이 테스트폰에서 테스트 해봐야됨
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
 
         networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -233,6 +237,9 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                 /*
                 * TODO (후기)작성버튼 클릭시
                  */
+                Intent intent = new Intent(context, TouristSpotReviewWrite.class);
+                intent.putExtra("nickname", nickName);
+
                 startActivity(new Intent(context, TouristSpotReviewWrite.class));
             }
         });

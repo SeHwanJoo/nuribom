@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         course = new CourseFragment(this, receivedUserNickName);
         home = new HomeFragment(this, receivedUserNickName);
-        mypage = new MypageFragment(this, receivedEmail, receivedProfileImg, receivedUserNickName, token);
+        mypage = new MypageFragment(this, receivedEmail, receivedUserNickName, token);
         spot = new SpotFragment(this, receivedUserNickName);
         alarm = new AlarmFragment(this);
 
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
 
             LoginDatas loginDatas = new LoginDatas();
-            loginDatas.email = loginInfo.getString("email", "No Login User##");
+            loginDatas.email = loginInfo.getString("email", "");
             loginDatas.password = loginInfo.getString("password", "");
             requestAutoSignin(loginDatas);
         }

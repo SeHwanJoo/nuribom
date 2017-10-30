@@ -41,7 +41,7 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
 
     Intent getContent;
 
-    String contentId, contentTypeId;
+    String contentId, contentTypeId, spotName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,7 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
         getContent = this.getIntent();
         contentId = getContent.getStringExtra("contentId");
         contentTypeId = getContent.getStringExtra("contentTypeId");
+        spotName = getContent.getStringExtra("spotName");
         ////////////////////////서비스 객체 초기화////////////////////////
         service = ApplicationController.getInstance().getNetworkService();
 
@@ -79,6 +80,9 @@ public class TouristSpotReview extends AppCompatActivity implements SwipeRefresh
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), TouristSpotReviewWrite.class);
+                intent.putExtra("contentId", contentId);
+                intent.putExtra("contentTypeId", contentTypeId);
+                intent.putExtra("nickname", spotName);
                 startActivity(intent);
             }
         });
