@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +42,7 @@ import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 
 import static android.view.View.GONE;
+import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
 /**
  * Created by taehyung on 2017-09-06.
@@ -265,9 +265,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
 
         Log.d(TAG, "search: " + search_keyword);
         searchData = new SearchData();
-        /*
-         * TODO 나중에 userid는 받아와야됨~
-         */
         searchData.userid = nickName;
         searchData.keyword = search_keyword;
 
@@ -353,6 +350,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     }
 
 
+    //Location Spinner(장소 스피너)
     public class SpinnerAdapter extends ArrayAdapter<String> {
         Context context;
         String[] items = new String[] {};
@@ -379,7 +377,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
-            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            /*try {
+                tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
             tv.setTextSize(12);
             tv.setHeight(50);
             return convertView;
@@ -400,12 +402,18 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     .findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
-            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            /*try {
+                tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
             tv.setTextSize(12);
+            tv.setGravity(TEXT_ALIGNMENT_CENTER);
             return convertView;
         }
     }
 
+    //Category Spinner(카테고리 스피너)
     public class SpinnerAdapter2 extends ArrayAdapter<String> {
         Context context;
         String[] items = new String[] {};
@@ -436,7 +444,11 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             }else {
                 tv_category.setTextColor(Color.parseColor("#1E3790"));
             }
-            tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            /*try {
+                tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
             tv_category.setTextSize(12);
             tv_category.setHeight(50);
             return convertView;
@@ -461,8 +473,13 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             }else {
                 tv_category.setTextColor(Color.parseColor("#1E3790"));
             }
-            tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            /*try {
+                tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
             tv_category.setTextSize(12);
+            tv_category.setGravity(TEXT_ALIGNMENT_CENTER);
             return convertView;
         }
     }
@@ -485,9 +502,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
         Log.d(TAG, "clickItem: contentId / contentTypeId : " + detailSpotListDatas.contentid +
                 " / " + detailSpotListDatas.contenttypeid);
 
-        /*
-        * TODO 나중에 userid는 받아와야함!
-         */
         detailSpotListDatas.userid = nickName;
 
         addr = spotResultListDatas.get(position).tripinfo.addr1;

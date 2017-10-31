@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,6 +38,8 @@ import streaming.test.org.togethertrip.datas.DetailCourseDatas;
 import streaming.test.org.togethertrip.network.NetworkService;
 
 import static android.view.View.GONE;
+import static android.view.View.TEXT_ALIGNMENT_CENTER;
+import static streaming.test.org.togethertrip.R.id.spinner_course_type;
 
 /**
  * Created by minseung on 2017-10-08.
@@ -73,6 +74,12 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
     SpinnerAdapter adspin1;
     final static String[] arrayLocation = {"서울", "인천", "경기도", "강원도", "충청북도",
             "충청남도", "전라북도", "전라남도", "경상북도", "경상남도"};
+
+    String choice_category_type;
+    Spinner spinner_category_type;
+    SpinnerAdapter2 adspin2;
+    //TODO 카테고리 정해서 넣어야됨!
+    final static String[] arrayCategoryType = {"전체","힐링", "가족", "친구"};
     String nickName;
 
     public CourseFragment(){
@@ -103,6 +110,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spinner_location = (Spinner) view.findViewById(R.id.spinner_course_location);
+        spinner_category_type = (Spinner) view.findViewById(spinner_course_type);
 
         courseInfo = new CourseInfo();
         courseInfo.userid = "";
@@ -175,6 +183,34 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
             }
         });
 
+        adspin2 = new SpinnerAdapter2(activity, arrayCategoryType, android.R.layout.simple_spinner_dropdown_item);
+        adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_category_type.setAdapter(adspin2);
+        spinner_category_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch(adspin2.getItem(position).toString()){
+                    case "전체":
+                        choice_category_type = "전체";
+                        break;
+                    case "힐링":
+                        choice_category_type = "힐링";
+                        break;
+                    case "가족":
+                        choice_category_type = "가족";
+                        break;
+                    case "친구":
+                        choice_category_type = "친구";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                choice_category_type = "전체";
+            }
+        });
         courseSearch();
 
         return view;
@@ -237,6 +273,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
 
     }
 
+    //Location Spinner(지역 스피너)
     public class SpinnerAdapter extends ArrayAdapter<String> {
         Context context;
         String[] items = new String[] {};
@@ -271,7 +308,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
             tv.setTextSize(12);
-            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+//            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setHeight(50);
             return convertView;
         }
@@ -291,11 +328,85 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
                     .findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
-            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+//            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setTextSize(12);
             return convertView;
         }
     }
+
+    //Category Spinner(카테고리 스피너)
+    public class SpinnerAdapter2 extends ArrayAdapter<String> {
+        Context context;
+        String[] items = new String[] {};
+
+        public SpinnerAdapter2(final Context context,
+                               final String[] objects, final int textViewResourceId) {
+            super(context, textViewResourceId, objects);
+            this.items = objects;
+            this.context = context;
+        }
+
+        /**
+         * 스피너 클릭시 보여지는 View의 정의
+         */
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_dropdown_item, parent, false);
+            }
+
+            TextView tv_category = (TextView) convertView.findViewById(android.R.id.text1);
+            tv_category.setText(items[position]);
+            if(items[position].equals("전체")){
+                tv_category.setTextColor(Color.parseColor("#686868"));
+            }else {
+                tv_category.setTextColor(Color.parseColor("#1E3790"));
+            }
+            /*try {
+                tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
+            tv_category.setTextSize(12);
+            tv_category.setHeight(50);
+            return convertView;
+        }
+
+        /**
+         * 기본 스피너 View 정의
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(context);
+                convertView = inflater.inflate(
+                        android.R.layout.simple_spinner_item, parent, false);
+            }
+
+            TextView tv_category = (TextView) convertView
+                    .findViewById(android.R.id.text1);
+            tv_category.setText(items[position]);
+            if(items[position].equals("전체")){
+                tv_category.setTextColor(Color.parseColor("#686868"));
+            }else {
+                tv_category.setTextColor(Color.parseColor("#1E3790"));
+            }
+            /*try {
+                tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }*/
+            tv_category.setTextSize(12);
+            tv_category.setGravity(TEXT_ALIGNMENT_CENTER);
+            return convertView;
+        }
+    }
+
+
+
 //    //리스트 클릭 리스너
 //    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
 //        @Override

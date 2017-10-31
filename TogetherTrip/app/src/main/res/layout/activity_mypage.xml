@@ -23,15 +23,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="마이페이지"
-                android:textSize="25dp"
+                android:textColor="#1D1D1D"
+                android:textSize="18sp"
+                app:font="custom2"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#BDBDBD" />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="9"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:background="#fff"

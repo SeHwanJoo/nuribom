@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -58,9 +57,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         recommend_spot_img_second = (ImageView) view.findViewById(R.id.recommend_spot_img_second);
         recommend_spot_img_third = (ImageView )view.findViewById(R.id.recommend_spot_img_third);
 
+        /*TODO minSDK 잠시내려서 주석
         GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.border_round);
         recommend_spot_img_first.setBackground(drawable);
-        recommend_spot_img_first.setClipToOutline(true);
+        recommend_spot_img_first.setClipToOutline(true);*/
 
         TextView tv_nearSearch = (TextView) view.findViewById(R.id.tv_nearSearch);
 

@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e4e4e4"
+        android:background="#f1f1f1"
         android:orientation="vertical"
         tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity">
 
@@ -44,10 +44,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="여행코스"
+                android:text="코스"
                 android:textColor="#1D1D1D"
                 android:textSize="18sp"
-                app:font="custom1"/>
+                app:font="custom2"/>
 
             <ImageButton
                 android:id="@+id/btn_course_search"
