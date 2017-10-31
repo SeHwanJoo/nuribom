@@ -40,6 +40,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_profileImg"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_margin="16dp"
@@ -57,7 +58,8 @@
                                 android:layout_marginTop="15dp"
                                 android:text="광화문"
                                 android:textColor="#1D1D1D"
-                                android:textSize="24sp"/>
+                                android:textSize="24sp"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/detail_spotAddr"
                                 android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="종로구 광화문역"
                                 android:textColor="#686868"
-                                android:textSize="16sp"/>
+                                android:textSize="16sp"
+                                app:font="custom1"/>
                         </LinearLayout>
                     </LinearLayout>
                     <View
@@ -84,7 +87,8 @@
                         android:layout_marginRight="16dp"
                         android:text="개요"
                         android:textColor="#1D1D1D"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -184,12 +188,14 @@
                                 android:layout_weight="1.7"
                                 android:text="주차"
                                 android:textColor="#8C8C8C"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
 
                             <TextView
                                 android:id="@+id/tv_parkinglot"
@@ -198,7 +204,8 @@
                                 android:layout_weight="8"
                                 android:text="주차 내용"
                                 android:textColor="#8C8C8C"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                app:font="custom1"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -214,12 +221,14 @@
                                 android:layout_weight="1.7"
                                 android:text="접근로"
                                 android:textColor="#8C8C8C"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_route"
                                 android:layout_width="0dp"
@@ -227,7 +236,8 @@
                                 android:layout_weight="8"
                                 android:text="접근로 내용"
                                 android:textColor="#8C8C8C"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                app:font="custom1"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -241,12 +251,14 @@
                                 android:layout_weight="1.7"
                                 android:text="휠체어"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_wheelchairs"
                                 android:layout_width="0dp"
@@ -254,7 +266,8 @@
                                 android:layout_weight="8"
                                 android:text="휠체어 내용"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -268,12 +281,14 @@
                                 android:layout_weight="1.7"
                                 android:text="엘레베이터"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_elevator"
                                 android:layout_width="0dp"
@@ -281,7 +296,8 @@
                                 android:layout_weight="8"
                                 android:text="엘레베이터 내용"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -295,12 +311,14 @@
                                 android:layout_weight="1.7"
                                 android:text="화장실"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_bathroom"
                                 android:layout_width="0dp"
@@ -308,7 +326,8 @@
                                 android:layout_weight="8"
                                 android:text="화장실 내용"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -322,12 +341,14 @@
                                 android:layout_weight="1.7"
                                 android:text="점자블록"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_braileblock"
                                 android:layout_width="0dp"
@@ -335,7 +356,8 @@
                                 android:layout_weight="8"
                                 android:text="점자블록 내용"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -349,12 +371,14 @@
                                 android:layout_weight="1.7"
                                 android:text="기타 시설"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                             <TextView
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
-                                android:text=":"/>
+                                android:text=":"
+                                app:font="custom1"/>
                             <TextView
                                 android:id="@+id/tv_handicapEtc"
                                 android:layout_width="0dp"
@@ -362,7 +386,8 @@
                                 android:layout_weight="8"
                                 android:text="기타 시설 내용"
                                 android:textSize="12sp"
-                                android:textColor="#8C8C8C"/>
+                                android:textColor="#8C8C8C"
+                                app:font="custom1"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -372,7 +397,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="20dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        >
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -413,7 +439,8 @@
                                 android:textSize="12sp"
                                 android:textColor="#8C8C8C"
                                 android:gravity="center|left"
-                                android:layout_gravity="center|left"/>
+                                android:layout_gravity="center|left"
+                                app:font="custom1"/>
 
                             <ImageButton
                                 android:id="@+id/detail_directionBtn"
@@ -473,7 +500,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center"
-                    android:text="00"/>
+                    android:text="00"
+                    app:font="custom1"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/commentLayout"
@@ -492,7 +520,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center"
-                    android:text="00"/>
+                    android:text="00"
+                    app:font="custom1"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

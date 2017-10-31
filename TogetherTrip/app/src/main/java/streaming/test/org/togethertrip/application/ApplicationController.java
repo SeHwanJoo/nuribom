@@ -3,6 +3,8 @@ package streaming.test.org.togethertrip.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.tsengvn.typekit.Typekit;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import streaming.test.org.togethertrip.network.NetworkService;
@@ -30,7 +32,6 @@ public class ApplicationController extends Application {
         return networkService;
     }    // 네트워크서비스 객체 반환
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,6 +40,12 @@ public class ApplicationController extends Application {
 
         ApplicationController.instance = this; //인스턴스 객체 초기화
         buildService();
+
+        //폰트 정의
+        Typekit.getInstance()
+                .addCustom1(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Regular.otf"))
+                .addCustom2(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Medium.otf"))
+                .addCustom3(Typekit.createFromAsset(this, "fonts/NotoSansCJKkr-Bold.otf"));
     }
 
     public void buildService() {

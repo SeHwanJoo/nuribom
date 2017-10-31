@@ -53,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="#95989A"
-                android:hint="기간은 자동으로 입력됩니다."/>
+                android:hint="기간은 자동으로 입력됩니다."
+                app:font="custom1"/>
 
             <Spinner
                 android:id="@+id/categoryspinner"
@@ -71,7 +72,8 @@
                 android:hint="제목을 입력해주세요"
                 android:textSize="24sp"
                 android:textColor="#1D1D1D"
-                android:background="@null" />
+                android:background="@null"
+                app:font="custom2"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,15 +86,17 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="8dp"
                     android:src="@drawable/mypage_profile_defalt"/>
+
                 <TextView
                     android:id="@+id/tv_writer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="작성자"
-                    android:textSize="16sp"
-                    android:textColor="#686868"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="6dp"
-                    android:layout_gravity="center_vertical"/>
+                    android:hint="작성자"
+                    android:textColor="#686868"
+                    android:textSize="16sp"
+                    app:font="custom2"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

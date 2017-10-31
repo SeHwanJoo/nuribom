@@ -105,7 +105,8 @@
                     android:textStyle="bold"
                     android:text="로그인"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom2"/>
 
                 <TextView
                     android:id="@+id/settings_signup"
@@ -119,7 +120,8 @@
                     android:textStyle="bold"
                     android:text="아이디 만들기"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom2"/>
             </LinearLayout>
 
 
@@ -142,7 +144,8 @@
                     android:layout_marginLeft="17dp"
                     android:text="알림 설정"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <TextView
                     android:id="@+id/textView16"
@@ -153,7 +156,8 @@
                     android:layout_marginLeft="30dp"
                     android:text="이메일"
                     android:textColor="#686868"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_email"
@@ -172,6 +176,7 @@
                     android:layout_marginLeft="30dp"
                     android:text="SMS"
                     android:textColor="#686868"
+                    app:font="custom1"
                     android:layout_above="@+id/settings_switch_push" />
 
                 <Switch
@@ -190,7 +195,8 @@
                     android:layout_marginLeft="30dp"
                     android:text="푸시알림"
                     android:textColor="#686868"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_push"
@@ -232,7 +238,8 @@
                     android:layout_marginLeft="17dp"
                     android:text="공지사항 및 이용약관"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <LinearLayout
                     android:id="@+id/ll_notice"
@@ -249,7 +256,8 @@
                         android:layout_marginLeft="30dp"
                         android:text="공지 사항"
                         android:textColor="#686868"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                     <View
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -278,7 +286,8 @@
                         android:layout_marginLeft="30dp"
                         android:text="이용 약관"
                         android:textColor="#686868"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                     <View
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -323,7 +332,8 @@
                     android:layout_marginLeft="17dp"
                     android:text="FAQ"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
             </RelativeLayout>
         </LinearLayout>

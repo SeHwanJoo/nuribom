@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_layout"
     android:background="@drawable/textbox110"
     android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="100dp"
             android:textSize="14dp"
-            android:fontFamily="HYGothic"
+            app:font="custom1"
             android:textColor="#505050"
             android:text="title"
             android:id="@+id/textview_worry_comment_title"/>
@@ -43,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시간"
+            app:font="custom1"
             android:id="@+id/textview_worry_comment_clock"/>
 
         <TextView
@@ -68,7 +69,7 @@
             android:layout_below="@+id/textview_worry_comment_clock"
             android:layout_marginLeft="100dp"
             android:textSize="12dp"
-            android:fontFamily="HYGothic"
+            app:font="custom1"
             android:textColor="#818181"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

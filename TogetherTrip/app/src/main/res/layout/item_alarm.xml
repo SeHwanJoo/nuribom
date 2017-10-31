@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/alarm_item">
 
@@ -25,7 +27,8 @@
             android:singleLine="true"
             android:layout_marginLeft="14dp"
             android:textSize="14dp"
-            android:textColor="#1D1D1D"/>
+            android:textColor="#1D1D1D"
+            app:font="custom1"  />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -69,6 +69,7 @@
                         android:textColor="#1D1D1D"
                         android:textSize="16sp"
                         android:text="장소이름"
+                        app:font="custom2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
@@ -79,6 +80,7 @@
                         android:layout_marginTop="6dp"
                         android:textColor="#8C8C8C"
                         android:textSize="14sp"
+                        app:font="custom1"
                         android:text="장소 구체적인 위치"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -90,6 +92,7 @@
                         android:textColor="#8C8C8C"
                         android:textSize="15dp"
                         android:text="2017/08/24 방문"
+                        app:font="custom1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
@@ -107,7 +110,8 @@
                         android:hint="내용을 입력하세요"
                         android:textColor="#1D1D1D"
                         android:textColorHint="#686868"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
