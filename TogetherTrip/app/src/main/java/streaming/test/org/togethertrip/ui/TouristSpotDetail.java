@@ -29,6 +29,7 @@ import com.skp.Tmap.TMapView;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailImage;
 import streaming.test.org.togethertrip.datas.DetailInfo;
@@ -41,6 +42,15 @@ import static android.support.constraint.ConstraintSet.WRAP_CONTENT;
 public class TouristSpotDetail extends FragmentActivity {
     final static String TAG = "TouristSpotDetailLog";
     private final static String mTMapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
+    //ContentTypeId에 따른 타입 종류
+    final int SPOT = 12;
+    final int CULTURE = 14;
+    final int FESTIVAL = 15;
+    final int REPORTS = 28;
+    final int ACCOMMODATION = 32;
+    final int SHOPPING = 38;
+    final int RESTAURANT = 39;
+
     Context context = this;
     Activity activity = this;
 
@@ -52,6 +62,7 @@ public class TouristSpotDetail extends FragmentActivity {
     ImageButton filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
     TextView tv_wheelchairs, tv_bathroom, tv_parkinglot, tv_elevator, tv_route, tv_braileblock, tv_handicapEtc;
     TextView tv_location;
+    CircleImageView iv_profileImg;
     LinearLayout detailInfo_container;
 
     RelativeLayout detail_mapRl;
@@ -134,6 +145,7 @@ public class TouristSpotDetail extends FragmentActivity {
         tv_commentCount = (TextView) findViewById(R.id.touristSpot_detail_commentsCount);
         detail_mapRl = (RelativeLayout) findViewById(R.id.detail_mapRl);
         detailInfo_container = (LinearLayout) findViewById(R.id.detailInfo_container);
+        iv_profileImg = (CircleImageView) findViewById(R.id.iv_profileImg);
 
         //각종 view 연결
         detail_spotName = (TextView) findViewById(R.id.detail_spotName);
@@ -154,16 +166,21 @@ public class TouristSpotDetail extends FragmentActivity {
         tv_braileblock = (TextView) findViewById(R.id.tv_braileblock);
         tv_handicapEtc = (TextView) findViewById(R.id.tv_handicapEtc);
 
-        //첫번째 화면에 firstImg 넣어주려고 했었는데
-        //
+        //contentTypeId별 프로필 이미지 변경
+        try {
+            checkContentType(Integer.parseInt(contentTypeId));
+        }catch(Exception e){
+            e.printStackTrace();
+            iv_profileImg.setImageResource(R.drawable.default_image);
+        }
         viewPager = (ViewPager) findViewById(R.id.touristSpot_detail_img_viewPager);
         viewPager.setAdapter(mFragmentAdapter);
 
-        SpotDetailImgFragment firstSpotDetailImgFragment = new SpotDetailImgFragment(this,firstImgUri);
+        Log.d(TAG, "onCreate: firstImgUri: " + firstImgUri);
+        SpotDetailImgFragment firstSpotDetailImgFragment = new SpotDetailImgFragment(this, firstImgUri);
         imgList.add(0, firstSpotDetailImgFragment);
-        mFragmentAdapter.notifyDataSetChanged();
 
-        Log.d(TAG, "onCreate: ttt" + detailImage.get(0).originimgurl + " / " + firstSpotDetailImgFragment.iv_detailImg);
+        mFragmentAdapter.notifyDataSetChanged();
 
         /*Glide.with(context)
                 .load(detailImage.get(0).originimgurl)
@@ -389,6 +406,34 @@ public class TouristSpotDetail extends FragmentActivity {
         @Override
         public int getCount() {
             return imgList.size();
+        }
+    }
+
+    public void checkContentType(int type){
+        switch(type){
+            case SPOT:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_touristspot);
+                break;
+            case CULTURE:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_culturalfacility);
+                break;
+            case FESTIVAL:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_festival);
+                break;
+            case REPORTS:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_sports);
+                break;
+            case ACCOMMODATION:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_accommodations);
+                break;
+            case SHOPPING:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_shopping);
+                break;
+            case RESTAURANT:
+                iv_profileImg.setImageResource(R.drawable.trips_categoryimage_restrant);
+                break;
+            default:
+
         }
     }
 

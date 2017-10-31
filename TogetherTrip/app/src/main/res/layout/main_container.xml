@@ -65,7 +65,7 @@
             android:layout_height="16dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:background="#dedede" />
+            android:background="#f1f1f1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,7 +144,7 @@
         android:layout_height="16dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="#dedede" />
+        android:background="#f1f1f1" />
 
     <!-- 추천관광지/추천코스 위에 선-->
     <LinearLayout
@@ -232,6 +232,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
 
                 <FrameLayout
@@ -249,6 +254,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
 
                 <FrameLayout
@@ -266,6 +276,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
             </LinearLayout>
         </HorizontalScrollView>

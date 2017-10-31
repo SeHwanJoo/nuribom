@@ -531,10 +531,14 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     detailIntent.putExtra("detailWithTour", detailSpotListClickResponse.detailWithTour);
                     detailIntent.putParcelableArrayListExtra("detailImage", detailSpotListClickResponse.detailImage);
                     detailIntent.putExtra("otherInfo", otherInfo);
-                    detailIntent.putExtra("firstImgUri", detailSpotListClickResponse.detailImage.get(0).originimgurl);
+                    try {
+                        detailIntent.putExtra("firstImgUri", detailSpotListClickResponse.detailImage.get(0).originimgurl);
 
-                    firstImgUri = detailSpotListClickResponse.detailImage.get(0).originimgurl;
+                        firstImgUri = detailSpotListClickResponse.detailImage.get(0).originimgurl;
+                    }catch(Exception e){
+                        e.printStackTrace();
 
+                    }
                     firstImgIntent.putExtra("firstImgUri", firstImgUri);
                     Log.d(TAG, "onResponse: firstImgUri: " + firstImgUri);
 

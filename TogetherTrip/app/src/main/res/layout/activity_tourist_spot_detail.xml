@@ -40,6 +40,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_profileImg"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_margin="16dp"

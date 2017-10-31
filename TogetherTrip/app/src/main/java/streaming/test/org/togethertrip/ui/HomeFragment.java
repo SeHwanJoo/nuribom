@@ -18,13 +18,14 @@ import streaming.test.org.togethertrip.R;
 
 /**
  * Created by taehyung on 2017-09-06.
+ * 코드상 폰트값이 바뀌는 부분은 일단 주석처리! 속도가 너무느려서!
  */
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
     Activity activity;
     Context context;
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
-    TextView recommed_spot, recommend_course;
+    TextView recommend_spot, recommend_course;
     View select_touristSpot, select_course;
     ImageButton home_searchBtn;
 
@@ -65,8 +66,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         TextView tv_nearSearch = (TextView) view.findViewById(R.id.tv_nearSearch);
 
 
-
-
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);
         filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
         filter_bathroom = (ImageButton) view.findViewById(R.id.filter_bathroom);
@@ -79,7 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         filter_parkinglot.setOnClickListener(this);
         filter_elevator.setOnClickListener(this);
 
-        recommed_spot = (TextView) view.findViewById(R.id.recommend_spot);
+        recommend_spot = (TextView) view.findViewById(R.id.recommend_spot);
         recommend_course = (TextView)view.findViewById(R.id.recommend_course);
 
         select_touristSpot = (View) view.findViewById(R.id.select_touristSpot);
@@ -96,12 +95,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        recommed_spot.setOnClickListener(new View.OnClickListener() {
+        recommend_spot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 select_touristSpot.setBackgroundColor(Color.parseColor("#263fe1"));
                 select_course.setBackgroundColor(Color.parseColor("#dedede"));
+                recommend_spot.setTextColor(Color.parseColor("#1D1D1D"));
+                recommend_course.setTextColor(Color.parseColor("#8C8C8C"));
+                /*recommend_spot.setTypeface(Typeface.createFromAsset(context.getAssets()
+                                                , "fonts/NotoSansCJKkr-Medium.otf"));
+                recommend_course.setTypeface(Typeface.createFromAsset(context.getAssets()
+                        , "fonts/NotoSansCJKkr-Regular.otf"));*/
 
+                recommend_spot_img_first.setImageResource(R.drawable.home_first2);
+                recommend_spot_img_second.setImageResource(R.drawable.home_second);
+                recommend_spot_img_third.setImageResource(R.drawable.home_third);
             }
         });
 
@@ -110,6 +118,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             public void onClick(View v) {
                 select_touristSpot.setBackgroundColor(Color.parseColor("#dedede"));
                 select_course.setBackgroundColor(Color.parseColor("#263fe1"));
+                recommend_spot.setTextColor(Color.parseColor("#8C8C8C"));
+                recommend_course.setTextColor(Color.parseColor("#1D1D1D"));
+                /*recommend_spot.setTypeface(Typeface.createFromAsset(context.getAssets()
+                        , "fonts/NotoSansCJKkr-Regular.otf"));
+                recommend_course.setTypeface(Typeface.createFromAsset(context.getAssets()
+                        , "fonts/NotoSansCJKkr-Medium.otf"));*/
+
+                recommend_spot_img_first.setImageResource(0);
+                recommend_spot_img_second.setImageResource(0);
+                recommend_spot_img_third.setImageResource(0);
             }
         });
 

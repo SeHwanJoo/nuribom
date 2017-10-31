@@ -55,6 +55,12 @@ public class SpotDetailImgFragment extends Fragment{
                 .load(firstImgUri)
                 .into(iv_detailImg);
 
+        if(firstImgUri == null || firstImgUri.equals("")){
+            Glide.with(this)
+                    .load(R.drawable.default_image)
+                    .into(iv_detailImg);
+        }
+
         return view;
     }
 
