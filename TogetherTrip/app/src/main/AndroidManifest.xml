@@ -100,7 +100,6 @@
             android:name=".ui.comment.CommentActivity"
             android:label="@string/title_activity_comment"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ui.DetailCourseActivity"></activity>
     </application>
 
 </manifest>

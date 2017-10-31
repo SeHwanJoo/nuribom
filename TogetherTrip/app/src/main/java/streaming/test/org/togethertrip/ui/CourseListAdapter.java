@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,16 +34,9 @@ import streaming.test.org.togethertrip.viewholder.CourseListViewHolder;
 public class CourseListAdapter extends BaseAdapter{
     Context context;
     ArrayList<CourseListDatas> CourseListDatas;
+    SharedPreferences loginInfo;
     NetworkService service;
-    ImageView course_image;
-    TextView coureName;
-    TextView date;
-    TextView category;
-    TextView heart_count;
-    TextView comment_count;
-    TextView courseid;
     AddLikeInfo addLikeInfo;
-    ImageView iv_heart;
     private LayoutInflater mInflater;
 
     public CourseListAdapter(Context context, ArrayList<CourseListDatas> courseListDatas) {

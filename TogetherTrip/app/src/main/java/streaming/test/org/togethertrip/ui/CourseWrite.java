@@ -1,6 +1,7 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,6 +42,7 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     FloatingActionButton nextfab;
     CourseWriteDatas courseWriteDatas;
     ArrayList<CourseWriteDatas.Page> page;
+    SharedPreferences loginInfo;
 
     MultipartBody.Part[] images;
 
@@ -77,6 +79,9 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        //user_id를 shared preference로 받아옴
+        loginInfo = getSharedPreferences("loginSetting", 0);
 
         //fab 버튼누르면 작성창
         nextfab = (FloatingActionButton) findViewById(R.id.nextfab);
@@ -120,7 +125,7 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
 
     public void okNetwork(){
 //        courseWriteDatas.notify();
-        courseWriteDatas.main.userid = "joo";
+        courseWriteDatas.main.userid = loginInfo.getString("nickname","");;
         Call<CourseWriteResult> courseWriteTitle = networkService.writeCourse(courseWriteDatas,images);
         courseWriteTitle.enqueue(new Callback<CourseWriteResult>() {
             @Override

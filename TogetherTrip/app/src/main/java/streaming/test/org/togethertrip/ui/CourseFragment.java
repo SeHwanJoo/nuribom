@@ -3,6 +3,7 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -59,6 +60,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
     NetworkService networkService;
     String search_keyword;
     CourseSearchData courseSearchData;
+    SharedPreferences loginInfo;
 
     ImageButton btn_search;
     ImageButton btn_map;
@@ -89,6 +91,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -102,9 +105,10 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
         tv_main = (TextView) view.findViewById(R.id.tv_main);
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         spinner_location = (Spinner) view.findViewById(R.id.spinner_course_location);
+        loginInfo = getActivity().getSharedPreferences("loginSetting", 0);
 
         courseInfo = new CourseInfo();
-        courseInfo.userid = "";
+        courseInfo.userid = loginInfo.getString("nickname","");
         //TODO userid sharedpreference로 받아와야함
         courseInfo.keyword = "";
         //TODO 검색했을때 키워드 받아오기

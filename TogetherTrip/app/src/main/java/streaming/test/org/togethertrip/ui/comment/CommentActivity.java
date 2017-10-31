@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui.comment;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -58,21 +59,22 @@ public class CommentActivity extends AppCompatActivity implements SwipeRefreshLa
     private ArrayList<CommentDatas> commentListDatas;
     private ArrayList<CourseListDatas> CourseListDatas;
     private  CommentRecyclerAdapter commentRecyclerAdapter;
-
+    SharedPreferences loginInfo;
     private LinearLayoutManager linearLayoutManager;
     Intent getIntent;
-    public  int course_id = 0;
-    public String user_id = "joo";
     String image = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        //user_id 받아옴
+        loginInfo = getSharedPreferences("loginSetting", 0);
 
         getIntent = getIntent();
         commentInfo = new CommentInfo();
         commentInfo.courseid =  getIntent.getIntExtra("courseid",0);
-        commentInfo.userid ="joo";
+        commentInfo.userid = loginInfo.getString("nickname","");
+//        commentInfo.userid ="joo";
 
         //변수 초기화
         delete = (ImageView)findViewById(R.id.imageview_tag_close) ;
