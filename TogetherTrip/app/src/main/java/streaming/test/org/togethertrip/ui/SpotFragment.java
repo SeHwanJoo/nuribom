@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -378,6 +379,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setTextSize(12);
             tv.setHeight(50);
             return convertView;
@@ -398,6 +400,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
                     .findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setTextSize(12);
             return convertView;
         }
@@ -433,6 +436,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             }else {
                 tv_category.setTextColor(Color.parseColor("#1E3790"));
             }
+            tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv_category.setTextSize(12);
             tv_category.setHeight(50);
             return convertView;
@@ -457,6 +461,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
             }else {
                 tv_category.setTextColor(Color.parseColor("#1E3790"));
             }
+            tv_category.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv_category.setTextSize(12);
             return convertView;
         }

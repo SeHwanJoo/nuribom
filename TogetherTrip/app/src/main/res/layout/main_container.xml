@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -73,12 +74,14 @@
             android:orientation="vertical"
             android:background="#fff">
             <TextView
+                android:id="@+id/tv_nearSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="주변 시설 검색"
+                app:font="custom2"
                 android:textSize="14sp"
                 android:textColor="#1D1D1D"/>
             <RelativeLayout
@@ -190,7 +193,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="추천 관광지"
-                android:textColor="#1D1D1D"/>
+                android:textColor="#1D1D1D"
+                app:font="custom2"/>
 
             <TextView
                 android:id="@+id/recommend_course"
@@ -198,7 +202,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="추천 코스"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="#8C8C8C"
+                app:font="custom1"/>
         </LinearLayout>
         <HorizontalScrollView
             android:layout_width="match_parent"

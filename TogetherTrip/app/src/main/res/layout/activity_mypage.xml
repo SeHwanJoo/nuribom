@@ -86,7 +86,8 @@
                             android:gravity="center_vertical"
                             android:text="찌니"
                             android:textColor="#1D1D1D"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            app:font="custom2"/>
 
                         <TextView
                             android:id="@+id/userEmail"
@@ -97,7 +98,8 @@
                             android:gravity="center_vertical"
                             android:text="email@example.com"
                             android:textColor="#686868"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            app:font="custom2"/>
                     </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
@@ -132,7 +134,8 @@
                     android:gravity="center"
                     android:text="로그아웃"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    app:font="custom2"/>
 
                 <TextView
                     android:id="@+id/settings_profile"
@@ -145,7 +148,8 @@
                     android:gravity="center"
                     android:text="프로필 사진 변경"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    app:font="custom2"/>
             </LinearLayout>
 
             <View
@@ -176,7 +180,8 @@
                         android:layout_marginBottom="8dp"
                         android:text="내가 쓴 코스"
                         android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        app:font="custom2"/>
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -187,7 +192,7 @@
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/mypage_mycource" />
-
+df
                     <TextView
                         android:id="@+id/mywrite_course"
                         android:layout_width="wrap_content"
@@ -197,7 +202,8 @@
                         android:layout_toRightOf="@id/imageView7"
                         android:text="0"
                         android:textColor="#1E3790"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        app:font="custom3"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -214,7 +220,8 @@
                         android:layout_marginBottom="8dp"
                         android:text="내가 쓴 후기"
                         android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        app:font="custom2"/>
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -234,7 +241,8 @@
                         android:layout_toRightOf="@id/imageView8"
                         android:text="0"
                         android:textColor="#1E3790"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        app:font="custom3"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -251,7 +259,8 @@
                         android:layout_marginBottom="8dp"
                         android:text="보관함"
                         android:textColor="#1D1D1D"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        app:font="custom2"/>
 
                     <ImageView
                         android:id="@+id/imageView9"
@@ -271,7 +280,8 @@
                         android:layout_toRightOf="@id/imageView9"
                         android:text="0"
                         android:textColor="#1E3790"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        app:font="custom3"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -302,7 +312,8 @@
                     android:layout_marginLeft="17dp"
                     android:text="알림 설정"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <TextView
                     android:id="@+id/textView16"
@@ -313,7 +324,8 @@
                     android:layout_marginLeft="30dp"
                     android:text="이메일"
                     android:textColor="#686868"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_email"
@@ -351,7 +363,8 @@
                     android:layout_marginLeft="30dp"
                     android:text="푸시알림"
                     android:textColor="#686868"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_push"
@@ -394,7 +407,8 @@
                     android:layout_marginTop="5dp"
                     android:text="공지사항 및 이용약관"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <LinearLayout
                     android:id="@+id/ll_notice"
@@ -412,7 +426,8 @@
                         android:layout_marginLeft="17dp"
                         android:text="공지 사항"
                         android:textColor="#686868"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:font="custom1"/>
 
                     <View
                         android:layout_width="0dp"
@@ -444,7 +459,8 @@
                         android:layout_marginLeft="17dp"
                         android:text="이용 약관"
                         android:textColor="#686868"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:font="custom1"/>
 
                     <View
                         android:layout_width="0dp"
@@ -496,7 +512,8 @@
                     android:layout_marginLeft="17dp"
                     android:text="FAQ"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
             </RelativeLayout>
 

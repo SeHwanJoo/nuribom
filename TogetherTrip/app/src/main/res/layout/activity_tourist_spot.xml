@@ -44,7 +44,8 @@
                 android:layout_centerInParent="true"
                 android:text="여행지"
                 android:textColor="#1D1D1D"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:font="custom2"/>
 
             <ImageButton
                 android:id="@+id/btn_search"
@@ -120,7 +121,8 @@
             android:gravity="center"
             android:text="시설 필터"
             android:textSize="14sp"
-            android:textColor="#1D1D1D"/>
+            android:textColor="#1D1D1D"
+            app:font="custom1"/>
 
         <RelativeLayout
             android:id="@+id/filerRl"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -270,6 +271,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
             tv.setTextSize(12);
+            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setHeight(50);
             return convertView;
         }
@@ -289,6 +291,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
                     .findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextColor(Color.parseColor("#1E3790"));
+            tv.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
             tv.setTextSize(12);
             return convertView;
         }

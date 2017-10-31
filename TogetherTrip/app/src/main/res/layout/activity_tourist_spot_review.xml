@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F9F9F9"
     android:orientation="vertical">
     <LinearLayout
@@ -24,7 +25,8 @@
                 android:layout_centerInParent="true"
                 android:text="여행지 후기"
                 android:textSize="18sp"
-                android:textColor="#1D1D1D"/>
+                android:textColor="#1D1D1D"
+                app:font="custom2"/>
 
         </RelativeLayout>
 
@@ -53,7 +55,8 @@
                     android:layout_margin="10px"
                     android:text="최신순"
                     android:textSize="12sp"
-                    android:textColor="#1D1D1D"/>
+                    android:textColor="#1D1D1D"
+                    app:font="custom2"/>
 
                 <TextView
                     android:id="@+id/ratingtxt"
@@ -62,7 +65,8 @@
                     android:layout_margin="10px"
                     android:text="별점순"
                     android:textSize="12sp"
-                    android:textColor="#8C8C8C" />
+                    android:textColor="#8C8C8C"
+                    app:font="custom2"/>
             </LinearLayout>
 
             <RelativeLayout

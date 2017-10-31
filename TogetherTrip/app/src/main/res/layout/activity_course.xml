@@ -46,7 +46,8 @@
                 android:layout_centerInParent="true"
                 android:text="여행코스"
                 android:textColor="#1D1D1D"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:font="custom1"/>
 
             <ImageButton
                 android:id="@+id/btn_course_search"

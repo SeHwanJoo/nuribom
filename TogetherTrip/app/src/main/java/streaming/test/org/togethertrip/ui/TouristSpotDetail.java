@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -195,7 +196,9 @@ public class TouristSpotDetail extends FragmentActivity {
                 tv_infoText.setLayoutParams(lp);
 
                 detailInfo_container.addView(tv_infoName);
+                tv_infoName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Medium.otf"));
                 detailInfo_container.addView(tv_infoText);
+                tv_infoText.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Regular.otf"));
             }
 
 
