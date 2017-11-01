@@ -181,18 +181,18 @@ public class CourseWriteFragment extends Fragment {
         spinner_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(adspin1.getItem(position).equals("카테고리1")){
-                    choice_category = "카테고리1";
-                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리1");
-                }else if(adspin1.getItem(position).equals("카테고리2")){
-                    choice_category = "카테고리2";
-                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리2");
-                }else if(adspin1.getItem(position).equals("카테고리3")){
-                    choice_category = "카테고리3";
-                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리3");
-                }else if(adspin1.getItem(position).equals("카테고리4")){
-                    choice_category = "카테고리4";
-                    ((DataSetListner)activity).FirstFragmentCategorySet("카테고리4");
+                if(adspin1.getItem(position).equals("힐링")){
+                    choice_category = "힐링";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("힐링");
+                }else if(adspin1.getItem(position).equals("가족")){
+                    choice_category = "가족";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("가족");
+                }else if(adspin1.getItem(position).equals("친구")){
+                    choice_category = "친구";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("친구");
+                }else if(adspin1.getItem(position).equals("연인")){
+                    choice_category = "연인";
+                    ((DataSetListner)activity).FirstFragmentCategorySet("연인");
                 }
             }
 

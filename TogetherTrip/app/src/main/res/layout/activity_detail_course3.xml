@@ -61,13 +61,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp">
                     <ImageButton
-                        android:id="@+id/touristSpot_detail_heartbtn"
+                        android:id="@+id/course_detail_heartbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/trips_heart_on"/>
                     <TextView
-                        android:id="@+id/touristSpot_detail_heartCount"
+                        android:id="@+id/course_detail_heartCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -86,7 +86,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/trips_comment"/>
                     <TextView
-                        android:id="@+id/touristSpot_detail_commentsCount"
+                        android:id="@+id/comment_detail_commentsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

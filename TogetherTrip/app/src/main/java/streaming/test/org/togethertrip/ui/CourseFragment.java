@@ -81,7 +81,7 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
     Spinner spinner_category_type;
     SpinnerAdapter2 adspin2;
     //TODO 카테고리 정해서 넣어야됨!
-    final static String[] arrayCategoryType = {"전체","힐링", "가족", "친구"};
+    final static String[] arrayCategoryType = {"전체","힐링", "가족", "친구","연인"};
     String nickName;
 
     public CourseFragment(){
@@ -208,6 +208,10 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
                     case "친구":
                         choice_category_type = "친구";
                         break;
+                    case "연인":
+                        choice_category_type = "연인";
+                        break;
+
                 }
             }
 
@@ -258,7 +262,10 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             detailIntent = new Intent(context, DetailCourseActivity.class);
+                            detailIntent.putExtra("userid",response.body().result.get(position).userid);
                             detailIntent.putExtra("courseid",response.body().result.get(position).courseid);
+                            detailIntent.putExtra("commentcount",response.body().result.get(position).commentcount);
+                            detailIntent.putExtra("heartCount",response.body().result.get(position).likecount);
                             startActivity(detailIntent);
                         }
                     });
@@ -412,50 +419,6 @@ public class CourseFragment extends Fragment  implements SwipeRefreshLayout.OnRe
 
 
 
-//    //리스트 클릭 리스너
-//    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            clickItem(view, position);
-//        }
-//    };
-//
-//    // detail 네트워킹
-//    public void clickItem(View view, int position){
-//
-//        Log.d(TAG, "clickItem: 진입");
-
-//        DetailCourseInfo detailCourseInfo = new DetailCourseInfo();
-//        detailCourseInfo.userid = "joo";
-//        detailCourseInfo.courseid = String.valueOf(courseListDatas.get(position).courseid);
-//
-//        Log.d(TAG, "clickItem: userid / courseId : " + courseListDatas.get(position).userid +
-//                " / " + String.valueOf(courseListDatas.get(position).courseid));
-//
-//
-//        NetworkService list_networkService = ApplicationController.getInstance().getNetworkService();
-//        Log.d(TAG, "clickItem: networkService: " + list_networkService);
-//        Call<DetailCourseResult> requestDetailCourseList = list_networkService.clickDetailCourseList(detailCourseInfo);
-//        requestDetailCourseList.enqueue(new Callback<DetailCourseResult>() {
-//            @Override
-//            public void onResponse(Call<DetailCourseResult> call, Response<DetailCourseResult> response) {
-//                if (response.isSuccessful()) {
-//                    Log.d(TAG, "onResponse: detail 통신");
-//
-
-//
-//
-//                } else {
-//                    Log.d(TAG, "onResponse: clickList response is not success");
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<DetailCourseResult> call, Throwable t) {
-//                //검색시 통신 실패
-//                Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
     //Swipe시 갱신되는 메소드
     @Override
