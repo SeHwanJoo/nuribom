@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +62,9 @@ public class MypageFragment extends Fragment {
     TextView signUpOrSignIn, settings_profile;
     TextView mywrite_course, mywrite_review, myLocker;
 
+    LinearLayout ll_logout;
+    FrameLayout ll_login;
+
     CircleImageView userProfile;
 
     LogoutDialog logoutDialog;
@@ -85,7 +90,7 @@ public class MypageFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         loginInfo = activity.getSharedPreferences("loginSetting", 0);
 
@@ -93,7 +98,6 @@ public class MypageFragment extends Fragment {
 
         networkservice = ApplicationController.getInstance().getNetworkService();
 
-//        final View[] view = {null};
         final View view = inflater.inflate(R.layout.activity_mypage, container, false);
 
         if(!(userId.equals(""))){
@@ -103,9 +107,10 @@ public class MypageFragment extends Fragment {
                 public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
                     if (response.isSuccessful()) {
                         Log.d(TAG, "reponse.body: " + response.body().message);
-                        if (response.body().message.equals("yes")) { // 로그인 성공
+                        if (response.body().message.equals("yes")) {
 
 
+                            ll_logout = (LinearLayout)view.findViewById(R.id.ll_logout);
                             loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
                             mywrite_course = (TextView) view.findViewById(R.id.mywrite_course);
                             mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
@@ -115,6 +120,7 @@ public class MypageFragment extends Fragment {
                             TextView userNickName = (TextView) view.findViewById(R.id.userNickName);
                             TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
 
+                            ll_logout.setVisibility(View.GONE);
                             userEmail.setText(response.body().userdata.email);
                             userNickName.setText(response.body().userdata.userid);
 
@@ -146,15 +152,21 @@ public class MypageFragment extends Fragment {
                                 }
                             });
                         }else{
-                            loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+                            ll_login = (FrameLayout)view.findViewById(R.id.ll_login);
+                            loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
                             signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+                            settings_profile = (TextView) view.findViewById(R.id.settings_profile);
+
+                            ll_login.setVisibility(View.GONE);
                             loginOrLogout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(activity, SigninActivity.class));
                                 }
                             });
-                            signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                            loginOrLogout.setText("로그인");
+                            settings_profile.setText("회원가입");
+                            settings_profile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     startActivity(new Intent(activity, SignupActivity.class));
@@ -167,15 +179,21 @@ public class MypageFragment extends Fragment {
                 @Override
                 public void onFailure(Call<UserInfoResult> call, Throwable t) {
                     Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
-                    loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+                    ll_login = (FrameLayout)view.findViewById(R.id.ll_login);
+                    loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
                     signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+                    settings_profile = (TextView) view.findViewById(R.id.settings_profile);
+
+                    ll_login.setVisibility(View.GONE);
                     loginOrLogout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(activity, SigninActivity.class));
                         }
                     });
-                    signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                    loginOrLogout.setText("로그인");
+                    settings_profile.setText("회원가입");
+                    settings_profile.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             startActivity(new Intent(activity, SignupActivity.class));
@@ -184,15 +202,21 @@ public class MypageFragment extends Fragment {
                 }
             });
         } else{
-            loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+            ll_login = (FrameLayout)view.findViewById(R.id.ll_login);
+            loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
             signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+            settings_profile = (TextView) view.findViewById(R.id.settings_profile);
+
+            ll_login.setVisibility(View.GONE);
             loginOrLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(activity, SigninActivity.class));
                 }
             });
-            signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+            loginOrLogout.setText("로그인");
+            settings_profile.setText("회원가입");
+            settings_profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(activity, SignupActivity.class));
