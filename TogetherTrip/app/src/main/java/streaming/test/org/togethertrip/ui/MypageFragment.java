@@ -54,7 +54,7 @@ public class MypageFragment extends Fragment {
     UserInfoResult userInfoResult;
     String checkString;
 
-    String email, profileImg, nickName, token;
+    String userId;
 
     TextView loginOrLogout;
     TextView signUpOrSignIn, settings_profile;
@@ -72,12 +72,9 @@ public class MypageFragment extends Fragment {
     SharedPreferences loginInfo;
 
 
-    public MypageFragment(Activity activity, String email, String nickName, String token){
+    public MypageFragment(Activity activity){
         this.activity = activity;
-        this.context = activity;
-        this.email = email;
-        this.nickName = nickName;
-        this.token = token;
+        context = activity;
     }
 
     @Override
@@ -88,80 +85,105 @@ public class MypageFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.activity_mypage, container, false);
-        View view = null;
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        checkLogin();
-        try {
-            if (userInfoResult.message.equals("no") ) { // 로그인이 안되어있을 때
-                view = inflater.inflate(R.layout.mypage_nologin, container, false);
+        loginInfo = activity.getSharedPreferences("loginSetting", 0);
 
-                loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
-                signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+        userId = loginInfo.getString("nickname","");
 
-                loginOrLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(activity, SigninActivity.class));
+        networkservice = ApplicationController.getInstance().getNetworkService();
+
+//        final View[] view = {null};
+        final View view = inflater.inflate(R.layout.activity_mypage, container, false);
+
+        if(!(userId.equals(""))){
+            Call<UserInfoResult> requestMypage = networkservice.getUserInfo(userId);
+            requestMypage.enqueue(new Callback<UserInfoResult>() {
+                @Override
+                public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(TAG, "reponse.body: " + response.body().message);
+                        if (response.body().message.equals("yes")) { // 로그인 성공
+
+
+                            loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
+                            mywrite_course = (TextView) view.findViewById(R.id.mywrite_course);
+                            mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
+                            myLocker = (TextView) view.findViewById(R.id.mylocker);
+                            settings_profile = (TextView) view.findViewById(R.id.settings_profile);
+                            userProfile = (CircleImageView) view.findViewById(R.id.userProfile);
+                            TextView userNickName = (TextView) view.findViewById(R.id.userNickName);
+                            TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
+
+                            userEmail.setText(response.body().userdata.email);
+                            userNickName.setText(response.body().userdata.userid);
+
+                            if(response.body().userdata.img == null) { // profileImge가 널일때 디폴트 이미지로
+                                userProfile.setImageResource(R.drawable.mypage_profile_defalt);
+                            }else{ // 그렇지 않으면 해당 이미지로
+                                Glide.with(context).load(response.body().userdata.img).into(userProfile);
+                            }
+
+                            mywrite_course.setText(""+response.body().result.course);
+                            mywrite_review.setText(""+(response.body().result.coursecomment+response.body().result.tripreviews));
+                            myLocker.setText(""+(response.body().result.courselike+response.body().result.triplike));
+
+                            loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    logoutDialog = new LogoutDialog(context, leftListner, rightLisnter);
+                                    logoutDialog.show();
+                                }
+                            });
+
+                            settings_profile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//                        startActivity(new Intent(context, ProfileChangeActivity.class));
+                                    pickImage();
+                                    network_modify();
+
+                                }
+                            });
+                        }else{
+                            loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+                            signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+                            loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(activity, SigninActivity.class));
+                                }
+                            });
+                            signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(activity, SignupActivity.class));
+                                }
+                            });
+                        }
                     }
-                });
-                signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(activity, SignupActivity.class));
-                    }
-                });
-
-            }else{ // 로그인이 되어있을 때
-                view = inflater.inflate(R.layout.activity_mypage, container, false);
-
-                loginOrLogout = (TextView) view.findViewById(R.id.settings_logout);
-                mywrite_course = (TextView) view.findViewById(R.id.mywrite_course);
-                mywrite_review = (TextView) view.findViewById(R.id.mywrite_review);
-                myLocker = (TextView) view.findViewById(R.id.mylocker);
-                settings_profile = (TextView) view.findViewById(R.id.settings_profile);
-                userProfile = (CircleImageView) view.findViewById(R.id.userProfile);
-                TextView userNickName = (TextView) view.findViewById(R.id.userNickName);
-                TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
-
-                userEmail.setText(email);
-                userNickName.setText(nickName);
-                Log.d(TAG, "onCreateView: image in Mypage: " + profileImg);
-
-                if(profileImg == null) { // profileImge가 널일때 디폴트 이미지로
-                    userProfile.setImageResource(R.drawable.mypage_profile_defalt);
-                }else{ // 그렇지 않으면 해당 이미지로
-                    Glide.with(context).load(userInfoResult.userdata.img).into(userProfile);
                 }
 
-                mywrite_course.setText(""+userInfoResult.result.course);
-                mywrite_review.setText(""+(userInfoResult.result.coursecomment+userInfoResult.result.tripreviews));
-                myLocker.setText(""+(userInfoResult.result.courselike+userInfoResult.result.triplike));
-
-                loginOrLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        logoutDialog = new LogoutDialog(context, leftListner, rightLisnter);
-                        logoutDialog.show();
-                    }
-                });
-
-                settings_profile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        startActivity(new Intent(context, ProfileChangeActivity.class));
-                        pickImage();
-                        network_modify();
-
-                    }
-                });
-            }
-        }catch(Exception e){
-            //로그인 유무 체크 중 예외 발생시 디폴트로 No Login으로 띄우기
-            e.printStackTrace();
-            view = inflater.inflate(R.layout.mypage_nologin, container, false);
-
+                @Override
+                public void onFailure(Call<UserInfoResult> call, Throwable t) {
+                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+                    signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+                    loginOrLogout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(activity, SigninActivity.class));
+                        }
+                    });
+                    signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(activity, SignupActivity.class));
+                        }
+                    });
+                }
+            });
+        } else{
             loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
             signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
             loginOrLogout.setOnClickListener(new View.OnClickListener() {
@@ -177,8 +199,9 @@ public class MypageFragment extends Fragment {
                 }
             });
         }
-
         return view;
+
+
     }
 
     @Override
@@ -186,41 +209,6 @@ public class MypageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    //첫 진입시 로그인 유무확인 네트워킹
-    public void checkLogin(){
-
-        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
-
-        if(nickName == null){
-            nickName="No Login User@";
-        }
-
-        Log.d(TAG, "checkLogin: email: " + nickName);
-
-        Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(nickName);
-        requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
-            @Override
-            public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
-                if (response.isSuccessful()) {
-                    userInfoResult = response.body();
-
-                    Log.d(TAG, "onResponse: result: " + userInfoResult.result);
-                    Log.d(TAG, "onResponse: message : " + userInfoResult.message);
-                } else {
-                    Log.d(TAG, "onResponse: search response is not success");
-                }
-            }
-            @Override
-            public void onFailure(Call<UserInfoResult> call, Throwable t) {
-                if(nickName==null){
-                    Toast.makeText(activity, "로그인을 해주세요.", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-    }
 
     public synchronized void network_modify(){
         if(imgUrl == null){
@@ -246,8 +234,8 @@ public class MypageFragment extends Fragment {
                 File photo = new File(imgUrl);
 
                 MultipartBody.Part image = MultipartBody.Part.createFormData("image", photo.getName(), phtoBody);
-                loginInfo = activity.getSharedPreferences("loginSetting",0);
-                RequestBody userid = RequestBody.create(MediaType.parse("multipart/from-data"),loginInfo.getString("nickname",""));
+
+                RequestBody userid = RequestBody.create(MediaType.parse("multipart/from-data"),userId);
                 networkservice = ApplicationController.getInstance().getNetworkService();
                 Call<ResultMessage> modifyProfile = networkservice.modifyProfile(image,userid);
                 modifyProfile.enqueue(new Callback<ResultMessage>() {
@@ -282,17 +270,11 @@ public class MypageFragment extends Fragment {
     //로그아웃 네트워킹
     public void logout(){
 
-        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
-
-        nickName = "No Login User##";
-
-        Call<UserInfoResult> requestDriverApplyOwner = networkService.getUserInfo(nickName);
-        requestDriverApplyOwner.enqueue(new Callback<UserInfoResult>() {
+        Call<ResultMessage> requestDriverApplyOwner = networkservice.requestLogout(userId);
+        requestDriverApplyOwner.enqueue(new Callback<ResultMessage>() {
             @Override
-            public void onResponse(Call<UserInfoResult> call, Response<UserInfoResult> response) {
+            public void onResponse(Call<ResultMessage> call, Response<ResultMessage> response) {
                 if (response.isSuccessful()) {
-                    userInfoResult = response.body();
-
                     Log.d(TAG, "onResponse: logout result: " + userInfoResult.result);
                     Log.d(TAG, "onResponse: logout message : " + userInfoResult.message);
                 } else {
@@ -300,7 +282,7 @@ public class MypageFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<UserInfoResult> call, Throwable t) {
+            public void onFailure(Call<ResultMessage> call, Throwable t) {
                 Toast.makeText(context, "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "로그아웃에 실패했습니다.", Toast.LENGTH_SHORT).show();
 
@@ -320,23 +302,17 @@ public class MypageFragment extends Fragment {
     //다이얼로그 로그아웃 클릭시
     private View.OnClickListener rightLisnter = new View.OnClickListener() {
         @Override
+
         public void onClick(View v) {
             logout();
-            Intent intent = new Intent(context, MainActivity.class);
-
             //로그인시 자동로그인 내역 삭제
-            loginInfo = activity.getSharedPreferences("loginSetting", 0);
             SharedPreferences.Editor editor = loginInfo.edit();
             editor.clear();
             editor.commit();
 
             //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            startActivity(intent);
             logoutDialog.dismiss();
-
-
+            startActivity(new Intent(context,MainActivity.class));
         }
     };
 
@@ -386,5 +362,24 @@ public class MypageFragment extends Fragment {
 
             }
         }
+    }
+
+    private View nouser(View view){
+
+        loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
+        signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+        loginOrLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, SigninActivity.class));
+            }
+        });
+        signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, SignupActivity.class));
+            }
+        });
+        return view;
     }
 }
