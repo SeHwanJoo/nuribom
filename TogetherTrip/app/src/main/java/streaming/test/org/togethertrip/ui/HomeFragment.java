@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +17,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dev.sacot41.scviewpager.DotsView;
+import com.dev.sacot41.scviewpager.SCViewPager;
+import com.dev.sacot41.scviewpager.SCViewPagerAdapter;
+
+import java.util.ArrayList;
+
 import streaming.test.org.togethertrip.R;
+import streaming.test.org.togethertrip.ui.home_ad_fragment.FirstAdFragment;
+import streaming.test.org.togethertrip.ui.home_ad_fragment.SecondAdFragment;
+import streaming.test.org.togethertrip.ui.home_ad_fragment.ThirdAdFragment;
 
 /**
  * Created by taehyung on 2017-09-06.
@@ -22,6 +34,10 @@ import streaming.test.org.togethertrip.R;
  */
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
+    //상단 광고 페이지 수
+    private final int NUM_PAGES = 3;
+    View view;
+
     Activity activity;
     Context context;
     ImageButton filter_all,filter_wheelchairs, filter_bathroom, filter_parkinglot, filter_elevator;
@@ -33,11 +49,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     String nickName;
 
+    //상단 광고 부분 viewPager, dot 뷰
+    SCViewPager mViewPager;
+    mPagerAdapter mPageAdapter;
+    DotsView mDotsView;
+
+    FirstAdFragment faf;
+    SecondAdFragment saf;
+    ThirdAdFragment taf;
+
+    ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
+
     public HomeFragment(){
 
     }
 
-    public HomeFragment(Activity activity,String nickName){
+    public HomeFragment(Activity activity, String nickName){
         this.activity = activity;
         this.nickName = nickName;
         context = activity;
@@ -47,37 +74,75 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.main_container, container, false);
+        view = inflater.inflate(R.layout.main_container, container, false);
 
         recommend_spot_img_first = (ImageView) view.findViewById(R.id.recommend_spot_img_first);
         recommend_spot_img_second = (ImageView) view.findViewById(R.id.recommend_spot_img_second);
         recommend_spot_img_third = (ImageView )view.findViewById(R.id.recommend_spot_img_third);
 
-        /*TODO minSDK 잠시내려서 주석
+        /*TODO minSDK 잠시내려서 주석 21버전 이상에서 사용 가능
         GradientDrawable drawable = (GradientDrawable) context.getDrawable(R.drawable.border_round);
         recommend_spot_img_first.setBackground(drawable);
         recommend_spot_img_first.setClipToOutline(true);*/
 
+        //지도 기반 검색시 사용할 textView(주변 시설 검색)
         TextView tv_nearSearch = (TextView) view.findViewById(R.id.tv_nearSearch);
 
+        mViewPager = (SCViewPager) view.findViewById(R.id.home_viewpager_ad);
+        mDotsView = (DotsView) view.findViewById(R.id.home_dotsview);
+        mDotsView.setDotRessource(R.drawable.dot_selected, R.drawable.dot_unselected);
+        mDotsView.setNumberOfPage(NUM_PAGES);
 
+        faf = new FirstAdFragment();
+        saf = new SecondAdFragment();
+        taf = new ThirdAdFragment();
+
+        mPageAdapter = new mPagerAdapter(getFragmentManager());
+        mPageAdapter.setNumberOfPage(3);
+        fragmentList.add(0, faf);
+        fragmentList.add(1, saf);
+        fragmentList.add(2, taf);
+
+        mViewPager.setAdapter(mPageAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mDotsView.selectDot(position);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        //필터링을 위한 뷰 연결
         filter_all = (ImageButton) view.findViewById(R.id.filter_all);
         filter_wheelchairs = (ImageButton) view.findViewById(R.id.filter_wheelchairs);
         filter_bathroom = (ImageButton) view.findViewById(R.id.filter_bathroom);
         filter_parkinglot = (ImageButton) view.findViewById(R.id.filter_parkinglot);
         filter_elevator = (ImageButton) view.findViewById(R.id.filter_elevator);
 
+        //필터링을 위한 리스너 연결
         filter_all.setOnClickListener(this);
         filter_wheelchairs.setOnClickListener(this);
         filter_bathroom.setOnClickListener(this);
         filter_parkinglot.setOnClickListener(this);
         filter_elevator.setOnClickListener(this);
 
+        //추천 여행지, 추천 코스 뷰 연결
         recommend_spot = (TextView) view.findViewById(R.id.recommend_spot);
         recommend_course = (TextView)view.findViewById(R.id.recommend_course);
 
@@ -189,5 +254,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+
+    public class mPagerAdapter extends SCViewPagerAdapter{
+
+        public mPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            try{
+                Log.d("adFrame", "getItem: " + fragmentList.get(position));
+                return fragmentList.get(position);
+            }catch (Exception e){
+                Log.d("adFrame", "getItem: " + e.toString());
+                Log.d("adFrame", "getItem: " + fragmentList );
+                return null;
+
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+    }
 
 }

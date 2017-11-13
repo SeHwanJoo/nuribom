@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,9 @@ import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.ResultMessage;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
 import streaming.test.org.togethertrip.network.NetworkService;
+import streaming.test.org.togethertrip.ui.notice.NoticeActivity;
+
+import static streaming.test.org.togethertrip.R.id.textView13;
 
 /**
  * Created by taehyung on 2017-09-06.
@@ -58,7 +62,9 @@ public class MypageFragment extends Fragment {
 
     TextView loginOrLogout;
     TextView signUpOrSignIn, settings_profile;
-    TextView mywrite_course, mywrite_review, myLocker;
+    TextView mywrite_course, mywrite_review, myLocker, notice;
+    LinearLayout notice_layout;
+
 
     CircleImageView userProfile;
 
@@ -94,8 +100,9 @@ public class MypageFragment extends Fragment {
 
         checkLogin();
         try {
-            if (userInfoResult.message.equals("no") ) { // 로그인이 안되어있을 때
+            if (userInfoResult.message.equals("no") || userInfoResult.message==null) { // 로그인이 안되어있을 때
                 view = inflater.inflate(R.layout.mypage_nologin, container, false);
+                notice_layout = (LinearLayout) view.findViewById(R.id.ll_notice);
 
                 loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
                 signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
@@ -124,6 +131,8 @@ public class MypageFragment extends Fragment {
                 userProfile = (CircleImageView) view.findViewById(R.id.userProfile);
                 TextView userNickName = (TextView) view.findViewById(R.id.userNickName);
                 TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
+                notice = (TextView)view.findViewById(textView13);
+                notice_layout = (LinearLayout) view.findViewById(R.id.ll_notice);
 
                 userEmail.setText(email);
                 userNickName.setText(nickName);
@@ -164,6 +173,9 @@ public class MypageFragment extends Fragment {
 
             loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
             signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
+            notice = (TextView)view.findViewById(textView13);
+            notice_layout = (LinearLayout) view.findViewById(R.id.ll_notice);
+
             loginOrLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -177,6 +189,13 @@ public class MypageFragment extends Fragment {
                 }
             });
         }
+        notice_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent noticeIntent = new Intent(activity,NoticeActivity.class);
+                startActivity(noticeIntent);
+            }
+        });
 
         return view;
     }

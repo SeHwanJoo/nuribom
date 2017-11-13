@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="tedpermission-2.0.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/ff7228269cc2092c789dc464f25ff363e621622a/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/ff7228269cc2092c789dc464f25ff363e621622a/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/9b35d1d5cf89cda69610dfb59d4d58998c3a89a5/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/9b35d1d5cf89cda69610dfb59d4d58998c3a89a5/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

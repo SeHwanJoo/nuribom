@@ -6,14 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity">
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/touristSpot_fab_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="20dp"
-        android:src="@drawable/course_main_write"
-        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -205,4 +198,12 @@
 
         </RelativeLayout>
     </LinearLayout>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/touristSpot_fab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:src="@drawable/course_main_write"
+        />
 </android.support.design.widget.CoordinatorLayout>

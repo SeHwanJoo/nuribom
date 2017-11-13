@@ -19,6 +19,7 @@ public class CourseWriteDatas {
     public static class Page{
         public String content;
         public String contentid;
+        public String place;
         public String contenttypeid;
         public Page(){};
         public Page(String content){

@@ -8,13 +8,7 @@
     tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity"
     android:background="#BDBDBD">
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="17dp"
-        android:src="@drawable/course_main_write" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -189,4 +183,11 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="17dp"
+        android:src="@drawable/course_main_write" />
 </android.support.design.widget.CoordinatorLayout>

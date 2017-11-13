@@ -2,20 +2,18 @@ package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +26,7 @@ import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
 import streaming.test.org.togethertrip.datas.DetailCourseDatas;
 import streaming.test.org.togethertrip.datas.DetailCourseInfo;
-import streaming.test.org.togethertrip.datas.DetailCourseResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
-import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.network.NetworkService;
 import streaming.test.org.togethertrip.ui.comment.CommentActivity;
 
@@ -48,6 +44,7 @@ public class DetailCourseActivity extends AppCompatActivity {
     LinearLayout commentLayout;
     ImageButton comment, heart;
     DetailCourseFragment detailCourseFragment;
+    DetailCourseDatas.Page page;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Override
@@ -101,6 +98,9 @@ public class DetailCourseActivity extends AppCompatActivity {
                     for(DetailCourseDatas.Page page : response.body().page){
                         DetailCourseFragment2 detailCourseFragment2 = new DetailCourseFragment2(DetailCourseActivity.this, page);
                         fragmentList.add(i,detailCourseFragment2);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("courseNumber", i);
+                        detailCourseFragment2.setArguments(bundle);
                         i++;
                     }
 
@@ -198,5 +198,4 @@ public class DetailCourseActivity extends AppCompatActivity {
     }
 
 }
-
 

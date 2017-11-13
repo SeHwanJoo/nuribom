@@ -65,12 +65,12 @@
                         android:layout_marginLeft="12dp"
                         android:layout_marginRight="7dp"
                         android:src="@drawable/course_more_place"/>
-                    <TextView
-                        android:id="@+id/placetv"
+                    <EditText
+                        android:id="@+id/title_place"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="장소를 입력해주세요"
+                        android:hint="장소를 입력해주세요"
                         android:textSize="16sp"
                         app:font="custom2"
                         android:textColor="#1E3790"/>

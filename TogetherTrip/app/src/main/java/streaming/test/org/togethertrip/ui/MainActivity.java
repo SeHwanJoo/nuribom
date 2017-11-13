@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         context = this;
 
+        //로그인시 데이터 받기
         Intent receivedIntent = getIntent();
         receivedEmail = receivedIntent.getStringExtra("email");
         receivedProfileImg = receivedIntent.getStringExtra("profileImg");
@@ -78,10 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        int currentposition = intent.getIntExtra("position",0);
+        int currentPosition = intent.getIntExtra("position",0);
 
-        //Fragment 생성
-
+        //Fragment 생성(검색시 필요한 닉네임을 생성자에 담아 전송)
         course = new CourseFragment(this, receivedUserNickName);
         home = new HomeFragment(this, receivedUserNickName);
         mypage = new MypageFragment(this, receivedEmail, receivedUserNickName, token);
@@ -96,12 +96,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentList.add(3, alarm);
         fragmentList.add(4, mypage);
 
-        //viewPager 연결
+        //메인 viewPager 연결
         mViewPager = (ViewPager) findViewById(R.id.container);
         Log.d(TAG, "onCreate: mViewPager: " + mViewPager);
         Log.d(TAG, "onCreate: mSectionPagerAdapter: " + mSectionsPagerAdapter);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(currentposition);
+        mViewPager.setCurrentItem(currentPosition);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -112,18 +112,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 tabSelect(position);
-                switch(position){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                }
             }
 
             @Override
@@ -132,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //홈에서 로그인 유무 체크
         mypage.checkLogin();
-
+        //마이페이지의 이메일이 null일 때 SharedPreferences에 담겨있는 로그인 정보를 받아와서 로그인
+        //한 것으로 가정, 자동로그인이 안되어있을 시 빈 값을 가짐
         if(mypage.email==null) {
             SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
 
@@ -281,12 +271,11 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("password", loginEchoResult.password);
                         intent.putExtra("profileImg", loginEchoResult.img);
                         intent.putExtra("userNickName", loginEchoResult.userid);
-                        //TODO 세환아 토큰 여기다 담아서 메인 액티비티로 보내놨어
                         intent.putExtra("token", loginEchoResult.token);
 
-                        //기존에 쌓여있던 task를 모두 삭제
+                        //기존에 쌓여있던 task를 모두 삭제 -> 액티비티가 중첩되어 쌓이는 것을 방지
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        //TOP에 있는 액티비티 제거
+                        //TOP에 있는 액티비티 제거 -> 액티비티가 중첩되어 쌓이는 것을 방지
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 //                        intent.putExtra("token", loginEchoResult.token);

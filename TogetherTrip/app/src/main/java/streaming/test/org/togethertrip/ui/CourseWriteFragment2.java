@@ -42,9 +42,9 @@ public class CourseWriteFragment2 extends Fragment {
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
     ImageView imageView;
-    EditText content;
+    EditText content, spot;
     RelativeLayout imageRl;
-
+    Intent getIntent;
     String imgUrl;
     Uri uri;
 
@@ -65,10 +65,11 @@ public class CourseWriteFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.activity_course_write2, container, false);
+        View view = inflater.inflate(R.layout.activity_course_write2, container, false);
 
         imageView=(ImageView)view.findViewById(R.id.elbum2);
         content = (EditText)view.findViewById(R.id.page_content);
+        spot = (EditText)view.findViewById(R.id.title_place);
         imageRl = (RelativeLayout) view.findViewById(R.id.imageRl);
 
         content.addTextChangedListener(new TextWatcher() {
@@ -85,6 +86,23 @@ public class CourseWriteFragment2 extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 ((DataSetListner)activity).FragmentContentSet(position, content.getText().toString());
+            }
+        });
+
+        spot.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ((DataSetListner)activity).FragmentTitleSet(position, spot.getText().toString());
             }
         });
 
@@ -180,6 +198,7 @@ public class CourseWriteFragment2 extends Fragment {
     public interface DataSetListner{
         void FragmentImageSet(int position, MultipartBody.Part image);
         void FragmentContentSet(int position,String content);
+        void FragmentTitleSet(int position,String title);
 //        void FirstFragmentDataSet(MultipartBody.Part image, String title, String content, String contentid, String contenttypeid);
 //        void FirstFragmentDataSet(MultipartBody.Part image, String title, String content, String contentid, String contenttypeid);
     }

@@ -3,34 +3,18 @@ package streaming.test.org.togethertrip.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.datas.DetailCourseDatas;
 
@@ -42,7 +26,8 @@ public class DetailCourseFragment2 extends Fragment {
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
     ImageView courseImgView;
-    TextView courseDetailSpotName, courseDetailDate, pageContent, courseDetailLocation;
+    TextView courseDetailSpotName, courseDetailDate, pageContent, courseDetailLocation, courseNumber;
+
 
     Activity activity;
     Intent intent;
@@ -67,6 +52,7 @@ public class DetailCourseFragment2 extends Fragment {
         courseDetailDate = (TextView)view.findViewById(R.id.course_detail_date);
         courseDetailLocation=(TextView)view.findViewById(R.id.course_detail_location);
         pageContent =(TextView)view.findViewById(R.id.page_content);
+        courseNumber = (TextView)view.findViewById(R.id.course_number);
 
         courseDetailSpotName.setText(page.title);
         courseDetailLocation.setText(page.title);
@@ -76,7 +62,7 @@ public class DetailCourseFragment2 extends Fragment {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(courseImgView);
-
+        courseNumber.setText(String.valueOf(getArguments().getInt("courseNumber")));
         return view;
     }
 

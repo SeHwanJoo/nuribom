@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -43,6 +44,7 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     CourseWriteDatas courseWriteDatas;
     ArrayList<CourseWriteDatas.Page> page;
     SharedPreferences loginInfo;
+    EditText SpotName;
 
     MultipartBody.Part[] images;
 
@@ -172,6 +174,24 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
         }
     }
 
+
+    @Override
+    public void FragmentTitleSet(int position, String place) {
+//        courseWriteDatas.page.add(position,)
+        if(place != null) {
+//            courseWriteDatas.page[position].content = new String();
+            try{
+                courseWriteDatas.page.get(position).place = place;
+            } catch(IndexOutOfBoundsException e){
+                for(int i = position-courseWriteDatas.page.size();i>=0;i--){
+                    courseWriteDatas.page.add(new CourseWriteDatas.Page());
+                }
+                courseWriteDatas.page.get(position).place = place;
+            }
+            Log.i("fat_co",place);
+        }
+    }
+
     @Override
     public void FirstFragmentImageSet(MultipartBody.Part image) {
         if(image != null) images[0] = image;
@@ -187,12 +207,22 @@ public class CourseWrite extends AppCompatActivity implements CourseWriteFragmen
     }
 
     @Override
+    public void FirstFragementDateSet(String date) {
+        if(date != null) {
+            courseWriteDatas.main.date = date;
+            Log.i("fat_ca",date);
+        }
+    }
+
+
+    @Override
     public void FirstFragmentTitleSet(String title) {
         if(title != null) {
             courseWriteDatas.main.title = title;
             Log.i("fat_ti",title);
         }
     }
+
 
 
     //페이지 선택 확인을 위한 어댑터

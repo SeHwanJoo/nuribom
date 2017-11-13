@@ -118,7 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
-                    android:text="아이디 만들기"
+                    android:text="회원가입"
                     android:textColor="#1D1D1D"
                     android:textSize="14sp"
                     app:font="custom2"/>
