@@ -26,7 +26,12 @@ import streaming.test.org.togethertrip.datas.SearchData;
 import streaming.test.org.togethertrip.datas.TouristSpotReviewResult;
 import streaming.test.org.togethertrip.datas.TouristSpotSearchResult;
 import streaming.test.org.togethertrip.datas.UserInfoResult;
+import streaming.test.org.togethertrip.datas.comment.CommentInfo;
+import streaming.test.org.togethertrip.datas.comment.CommentResult;
+import streaming.test.org.togethertrip.datas.comment.CommentWriteDatas;
+import streaming.test.org.togethertrip.datas.comment.CommentWriteResult;
 import streaming.test.org.togethertrip.datas.duplicationcheck.EmailCheckResult;
+import streaming.test.org.togethertrip.datas.duplicationcheck.NicknameCheckResult;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.datas.like.AddTripsLikeInfo;
@@ -54,16 +59,19 @@ public interface NetworkService {
     @POST("users/login")
     Call<LoginResult> requestSignin(@Body LoginDatas loginDatas);
 
-    //이메일중복체크
-    @GET("users/emailtest/{userid}")
-    Call<EmailCheckResult> emailCheck (@Path("userid")String userid);
+    //이메일 중복체크
+    @GET("users/emailtest/{email}")
+    Call<EmailCheckResult> emailCheck (@Path("email")String email);
 
+    //닉네임 중복체크
+    @GET("users/idtest/{userid}")
+    Call<NicknameCheckResult> nicknameCheck(@Path("userid")String userid);
 
     //코스작성
     @Multipart
     @POST("/course/edit")
     Call<CourseWriteResult> writeCourse(@Part("body") CourseWriteDatas courseWriteDatas,
-                                        @Part MultipartBody.Part[] image);
+                                            @Part MultipartBody.Part[] image);
 
     //코스 상세보기
     @POST("course/")
@@ -87,6 +95,13 @@ public interface NetworkService {
     @GET("/trips/reviews/{contentid}")
     Call<TouristSpotReviewResult> getMainResult(@Path("contentid") String contentid);
 
+    // 댓글 작성
+    @POST("/course/comment")
+    Call<CommentWriteResult> writeComment(@Body CommentWriteDatas commentWriteDatas);
+
+    //댓글 불러오기
+    @POST("/course/comments")
+    Call<CommentResult> getComment(@Body CommentInfo commentInfo);
 
     //코스 좋아요
     @POST("/course/like")

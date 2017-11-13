@@ -24,7 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="마이페이지"
-                android:textSize="25dp"
+                android:textSize="20sp"
+                android:textColor="#1D1D1D"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
     </RelativeLayout>
@@ -56,9 +57,7 @@
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:background="#80000000" />
+                    android:background="#BDBDBD" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,16 +77,8 @@
                     android:textStyle="bold"
                     android:text="로그인"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="#80000000" />
+                    android:textSize="14sp"
+                    app:font="custom2"/>
 
                 <TextView
                     android:id="@+id/settings_signup"
@@ -101,23 +92,11 @@
                     android:textStyle="bold"
                     android:text="아이디 만들기"
                     android:textColor="#1D1D1D"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    app:font="custom2"/>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="#dedede" />
 
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="#dedede" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -134,10 +113,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="17dp"
                     android:text="알림 설정"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:textSize="16dp" />
+                    android:textColor="#1D1D1D"
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <TextView
                     android:id="@+id/textView16"
@@ -145,10 +125,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textView15"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="30dp"
                     android:text="이메일"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textColor="#686868"
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_email"
@@ -164,9 +145,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView16"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="30dp"
                     android:text="SMS"
-                    android:textColor="#000000"
+                    android:textColor="#686868"
+                    app:font="custom1"
                     android:layout_above="@+id/settings_switch_push" />
 
                 <Switch
@@ -182,9 +164,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView17"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="30dp"
                     android:text="푸시알림"
-                    android:textColor="#000000" />
+                    android:textColor="#686868"
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <Switch
                     android:id="@+id/settings_switch_push"
@@ -202,12 +186,10 @@
                 android:background="#fff">
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#cecece" />
+                    android:background="#BDBDBD" />
             </LinearLayout>
 
             <RelativeLayout
@@ -225,10 +207,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="17dp"
                     android:text="공지사항 및 이용약관"
-                    android:textColor="#000000"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textColor="#1D1D1D"
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
                 <LinearLayout
                     android:id="@+id/ll_notice"
@@ -242,9 +225,11 @@
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
                         android:text="공지 사항"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textColor="#686868"
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                     <View
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -255,8 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_below="@+id/textView12"
-                        android:text=">"
-                        android:textSize="15sp" />
+                        android:background="@drawable/ppp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -271,9 +255,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
                         android:text="이용 약관"
-                        android:textColor="#000000"
-                        android:textSize="15sp" />
+                        android:textColor="#686868"
+                        android:textSize="14sp"
+                        app:font="custom1"/>
                     <View
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -285,8 +271,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="10dp"
                         android:padding="0dp"
-                        android:text=">"
-                        android:textSize="15sp" />
+                        android:background="@drawable/ppp"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -296,12 +281,10 @@
                 android:background="#fff">
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#cecece" />
+                    android:background="#BDBDBD" />
             </LinearLayout>
 
             <RelativeLayout
@@ -312,29 +295,19 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="20dp"
                 android:paddingTop="16dp">
-
-
-
                 <TextView
                     android:id="@+id/faq_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="17dp"
                     android:text="FAQ"
-                    android:textColor="#000000"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textColor="#1D1D1D"
+                    android:textSize="14sp"
+                    app:font="custom1"/>
 
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:background="#cecece" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

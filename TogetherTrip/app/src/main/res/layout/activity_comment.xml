@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/relative_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/RefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_comment_list"
+        android:layout_weight = "9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <EditText
+            android:paddingBottom="10dp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="13dp"
+            android:paddingLeft="18dp"
+            android:id="@+id/edittext_comment_enter"
+            android:fontFamily="HYGothic"
+            android:textSize="14dp"
+            android:textColor="#95989A"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/write_re"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/write_re_delete"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/imageview_tag_close"
+            android:background="@drawable/write__re_plus"
+            android:layout_toRightOf="@+id/edittext_comment_enter"/>
+
+        <ImageView
+            android:id="@+id/supply_enter"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="HYGothic"
+            android:src="@drawable/write__re_plus"
+            android:background="@drawable/write__re_plus"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/imageview_tag_close"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

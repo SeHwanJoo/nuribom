@@ -21,8 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="후기 작성하기"
-            android:textSize="25sp"
-            android:layout_centerInParent="true"/>
+            android:textSize="18sp"
+            android:textColor="#1D1D1D"
+            android:layout_centerInParent="true"
+            app:font="custom2"/>
 
         <Button
             android:id="@+id/completeBtn"
@@ -90,7 +92,8 @@
                 android:layout_weight="7"
                 android:fontFamily="HYGothic"
                 android:text="장소를 입력해주세요."
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                app:font="custom2"/>
         </LinearLayout>
 
         <View
@@ -137,7 +140,8 @@
                 android:layout_weight="7"
                 android:fontFamily="HYGothic"
                 android:text="방문일 날짜를 선택해주세요."
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                app:font="custom1"/>
 
 
         </LinearLayout>
@@ -165,7 +169,8 @@
                 android:layout_weight="8"
                 android:gravity="top"
                 android:hint="이곳에 후기를 남겨주세요."
-                android:padding="15dp" />
+                android:padding="15dp"
+                app:font="custom1"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -196,12 +201,14 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_rating_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="5.0"
-                    android:textSize="30dp" />
+                    android:textSize="34sp"
+                    app:font="custom2"/>
 
             </LinearLayout>
 

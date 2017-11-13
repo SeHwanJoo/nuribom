@@ -100,7 +100,6 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     if (response.body().message.equals("ok")) { // 로그인 성공
                         loginEchoResult = response.body().result;
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
                         //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

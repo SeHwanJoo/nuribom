@@ -38,7 +38,7 @@ import streaming.test.org.togethertrip.network.NetworkService;
 import static streaming.test.org.togethertrip.ui.MainActivity.context;
 
 public class Home_SearchActivity extends AppCompatActivity {
-    static final String TAG = "SpotFragmentLog";
+    static final String TAG = "HomeSearchLog";
     EditText edit_homeSearch;
     ImageButton searchBtn, STTBtn, tripImgBtn, touristSpotImgBtn;
     View select_trip, select_tourist;

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cecece"
-    android:weightSum="10">
+    android:background="#cecece">
     <RelativeLayout
         android:id="@+id/firstRl"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#fff"
-        android:layout_weight="1">
+        android:layout_height="56dp"
+        android:background="#fff">
 
         <ImageView
             android:id="@+id/iv_main"
@@ -39,23 +38,24 @@
 
         <ImageButton
             android:id="@+id/home_searchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/trips_searsh"/>
     </RelativeLayout>
+
+    <!-- 배너 + 필터 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:layout_weight="7.4"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3.9"
+            android:layout_weight="4.5"
             android:background="@drawable/history">
 
         </LinearLayout>
@@ -65,89 +65,88 @@
             android:layout_height="16dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:background="#dedede" />
+            android:background="#f1f1f1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.5"
+            android:layout_weight="6.4"
             android:orientation="vertical"
             android:background="#fff">
             <TextView
+                android:id="@+id/tv_nearSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="16dp"
                 android:text="주변 시설 검색"
+                app:font="custom2"
                 android:textSize="14sp"
                 android:textColor="#1D1D1D"/>
             <RelativeLayout
 
                 android:id="@+id/filerRl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp">
                     <ImageButton
                         android:id="@+id/filter_all"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_width="52dp"
+                        android:layout_height="70.79dp"
                         android:background="@drawable/trips_facilityfilter_all_on"/>
                     <ImageButton
                         android:id="@+id/filter_wheelchairs"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="52dp"
+                        android:layout_height="70.79dp"
                         android:layout_marginLeft="17dp"
                         android:layout_toRightOf="@id/filter_all"
-                        android:layout_weight="1"
                         android:background="@drawable/trips_facilityfilter_wheelchairs_off"/>
 
                     <ImageButton
                         android:id="@+id/filter_bathroom"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="52dp"
+                        android:layout_height="70.79dp"
                         android:layout_marginLeft="17dp"
                         android:layout_toRightOf="@id/filter_wheelchairs"
-                        android:layout_weight="1"
                         android:background="@drawable/trips_facilityfilter_bathroom_off" />
 
                     <ImageButton
                         android:id="@+id/filter_parkinglot"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="52dp"
+                        android:layout_height="70.79dp"
                         android:layout_marginLeft="17dp"
                         android:layout_toRightOf="@id/filter_bathroom"
-                        android:layout_weight="1"
                         android:background="@drawable/trips_facilityfilter_parkinglot_off"
                         />
                     <ImageButton
                         android:id="@+id/filter_elevator"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="52dp"
+                        android:layout_height="70.79dp"
                         android:layout_marginLeft="17dp"
                         android:layout_toRightOf="@id/filter_parkinglot"
-                        android:layout_weight="1"
                         android:background="@drawable/trips_facilityfilter_elevator_off"/>
 
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:background="#dedede" />
-
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#f1f1f1" />
+
+    <!-- 추천관광지/추천코스 위에 선-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -179,8 +178,7 @@
         android:layout_height="0dp"
         android:layout_weight="4.5"
         android:weightSum="10"
-        android:orientation="vertical"
-        android:elevation="10dp">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -194,7 +192,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="추천 관광지" />
+                android:text="추천 관광지"
+                android:textColor="#1D1D1D"
+                app:font="custom2"/>
 
             <TextView
                 android:id="@+id/recommend_course"
@@ -202,12 +202,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="추천 코스"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textColor="#8C8C8C"
+                app:font="custom1"/>
         </LinearLayout>
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_weight="8.5"
             android:background="#000"
             android:elevation="5dp">
             <LinearLayout
@@ -230,6 +232,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
 
                 <FrameLayout
@@ -247,6 +254,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
 
                 <FrameLayout
@@ -264,6 +276,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/home_frame"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@drawable/border_round"/>
                 </FrameLayout>
             </LinearLayout>
         </HorizontalScrollView>
@@ -273,6 +290,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_weight="0.2"
+        android:background="#cecece">
     </LinearLayout>
 </LinearLayout>

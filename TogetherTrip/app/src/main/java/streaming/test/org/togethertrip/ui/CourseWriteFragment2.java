@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -42,6 +43,7 @@ public class CourseWriteFragment2 extends Fragment {
     Context context;
     ImageView imageView;
     EditText content;
+    RelativeLayout imageRl;
 
     String imgUrl;
     Uri uri;
@@ -67,6 +69,7 @@ public class CourseWriteFragment2 extends Fragment {
 
         imageView=(ImageView)view.findViewById(R.id.elbum2);
         content = (EditText)view.findViewById(R.id.page_content);
+        imageRl = (RelativeLayout) view.findViewById(R.id.imageRl);
 
         content.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,6 +88,12 @@ public class CourseWriteFragment2 extends Fragment {
             }
         });
 
+        imageRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.performClick();
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

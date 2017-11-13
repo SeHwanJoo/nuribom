@@ -5,7 +5,8 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity">
+    tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity"
+    android:background="#BDBDBD">
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -18,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e4e4e4"
+        android:background="#f1f1f1"
         android:orientation="vertical"
         tools:context="streaming.test.org.togethertrip.ui.TouristSpotActivity">
 
@@ -43,9 +44,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="여행코스"
+                android:text="코스"
                 android:textColor="#1D1D1D"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:font="custom2"/>
 
             <ImageButton
                 android:id="@+id/btn_course_search"
@@ -73,13 +75,14 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#cecece" />
+            android:layout_height="1dp"
+            android:background="#BDBDBD" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8"
+            android:background="#F1F1F1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -118,20 +121,6 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/lineRl2"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_below="@id/filerRl"
-                android:background="#cecece"></RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/lineRl4"
-                android:layout_width="match_parent"
-                android:layout_height="0.9dp"
-                android:layout_below="@id/filerRl"
-                android:background="#5f5f5f"></RelativeLayout>
-
-            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2.5">
@@ -139,7 +128,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#fff" />
+                    android:background="@drawable/history" />
 
             </RelativeLayout>
 
@@ -148,14 +137,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_below="@id/filerRl"
-                android:background="#cecece"></RelativeLayout>
+                android:background="#BDBDBD"></RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.5"
-                android:background="#e4e4e4">
+                android:background="#F1F1F1">
 
                 <TextView
                     android:id="@+id/ingi"
@@ -166,7 +155,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="20dp"
                     android:text="인기순"
-                    android:textSize="10sp" />
+                    android:textSize="12sp"
+                    android:textColor="#1D1D1D"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,7 +165,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/ingi"
                     android:text="최신순"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <RelativeLayout

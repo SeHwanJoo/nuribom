@@ -1,14 +1,13 @@
 package streaming.test.org.togethertrip.ui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Network;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,28 +23,23 @@ import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
 import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.CourseListDatas;
-import streaming.test.org.togethertrip.datas.CourseSearchData;
 import streaming.test.org.togethertrip.datas.like.AddLikeInfo;
 import streaming.test.org.togethertrip.datas.like.AddLikeResult;
 import streaming.test.org.togethertrip.network.NetworkService;
+import streaming.test.org.togethertrip.viewholder.CourseListViewHolder;
 
 /**
  * Created by minseung on 2017-10-07.
  */
 
 public class CourseListAdapter extends BaseAdapter{
+
     Context context;
     ArrayList<CourseListDatas> CourseListDatas;
+    SharedPreferences loginInfo;
     NetworkService service;
-    ImageView course_image;
-    TextView coureName;
-    TextView date;
-    TextView category;
-    TextView heart_count;
-    TextView comment_count;
-    TextView courseid;
     AddLikeInfo addLikeInfo;
-    ImageView iv_heart;
+    Intent commentIntent;
     private LayoutInflater mInflater;
 
     public CourseListAdapter(Context context, ArrayList<CourseListDatas> courseListDatas) {
@@ -155,6 +149,8 @@ public class CourseListAdapter extends BaseAdapter{
         viewHolder.category.setText(CourseListDatas.get(position).category);
         viewHolder.heart_count.setText(String.valueOf(CourseListDatas.get(position).likecount));
         viewHolder.comment_count.setText(String.valueOf(CourseListDatas.get(position).commentcount));
+
+
         return convertView;
     }
 

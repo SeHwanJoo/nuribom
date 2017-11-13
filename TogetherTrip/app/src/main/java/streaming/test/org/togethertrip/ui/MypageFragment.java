@@ -233,7 +233,6 @@ public class MypageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-
     public synchronized void network_modify(){
         if(imgUrl == null){
             uri = null;
@@ -388,22 +387,4 @@ public class MypageFragment extends Fragment {
         }
     }
 
-    private View nouser(View view){
-
-        loginOrLogout = (TextView) view.findViewById(R.id.settings_login);
-        signUpOrSignIn = (TextView) view.findViewById(R.id.settings_signup);
-        loginOrLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(activity, SigninActivity.class));
-            }
-        });
-        signUpOrSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(activity, SignupActivity.class));
-            }
-        });
-        return view;
-    }
 }
