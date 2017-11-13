@@ -68,8 +68,10 @@ public class CourseWriteFragment extends Fragment {
 
     String choice_category = "";
     Spinner spinner_category;
-    CourseWriteFragment.SpinnerAdapter adspin1;
-    final static String[] arrayLocation1 = {"카테고리1", "카테고리2", "카테고리3", "카테고리4"};
+    Spinner date_category;
+    CourseWriteFragment.SpinnerAdapter adspin1, adspin2;
+    final static String[] arrayLocation1 = {"힐링", "가족", "친구", "연인"};
+    final static String[] arrayDate = {"당일치기", "1박 2일", "2박 3일", "3박 4일", "4박 5일","5박 6일", "6박 7일","7박 8일","장기"};
 
 
     public CourseWriteFragment() {}
@@ -202,6 +204,55 @@ public class CourseWriteFragment extends Fragment {
             }
         });
 
+
+
+        date_category = (Spinner) view.findViewById(R.id.calenderspinner);
+        adspin2 = new CourseWriteFragment.SpinnerAdapter(activity, arrayDate, android.R.layout.simple_spinner_dropdown_item);
+        adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        date_category.setAdapter(adspin2);
+        date_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(adspin2.getItem(position).equals("당일치기")){
+                    choice_category = "당일치기";
+                    ((DataSetListner)activity).FirstFragementDateSet("당일치기");
+                }else if(adspin2.getItem(position).equals("1박 2일")){
+                    choice_category = "1박 2일";
+                    ((DataSetListner)activity).FirstFragementDateSet("1박 2일");
+                }else if(adspin2.getItem(position).equals("2박 3일")){
+                    choice_category = "2박 3일";
+                    ((DataSetListner)activity).FirstFragementDateSet("2박 3일");
+                }else if(adspin2.getItem(position).equals("3박 4일")){
+                    choice_category = "3박 4일";
+                    ((DataSetListner)activity).FirstFragementDateSet("3박 4일");
+                }
+                else if(adspin2.getItem(position).equals("4박 5일")){
+                    choice_category = "4박 5일";
+                    ((DataSetListner)activity).FirstFragementDateSet("4박 5일");
+                }
+                else if(adspin2.getItem(position).equals("5박 6일")){
+                    choice_category = "5박 6일";
+                    ((DataSetListner)activity).FirstFragementDateSet("5박 6일");
+                }
+                else if(adspin2.getItem(position).equals("6박 7일")){
+                    choice_category = "6박 7일";
+                    ((DataSetListner)activity).FirstFragementDateSet("6박 7일");
+                }
+                else if(adspin2.getItem(position).equals("7박 8일")){
+                    choice_category = "7박 8일";
+                    ((DataSetListner)activity).FirstFragementDateSet("7박 8일");
+                }
+                else if(adspin2.getItem(position).equals("장기여행")){
+                    choice_category = "장기여행";
+                    ((DataSetListner)activity).FirstFragementDateSet("장기여행");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
     }
 
@@ -346,9 +397,10 @@ public class CourseWriteFragment extends Fragment {
         void FirstFragmentImageSet(MultipartBody.Part image);
         void FirstFragmentCategorySet( String category);
         void FirstFragmentTitleSet(String title);
+        void FirstFragementDateSet(String date);
     }
     @Override
-
+    //뷰가 생성될때 호출되는 함수
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof Activity) {

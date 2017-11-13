@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +45,8 @@ public class DetailCourseFragment2 extends Fragment {
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
     ImageView courseImgView;
-    TextView courseDetailSpotName, courseDetailDate, pageContent, courseDetailLocation;
+    TextView courseDetailSpotName, courseDetailDate, pageContent, courseDetailLocation, courseNumber;
+
 
     Activity activity;
     Intent intent;
@@ -67,6 +71,7 @@ public class DetailCourseFragment2 extends Fragment {
         courseDetailDate = (TextView)view.findViewById(R.id.course_detail_date);
         courseDetailLocation=(TextView)view.findViewById(R.id.course_detail_location);
         pageContent =(TextView)view.findViewById(R.id.page_content);
+        courseNumber = (TextView)view.findViewById(R.id.course_number);
 
         courseDetailSpotName.setText(page.title);
         courseDetailLocation.setText(page.title);
@@ -76,7 +81,7 @@ public class DetailCourseFragment2 extends Fragment {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(courseImgView);
-
+        courseNumber.setText(String.valueOf(getArguments().getInt("courseNumber")));
         return view;
     }
 

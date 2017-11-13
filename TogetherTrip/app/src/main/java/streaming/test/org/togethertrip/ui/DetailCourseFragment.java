@@ -56,7 +56,6 @@ import streaming.test.org.togethertrip.network.NetworkService;
 //import static streaming.test.org.togethertrip.ui.CourseWrite.position;
 
 public class DetailCourseFragment extends Fragment {
-
     private static final String TAG = "DetailCourseFragment";
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     Context context;
@@ -90,10 +89,11 @@ public class DetailCourseFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_detail_course, container, false);
         imageView =(ImageView)view.findViewById(R.id.course_detail_elbum);
         courseTitle = (TextView) view.findViewById(R.id.course_detail_courseTitle);
-        courseDate = (TextView) view.findViewById(R.id.course_detail_date);
+        courseDate = (TextView) view.findViewById(R.id.course_detail_calenderview);
         courseCategory = (TextView) view.findViewById(R.id.course_detail_category);
         courseWriter = (TextView) view.findViewById(R.id.course_detail_writer);
 
+        courseDate.setText(result.date);
         courseTitle.setText(result.title);
 //        courseDate.setText(result.date);
         courseCategory.setText(result.category);
@@ -111,15 +111,6 @@ public class DetailCourseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-
-
-
-
-    public interface DataSetListner{
-        void FirstFragmentImageSet(MultipartBody.Part image);
-        void FirstFragmentCategorySet( String category);
-        void FirstFragmentTitleSet(String title);
-    }
     @Override
 
     public void onAttach(Context context) {

@@ -96,6 +96,7 @@
         <activity android:name=".ui.ProfileChangeActivity" />
         <activity android:name=".ui.MapCourseGuideActivity" />
         <activity android:name=".ui.DetailCourseActivity" />
+        <activity android:name=".ui.notice.NoticeActivity" />
         <activity
             android:windowSoftInputMode="adjustPan"
             android:name=".ui.comment.CommentActivity"

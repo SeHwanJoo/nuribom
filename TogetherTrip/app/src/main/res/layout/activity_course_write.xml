@@ -32,8 +32,8 @@
             android:background="#cecece">
             <ImageView
                 android:id="@+id/elbum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:src="@drawable/review_write_image"
                 android:scaleType="centerCrop"/>
@@ -44,25 +44,42 @@
             android:layout_weight="4"
             android:orientation="vertical"
             android:background="#fff">
-
+         <LinearLayout
+             android:orientation="horizontal"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
             <TextView
-                android:layout_marginTop="22dp"
                 android:layout_marginLeft="16dp"
-                android:id="@+id/calenderview"
+                android:layout_marginTop="5dp"
+                android:text=" 일정 :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/calenderspinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#95989A"
-                android:hint="기간은 자동으로 입력됩니다."
-                app:font="custom1"/>
+                android:layout_marginTop="5dp"
+                />
+         </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:text=" 카테고리 :"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-            <Spinner
+                <Spinner
                 android:id="@+id/categoryspinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="16dp"
                 />
+            </LinearLayout>
             <EditText
                 android:id="@+id/courseTitle"
                 android:layout_width="wrap_content"

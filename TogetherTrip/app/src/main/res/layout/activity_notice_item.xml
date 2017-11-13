@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_notice"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F9F9F9"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/textview_notice_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/setting_box"
+        android:text="시라노_버전 1.0 런칭"
+        android:textColor="#95989A"
+        android:fontFamily="HYGothic"
+        android:textSize="13dp"/>
+
+    <TextView
+        android:id="@+id/textview_notice_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="#F9F9F9"
+        android:textSize="11dp"
+        android:textColor="#95989A"
+        android:fontFamily="HYGothic"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="여러분 드디어 시라노가 7월 1일 런칭하게 되었습니다."/>
+
+
+</LinearLayout>
+
+

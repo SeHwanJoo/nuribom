@@ -48,6 +48,7 @@ public class DetailCourseActivity extends AppCompatActivity {
     LinearLayout commentLayout;
     ImageButton comment, heart;
     DetailCourseFragment detailCourseFragment;
+    DetailCourseDatas.Page page;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Override
@@ -101,6 +102,9 @@ public class DetailCourseActivity extends AppCompatActivity {
                     for(DetailCourseDatas.Page page : response.body().page){
                         DetailCourseFragment2 detailCourseFragment2 = new DetailCourseFragment2(DetailCourseActivity.this, page);
                         fragmentList.add(i,detailCourseFragment2);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("courseNumber", i);
+                        detailCourseFragment2.setArguments(bundle);
                         i++;
                     }
 
