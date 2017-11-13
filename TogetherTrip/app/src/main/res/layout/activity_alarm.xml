@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:text="알람"
             android:textSize="20sp"
+            app:font="custom2"
             android:textColor="#1D1D1D"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
@@ -75,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="이전 알람"
                     android:textColor="#1E3790"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_marginTop="10dp"
                     android:paddingBottom="11dp"
                     android:paddingLeft="16dp"

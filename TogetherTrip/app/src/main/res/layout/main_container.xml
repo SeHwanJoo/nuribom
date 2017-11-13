@@ -52,14 +52,32 @@
         android:layout_height="0dp"
         android:layout_weight="7.4"
         android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.5"
-            android:background="@drawable/history">
+            android:layout_weight="4.5">
+            <com.dev.sacot41.scviewpager.SCViewPager
+                android:id="@+id/home_viewpager_ad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.dev.sacot41.scviewpager.SCViewPager>
+            <com.dev.sacot41.scviewpager.DotsView
+                android:id="@+id/home_dotsview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+            </com.dev.sacot41.scviewpager.DotsView>
+            <ImageView
+                android:id="@+id/imageView_ad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
-        </LinearLayout>
 
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="16dp"

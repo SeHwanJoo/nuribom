@@ -65,7 +65,7 @@ public class CourseWriteFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.activity_course_write2, container, false);
+        View view = inflater.inflate(R.layout.activity_course_write2, container, false);
 
         imageView=(ImageView)view.findViewById(R.id.elbum2);
         content = (EditText)view.findViewById(R.id.page_content);

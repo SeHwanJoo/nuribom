@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/setting_box"
-        android:text="시라노_버전 1.0 런칭"
+        android:text="투트_버전 1.0 런칭"
         android:textColor="#95989A"
         android:fontFamily="HYGothic"
         android:textSize="13dp"/>
@@ -26,9 +26,7 @@
         android:fontFamily="HYGothic"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="여러분 드디어 시라노가 7월 1일 런칭하게 되었습니다."/>
-
+        android:text="여러분 드디어 투트가 11월 2일 런칭하게 되었습니다."/>
 
 </LinearLayout>
-
 

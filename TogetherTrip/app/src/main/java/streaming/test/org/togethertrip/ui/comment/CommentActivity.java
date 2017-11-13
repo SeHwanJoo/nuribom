@@ -1,37 +1,21 @@
 package streaming.test.org.togethertrip.ui.comment;
 
-import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,8 +28,6 @@ import streaming.test.org.togethertrip.datas.comment.CommentResult;
 import streaming.test.org.togethertrip.datas.comment.CommentWriteDatas;
 import streaming.test.org.togethertrip.datas.comment.CommentWriteResult;
 import streaming.test.org.togethertrip.network.NetworkService;
-
-import static streaming.test.org.togethertrip.R.id.completeBtn;
 
 public class CommentActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public TextView title;

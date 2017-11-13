@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import retrofit2.http.HEAD;
 import streaming.test.org.togethertrip.R;
 
 public class NoticeActivity extends AppCompatActivity {
@@ -34,12 +35,14 @@ public class NoticeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         itemdatas = new ArrayList<itemData>();
+
         itemdatas.add(new itemData("투투_버전 1.0 런칭","여러분 드디어 투투가 7월 1일 런칭하게 되었습니다."));
         itemdatas.add(new itemData("투투_버전 2.0 런칭","여러분 드디어 투투가 8월 1일 런칭하게 되었습니다."));
         itemdatas.add(new itemData("투투_버전 3.0 런칭","여러분 드디어 투투가 9월 1일 런칭하게 되었습니다."));
         itemdatas.add(new itemData("투투_버전 4.0 런칭","여러분 드디어 투투가 10월 1일 런칭하게 되었습니다."));
         itemdatas.add(new itemData("투투_버전 5.0 런칭","여러분 드디어 투투가 11월 1일 런칭하게 되었습니다."));
         itemdatas.add(new itemData("투투_버전 6.0 런칭","여러분 드디어 투투가 12월 1일 런칭하게 되었습니다."));
+
 
         recycleAdapter = new RecycleAdapter(itemdatas, clickListener);
         recyclerView.setAdapter(recycleAdapter);

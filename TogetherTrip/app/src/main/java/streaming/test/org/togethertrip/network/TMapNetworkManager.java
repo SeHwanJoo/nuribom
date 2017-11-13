@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,7 +25,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.tmapapi.GeometryDeserializer;
 import streaming.test.org.togethertrip.datas.tmapapi.TmapAPIResult;
 import streaming.test.org.togethertrip.datas.tmapapi.TmapGeometry;
@@ -40,7 +38,9 @@ public class TMapNetworkManager {
     private final String TAG = "TMAPNetworkManagerLog";
     private static TMapNetworkManager instance;
     private static final String tmapApiKey = "d9c128a3-3d91-3162-a305-e4b65bea1b55";
+    //TMap base Url
     public static final String TMAP_SERVER = "http://apis.skplanetx.com/tmap";
+    //TMap 길찾기 Url
     private static final String SEARCH_FIND_PATH_URL = TMAP_SERVER + "/routes/pedestrian?callback=&version=1";
     private static final int MESSAGE_SUCCESS = 1;
     private static final int MESSAGE_FAIL = 0;
@@ -139,6 +139,7 @@ public class TMapNetworkManager {
         result.request = request;
         result.listner = listner;
 
+        //통신부
         mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -152,14 +153,12 @@ public class TMapNetworkManager {
                 if(response.isSuccessful()){
                     TmapAPIResult data = new TmapAPIResult();
 
-                    Log.d(TAG, "onResponse: 통신 성공" + data);
-
                     try{
                         data= routeGson.fromJson(response.body().charStream(), TmapAPIResult.class);
-                        Log.d(TAG, "onResponse: data 셋팅 try : " + data);
                     }catch(JsonSyntaxException e){
                         e.printStackTrace();
                     }finally{
+                        //자원 정리
                         if(response.body()!= null) try{ response.body().close(); } catch(Exception e) { e.printStackTrace(); };
                     }
 
@@ -173,15 +172,6 @@ public class TMapNetworkManager {
                 }
             }
         });
-
-        Log.d(TAG, "getSearchFindPath: request 반환 직전: " + request);
-
         return request;
-
-
     }
-
-
-
-
 }

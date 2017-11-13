@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="scviewpager-0.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/9115a9e87681774c3c3c68e61c7b8ca8e1adeb09/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/9115a9e87681774c3c3c68e61c7b8ca8e1adeb09/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.dev.sacot41/scviewpager/0.0.4/d1f0d672bc2867e7d35dfee1e319229c6a7ef6e2/scviewpager-0.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -94,15 +94,20 @@
                         android:text="2017/08/24 방문"
                         app:font="custom1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                <ScrollView
                     android:layout_weight="6.2"
-                    android:padding="12dp">
-
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   >
                     <TextView
                         android:id="@+id/page_content"
                         android:layout_width="match_parent"
@@ -113,6 +118,7 @@
                         android:textSize="14sp"
                         app:font="custom1"/>
                 </LinearLayout>
+                </ScrollView>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

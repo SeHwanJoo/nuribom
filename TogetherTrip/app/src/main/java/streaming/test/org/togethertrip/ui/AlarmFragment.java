@@ -2,6 +2,7 @@ package streaming.test.org.togethertrip.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,7 @@ public class AlarmFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     NetworkService service;
+    SharedPreferences loginInfo;
 
     public AlarmFragment(Context context){
         this.context = context;
@@ -58,8 +60,9 @@ public class AlarmFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         itemDatas = new ArrayList<AlarmDatas.AlarmResult>();
         itemDatas1 = new ArrayList<AlarmDatas.AlarmResult>();
+        loginInfo = context.getSharedPreferences("loginSetting", 0);
 
-        userid = "joo";
+        userid = loginInfo.getString("nickname", "");
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipelayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);

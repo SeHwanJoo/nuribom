@@ -60,7 +60,7 @@ public class CourseWriteFragment extends Fragment {
     FloatingActionButton nextfab;
 
     String title;
-//    Uri mUri;
+    //    Uri mUri;
     String imgUrl;
     Uri uri;
     DataSetListner mListner;
@@ -112,23 +112,23 @@ public class CourseWriteFragment extends Fragment {
         try{
             courseTitle.addTextChangedListener(new TextWatcher() {
 
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        //입력하기 전에
-                    }
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    //입력하기 전에
+                }
 
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                        입력되는 텍스트에 변화가 있을때
-                    }
+                }
 
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        //입력이 끝났을 때
-                        title = courseTitle.getText().toString();
-                        ((DataSetListner)activity).FirstFragmentTitleSet(courseTitle.getText().toString());
-                    }
-                });
+                @Override
+                public void afterTextChanged(Editable s) {
+                    //입력이 끝났을 때
+                    title = courseTitle.getText().toString();
+                    ((DataSetListner)activity).FirstFragmentTitleSet(courseTitle.getText().toString());
+                }
+            });
         }catch(Exception e){
 
         }
@@ -427,4 +427,3 @@ public class CourseWriteFragment extends Fragment {
 //        mListner = null;
 //    }
 }
-

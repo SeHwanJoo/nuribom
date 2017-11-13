@@ -72,28 +72,33 @@
         <activity
             android:name=".ui.TouristSpotDetail"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.TouristSpotReview" />
-        <activity android:name=".ui.TouristSpotReviewListViewItem" />
-        <activity android:name=".ui.TouristSpotReviewWrite" />
-        <activity android:name=".ui.CourseWrite" />
+        <activity android:name=".ui.TouristSpotReview"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.TouristSpotReviewListViewItem"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.TouristSpotReviewWrite"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.CourseWrite"
+            android:windowSoftInputMode="adjustPan"/>
 
         <fragment
-            android:name=".ui.CourseFragment"
-            android:windowSoftInputMode="adjustPan" />
+            android:name=".ui.CourseFragment" />
         <fragment
-            android:name=".ui.CourseFragment2"
-            android:windowSoftInputMode="adjustPan" />
+            android:name=".ui.CourseFragment2"/>
 
-        <activity android:name=".ui.Home_SearchActivity" />
-        <activity android:name=".ui.SignupActivity" />
+        <activity android:name=".ui.Home_SearchActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.SignupActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name="com.yongbeam.y_photopicker.util.photopicker.PhotoPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".ui.SigninActivity" />
-        <activity android:name=".ui.ProfileChangeActivity" />
+        <activity android:name=".ui.SigninActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.ProfileChangeActivity"/>
         <activity android:name=".ui.MapCourseGuideActivity" />
         <activity android:name=".ui.DetailCourseActivity" />
         <activity android:name=".ui.notice.NoticeActivity" />
@@ -102,6 +107,7 @@
             android:name=".ui.comment.CommentActivity"
             android:label="@string/title_activity_comment"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".ui.MyWriteCourseActivity"/>
     </application>
 
 </manifest>

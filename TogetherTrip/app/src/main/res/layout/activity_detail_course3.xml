@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8"
+            android:background="#F1F1F1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
         </android.support.v4.view.ViewPager>
 
@@ -97,5 +98,4 @@
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
-
 

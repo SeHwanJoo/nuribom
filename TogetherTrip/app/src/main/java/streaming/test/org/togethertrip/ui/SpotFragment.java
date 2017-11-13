@@ -116,7 +116,6 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_tourist_spot, container, false);
         //프래그먼트에 포커스 주기
-        //TODO 없어도 되는데 태형 테스트폰에서는 되는데 지현이 테스트폰에서 테스트 해봐야됨
         view.setFocusableInTouchMode(true);
         view.requestFocus();
 
@@ -260,8 +259,7 @@ public class SpotFragment extends Fragment implements View.OnClickListener, Swip
     public void search(){
         search_keyword = edit_search.getText().toString();
 
-        if(search_keyword == null) search_keyword = "한강";
-        else if(search_keyword.equals("")) search_keyword = "한강";
+        if(search_keyword == null || search_keyword.equals("")) search_keyword = "청계천";
 
         Log.d(TAG, "search: " + search_keyword);
         searchData = new SearchData();

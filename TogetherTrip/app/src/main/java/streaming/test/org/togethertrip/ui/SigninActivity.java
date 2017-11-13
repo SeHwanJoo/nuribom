@@ -73,6 +73,8 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     loginDatas.password = input_password.getText().toString();
                     loginDatas.token = FirebaseInstanceId.getInstance().getToken();
 
+                    Log.i("fat",loginDatas.token);
+
                     requestSignin(loginDatas);
 
                 }
@@ -98,24 +100,15 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     if (response.body().message.equals("ok")) { // 로그인 성공
                         loginEchoResult = response.body().result;
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("email", loginEchoResult.email);
-                        intent.putExtra("password", loginEchoResult.password);
-                        intent.putExtra("profileImg", loginEchoResult.img);
-                        intent.putExtra("userNickName", loginEchoResult.userid);
-                        intent.putExtra("token", loginEchoResult.token);
-
                         //앞서 쌓여있던 NoLogin된 메인 액티비티 제거하라는 플래그
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                         loginInfo = getSharedPreferences("loginSetting", 0);
                         SharedPreferences.Editor editor = loginInfo.edit();
-                        editor.putString("email", loginEchoResult.email);
-                        editor.putString("password", loginEchoResult.password);
                         editor.putString("nickname", loginEchoResult.userid);
 
                         editor.commit();
 
-//                        intent.putExtra("token", loginEchoResult.token);
                         startActivity(intent);
                         finish();
                     }else{

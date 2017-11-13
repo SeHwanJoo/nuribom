@@ -11,13 +11,13 @@
         android:id="@+id/RefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="500dp">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_comment_list"
-        android:layout_weight = "9"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_comment_list"
+            android:layout_weight = "9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
