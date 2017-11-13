@@ -233,6 +233,7 @@ public class MypageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+
     public synchronized void network_modify(){
         if(imgUrl == null){
             uri = null;
