@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +24,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import streaming.test.org.togethertrip.R;
-import streaming.test.org.togethertrip.application.ApplicationController;
 import streaming.test.org.togethertrip.datas.login.LoginDatas;
 import streaming.test.org.togethertrip.datas.login.LoginEchoResult;
 import streaming.test.org.togethertrip.datas.login.LoginResult;
-import streaming.test.org.togethertrip.network.NetworkService;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivityLog";
@@ -70,21 +66,18 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         context = this;
 
-        //로그인시 데이터 받기
         Intent receivedIntent = getIntent();
-        receivedEmail = receivedIntent.getStringExtra("email");
-        receivedProfileImg = receivedIntent.getStringExtra("profileImg");
         receivedUserNickName = receivedIntent.getStringExtra("userNickName");
-//        token = receivedIntent.getStringExtra("token");
 
         Intent intent = getIntent();
 
-        int currentPosition = intent.getIntExtra("position",0);
+        int currentposition = intent.getIntExtra("position",0);
 
-        //Fragment 생성(검색시 필요한 닉네임을 생성자에 담아 전송)
+        //Fragment 생성
+
         course = new CourseFragment(this, receivedUserNickName);
         home = new HomeFragment(this, receivedUserNickName);
-        mypage = new MypageFragment(this, receivedEmail, receivedUserNickName, token);
+        mypage = new MypageFragment(this);
         spot = new SpotFragment(this, receivedUserNickName);
         alarm = new AlarmFragment(this);
 
@@ -96,12 +89,12 @@ public class MainActivity extends AppCompatActivity {
         fragmentList.add(3, alarm);
         fragmentList.add(4, mypage);
 
-        //메인 viewPager 연결
+        //viewPager 연결
         mViewPager = (ViewPager) findViewById(R.id.container);
         Log.d(TAG, "onCreate: mViewPager: " + mViewPager);
         Log.d(TAG, "onCreate: mSectionPagerAdapter: " + mSectionsPagerAdapter);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(currentPosition);
+        mViewPager.setCurrentItem(currentposition);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -112,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 tabSelect(position);
+                switch(position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
             }
 
             @Override
@@ -120,18 +125,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //홈에서 로그인 유무 체크
-        mypage.checkLogin();
-        //마이페이지의 이메일이 null일 때 SharedPreferences에 담겨있는 로그인 정보를 받아와서 로그인
-        //한 것으로 가정, 자동로그인이 안되어있을 시 빈 값을 가짐
-        if(mypage.email==null) {
-            SharedPreferences loginInfo = getSharedPreferences("loginSetting", 0);
-
-            LoginDatas loginDatas = new LoginDatas();
-            loginDatas.email = loginInfo.getString("email", "");
-            loginDatas.password = loginInfo.getString("password", "");
-            requestAutoSignin(loginDatas);
-        }
     }
 
     //페이지 선택 확인을 위한 어댑터
@@ -253,47 +246,5 @@ public class MainActivity extends AppCompatActivity {
     public static Context getContext(){
         return context;
     }
-
-    //로그인 네트워크
-    public void requestAutoSignin(LoginDatas loginDatas){
-        NetworkService networkService = ApplicationController.getInstance().getNetworkService();
-
-        Call<LoginResult> requestLogin = networkService.requestSignin(loginDatas);
-        requestLogin.enqueue(new Callback<LoginResult>() {
-            @Override
-            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "reponse.body: " + response.body().message);
-                    if (response.body().message.equals("ok")) { // 로그인 성공
-                        loginEchoResult = response.body().result;
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("email", loginEchoResult.email);
-                        intent.putExtra("password", loginEchoResult.password);
-                        intent.putExtra("profileImg", loginEchoResult.img);
-                        intent.putExtra("userNickName", loginEchoResult.userid);
-                        intent.putExtra("token", loginEchoResult.token);
-
-                        //기존에 쌓여있던 task를 모두 삭제 -> 액티비티가 중첩되어 쌓이는 것을 방지
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        //TOP에 있는 액티비티 제거 -> 액티비티가 중첩되어 쌓이는 것을 방지
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-//                        intent.putExtra("token", loginEchoResult.token);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "아이디 혹은 암호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LoginResult> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "네트워크가 원활하지 않습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
 
 }

@@ -7,6 +7,7 @@
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
+<<<<<<< HEAD
         sha1="dc8ab0062739a1d7921a388cce50aa8849f584ce">
         <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\4\classes_c5a969393a8af37278655bd32cbb7af9599ca002\classes.dex" />
     </item>
@@ -18,6 +19,50 @@
         revision="25.0.0"
         sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
         <dex dex="D:\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_133d5ea1dd63aea0c05e655bbbceeb4095c1791c\classes.dex" />
+=======
+<<<<<<< .merge_file_a11904
+        sha1="346b9b18c0ca9ee8a4568f112c53c259f2ab9e39">
+=======
+        sha1="9e011d41278e98b2af697668cd9014fe3ae7f3f2">
+>>>>>>> .merge_file_a10432
+        <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ef75093c71c406bdb4b2343d34e48236e354db47\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+<<<<<<< .merge_file_a11904
+        jar="C:\project\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
+        <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_caf1255f6040339d0ea6d1f133a0446dc681d2e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\project\nuribom\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_9b27dafa43509b509d0589441f3575bb57d4ce41\classes.dex" />
+=======
+        jar="C:\project\nuribom\TogetherTrip\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_9b27dafa43509b509d0589441f3575bb57d4ce41\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\project\nuribom\TogetherTrip\app\libs\com.skp.Tmap_1.0.48.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f311d9fdd9404329f69eceaf7d75c955c2291584">
+        <dex dex="C:\project\nuribom\TogetherTrip\app\build\intermediates\transforms\dex\debug\folders\1000\2\com.skp.Tmap_1.0.48_caf1255f6040339d0ea6d1f133a0446dc681d2e2\classes.dex" />
+>>>>>>> .merge_file_a10432
+>>>>>>> a7632ca0fe6b275f939a00c902ad0902bf89aaa2
     </item>
 
 </items>

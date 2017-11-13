@@ -123,4 +123,6 @@ public interface NetworkService {
     Call<ResultMessage> modifyProfile(@Part MultipartBody.Part image,
                                       @Part RequestBody userid);
 
+    @GET("/mypage/logout/{userid}")
+    Call<ResultMessage> requestLogout(@Path("userid") String userid);
 }

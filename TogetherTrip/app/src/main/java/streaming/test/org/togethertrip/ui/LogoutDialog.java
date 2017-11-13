@@ -41,6 +41,8 @@ public class LogoutDialog extends Dialog{
         tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         tv_logout = (TextView) findViewById(R.id.tv_logout);
 
+
+
         if(mLeftClickListener != null && mRightClickListener != null){
             tv_cancel.setOnClickListener(mLeftClickListener);
             tv_logout.setOnClickListener(mRightClickListener);
